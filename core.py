@@ -1,5 +1,18 @@
 #!/usr/bin/python
 
+################################################################################
+# Project: 	Traffic Control
+# Script Usage: guess_yellow_time.py
+# Created: 	2017-04-02
+# Author: 	Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
+# Description:	Goal is to guess the amount of time that the traffic light will
+# 		yellow for before it turns yellow. The script will provide a
+# 		a random speed. Then using the yellow light formula, students
+#		are to calculate the amount of time that the light will be for
+#		before the light changes. Speed is given when the light turns 
+#		green and countdown is started.
+################################################################################
+
 import time
 import RPi.GPIO as GPIO
 import lcddriver
@@ -8,9 +21,8 @@ import random
 
 # LIST ALL OF THE PINS USED
 pinOutList = [26, 19, 13, 6, 12, 16, 20, 21]
-pinInList = [4]
 
-# DEFINE THE PIN NUMBERS AND VARIABLES FOR NORTHBOUND TRAFFIC
+# DEFINE THE GPIO NUMBERS AND VARIABLES FOR NORTHBOUND TRAFFIC
 NORTH_CR = 26
 NORTH_CY = 19
 NORTH_CG = 13
@@ -20,18 +32,19 @@ NORTH_SPEEDLIMIT = 45
 NORTH_YEL_TIME = 0
 NORTH_GRN_TIME = 0
 
-# DEFINE THE PIN NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
+# DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
 EAST_CR = 6
 EAST_CY = 12
 EAST_CG = 16
 EAST_SPEEDLIMIT = 25
 EAST_YEL_TIME = 0
 EAST_GRN_TIME = 0
-EAST_PD = 4
 
 # SET THE VALUE OF OTHER MISC VARIABLES
-# ALL_RED_TIME=5
-ALL_RED_TIME=10
+if DEBUG == 1:
+	ALL_RED_TIME=5
+else:
+	ALL_RED_TIME=10
 
 # SET INITIAL VALUE FOR THE PHASES
 phasering1 = 0
@@ -51,9 +64,6 @@ def setup():
 		GPIO.setup(i, GPIO.OUT)
 		GPIO.output(i, GPIO.HIGH)
 
-	# for i in pinInList:
-		# GPIO.setup(i, GPIO.IN)
-
 	return 0
 
 def calc_yellow_time( speed, grade ):
@@ -65,7 +75,11 @@ def calc_yellow_time( speed, grade ):
 
 def calc_green_time():
 # SET A RANDOM VALUE FOR THE GREEN TIME
-	grn_time=random.randint(20, 50)
+	if DEBUG == 1:
+		grn_time=random.randint(5,15)
+	else:
+		grn_time=random.randint(25, 50)
+
 	log_message("Green Time: " + str(grn_time))
 	return grn_time
 
@@ -83,7 +97,9 @@ def light_off(pin):
 
 def debug_message(message):
 # LOG ADDITIONAL MESSAGES TO THE SCREEN/LOG FILE WHEN TESTING
-	log_message("DEBUG: " + message)
+	if DEBUG == 1:
+		log_message("DEBUG: " + message)
+
 	return 0
 
 def log_message(message):
@@ -124,16 +140,6 @@ def controlflasher( phase ):
 		phase=0
 	return phase
 
-
-def failsafe(phaseflash, phasering1 ):
-# MAKE SURE THAT THE TRAFFIC LIGHT DOES GO INTO AN INVALID STATE THAT WOULD CAUSE AN ACCIDENT
-	if (phaseflash == 0 and phasering1 == 0):
-		# ENABLE THE FLASHER IF SOMETHING GOES WRONG
-		failsafe=1
-		lcd_message ("Fail safe occurred.")
-
-	return failsafe
-
 def controlring1( phase ):
 # RUN NORMAL RUN SEQUENCE
 
@@ -159,7 +165,7 @@ def controlring1( phase ):
 		light_off(EAST_CG)
 
 		phase = 2
-		# lcd_message("NB RED -- EB RED")
+		log_message("NB RED -- EB RED")
 		# time.sleep(ALL_RED_TIME)
 	elif phase == 2:
 		light_off(NORTH_CR)
@@ -170,7 +176,7 @@ def controlring1( phase ):
 		light_off(EAST_CG)
 
 		phase = 3
-		# lcd_message("NB GRN -- EB RED")
+		log_message("NB GRN -- EB RED")
 	elif phase == 3:
 		light_off(NORTH_CR)
 		light_on(NORTH_CY)
@@ -180,7 +186,7 @@ def controlring1( phase ):
 		light_off(EAST_CG)
 
 		phase = 4 
-		# lcd_message("NB YEL -- EB RED")
+		log_message("NB YEL -- EB RED")
 	elif phase == 4:
 		light_on(NORTH_CR)
 		light_off(NORTH_CY)
@@ -190,7 +196,7 @@ def controlring1( phase ):
 		light_off(EAST_CG)
 		
 		phase = 5
-		# lcd_message("NB RED -- EB RED")
+		log_message("NB RED -- EB RED")
 		# time.sleep(ALL_RED_TIME)
 	elif phase == 5:
 		light_on(NORTH_CR)
@@ -201,7 +207,7 @@ def controlring1( phase ):
 		light_on(EAST_CG)
 		
 		phase = 6 
-		# debug_message("NB RED -- EB GRN")
+		log_message("NB RED -- EB GRN")
 	elif phase == 6:
 		light_on(NORTH_CR)
 		light_off(NORTH_CY)
@@ -211,7 +217,7 @@ def controlring1( phase ):
 		light_off(EAST_CG)
 
 		phase = 1 
-		# debug_message("NB RED -- EB YEL")
+		log_message("NB RED -- EB YEL")
 	else:
 		phase = 1
 
@@ -241,77 +247,7 @@ def lamptest():
 	display.lcd_clear()
 
 try:
-	setup()
-
-	phaseflasher=0
-	phasering1=1
-
-	while True:
-		# lcd_message("All Red Delay", "")
-
-		debug_message("Turning all red")
-
-		phasering1=controlring1(phasering1)
-
-		for x in range(ALL_RED_TIME, 0, -1):	
-			lcd_message("All Red Delay", "Starting in " + str(x) + "s")
-			time.sleep(1)
-
-		## BOUNDARY
-
-		NORTH_SPEEDLIMIT=randomspeed()
-		EAST_SPEEDLIMIT=randomspeed()
-	
-		NORTH_GRN_TIME=calc_green_time()
-
-		debug_message("Turning north green")
-
-		phasering1=controlring1(phasering1)
-
-		for x in range(NORTH_GRN_TIME, 0, -1):
-			lcd_message("Speed Limit: " + str(NORTH_SPEEDLIMIT), "Time Remain: " + str(x) + "s")
-			time.sleep(1)
-		# time.sleep(NORTH_GRN_TIME)
-
-		NORTH_YEL_TIME=calc_yellow_time(NORTH_SPEEDLIMIT, 0)
-
-		debug_message("Turning north yellow")
-
-		phasering1=controlring1(phasering1)
-
-		lcd_message("Yellow Time: " + str(NORTH_YEL_TIME) + "s", "")
-		time.sleep(NORTH_YEL_TIME)
-
-		debug_message("turning all red")
-
-		# lcd_message("All red delay", "")
-		for x in range(ALL_RED_TIME, 0, -1):
-			lcd_message("All Red Delay", "Starting in " + str(x) + "s")
-			time.sleep(1)
-
-		phasering1=controlring1(phasering1)
-
-		## BOUNDARY
-
-		EAST_GRN_TIME=calc_green_time()
-
-		debug_message("Turning east green")
-
-		phasering1=controlring1(phasering1)
-
-		for x in range(EAST_GRN_TIME, 0, -1):
-			lcd_message("Speed Limit: " + str(EAST_SPEEDLIMIT), "Time Remain: " + str(x) + "s")
-			time.sleep(1)
-
-		EAST_YEL_TIME=calc_yellow_time(EAST_SPEEDLIMIT, 0)
-
-		debug_message("Turning east yellow")
-
-		phasering1=controlring1(phasering1)
-
-		lcd_message("Yellow Time: " + str(EAST_YEL_TIME) + "s", "")
-		time.sleep(EAST_YEL_TIME)
-
+	# CODE TO RUN GOES HERE
 except KeyboardInterrupt:
 	log_message("Exiting")
 	GPIO.cleanup()
