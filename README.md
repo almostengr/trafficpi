@@ -12,6 +12,8 @@
 * Acknowledgements
 * More Information
 
+----
+
 ## Purpose 
 The purpose of this project is to educate children about the STEM (Science, Technology, 
 Engineering, and Mathematics) fields. Through the use of low cost devices and effective 
@@ -55,7 +57,7 @@ where "<scriptname>" is the name of the script.
 * When exiting the script (using Ctrl+C), all of the relays may not turn off. In addition, the LCD display may not clear if it is writing when the kill shortcut is performed.
 ----
 
-##Bug Reports
+## Bug Reports
 Please open a new issue on this repo. Include as much detail that you have so that the issue can be replicated.
 
 ----

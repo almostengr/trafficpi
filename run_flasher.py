@@ -108,7 +108,7 @@ try:
 
 	while True:
 		phaseflasher=controlflasher( phaseflasher )
-		time.sleep(1)
+		time.sleep(0.5)
 
 except KeyboardInterrupt:
 	log_message("Exiting")
