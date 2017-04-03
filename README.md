@@ -69,7 +69,13 @@ This project is licensed under the MIT License.  See LICENSE for more details.
 ----
 
 ## Acknowledgements
-Portions of the code for controlling the LCD display were provided from https://github.com/the-raspberry-pi-guy/lcd. 
+* LCD Dipslay code for controlling the LCD display were provided from https://github.com/the-raspberry-pi-guy/lcd. 
+* Attempts to replicate the Traffic Light Simulation created by Samuel Vidal seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
+
+----
+
+## Road Map
+Future enhancements and updates to the scripts will be tracked using the Issue queue.  Any special requests can be submitted. 
 
 ----
 
