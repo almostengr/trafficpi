@@ -45,7 +45,7 @@ timing decisions.
 ----
 
 ## Running The Scripts
-To run the script, browse to the script folder, and run `python <scriptname>` where "<scriptname>" is the name of the script.
+To run the script, browse to the script folder, and run `python <scriptname>` where `<scriptname>` is the name of the script.
 
 ----
 
