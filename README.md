@@ -2,11 +2,11 @@
 
 ## Table of Contents
 * Purpose
-* [System Requirements](#system-requirements)
+* System Requirements
 * Pin Setup
 * Running the Scripts
 * Known Bugs
-* [Bug Reports](#bug-reports)
+* Bug Reports
 * Authors
 * License
 * Acknowledgements
@@ -26,6 +26,11 @@ M" of "STEM" by using electronic circuits for controlling the lights, software f
 controlling the electronic circuits, and mathematical calculations for making 
 timing decisions.
 
+This project is intended to be used with two traffic lights. Northbound (NB) light 
+has a left turn yellow and green arrows in addition to the standard 3-segement 
+light. Eastbound (EB) light only has a standard 3-segment light. It is possible to
+only connect one traffic light assembly to the board as all code will still function.
+
 ----
 
 ## System Requirements
@@ -40,21 +45,45 @@ timing decisions.
 ----
 
 ## Pin Setup
-*To be provided.*
+Below is the mapping for the connections to the Raspberry Pi. The Pin numbers
+listed are the physical pin numbers on the board, not the GPIO pin numbers. If 
+you are not using a relay board, the connections can be made directly to a 
+breadboard with LEDs connected.
+
+Pi Pin (Board)		Device Pin / LED Color
+2 --------------------- LCD Display VCC (+5V)
+3 ---------------------	LCD Display SDA
+4 ---------------------	Relay Board VCC (+5V)
+5 --------------------- LCD Display SLC
+19 --------------------	Relay Board EB Red / Red 2
+21 --------------------	Relay Board EB Yellow / Yellow 2
+23 --------------------	Relay Board EB Green / Green 2
+29 --------------------	Relay Board NB Left Yellow / Left Yellow Arrow 1
+30 --------------------	LCD Display GND
+31 -------------------- Relay Board NB Left Green / Left Green Arrow 1
+33 -------------------- Relay Board NB Red / Red 1
+34 --------------------	Relay Board GND
+35 -------------------- Relay Board NB Yellow / Yellow 1
+37 --------------------	Relay Board NB Green / Green 1
 
 ----
 
 ## Running The Scripts
-To run the script, browse to the script folder, and run `python <scriptname>` where `<scriptname>` is the name of the script.
+To run the script, browse to the script folder, and run `python <scriptname>` 
+where `<scriptname>` is the name of the script.
 
 ----
 
 ## Known Bugs
-* When exiting the script (using Ctrl+C), all of the relays may not turn off. In addition, the LCD display may not clear if it is writing when the kill shortcut is performed.
+* When exiting the script (using Ctrl+C), all of the relays may not turn off. 
+In addition, the LCD display may not clear if it is writing when the kill 
+shortcut is performed.
+
 ----
 
 ## Bug Reports
-Please open a new issue on this repo. Include as much detail that you have so that the issue can be replicated.
+Please open a new issue on this repo. Include as much detail that you have so 
+that the issue can be replicated.
 
 ----
 
@@ -64,20 +93,24 @@ Kenny Robinson, Bit Second Tech
 ----
 
 ## License
-This project is licensed under the MIT License.  See LICENSE for more details.
+This project is licensed under the MIT License. See LICENSE for more details.
 
 ----
 
 ## Acknowledgements
-* LCD Dipslay code for controlling the LCD display were provided from https://github.com/the-raspberry-pi-guy/lcd. 
-* Attempts to replicate the Traffic Light Simulation created by Samuel Vidal seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
+* LCD Dipslay code for controlling the LCD display were provided from 
+https://github.com/the-raspberry-pi-guy/lcd. 
+* Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
+seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
 
 ----
 
 ## Road Map
-Future enhancements and updates to the scripts will be tracked using the Issue queue.  Any special requests can be submitted. 
+Future enhancements and updates to the scripts will be tracked using the Issue 
+queue.  Any special requests can be submitted. 
 
 ----
 
 ## More Information
-For more information about the author of this script, please visit http://www.bitsecondtech.com.
+For more information about the author of this script, please visit 
+http://www.bitsecondtech.com.
