@@ -2,10 +2,13 @@
 
 ################################################################################
 # Project: 	Traffic Control
-# Script Usage: run_flasher.py
+# Script Usage: raspitraffic.py
 # Created: 	2017-04-02
 # Author: 	Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
-# Description:	Flash lights as if a malfunction or power outage has occurred.
+# Description:	The core functions that are used by the raspitraffic light and
+#		it's functionality. 
+# 
+# Fixed Issue #2 by creating this file.
 ################################################################################
 
 from time import sleep
