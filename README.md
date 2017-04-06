@@ -50,21 +50,21 @@ listed are the physical pin numbers on the board, not the GPIO pin numbers. If
 you are not using a relay board, the connections can be made directly to a 
 breadboard with LEDs connected.
 
-Pi Pin (Board)		Device Pin / LED Color
-2 --------------------- LCD Display VCC (+5V)
-3 ---------------------	LCD Display SDA
-4 ---------------------	Relay Board VCC (+5V)
-5 --------------------- LCD Display SLC
-19 --------------------	Relay Board EB Red / Red 2
-21 --------------------	Relay Board EB Yellow / Yellow 2
-23 --------------------	Relay Board EB Green / Green 2
-29 --------------------	Relay Board NB Left Yellow / Left Yellow Arrow 1
-30 --------------------	LCD Display GND
-31 -------------------- Relay Board NB Left Green / Left Green Arrow 1
-33 -------------------- Relay Board NB Red / Red 1
-34 --------------------	Relay Board GND
-35 -------------------- Relay Board NB Yellow / Yellow 1
-37 --------------------	Relay Board NB Green / Green 1
+* Pi Pin (Board)		Device Pin / LED Color
+* 2 --------------------- LCD Display VCC (+5V)
+* 3 ---------------------	LCD Display SDA
+* 4 ---------------------	Relay Board VCC (+5V)
+* 5 --------------------- LCD Display SLC
+* 19 --------------------	Relay Board EB Red / Red 2
+* 21 --------------------	Relay Board EB Yellow / Yellow 2
+* 23 --------------------	Relay Board EB Green / Green 2
+* 29 --------------------	Relay Board NB Left Yellow / Left Yellow Arrow 1
+* 30 --------------------	LCD Display GND
+* 31 -------------------- Relay Board NB Left Green / Left Green Arrow 1
+* 33 -------------------- Relay Board NB Red / Red 1
+* 34 --------------------	Relay Board GND
+* 35 -------------------- Relay Board NB Yellow / Yellow 1
+* 37 --------------------	Relay Board NB Green / Green 1
 
 ----
 
