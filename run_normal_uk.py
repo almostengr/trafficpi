@@ -32,42 +32,50 @@ try:
 			if x > 0:
 				# nb about to change
 				phasering1=rtc.controlring1uk(phasering1)
-				for ptime in range(NORTH_YEL_TIME, -1, 0):
+				for ptime in range(NORTH_YEL_TIME, 0, -1):
+					rtc.lcd_message("Time: " + str(ptime), "")
 					sleep(1)
 
 			# nb green
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(NORTH_GRN_TIME, -1, 0):
+			for ptime in range(NORTH_GRN_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# nb yellow
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(NORTH_YEL_TIME, -1, 0):
+			for ptime in range(NORTH_YEL_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 			
 			# all red	
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(ALL_RED_TIME, -1, 0):
+			for ptime in range(ALL_RED_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# eb about to change 	
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(EAST_YEL_TIME, -1, 0):
+			for ptime in range(EAST_YEL_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# eb green 	
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(EAST_GRN_TIME, -1, 0):
+			for ptime in range(EAST_GRN_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# eb yellow
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(EAST_YEL_TIME, -1, 0):
+			for ptime in range(EAST_YEL_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# all red	
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(ALL_RED_TIME, -1, 0):
+			for ptime in range(ALL_RED_TIME, 0, -1):
+				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 		phasering1 = 0
