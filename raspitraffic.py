@@ -88,20 +88,14 @@ def controlflasher( phase ):
 	if phase == 0:
 		log_message("Do nothing")
 	elif phase == 1:
-		lcd_message("Flasher Mode", "EB YEL, NB OFF")
-		light_off(NORTH_CG)
-		light_off(NORTH_CY)
-		light_off(NORTH_LG)
-		light_off(NORTH_LY)
-		light_off(NORTH_CR)
-		light_off(EAST_CR)
-		light_on(EAST_CY)
-		light_off(EAST_CG)
+		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPOFF)
+		lcd_message("Flasher Mode", "EB OFF, NB YEL")
 		phase=2
 	elif phase == 2:
-		light_on(NORTH_CR)
-		light_off(EAST_CY)
-		lcd_message ("Flasher Mode", "EB OFF, NB RED")
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		lcd_message ("Flasher Mode", "EB RED, NB OFF")
 		phase=1
 	else:
 		log_message("Not valid flasher phase")
@@ -118,11 +112,10 @@ def calc_yellow_time( speed, grade ):
 def calc_green_time():
 # SET A RANDOM VALUE FOR THE GREEN TIME
 	grn_time=random.randint(15, 35)
-
 	log_message("Green Time: " + str(grn_time))
 	return grn_time
 
-def nblight(cirred, ciryel, cirgrn, lefyel, lefgrn);
+def nblight(cirred, ciryel, cirgrn, lefyel, lefgrn):
 	GPIO.output(NORTH_CR, cirred)
 	GPIO.output(NORTH_CY, ciryel)
 	GPIO.output(NORTH_CG, cirgrn)
@@ -185,11 +178,12 @@ def controlring1uk(phase):
 		phase = 1 
 	else:
 		phase=1
-
+	
+	debug_message("outgoing phase " + str(phase))
 	return phase
 
-def controlring1( phase ):
-# RUN NORMAL RUN SEQUENCE
+def controlring1(phase):
+# RUN NORMAL SEQUENCE
 
 # phase 0 - do nothing
 # phase 1 - nb cr, eb cr
@@ -277,7 +271,7 @@ def randomspeed():
 def lamptest():
 	lcd_message("LAMP TEST", "")
 
-	for i in pinOutList:
+	for i in pinOutList: 	
 		light_on(i)
 		lcd_message("LAMP TEST", "Pin " + str(i) + " on")
 		sleep(1)
