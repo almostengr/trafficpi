@@ -124,6 +124,7 @@ def calc_green_time():
 	return grn_time
 
 def nblight(cirred, ciryel, cirgrn, lefyel, lefgrn):
+# CONTROLS THE LAMPS ON THE NORTHBOUND LIGHT. DESIGNED TO INCLUDE LEFT TURN
 	GPIO.output(NORTH_CR, cirred)
 	GPIO.output(NORTH_CY, ciryel)
 	GPIO.output(NORTH_CG, cirgrn)
@@ -131,6 +132,7 @@ def nblight(cirred, ciryel, cirgrn, lefyel, lefgrn):
 	GPIO.output(NORTH_LG, lefgrn)
 
 def eblight(cirred, ciryel, cirgrn):
+# CONTROLS THE LAMPS ON THE EASTBOUND LIGHT. DOESNT HAVE LEFT TURN
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
@@ -196,58 +198,32 @@ def controlring1(phase):
 		log_message("Doing nothing")
 	elif phase == 1:
 		log_message("NB RED -- EB RED")
-		light_on(NORTH_CR)
-		light_off(NORTH_CY)
-		light_off(NORTH_CG)
-		light_off(NORTH_LG)
-		light_off(NORTH_LY)
-		light_on(EAST_CR)
-		light_off(EAST_CY)
-		light_off(EAST_CG)
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 2
 	elif phase == 2:
 		log_message("NB GRN -- EB RED")
-		light_off(NORTH_CR)
-		light_off(NORTH_CY)
-		light_on(NORTH_CG)
-		light_on(EAST_CR)
-		light_off(EAST_CY)
-		light_off(EAST_CG)
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 3
 	elif phase == 3:
-		light_off(NORTH_CR)
-		light_on(NORTH_CY)
-		light_off(NORTH_CG)
-		light_on(EAST_CR)
-		light_off(EAST_CY)
-		light_off(EAST_CG)
+		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 4 
 		log_message("NB YEL -- EB RED")
 	elif phase == 4:
-		light_on(NORTH_CR)
-		light_off(NORTH_CY)
-		light_off(NORTH_CG)
-		light_on(EAST_CR)
-		light_off(EAST_CY)
-		light_off(EAST_CG)
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 5
 		log_message("NB RED -- EB RED")
 	elif phase == 5:
-		light_on(NORTH_CR)
-		light_off(NORTH_CY)
-		light_off(NORTH_CG)
-		light_off(EAST_CR)
-		light_off(EAST_CY)
-		light_on(EAST_CG)
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPON)
 		phase = 6 
 		log_message("NB RED -- EB GRN")
 	elif phase == 6:
-		light_on(NORTH_CR)
-		light_off(NORTH_CY)
-		light_off(NORTH_CG)
-		light_off(EAST_CR)
-		light_on(EAST_CY)
-		light_off(EAST_CG)
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPON, LMPOFF)
 		phase = 1 
 		log_message("NB RED -- EB YEL")
 	else:
