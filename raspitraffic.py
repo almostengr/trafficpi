@@ -1,11 +1,12 @@
 #!/usr/bin/python
 
 ################################################################################
-# Project: 	Traffic Control
-# Script Usage: run_flasher.py
+# Project: 	Raspi Traffic Control
+# Script Usage: raspitraffic.py
 # Created: 	2017-04-02
 # Author: 	Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
-# Description:	Flash lights as if a malfunction or power outage has occurred.
+# Description:	Core script which all the functions for controlling the lights
+# 		are contained. 
 ################################################################################
 
 from time import sleep
@@ -82,6 +83,12 @@ def lcd_message(line1, line2):
 	display.lcd_display_string(line2, 2)
 	log_message(line1 + " | " + line2)
 	return 0
+
+def terminate():
+# WHEN COMMAND TO EXIT IS GIVEN, THEN RESET EVERYTHING BACK TO DEFAULT
+	log_message("Exiting")
+        GPIO.cleanup()
+        display.lcd_clear()
 
 def controlflasher( phase ):
 # runs flasher SEQUENCE
@@ -268,6 +275,20 @@ def randomspeed():
 	speed=random.randint(25,50)
 	return speed
 
+def allon():
+# TURNS ON ALL OF THE LIGHTS
+	lcd_message("ALL LIGHTS ON", "")
+	for i in pinOutList:
+		light_on(i)
+	sleep(3)
+
+def alloff():
+# TURNS OFF ALL OF THE LIGHTS
+	lcd_message("ALL LIGHTS OFF", "")
+	for i in pinOutList:
+		light_off(i)
+	sleep(3)
+
 def lamptest():
 	lcd_message("LAMP TEST", "")
 
@@ -288,5 +309,4 @@ def lamptest():
 	sleep(3)
 	sleep(3)	
 	display.lcd_clear()
-
 
