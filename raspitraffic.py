@@ -15,7 +15,7 @@ import lcddriver
 import random
 
 # DEBUG MODE, ENABLED=1, DISABLED=0
-DEBUG=1
+DEBUG=0
 
 # LIST ALL OF THE PINS USED
 pinOutList = [37, 35, 33, 31, 29, 23, 21, 19]
