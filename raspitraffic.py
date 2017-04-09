@@ -13,6 +13,9 @@ import RPi.GPIO as GPIO
 import lcddriver
 import random
 
+# DEBUGGING MODE, DISABLED=0, ENABLED=1
+DEBUG=0
+
 # LIST ALL OF THE PINS USED
 pinOutList = [37, 35, 33, 31, 29, 23, 21, 19]
 
@@ -28,8 +31,8 @@ EAST_CR = 23
 EAST_CY = 21
 EAST_CG = 19
 
-# DEBUG MODE, ENABLED=1, DISABLED=0
-DEBUG=1
+LMPON=GPIO.LOW
+LMPOFF=GPIO.HIGH
 
 display=lcddriver.lcd()
 ALL_RED_TIME=5
@@ -118,6 +121,72 @@ def calc_green_time():
 
 	log_message("Green Time: " + str(grn_time))
 	return grn_time
+
+def nblight(cirred, ciryel, cirgrn, lefyel, lefgrn);
+	GPIO.output(NORTH_CR, cirred)
+	GPIO.output(NORTH_CY, ciryel)
+	GPIO.output(NORTH_CG, cirgrn)
+	GPIO.output(NORTH_LY, lefyel)
+	GPIO.output(NORTH_LG, lefgrn)
+
+def eblight(cirred, ciryel, cirgrn):
+	GPIO.output(EAST_CR, cirred)
+	GPIO.output(EAST_CY, ciryel)
+	GPIO.output(EAST_CG, cirgrn)
+
+def controlring1uk(phase):
+# RUN NORMAL SEQUENCE WITH UK PHASING
+
+# phase 0 - do nothing
+# phase 1 - nb cr, eb cr
+# phase 2 - nb cr cy, eb cr
+# phase 3 - nb cg, eb cr
+# phase 4 - nb cy, eb cr
+# phase 5 - nb cr, eb cr
+# phase 6 - nb cr, eb cr cy
+# phase 7 - nb cr, eb cg
+# phase 8 - nb cr, eb cy
+	
+	debug_message("incoming phase: " + str(phase))
+	
+	if phase == 0:
+		log_message("Do nothing")
+	elif phase == 1:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 2
+	elif phase == 2:
+		nblight(LMPON, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase=3
+	elif phase == 3:
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 4
+	elif phase == 4:
+		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 5
+	elif phase == 5:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 6
+	elif phase == 6:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPON, LMPOFF)
+		phase = 7
+	elif phase == 7:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPON)
+		phase = 8
+	elif phase == 8:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPON, LMPOFF)
+		phase = 1 
+	else:
+		phase=1
+
+	return phase
 
 def controlring1( phase ):
 # RUN NORMAL RUN SEQUENCE
