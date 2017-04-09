@@ -217,7 +217,6 @@ def allon():
 	lcd_message("ALL LIGHTS ON", "")
 	for i in pinOutList:
 		light_on(i)
-	
 	sleep(3)
 
 def alloff():
