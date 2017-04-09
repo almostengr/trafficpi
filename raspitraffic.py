@@ -207,7 +207,7 @@ def randomspeed():
 
 def allon():
 # TURNS ON ALL OF THE LIGHTS
-	lcd_message("All LIGHTS ON", "")
+	lcd_message("ALL LIGHTS ON", "")
 	for i n pinOutList:
 		light_on(i)
 	

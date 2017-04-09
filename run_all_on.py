@@ -2,15 +2,10 @@
 
 ################################################################################
 # Project: 	Traffic Control
-# Script Usage: guess_yellow_time.py
-# Created: 	2017-04-02
+# Script Usage: run_all_on.py
+# Created: 	2017-04-09
 # Author: 	Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
-# Description:	Goal is to guess the amount of time that the traffic light will
-# 		yellow for before it turns yellow. The script will provide a
-# 		a random speed. Then using the yellow light formula, students
-#		are to calculate the amount of time that the light will be for
-#		before the light changes. Speed is given when the light turns 
-#		green and countdown is started.
+# Description:	Turns on all the lights. 
 ################################################################################
 
 from time import sleep
@@ -24,7 +19,7 @@ try:
 	# CODE TO RUN GOES HERE
 
 	rtc.setup()
-	rtc.lamptest()
+	rtc.allon()
 
 except KeyboardInterrupt:
 	rtc.log_message("Exiting")
