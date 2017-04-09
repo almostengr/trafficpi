@@ -32,16 +32,18 @@ EAST_CR = 23
 EAST_CY = 21
 EAST_CG = 19
 
+# DEFINE CONSTANTS
 LMPON=GPIO.LOW
 LMPOFF=GPIO.HIGH
+ALL_RED_TIME=2
 
 display=lcddriver.lcd()
-ALL_RED_TIME=5
 
 def setup():
 # SET UP GPIO PINS
 	GPIO.setmode(GPIO.BOARD)
-
+	
+	# loop through each of the pins and define it.
 	for i in pinOutList:
 		GPIO.setup(i, GPIO.OUT)
 		GPIO.output(i, GPIO.HIGH)
@@ -68,11 +70,10 @@ def debug_message(message):
 # LOG ADDITIONAL MESSAGES TO THE SCREEN/LOG FILE WHEN TESTING
 	if DEBUG == 1:
 		log_message("DEBUG: " + message)
-
 	return 0
 
 def log_message(message):
-# print message on LCD screen
+# print message on computer screen
 	print message
 	return 0
 
@@ -90,7 +91,7 @@ def terminate():
         GPIO.cleanup()
         display.lcd_clear()
 
-def controlflasher( phase ):
+def controlflasher(phase):
 # runs flasher SEQUENCE
 	if phase == 0:
 		log_message("Do nothing")
@@ -138,48 +139,38 @@ def controlring1uk(phase):
 # RUN NORMAL SEQUENCE WITH UK PHASING
 
 # phase 0 - do nothing
-# phase 1 - nb cr, eb cr
-# phase 2 - nb cr cy, eb cr
-# phase 3 - nb cg, eb cr
-# phase 4 - nb cy, eb cr
-# phase 5 - nb cr, eb cr
-# phase 6 - nb cr, eb cr cy
-# phase 7 - nb cr, eb cg
-# phase 8 - nb cr, eb cy
+# phase 1 - nb cr cy, eb cr
+# phase 2 - nb cg, eb cr
+# phase 3 - nb cy, eb cr
+# phase 4 - nb cr, eb cr cy
+# phase 5 - nb cr, eb cg
+# phase 6 - nb cr, eb cy
 	
 	debug_message("incoming phase: " + str(phase))
 	
 	if phase == 0:
 		log_message("Do nothing")
 	elif phase == 1:
-		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		nblight(LMPON, LMPON, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 2
 	elif phase == 2:
-		nblight(LMPON, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
 		phase=3
 	elif phase == 3:
-		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPOFF)
+		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 4
 	elif phase == 4:
-		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
-		eblight(LMPON, LMPOFF, LMPOFF)
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPON, LMPOFF)
 		phase = 5
 	elif phase == 5:
 		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
-		eblight(LMPON, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPON)
 		phase = 6
 	elif phase == 6:
-		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
-		eblight(LMPON, LMPON, LMPOFF)
-		phase = 7
-	elif phase == 7:
-		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
-		eblight(LMPOFF, LMPOFF, LMPON)
-		phase = 8
-	elif phase == 8:
 		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPOFF, LMPON, LMPOFF)
 		phase = 1 
@@ -213,7 +204,6 @@ def controlring1(phase):
 		light_on(EAST_CR)
 		light_off(EAST_CY)
 		light_off(EAST_CG)
-
 		phase = 2
 	elif phase == 2:
 		log_message("NB GRN -- EB RED")
@@ -223,7 +213,6 @@ def controlring1(phase):
 		light_on(EAST_CR)
 		light_off(EAST_CY)
 		light_off(EAST_CG)
-
 		phase = 3
 	elif phase == 3:
 		light_off(NORTH_CR)
@@ -232,7 +221,6 @@ def controlring1(phase):
 		light_on(EAST_CR)
 		light_off(EAST_CY)
 		light_off(EAST_CG)
-
 		phase = 4 
 		log_message("NB YEL -- EB RED")
 	elif phase == 4:
@@ -242,7 +230,6 @@ def controlring1(phase):
 		light_on(EAST_CR)
 		light_off(EAST_CY)
 		light_off(EAST_CG)
-		
 		phase = 5
 		log_message("NB RED -- EB RED")
 	elif phase == 5:
@@ -252,7 +239,6 @@ def controlring1(phase):
 		light_off(EAST_CR)
 		light_off(EAST_CY)
 		light_on(EAST_CG)
-		
 		phase = 6 
 		log_message("NB RED -- EB GRN")
 	elif phase == 6:
@@ -262,7 +248,6 @@ def controlring1(phase):
 		light_off(EAST_CR)
 		light_on(EAST_CY)
 		light_off(EAST_CG)
-
 		phase = 1 
 		log_message("NB RED -- EB YEL")
 	else:
@@ -281,6 +266,7 @@ def allon():
 	for i in pinOutList:
 		light_on(i)
 	sleep(3)
+	display.lcd_clear()
 
 def alloff():
 # TURNS OFF ALL OF THE LIGHTS
@@ -288,6 +274,7 @@ def alloff():
 	for i in pinOutList:
 		light_off(i)
 	sleep(3)
+	display.lcd_clear()
 
 def lamptest():
 	lcd_message("LAMP TEST", "")
@@ -307,6 +294,5 @@ def lamptest():
 
 	lcd_message("LAMP TEST", "ALL OFF")
 	sleep(3)
-	sleep(3)	
 	display.lcd_clear()
 
