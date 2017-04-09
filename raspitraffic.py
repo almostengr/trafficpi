@@ -205,6 +205,21 @@ def randomspeed():
 	speed=random.randint(25,50)
 	return speed
 
+def allon():
+# TURNS ON ALL OF THE LIGHTS
+	lcd_message("All LIGHTS ON", "")
+	for i n pinOutList:
+		light_on(i)
+	
+	sleep(3)
+
+def alloff():
+# TURNS OFF ALL OF THE LIGHTS
+	lcd_message("ALL LIGHTS OFF", "")
+	for i in pinOutList:
+		light_off(i)
+	sleep(3)
+
 def lamptest():
 	lcd_message("LAMP TEST", "")
 
