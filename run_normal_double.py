@@ -5,8 +5,9 @@
 # Script Usage: run_normal_single.py
 # Created: 	2017-04-03
 # Author: 	Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
-# Description:	Runs normal operation and then flasher for a single traffic
-# 		signal. Phasing is based on US traffic signal convention.
+# Description:	Runs normal operation and then flasher for traffic facing two 
+# 		different directions. Phasing is based on US traffic
+#		signal convention. 
 ################################################################################
 
 import raspitraffic as rtc

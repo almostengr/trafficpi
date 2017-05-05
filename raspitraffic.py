@@ -46,7 +46,8 @@ def setup():
 	# loop through each of the pins and define it.
 	# tun on all the lights once setup
 	
-	log_message("Performing setup")
+	# log_message("Performing setup")
+	lcd_message("Performing setup", "Please wait...")
 	
 	for i in pinOutList:
 		debug_message("Setting up and activiating pin " + str(i))
@@ -61,7 +62,8 @@ def setup():
 	for i in pinOutList:
 		GPIO.output(i, GPIO.HIGH)
 
-	log_message("Done performing setup")
+	# log_message("Done performing setup")
+	lcd_message("Done performing setup", "")
 		
 	return 0
 
