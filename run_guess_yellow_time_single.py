@@ -50,44 +50,7 @@ try:
 			rtc.lcd_message("All Red Delay", "Starting in " + str(x) + "s")
 			sleep(1)
 
-		## BOUNDARY
-
-		north_speedlimit=rtc.randomspeed()
 		east_speedlimit=rtc.randomspeed()
-
-		rtc.debug_message("Turning north green")
-	
-		north_grn_time=rtc.calc_green_time()
-
-		phasering1=rtc.controlring1(phasering1)
-
-		for x in range(north_grn_time, 0, -1):
-			rtc.lcd_message("Speed Limit: " + str(north_speedlimit), \
-				"Time Remain: " + str(x) + "s")
-			sleep(1)
-
-		rtc.debug_message("Turning north yellow")
-
-		north_yel_time=rtc.calc_yellow_time(north_speedlimit, 0)
-
-		phasering1=rtc.controlring1(phasering1)
-
-		rtc.lcd_message("Yellow Time: " + str(north_yel_time) + "s", "")
-		sleep(north_yel_time)
-
-		rtc.debug_message("turning all red")
-
-		phasering1=rtc.controlring1(phasering1)
-
-		rtc.lcd_message("Yellow Time: " + str(north_yel_time) + "s", "Game over")
-
-		# lcd_message("All red delay", "")
-		for x in range(ALL_RED_TIME, 0, -1):
-			rtc.lcd_message("All Red Delay", "Starting in " + str(x) + "s")
-			sleep(1)
-
-
-		## BOUNDARY
 
 		east_grn_time=rtc.calc_green_time()
 
