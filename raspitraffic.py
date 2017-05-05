@@ -183,7 +183,7 @@ def controlring1uk(phase):
 	return phase
 
 def controlring1(phase):
-# RUN NORMAL SEQUENCE
+# RUN NORMAL SEQUENCE FOR NORTHBOUND AND EASTBOUND LIGHT
 
 # phase 0 - do nothing
 # phase 1 - nb cr, eb cr
@@ -226,6 +226,30 @@ def controlring1(phase):
 		eblight(LMPOFF, LMPON, LMPOFF)
 		phase = 1 
 		log_message("NB RED -- EB YEL")
+	else:
+		phase = 1
+
+	debug_message("Outgoing phase: " + str(phase))
+	return phase
+
+def controlring2(phase):
+# RUN NORMAL SEQUENCE FOR EASTBOUND LIGHT ONLY
+
+# phase 0 - do nothing
+# phase 1 - eb cr
+# phase 2 - eb cg
+# phase 3 - eb cy
+
+	debug_message("Incoming phase: " + str(phase))
+
+	if phase == 0:
+		log_message("Doing nothing")
+	elif phase == 1:
+		eblight(LMPON, LMPOFF, LMPOFF)
+	elif phase == 2:
+		eblight(LMPOFF, LMPOFF, LMPON)
+	elif phase == 3:
+		eblight(LMPOFF, LMPON, LMPOFF)
 	else:
 		phase = 1
 
