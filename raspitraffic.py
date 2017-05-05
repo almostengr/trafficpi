@@ -35,7 +35,7 @@ EAST_CG = 19
 # DEFINE CONSTANTS
 LMPON=GPIO.LOW
 LMPOFF=GPIO.HIGH
-ALL_RED_TIME=2
+ALL_RED_TIME=5
 
 display=lcddriver.lcd()
 
@@ -45,15 +45,23 @@ def setup():
 	
 	# loop through each of the pins and define it.
 	# tun on all the lights once setup
+	
+	log_message("Performing setup")
+	
 	for i in pinOutList:
+		debug_message("Setting up and activiating pin " + str(i))
 		GPIO.setup(i, GPIO.OUT)
 		GPIO.output(i, GPIO.LOW)
+
+	debug_message("Waiting")
 
 	sleep(2)
 
 	# turn off all the lights
 	for i in pinOutList:
 		GPIO.output(i, GPIO.HIGH)
+
+	log_message("Done performing setup")
 		
 	return 0
 
@@ -121,12 +129,13 @@ def calc_yellow_time( speed, grade ):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
 	# y = 1 + ((1.47 * speed) / (2 * (10 * (grade / 100) * 32.2))
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
+	# yel_time = 1 +  644
 	log_message("Yellow Time: " + str(yel_time))
 	return yel_time
 
 def calc_green_time():
 # SET A RANDOM VALUE FOR THE GREEN TIME
-	grn_time=random.randint(15, 35)
+	grn_time=random.randint(20, 45)
 	log_message("Green Time: " + str(grn_time))
 	return grn_time
 
@@ -249,13 +258,17 @@ def controlring1eb(phase):
 
 	debug_message("Incoming phase: " + str(phase))
 
-	if phase == 0:
+	if phase == 0:	
+		# do nothing
 		log_message("Doing nothing")
 	elif phase == 1:
+		# red on
 		eblight(LMPON, LMPOFF, LMPOFF)
 	elif phase == 2:
+		# green on
 		eblight(LMPOFF, LMPOFF, LMPON)
 	elif phase == 3:
+		# yellow on
 		eblight(LMPOFF, LMPON, LMPOFF)
 	else:
 		phase = 1

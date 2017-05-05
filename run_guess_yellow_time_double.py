@@ -60,6 +60,8 @@ try:
 		north_grn_time=rtc.calc_green_time()
 
 		phasering1=rtc.controlring1(phasering1)
+		
+		north_yel_time=rtc.calc_yellow_time(north_speedlimit, 0)
 
 		for x in range(north_grn_time, 0, -1):
 			rtc.lcd_message("Speed Limit: " + str(north_speedlimit), \
@@ -68,7 +70,7 @@ try:
 
 		rtc.debug_message("Turning north yellow")
 
-		north_yel_time=rtc.calc_yellow_time(north_speedlimit, 0)
+		# north_yel_time=rtc.calc_yellow_time(north_speedlimit, 0)
 
 		phasering1=rtc.controlring1(phasering1)
 
@@ -95,13 +97,15 @@ try:
 
 		phasering1=rtc.controlring1(phasering1)
 
+		east_yel_time=rtc.calc_yellow_time(east_speedlimit, 0)
+
 		for x in range(east_grn_time, 0, -1):
 			rtc.lcd_message("Speed Limit: " + str(east_speedlimit), "Time Remain: " + str(x) + "s")
 			sleep(1)
 
 		rtc.debug_message("Turning east yellow")
 
-		east_yel_time=rtc.calc_yellow_time(east_speedlimit, 0)
+		# east_yel_time=rtc.calc_yellow_time(east_speedlimit, 0)
 
 		phasering1=rtc.controlring1(phasering1)
 
