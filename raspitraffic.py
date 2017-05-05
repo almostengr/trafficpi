@@ -44,10 +44,17 @@ def setup():
 	GPIO.setmode(GPIO.BOARD)
 	
 	# loop through each of the pins and define it.
+	# tun on all the lights once setup
 	for i in pinOutList:
 		GPIO.setup(i, GPIO.OUT)
-		GPIO.output(i, GPIO.HIGH)
+		GPIO.output(i, GPIO.LOW)
 
+	sleep(2)
+
+	# turn off all the lights
+	for i in pinOutList:
+		GPIO.output(i, GPIO.HIGH)
+		
 	return 0
 
 def getallredtime():
@@ -232,7 +239,7 @@ def controlring1(phase):
 	debug_message("Outgoing phase: " + str(phase))
 	return phase
 
-def controlring2(phase):
+def controlring1eb(phase):
 # RUN NORMAL SEQUENCE FOR EASTBOUND LIGHT ONLY
 
 # phase 0 - do nothing
