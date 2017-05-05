@@ -266,12 +266,15 @@ def controlring1eb(phase):
 	elif phase == 1:
 		# red on
 		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 2
 	elif phase == 2:
 		# green on
 		eblight(LMPOFF, LMPOFF, LMPON)
+		phase = 3
 	elif phase == 3:
 		# yellow on
 		eblight(LMPOFF, LMPON, LMPOFF)
+		phase = 1
 	else:
 		phase = 1
 

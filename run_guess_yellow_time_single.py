@@ -28,19 +28,16 @@ try:
 	phaseflasher=0
 	phasering1=1
 	counter=0
+	east_grn_time=0
+	east_yel_time=0
+	ALL_RED_TIME=rtc.getallredtime()
 
 	while True:
 		rtc.debug_message("Turning all red")
 
-		north_grn_time=0
-		north_yel_time=0
-                north_speedlimit=rtc.randomspeed()
                 east_speedlimit=rtc.randomspeed()
-		east_grn_time=0
-		east_yel_time=0
-		ALL_RED_TIME=rtc.getallredtime()
 
-		phasering1=rtc.controlring1(phasering1)
+		phasering1=rtc.controlring1eb(phasering1)
 
 		if counter>0:
 			rtc.lcd_message("Yellow Time: " + str(east_yel_time) + "s", "Game over")
@@ -50,13 +47,16 @@ try:
 			rtc.lcd_message("All Red Delay", "Starting in " + str(x) + "s")
 			sleep(1)
 
-		east_speedlimit=rtc.randomspeed()
+		## BOUNDARY
 
+		east_speedslimit=rtc.randomspeed()
 		east_grn_time=rtc.calc_green_time()
 
 		rtc.debug_message("Turning east green")
 
-		phasering1=rtc.controlring1(phasering1)
+		phasering1=rtc.controlring1eb(phasering1)
+
+		east_yel_time=rtc.calc_yellow_time(east_speedlimit, 0)
 
 		for x in range(east_grn_time, 0, -1):
 			rtc.lcd_message("Speed Limit: " + str(east_speedlimit), "Time Remain: " + str(x) + "s")
@@ -64,9 +64,9 @@ try:
 
 		rtc.debug_message("Turning east yellow")
 
-		east_yel_time=rtc.calc_yellow_time(east_speedlimit, 0)
+		# east_yel_time=rtc.calc_yellow_time(east_speedlimit, 0)
 
-		phasering1=rtc.controlring1(phasering1)
+		phasering1=rtc.controlring1eb(phasering1)
 
 		rtc.lcd_message("Yellow Time: ", str(east_yel_time) + " seconds")
 		
