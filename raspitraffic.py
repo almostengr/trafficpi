@@ -36,7 +36,7 @@ EAST_CG = 19
 LMPON=GPIO.LOW
 LMPOFF=GPIO.HIGH
 ALL_RED_TIME=5
-FLASHER_DELAY=.5
+FLASHER_DELAY=.7
 
 display=lcddriver.lcd()
 
@@ -237,6 +237,27 @@ def controlring1uk(phase):
 	
 	debug_message("outgoing phase " + str(phase))
 	return phase
+
+def controlredlightgreenlight(phase):
+# SEQUENCE FOR RED LIGHT GREEN LIGHT GAME
+	if phase == 0:
+		log_message("Doing nothing")
+	elif phase == 1:
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		lcd_message("Red Light!", "")
+		phase = 2
+	elif phase == 2:
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPON)
+		lcd_message("Green Light!", "")
+		phase = 1
+	else:
+		phase = 1
+		log_message("Not a valid phase")
+	
+	return phase
+
 
 def controlring1(phase):
 # RUN NORMAL SEQUENCE FOR NORTHBOUND AND EASTBOUND LIGHT
