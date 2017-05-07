@@ -35,7 +35,7 @@ EAST_CG = 19
 # DEFINE CONSTANTS
 LMPON=GPIO.LOW
 LMPOFF=GPIO.HIGH
-ALL_RED_TIME=2
+ALL_RED_TIME=5
 
 display=lcddriver.lcd()
 
@@ -44,10 +44,27 @@ def setup():
 	GPIO.setmode(GPIO.BOARD)
 	
 	# loop through each of the pins and define it.
+	# tun on all the lights once setup
+	
+	# log_message("Performing setup")
+	lcd_message("Performing setup", "Please wait...")
+	
 	for i in pinOutList:
+		debug_message("Setting up and activiating pin " + str(i))
 		GPIO.setup(i, GPIO.OUT)
+		GPIO.output(i, GPIO.LOW)
+
+	debug_message("Waiting")
+
+	sleep(2)
+
+	# turn off all the lights
+	for i in pinOutList:
 		GPIO.output(i, GPIO.HIGH)
 
+	# log_message("Done performing setup")
+	lcd_message("Done performing setup", "")
+		
 	return 0
 
 def getallredtime():
@@ -114,12 +131,13 @@ def calc_yellow_time( speed, grade ):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
 	# y = 1 + ((1.47 * speed) / (2 * (10 * (grade / 100) * 32.2))
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
+	# yel_time = 1 +  644
 	log_message("Yellow Time: " + str(yel_time))
 	return yel_time
 
 def calc_green_time():
 # SET A RANDOM VALUE FOR THE GREEN TIME
-	grn_time=random.randint(15, 35)
+	grn_time=random.randint(20, 45)
 	log_message("Green Time: " + str(grn_time))
 	return grn_time
 
@@ -183,7 +201,7 @@ def controlring1uk(phase):
 	return phase
 
 def controlring1(phase):
-# RUN NORMAL SEQUENCE
+# RUN NORMAL SEQUENCE FOR NORTHBOUND AND EASTBOUND LIGHT
 
 # phase 0 - do nothing
 # phase 1 - nb cr, eb cr
@@ -226,6 +244,37 @@ def controlring1(phase):
 		eblight(LMPOFF, LMPON, LMPOFF)
 		phase = 1 
 		log_message("NB RED -- EB YEL")
+	else:
+		phase = 1
+
+	debug_message("Outgoing phase: " + str(phase))
+	return phase
+
+def controlring1eb(phase):
+# RUN NORMAL SEQUENCE FOR EASTBOUND LIGHT ONLY
+
+# phase 0 - do nothing
+# phase 1 - eb cr
+# phase 2 - eb cg
+# phase 3 - eb cy
+
+	debug_message("Incoming phase: " + str(phase))
+
+	if phase == 0:	
+		# do nothing
+		log_message("Doing nothing")
+	elif phase == 1:
+		# red on
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 2
+	elif phase == 2:
+		# green on
+		eblight(LMPOFF, LMPOFF, LMPON)
+		phase = 3
+	elif phase == 3:
+		# yellow on
+		eblight(LMPOFF, LMPON, LMPOFF)
+		phase = 1
 	else:
 		phase = 1
 
