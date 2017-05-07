@@ -27,8 +27,8 @@ controlling the electronic circuits, and mathematical calculations for making
 timing decisions.
 
 This project is intended to be used with two traffic lights. Northbound (NB) light 
-has a left turn yellow and green arrows in addition to the standard 3-segement 
-light. Eastbound (EB) light only has a standard 3-segment light. It is possible to
+(Signal 1) has a left turn yellow and green arrows in addition to the standard 3-segment 
+light. Eastbound (EB) light (Signal 2) only has a standard 3-segment light. It is possible to
 only connect one traffic light assembly to the board as all code will still function.
 
 ----
@@ -39,6 +39,7 @@ only connect one traffic light assembly to the board as all code will still func
 * Traffic Light (actual or DIY)
 * I2C 16x2 LCD Display
 * Breadboard Jumper Cables
+* Breadboard (optional)
 * Python 2.7.9
 * Raspbian Jessie (May work on other OSs, but has only been tested on Raspbian Jessie)
 
@@ -52,19 +53,19 @@ breadboard with LEDs connected.
 
 * Pi Pin (Board)		Device Pin / LED Color
 * 2 --------------------- LCD Display VCC (+5V)
-* 3 ---------------------	LCD Display SDA
-* 4 ---------------------	Relay Board VCC (+5V)
+* 3 --------------------- LCD Display SDA
+* 4 --------------------- Relay Board VCC (+5V)
 * 5 --------------------- LCD Display SLC
-* 19 --------------------	Relay Board EB Red / Red 2
-* 21 --------------------	Relay Board EB Yellow / Yellow 2
-* 23 --------------------	Relay Board EB Green / Green 2
-* 29 --------------------	Relay Board NB Left Yellow / Left Yellow Arrow 1
-* 30 --------------------	LCD Display GND
-* 31 -------------------- Relay Board NB Left Green / Left Green Arrow 1
-* 33 -------------------- Relay Board NB Red / Red 1
-* 34 --------------------	Relay Board GND
-* 35 -------------------- Relay Board NB Yellow / Yellow 1
-* 37 --------------------	Relay Board NB Green / Green 1
+* 19 -------------------- Signal 2 Red
+* 21 -------------------- Signal 2 Yellow
+* 23 -------------------- Signal 2 Green
+* 29 -------------------- Signal 1 Left Turn Yellow
+* 30 -------------------- LCD Display GND
+* 31 -------------------- Signal 1 Left Turn Green
+* 33 -------------------- Signal 1 Red
+* 34 -------------------- Relay Board GND
+* 35 -------------------- Signal 1 Yellow
+* 37 -------------------- Signal 1 Green
 
 ----
 
