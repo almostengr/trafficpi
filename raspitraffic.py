@@ -323,11 +323,27 @@ def randomspeed():
 	speed=random.randint(25,50)
 	return speed
 
-def allon():
-# TURNS ON ALL OF THE LIGHTS
-	lcd_message("ALL LIGHTS ON", "")
-	for i in pinOutList:
-		light_on(i)
+def allon(phase):
+# TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED 
+	if phase == "all":
+		nblight(LMPON, LMPON, LMPON, LMPON, LMPON)
+		eblight(LMPON, LMPON, LMPON)
+	        lcd_message("ALL LIGHTS ON", "")
+	elif phase == "red":
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		lcd_message("ALL REDS ON", "")
+	elif phase == "yellow":
+                nblight(LMPOFF, LMPON, LMPOFF, LMPON, LMPOFF)
+		eblight(LMPOFF, LMPON, LMPOFF)
+		lcd_message("ALL YELLOWS ON", "")
+	elif phase == "green":
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPON)
+		eblight(LMPOFF, LMPOFF, LMPON)
+		lcd_message("ALL GREENS ON", "")
+	else:
+		log_message("Doing nothing")
+		
 	sleep(3)
 	display.lcd_clear()
 

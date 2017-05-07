@@ -12,7 +12,6 @@ import raspitraffic as rtc
 
 try:
 	rtc.setup()
-	rtc.nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPON)
-	rtc.eblight(LMPOFF, LMPOFF, LMPON)
+	rtc.allon("green")
 except KeyboardInterrupt:
 	rtc.terminate()
