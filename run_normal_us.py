@@ -10,21 +10,21 @@
 ################################################################################
 
 import raspitraffic as rtc
-import RPi.GPIO as GPIO
 import lcddriver
 import random
 from time import sleep
-
-NORTH_GRN_TIME=random.randint(5, 20)
-NORTH_YEL_TIME=random.randint(2, 5)
-EAST_GRN_TIME=random.randint(5, 20)
-EAST_YEL_TIME=random.randint(2, 5)
-ALL_RED_TIME=rtc.getallredtime()
 
 display=lcddriver.lcd()
 
 try:
 	rtc.setup()
+
+	north_grn_time=rtc.calc_green_time()
+	north_yel_time=rtc.calc_yellow_time(rtc.randomspeed(), random.randint(0, 5))
+	east_grn_time=rtc.calc_green_time()
+	east_yel_time=rtc.calc_yellow_time(rtc.randomspeed(), random.randint(0, 5))
+	ALL_RED_TIME=rtc.getallredtime()
+
 
 	while True:
 		phasering1=1
@@ -33,35 +33,50 @@ try:
 		# normal cycle loop
 		for x in range(0, 2, +1):
 			phasering1=rtc.controlring1(phasering1)
-			for ttime in range(ALL_RED_TIME, -1, -1):
-				rtc.lcd_message("RED", "Time Remain: " + str(ttime) + "s")
+			for ttime in range(ALL_RED_TIME, 0, -1):
+				rtc.lcd_message("Time Remain: ", str(ttime) + "s")
 				sleep(1)
 
 			phasering1=rtc.controlring1(phasering1)
-			for ttime in range(NORTH_GRN_TIME, 0, -1):
-				rtc.lcd_message("GREEN", "Time Remain: " + str(ttime) + "s")
+			for ttime in range(north_grn_time, 0, -1):
+				rtc.lcd_message("Time Remain: ", str(ttime) + "s")
 				sleep(1)
 
 			phasering1=rtc.controlring1(phasering1)
-			for ttime in range(NORTH_YEL_TIME, 0, -1):
-				rtc.lcd_message("YELLOW", "Time Remain: " + str(ttime) + "s")
+			for ttime in range(int(round(north_yel_time, 0)), 0, -1):
+				rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+				sleep(1)
+	
+			phasering1=rtc.controlring1(phasering1)
+			for ttime in range(ALL_RED_TIME, 0, -1):
+				rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+				sleep(1)
+
+			phasering1=rtc.controlring1(phasering1)
+			for ttime in range(east_grn_time, 0, -1):
+				rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+				sleep(1)
+
+			phasering1=rtc.controlring1(phasering1)
+			for ttime in range(int(round(east_yel_time, 0)), 0, -1):
+				rtc.lcd_message("Time Remain: ", str(ttime) + "s")
 				sleep(1)
 
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(ALL_RED_TIME, 0, -1):
-			rtc.lcd_message("RED", "Time Remain: " + str(ttime) + "s")
+			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
 			sleep(1)
 	
 		phasering1 = 0
 		phaseflasher = 1
 
 		# flasher loop
-		for x in range(0, 20, +1):
+		for x in range(0, 30, +1):
+			rtc.lcd_message("Flasher Mode", "")
 			phaseflasher=rtc.controlflasher(phaseflasher)
-			sleep(0.7)
+			sleep(rtc.getflashsleep())
 		
 		
 except KeyboardInterrupt:
-	rtc.log_message("Exiting")
-	GPIO.cleanup()
-	display.lcd_clear()
+	rtc.terminate()
+

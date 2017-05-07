@@ -35,7 +35,7 @@ EAST_CG = 19
 # DEFINE CONSTANTS
 LMPON=GPIO.LOW
 LMPOFF=GPIO.HIGH
-ALL_RED_TIME=5
+ALL_RED_TIME=2
 FLASHER_DELAY=.7
 
 display=lcddriver.lcd()
@@ -309,36 +309,41 @@ def controlring1(phase):
 	debug_message("Outgoing phase: " + str(phase))
 	return phase
 
-def controlring1eb(phase):
-# RUN NORMAL SEQUENCE FOR EASTBOUND LIGHT ONLY
-
+def controlring2(phase):
+# NORMAL SEQUENCE FOR CONTROLLING NORTHBOUND AND SOUTHBOUND TRAFFIC
 # phase 0 - do nothing
-# phase 1 - eb cr
-# phase 2 - eb cg
-# phase 3 - eb cy
+# phase 1 - nb cg, sb cg
+# phase 2 - nb cy, sb cy
+# phase 3 - nb cr, sb cr
+# phase 4 - nb cg lg, sb cr
+# phase 5 - nb cg ly, sb cr 
 
-	debug_message("Incoming phase: " + str(phase))
-
-	if phase == 0:	
-		# do nothing
+	if phase == 0:
 		log_message("Doing nothing")
 	elif phase == 1:
-		# red on
-		eblight(LMPON, LMPOFF, LMPOFF)
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPON)
 		phase = 2
 	elif phase == 2:
-		# green on
-		eblight(LMPOFF, LMPOFF, LMPON)
+		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPON, LMPOFF)
 		phase = 3
 	elif phase == 3:
-		# yellow on
-		eblight(LMPOFF, LMPON, LMPOFF)
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase = 4
+	elif phase == 4:
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPON)
+		eblight(LMPOFF, LMPOFF, LMPOFF)
+		phase = 5
+	elif phase == 5:
+		nblight(LMPOFF, LMPOFF, LMPON, LMPON, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
 		phase = 1
 	else:
+		log_message("Invalid phase")
 		phase = 1
-
-	debug_message("Outgoing phase: " + str(phase))
-	return phase
+	return phase 
 
 def randomspeed():
 	speed=random.randint(25,50)
