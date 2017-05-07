@@ -13,10 +13,6 @@ import raspitraffic as rtc
 from random import randint
 from time import sleep
 
-NORTH_GRN_TIME=randint(5, 10)
-NORTH_YEL_TIME=randint(2, 5)
-EAST_GRN_TIME=randint(5, 10)
-EAST_YEL_TIME=randint(2, 5)
 ALL_RED_TIME=rtc.getallredtime()
 
 try:
@@ -26,18 +22,23 @@ try:
 		phasering1=2
 		phaseflasher=0
 
+		north_grn_time=randint(5, 15)
+		north_yel_time=randint(2, 5)
+		east_grn_time=randint(5, 15)
+		east_yel_time=randint(2, 5)
+
 		# normal cycle loop
 		for x in range(0, 2, +1):
 
 			# nb green
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(NORTH_GRN_TIME, 0, -1):
+			for ptime in range(north_grn_time, 0, -1):
 				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# nb yellow
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(NORTH_YEL_TIME, 0, -1):
+			for ptime in range(north_yel_time, 0, -1):
 				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 			
@@ -49,13 +50,13 @@ try:
 
 			# eb green 	
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(EAST_GRN_TIME, 0, -1):
+			for ptime in range(east_grn_time, 0, -1):
 				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
 			# eb yellow
 			phasering1=rtc.controlring1uk(phasering1)
-			for ptime in range(EAST_YEL_TIME, 0, -1):
+			for ptime in range(east_yel_time, 0, -1):
 				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
@@ -71,7 +72,7 @@ try:
 		# flasher loop
 		for x in range(0, 20, +1):
 			phaseflasher=rtc.controlflasher(phaseflasher)
-			sleep(0.7)
+			sleep(rtc.getflashsleep())
 		
 		
 except KeyboardInterrupt:
