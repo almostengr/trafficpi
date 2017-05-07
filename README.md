@@ -35,7 +35,7 @@ only connect one traffic light assembly to the board as all code will still func
 
 ## System Requirements
 * Raspiberry Pi 3 (May work on other models, but has been tested on Raspberry Pi 3)
-* 8 Channel Relay board (optional)
+* Relay board(s) to handle 8 channels (optional)
 * Traffic Light (actual or DIY)
 * I2C 16x2 LCD Display
 * Breadboard Jumper Cables
