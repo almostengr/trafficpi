@@ -36,6 +36,7 @@ EAST_CG = 19
 LMPON=GPIO.LOW
 LMPOFF=GPIO.HIGH
 ALL_RED_TIME=5
+FLASHER_DELAY=.5
 
 display=lcddriver.lcd()
 
@@ -67,6 +68,10 @@ def setup():
 		
 	return 0
 
+def getflashsleep():
+# GETS THE SLEEP VALUE FOR THE FLASHER FUNCTION
+	return FLASHER_DELAY
+	
 def getallredtime():
 # GETS THE VALUE OF THE ALL RED TIME
 	return ALL_RED_TIME
@@ -109,23 +114,56 @@ def terminate():
         display.lcd_clear()
 
 def controlflasher(phase):
-# runs flasher SEQUENCE
+# runs flasher sequence
+
+	# flash normally
 	if phase == 0:
 		log_message("Do nothing")
 	elif phase == 1:
 		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPOFF, LMPOFF, LMPOFF)
-		lcd_message("Flasher Mode", "EB OFF, NB YEL")
+		# lcd_message("Flasher Mode", "EB OFF, NB YEL")
 		phase=2
 	elif phase == 2:
 		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
-		lcd_message ("Flasher Mode", "EB RED, NB OFF")
+		# lcd_message ("Flasher Mode", "EB RED, NB OFF")
 		phase=1
-	else:
+
+	# flash red lights
+	elif phase == 3:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPOFF)
+		phase=4
+	elif phase == 4:
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		phase=3
+
+	# flash yellow lights
+	elif phase == 5:
+		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPOFF)
+		phase = 6
+	elif phase == 6:
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPON, LMPOFF)
+		phase = 5
+
+	# flash green lights
+	elif phase == 7:
+		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPON)
+		eblight(LMPOFF, LMPOFF, LMPOFF)
+		phase = 8
+	elif phase == 8:
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPON)
+		phase = 7
+	else:	
 		log_message("Not valid flasher phase")
-		phase=0
+		phase = 0
 	return phase
+
 
 def calc_yellow_time( speed, grade ):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME

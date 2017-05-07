@@ -8,25 +8,15 @@
 # Description:  Flash lights as if a malfunction or power outage has occurred.
 ################################################################################
 
-from raspitraffic import controlflasher
-from raspitraffic import log_message
-from raspitraffic import setup
+import raspitraffic as rtc
 from time import sleep
-import lcddriver
-import RPi.GPIO as GPIO
 
 try:
-	display=lcddriver.lcd()
-	
-	setup()
-
-	# CODE TO RUN GOES HERE
+	rtc.setup()
 	phaseflasher=1
 
 	while True:
-		phaseflasher=controlflasher(phaseflasher)
-		sleep(.5)
+		phaseflasher=rtc.controlflasher(phaseflasher)
+		sleep(rtc.getflashsleep())
 except KeyboardInterrupt:
-	log_message("Exiting")
-	GPIO.cleanup()
-	display.lcd_clear()
+	rtc.terminate()
