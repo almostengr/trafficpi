@@ -175,7 +175,7 @@ def calc_yellow_time( speed, grade ):
 
 def calc_green_time():
 # SET A RANDOM VALUE FOR THE GREEN TIME
-	grn_time=random.randint(20, 45)
+	grn_time=random.randint(10, 45)
 	log_message("Green Time: " + str(grn_time))
 	return grn_time
 
@@ -263,51 +263,52 @@ def controlring1(phase):
 # RUN NORMAL SEQUENCE FOR NORTHBOUND AND EASTBOUND LIGHT
 
 # phase 0 - do nothing
-# phase 1 - nb cr, eb cr
-# Phase 2 - nb cg, eb cr
-# phase 3 - nb cy, eb cr
-# phase 4 - nb cr, eb cr
-# phase 5 - nb cr, eb cg
-# phase 6 - nb cr, eb cy
+# phase 1 - nb cg, eb cr
+# phase 2 - nb cy, eb cr
+# phase 3 - nb cr, eb cr
+# phase 4 - nb cr, eb cg
+# phase 5 - nb cr, eb cy
+# phase 6 - nb cr, eb cr
 	debug_message("incoming phase: " + str(phase))
+	nextphase = 0
 
 	if phase == 0:
 		log_message("Doing nothing")
 	elif phase == 1:
-		log_message("NB RED -- EB RED")
-		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
-		eblight(LMPON, LMPOFF, LMPOFF)
-		phase = 2
-	elif phase == 2:
 		log_message("NB GRN -- EB RED")
 		nblight(LMPOFF, LMPOFF, LMPON, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
-		phase = 3
-	elif phase == 3:
+		nextphase = 2
+	elif phase == 2:
+		log_message("NB YEL -- EB RED")
 		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
-		phase = 4 
-		log_message("NB YEL -- EB RED")
-	elif phase == 4:
+		nextphase = 3
+	elif phase == 3:
+		log_message("NB RED -- EB RED")
 		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
-		phase = 5
-		log_message("NB RED -- EB RED")
-	elif phase == 5:
+		nextphase = 4
+	elif phase == 4:
+		log_message("NB RED -- EB GRN")
 		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPOFF, LMPOFF, LMPON)
-		phase = 6 
-		log_message("NB RED -- EB GRN")
-	elif phase == 6:
+		nextphase = 5
+	elif phase == 5:	
+		log_message("NB RED -- EB YEL")
 		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPOFF, LMPON, LMPOFF)
-		phase = 1 
-		log_message("NB RED -- EB YEL")
+		nextphase = 6
+	elif phase == 6:
+		log_message("NB RED -- EB RED")
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPON, LMPOFF, LMPOFF)
+		nextphase = 1
 	else:
-		phase = 1
+		nextphase = 1
 
-	debug_message("Outgoing phase: " + str(phase))
-	return phase
+	debug_message("Outgoing phase: " + str(nextphase))
+	return nextphase
 
 def controlring2(phase):
 # NORMAL SEQUENCE FOR CONTROLLING NORTHBOUND AND SOUTHBOUND TRAFFIC
