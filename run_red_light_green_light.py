@@ -18,15 +18,18 @@ try:
 
         while True:
                 red_time=randint(2, 10)
-		green_time=randint(0,3)
+		green_time=randint(0, 2)
 
 		phasenum=rtc.controlredlightgreenlight(phasenum)
 		rtc.debug_message("Red Time: " + str(red_time))
+		# rtc.lcd_message("Red Light!", "Dont move!")
 		sleep(red_time)
 			
 		phasenum=rtc.controlredlightgreenlight(phasenum)
 		rtc.debug_message("Green Time: " + str(green_time))
+		# rtc.lcd_message("Green Light!", "Run!")
 		sleep(green_time)	
 
 except KeyboardInterrupt:
 	rtc.terminate()
+

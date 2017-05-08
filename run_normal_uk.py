@@ -74,6 +74,6 @@ try:
 			phaseflasher=rtc.controlflasher(phaseflasher)
 			sleep(rtc.getflashsleep())
 		
-		
 except KeyboardInterrupt:
 	rtc.terminate()
+

@@ -9,7 +9,7 @@
 ################################################################################
 
 import raspitraffic as rtc
-from time import sleep
+# from time import sleep
 
 try:
         rtc.setup()
@@ -17,7 +17,8 @@ try:
 
         while True:
                 phasenum=rtc.controlflasher(phasenum)
-                sleep(rtc.getflashsleep())
+		rtc.flashsleep()
+                # sleep(rtc.getflashsleep())
 
 except KeyboardInterrupt:
         rtc.terminate()

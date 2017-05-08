@@ -12,6 +12,6 @@ import raspitraffic as rtc
 
 try:
 	rtc.setup()
-	rtc.allon()
+	rtc.allon("all")
 except KeyboardInterrupt:
 	rtc.terminate()

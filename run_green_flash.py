@@ -9,15 +9,17 @@
 ################################################################################
 
 import raspitraffic as rtc
-from time import sleep
+# from time import sleep
 
 try:
         rtc.setup()
         phasenum=7
 
         while True:
+		rtc.lcd_message("Flashing Green", "")
                 phasenum=rtc.controlflasher(phasenum)
-                sleep(rtc.getflashsleep())
+		rtc.flashsleep()
+                # sleep(rtc.getflashsleep())
 
 except KeyboardInterrupt:
         rtc.terminate()

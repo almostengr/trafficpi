@@ -68,6 +68,10 @@ def setup():
 		
 	return 0
 
+def flashsleep():
+# SLEEPS FOR THE DEFINED DELAY
+	sleep(FLASHER_DELAY)
+
 def getflashsleep():
 # GETS THE SLEEP VALUE FOR THE FLASHER FUNCTION
 	return FLASHER_DELAY
