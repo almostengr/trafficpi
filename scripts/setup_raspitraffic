@@ -1,0 +1,49 @@
+#!/bin/bash 
+
+#################################################################
+# Description: Setup the required software to run the scripts.
+# 
+# Author: Kenny Robinson, Bit Second Tech
+# Created: 2017-05-15
+#################################################################
+
+function log_message() {
+	# print message to screen
+	echo $*
+	
+	# print message to log file	
+	echo "$(date) | "$* >> /var/tmp/raspitraffc_setup.log
+}
+
+# SCRIPT MAIN
+if [ $(id -u) -eq 0 ]; then
+	log_message "Running script"
+
+	log_message "Updating repositories"
+
+	apt-get update
+	
+	log_message "Done updating repositories"
+	
+	log_message "Upgrading repositories"
+
+	apt-get upgrade -y 
+	
+	log_message "Done upgrading respositories"
+
+	log_message "Installing needed packages" 
+
+	apt-get python
+	
+	log_message "Done installing needed packages"
+	
+	log_message "Displaying python version"
+
+	/usr/bin/python --version
+
+else
+	log_message "Need to be sudo or root to run script"
+if
+
+log_message "Done running script"
+

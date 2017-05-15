@@ -1,7 +1,10 @@
 #!/bin/bash
 
 ####################################################################
-# Script to test 
+# Description: Script to configure wifi settings.
+# Author: Kenny Robinson, Bit Second Tech
+# Created: 2017-05-15
+####################################################################  
 
 RTNCD=255
 
