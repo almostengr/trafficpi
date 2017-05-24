@@ -120,9 +120,10 @@ def terminate():
 def controlflasher(phase):
 # runs flasher sequence
 
-	# flash normally
 	if phase == 0:
 		log_message("Do nothing")
+	
+	# flash nb yellow, eb red
 	elif phase == 1:
 		nblight(LMPOFF, LMPON, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPOFF, LMPOFF, LMPOFF)
@@ -163,6 +164,17 @@ def controlflasher(phase):
 		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPOFF, LMPOFF, LMPON)
 		phase = 7
+
+	# flash with nb red, eb yellow
+	elif phase == 9:
+		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPOFF, LMPOFF)
+		phase = 10
+	elif phase == 10:
+		nblight(LMPOFF, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
+		eblight(LMPOFF, LMPON, LMPOFF)
+		phase = 9
+
 	else:	
 		log_message("Not valid flasher phase")
 		phase = 0
