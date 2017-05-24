@@ -85,6 +85,7 @@ where `<scriptname>` is the name of the script.
 * run_normal_uk.py - Operates as a normal traffic light using the UK signal phasing.
 * run_normal_us.py - Operates as a normal traffic light using the US signal phasing.
 * run_red_flash.py - Flashes all of the red lights.
+* run_red_on.py - Turns on all of the red lights.
 * run_red_light_green_light.py - Operates the traffic light to play Red Light, Green Light game.
 * run_red_on.py - Turns on all of the red lights.
 * run_yellow_flash.py - Flashes all of the yellow lights.
