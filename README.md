@@ -6,9 +6,8 @@
 * Pin Setup
 * Running the Scripts
 * Bug Reports
-* Authors
-* License
 * Acknowledgements
+* License
 
 ----
 
@@ -85,12 +84,11 @@ opposite colors in run_flasher1.py.
 amount of time that the traffic light will show a yellow signal. This script 
 is for the use of two traffic lights.
 * run_guess_yellow_time_single.py - A game that requires the guess of the 
-amount of time that the traffic light will show a yellow singal.  This script 
+amount of time that the traffic light will show a yellow signal.  This script 
 is for the use of a signal traffic light. 
 * run_normal_uk.py - Operates as a normal traffic light using the UK signal phasing.
 * run_normal_us.py - Operates as a normal traffic light using the US signal phasing.
 * run_red_flash.py - Flashes all of the red lights.
-* run_red_on.py - Turns on all of the red lights.
 * run_red_light_green_light.py - Operates the traffic light to play Red Light, 
 Green Light game.
 * run_red_on.py - Turns on all of the red lights.
@@ -112,19 +110,15 @@ shortcut is performed.
 
 ----
 
-## Authors
-Kenny Robinson, Bit Second Tech http://www.bitsecondtech.com
+## Acknowledgements
+* Author: Kenny Robinson, Bit Second Tech http://www.bitsecondtech.com
+* LCD Display code for controlling the LCD display were provided from 
+https://github.com/the-raspberry-pi-guy/lcd. 
+* Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
+seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
 
 ----
 
 ## License
 This project is licensed under the MIT License. See LICENSE for more details.
-
-----
-
-## Acknowledgements
-* LCD Dipslay code for controlling the LCD display were provided from 
-https://github.com/the-raspberry-pi-guy/lcd. 
-* Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
-seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
 
