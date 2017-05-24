@@ -20,7 +20,6 @@ try:
 
 	while True:
 		phasering1=2
-		phaseflasher=0
 
 		north_grn_time=randint(5, 15)
 		north_yel_time=randint(2, 5)
@@ -66,14 +65,6 @@ try:
 				rtc.lcd_message("Time: " + str(ptime), "")
 				sleep(1)
 
-		phasering1 = 0
-		phaseflasher = 1
-
-		# flasher loop
-		for x in range(0, 20, +1):
-			phaseflasher=rtc.controlflasher(phaseflasher)
-			sleep(rtc.getflashsleep())
-		
 except KeyboardInterrupt:
 	rtc.terminate()
 

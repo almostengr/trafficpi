@@ -57,19 +57,6 @@ try:
 			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
 			sleep(1)
 
-		counter=counter+1
-	
-		phasering1=0
-		phaseflasher=1
-
-		if counter > 4:
-			for ttime in range(30, 0, -1):
-				rtc.lcd_message("Flasher Mode", "")
-				phaseflasher=rtc.controlflasher(phaseflasher)
-				sleep(rtc.getflashsleep())
-			
-			counter = 0
-		
 except KeyboardInterrupt:
 	rtc.terminate()
 
