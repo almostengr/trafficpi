@@ -73,6 +73,23 @@ breadboard with LEDs connected.
 To run the script, browse to the script folder, and run `python <scriptname>` 
 where `<scriptname>` is the name of the script.
 
+### Script Name and Description
+* run_all_off.py - Turns off all of the lights.
+* run_all_on.py - Turns on all of the lights.
+* run_flasher1.py - Flashes the lights in the normal sequence, but with opposite colors in run_flasher2.py.
+* run_flasher2.py - Flashes the lights in the normal sequence, but with opposite colors in run_flasher1.py.
+* run_green_flash.py - Flashes all of the green lights.
+* run_green_on.py - Turns on all of the green lights.
+* run_guess_yellow_time_double.py - A game that requires the guess of the amount of time that the traffic light will show a yellow signal. This script is for the use of two traffic lights.
+* run_guess_yellow_time_single.py - A game that requires the guess of the amount of time that the traffic light will show a yellow singal.  This script is for the use of a signal traffic light. 
+* run_normal_uk.py - Operates as a normal traffic light using the UK signal phasing.
+* run_normal_us.py - Operates as a normal traffic light using the US signal phasing.
+* run_red_flash.py - Flashes all of the red lights.
+* run_red_light_green_light.py - Operates the traffic light to play Red Light, Green Light game.
+* run_red_on.py - Turns on all of the red lights.
+* run_yellow_flash.py - Flashes all of the yellow lights.
+* run_yellow_on.py - Turns on all of the yellow lights.
+
 ----
 
 ## Known Bugs
