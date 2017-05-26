@@ -18,7 +18,7 @@ try:
 
         while True:
                 red_time=randint(2, 10)
-		green_time=randint(0, 2)
+		green_time=randint(1, 3)
 
 		phasenum=rtc.controlredlightgreenlight(phasenum)
 		rtc.debug_message("Red Time: " + str(red_time))
