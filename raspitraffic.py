@@ -255,7 +255,11 @@ def controlring1uk(phase):
 	return phase
 
 def controlredlightgreenlight(phase):
-# SEQUENCE FOR RED LIGHT GREEN LIGHT GAME
+# SEQUENCE FOR RED LIGHT GREEN LIGHT GAME. PLAYED WITH ONLY ONE TRAFFIC LIGHT.
+
+# phase 0 - do nothing
+# phase 1 - red light
+# phase 2 - green light
 	if phase == 0:
 		log_message("Doing nothing")
 	elif phase == 1:
