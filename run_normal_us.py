@@ -27,34 +27,40 @@ try:
 		east_grn_time=rtc.calc_green_time()
 		east_yel_time=rtc.calc_yellow_time(rtc.randomspeed(), random.randint(0, 5))
 
+		# nb grn, eb red
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(north_grn_time, 0, -1):
-			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+			rtc.lcd_message("NB GRN, EB RED", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
-
+	
+		# nb yel, eb red
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(int(round(north_yel_time, 0)), 0, -1):
-			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+			rtc.lcd_message("NB YEL, EB RED", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
-
+		
+		# all red phase
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(ALL_RED_TIME, 0, -1):
-			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+			rtc.lcd_message("NB RED, EB RED", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
+		# nb red, eb grn
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(east_grn_time, 0, -1):
-			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+			rtc.lcd_message("NB RED, EB GRN", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
+		# nb red, eb yel
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(int(round(east_yel_time, 0)), 0, -1):
-			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+			rtc.lcd_message("NB RED, EB YEL", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
-
+	
+		# all red
 		phasering1=rtc.controlring1(phasering1)
 		for ttime in range(ALL_RED_TIME, 0, -1):
-			rtc.lcd_message("Time Remain: ", str(ttime) + "s")
+			rtc.lcd_message("NB RED, EB RED", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
 except KeyboardInterrupt:
