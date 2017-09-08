@@ -13,6 +13,8 @@ from time import sleep
 import RPi.GPIO as GPIO
 import lcddriver
 import random
+import sys
+import os
 
 # DEBUGGING MODE, DISABLED=0, ENABLED=1
 DEBUG=0
@@ -21,11 +23,11 @@ DEBUG=0
 pinOutList = [37, 35, 33, 31, 29, 23, 21, 19]
 
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR NORTHBOUND TRAFFIC
-NORTH_CR = 37
-NORTH_CY = 35
-NORTH_CG = 33
-NORTH_LG = 31
-NORTH_LY = 29
+# NORTH_CR = 37
+# NORTH_CY = 35
+# NORTH_CG = 33
+# NORTH_LG = 31
+# NORTH_LY = 29
 
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
 EAST_CR = 23
@@ -370,18 +372,38 @@ def randomspeed():
 	speed=random.randint(25,50)
 	return speed
 
+def eightball():
+# run the magic 8 ball game with the traffic light 
+	rand=random.randint(1,3)
+
+	display_message("Ask as question", "3...")
+	sleep(1)
+	display_message("Ask as question", "2...")
+	sleep(1)
+	display_message("Ask as question", "1...")
+	sleep(1)
+
+	if rand == 1:
+		eblight(LMPON, LMPOFF, LMPOFF)
+	elif rand == 2:
+		eblight(LMPOFF, LMPON, LMPOFF)
+	elif rand == 3:
+		eblight(LMPOFF, LMPOFF, LMPON)
+	else:
+		log_message("Invalid Phase")
+
 def allon(phase):
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED 
 	if phase == "all":
 		nblight(LMPON, LMPON, LMPON, LMPON, LMPON)
 		eblight(LMPON, LMPON, LMPON)
-	        lcd_message("ALL LIGHTS ON", "")
+		lcd_message("ALL LIGHTS ON", "")
 	elif phase == "red":
 		nblight(LMPON, LMPOFF, LMPOFF, LMPOFF, LMPOFF)
 		eblight(LMPON, LMPOFF, LMPOFF)
 		lcd_message("ALL REDS ON", "")
 	elif phase == "yellow":
-                nblight(LMPOFF, LMPON, LMPOFF, LMPON, LMPOFF)
+		nblight(LMPOFF, LMPON, LMPOFF, LMPON, LMPOFF)
 		eblight(LMPOFF, LMPON, LMPOFF)
 		lcd_message("ALL YELLOWS ON", "")
 	elif phase == "green":
@@ -422,3 +444,22 @@ def lamptest():
 	sleep(3)
 	display.lcd_clear()
 
+def mainmenu():
+# MAIN MENU FOR THE PROGRAM
+    os.system('clear')
+    
+    print "Main Menu\n"
+    print "1) All Lights On\n"
+    print "2) All Lights Off\n"
+    print "Q) Exit\n"
+
+    selection = raw_input(">> ")
+
+    if selection == "1"
+        allon
+    elif selection == "2"
+        alloff
+    elif selection == "3"
+        
+    elif selection == "Q":
+        sys.exit()
