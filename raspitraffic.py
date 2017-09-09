@@ -137,13 +137,13 @@ def run_us_signal():
         sleep(1)
 
     # change flasher color
-    if phaseflasher == 1 || phaseflasher == 2:
+    if phaseflasher == 1 or phaseflasher == 2:
         phaseflasher = 3
-    else
+    else:
         phaseflasher = 1
 
     # flasher
-    for 
+    #for 
 
 
 def controlflasher(phase):
@@ -483,13 +483,13 @@ def mainmenu():
 # MAIN MENU FOR THE PROGRAM
     os.system('clear')
 
-    log_message "Main Menu\n"
-    log_message "1) All Lights On\n"
-    log_message "2) All Lights Off\n"
-    log_message "3) Green On\n"
-    log_message "4) Yellow On\n"
-    log_message "5) Red On\n"
-    log_message "Q) Exit\n"
+    log_message("Main Menu")
+    log_message("1) All Lights On")
+    log_message("2) All Lights Off")
+    log_message("3) Green On")
+    log_message("4) Yellow On")
+    log_message("5) Red On")
+    log_message("Q) Exit")
     
     selection = raw_input(">> ")
 
@@ -500,8 +500,8 @@ def mainmenu():
 setup()
 
 # while (selection != "Q"):
-while (selection != "Q" || selection != "q"):
-    try
+while selection != "Q" or selection != "q":
+    try:
         selection = 0
         selection = mainmenu()
 
@@ -613,7 +613,7 @@ while (selection != "Q" || selection != "q"):
                 east_yel_time=randint(2, 5)
 
                 # normal cycle loop
-                for x in range(0, 2, +1):
+                # for x in range(0, 2, +1):
 
                 # nb green
                 phasering1=controlring1uk(phasering1)
@@ -722,9 +722,9 @@ while (selection != "Q" || selection != "q"):
             # sys.exit()
             log_message("Exiting...")
 
-        else
+        else:
         # display error and help message
             log_message("Invalid selection, try again.")
 
-except KeyboardInterrupt:
-    terminate()
+	except KeyboardInterrupt:
+		terminate()
