@@ -42,6 +42,7 @@ ALL_RED_TIME=2
 FLASHER_DELAY=.7
 
 display=lcddriver.lcd()
+selection=0
 
 def setup():
     # SET UP GPIO PINS
@@ -484,6 +485,7 @@ def mainmenu():
     os.system('clear')
 
     log_message("Main Menu")
+    log_message("====================")
     log_message("1) All Lights On")
     log_message("2) All Lights Off")
     log_message("3) Green On")
@@ -500,7 +502,7 @@ def mainmenu():
 setup()
 
 # while (selection != "Q"):
-while selection != "Q" or selection != "q":
+while (selection != "Q" or selection != "q"):
     try:
         selection = 0
         selection = mainmenu()
@@ -717,14 +719,14 @@ while selection != "Q" or selection != "q":
                 # lcd_message("Green Light!", "Run!")
                 sleep(green_time)
 
-        elif selection == "Q":
+        elif selection == "Q" or selection == "q":
         # exit the script
-            # sys.exit()
-            log_message("Exiting...")
+            sys.exit()
+            # log_message("Exiting...")
 
         else:
         # display error and help message
             log_message("Invalid selection, try again.")
 
-	except KeyboardInterrupt:
-		terminate()
+    except KeyboardInterrupt:
+        terminate()
