@@ -10,6 +10,7 @@
 ################################################################################
 
 from time import sleep
+from random import randint
 import RPi.GPIO as GPIO
 import lcddriver
 import random
@@ -61,7 +62,7 @@ def setup():
 
     debug_message("Waiting")
 
-    sleep(2)
+    sleep(1)
 
     # turn off all the lights
     for i in pinOutList:
@@ -100,7 +101,7 @@ def lcd_message(line1, line2):
     display.lcd_clear()
     display.lcd_display_string(line1, 1)
     display.lcd_display_string(line2, 2)
-    log_message(line1 + " | " + line2)
+    # log_message(line1 + " | " + line2)
     return 0
 
 def terminate():
@@ -457,8 +458,9 @@ def alloff():
     lcd_message("ALL LIGHTS OFF", "")
     for i in pinOutList:
         light_off(i)
-        sleep(3)
-        display.lcd_clear()
+    
+    sleep(3)
+    display.lcd_clear()
 
 def lamptest():
     lcd_message("LAMP TEST", "")
@@ -491,6 +493,10 @@ def mainmenu():
     log_message("3) Green On")
     log_message("4) Yellow On")
     log_message("5) Red On")
+    log_message("6) Flash Red")
+    # log_message("7) Flash Yellow")
+    log_message("8) Flash Green")
+    log_message("9) Flash Yellow")
     log_message("Q) Exit")
     
     selection = raw_input(">> ")
@@ -499,13 +505,16 @@ def mainmenu():
 
 
 # configure everything
-setup()
+# setup()
 
 # while (selection != "Q"):
 while (selection != "Q" or selection != "q"):
     try:
         selection = 0
         selection = mainmenu()
+
+        setup()
+        debug_message("Debug mode enabled")
 
         if selection == "1":
         # all lights on
@@ -516,6 +525,7 @@ while (selection != "Q" or selection != "q"):
             alloff()
 
         elif selection == "6":
+        # flash red
             phaseflasher=1
             while True:
                 lcd_message("Flashing Red", "")
@@ -523,6 +533,7 @@ while (selection != "Q" or selection != "q"):
                 sleep(FLASHER_DELAY)
 
         elif selection == "7":
+        # flash yellow
             phaseflasher=9
             while True:
                 lcd_message("Flashing Yellow", "")
@@ -530,6 +541,7 @@ while (selection != "Q" or selection != "q"):
                 sleep(FLASHER_DELAY)
 
         elif selection == "8":
+        # flash green
             phasenum=7
             while True:
                 lcd_message("Flashing Green", "")
@@ -549,13 +561,13 @@ while (selection != "Q" or selection != "q"):
             allon("red")
 
         elif selection == "9":
+		# flash yellow
             phasenum=5
             while True:
                 phasenum=controlflasher(phasenum)
                 sleep(FLASHER_DELAY)
 
         elif selection == "10":
-            debug_message("Debug mode enabled")
 
             phaseflasher=0
             phasering1=1
