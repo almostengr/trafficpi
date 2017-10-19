@@ -46,6 +46,10 @@ def setup():
     # SET UP GPIO PINS
     GPIO.setmode(GPIO.BOARD)
 
+    # disable GPIO warnings when not debugging
+    if DEBUG == 0:
+        GPIO.setwarnings(False)
+
     # loop through each of the pins and define it.
     # tun on all the lights once setup
 
@@ -362,6 +366,8 @@ def mainmenu():
     log_message("20) US Signal")
     log_message("21) UK Signal")
     log_message("Q) Exit")
+    log_message("")
+    log_message("Use Ctrl+C to exit running command.")
 
     selection = raw_input(">> ")
 
