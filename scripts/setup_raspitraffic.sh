@@ -46,7 +46,7 @@ if [ $(id -u) -eq 0 ]; then
 	log_message "Running LCD install script"
 
 	# run LCD install script
-	. $(pwd)/lcd/install.sh
+	. $(pwd)/../lcd/install.sh
 
 	log_message "Done running LCD install script"
 else
