@@ -121,8 +121,6 @@ def run_red_light_green_light():
     # phase 0 - do nothing
     # phase 1 - red light
     # phase 2 - green light
-    
-    phasenum=1
 
     while True:
         red_time=randint(2, 10)
@@ -188,7 +186,7 @@ def run_signal(country):
             phaseflasher = 1
 
         # flasher
-        for i in 20:
+        for i in 30:
             phaseflasher = controlflasher(phaseflasher)
             sleep(1)
 
@@ -380,9 +378,10 @@ def mainmenu():
     log_message("4) Yellow On")
     log_message("5) Red On")
     log_message("6) Flash Red")
-    # log_message("7) Flash Yellow")
     log_message("8) Flash Green")
     log_message("9) Flash Yellow")
+    log_message("20) US Signal")
+    log_message("21) UK Signal")
     log_message("Q) Exit")
     
     selection = raw_input(">> ")
@@ -616,6 +615,14 @@ while (selection != "Q" or selection != "q"):
                 debug_message("Green Time: " + str(green_time))
                 # lcd_message("Green Light!", "Run!")
                 sleep(green_time)
+                
+        elif selection = "20":
+        # US signal pattern
+            run_signal("US")
+        
+        elif selection == "21": 
+        # UK signal pattern
+            run_signal("UK")
 
         elif selection == "Q" or selection == "q":
         # exit the script
