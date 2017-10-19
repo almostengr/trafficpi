@@ -25,7 +25,6 @@ import os
 DEBUG=0
 
 # LIST ALL OF THE PINS USED
-# pinOutList = [37, 35, 33, 31, 29, 23, 21, 19]
 pinOutList = [23, 21, 19]
 
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
@@ -66,7 +65,6 @@ def setup():
     for i in pinOutList:
         GPIO.output(i, GPIO.HIGH)
 
-    # log_message("Done performing setup")
     lcd_message("Done performing setup", "")
 
     return 0
@@ -367,7 +365,6 @@ def mainmenu():
 
     return selection
 
-
 # configure everything
 # setup()
 
@@ -425,174 +422,11 @@ while (selection != "Q" or selection != "q"):
             allon("red")
 
         elif selection == "9":
-		# flash yellow
+	# flash yellow
             phasenum=5
             while True:
                 phasenum=controlflasher(phasenum)
                 sleep(FLASHER_DELAY)
-
-        elif selection == "10":
-
-            phaseflasher=0
-            phasering1=1
-            counter=0
-            east_grn_time=0
-            east_yel_time=0
-            # ALL_RED_TIME=getallredtime()
-
-            while True:
-                debug_message("Turning all red")
-                east_speedlimit=randomspeed()
-                phasering1=controlring1eb(phasering1)
-
-            if counter>0:
-                lcd_message("Yellow Time: " + str(east_yel_time) + "s", "Game over")
-                sleep(ALL_RED_TIME)
-
-            for x in range(ALL_RED_TIME, 0, -1):
-                lcd_message("All Red Delay", "Starting in " + str(x) + "s")
-                sleep(1)
-
-            ## BOUNDARY
-
-            east_speedslimit=randomspeed()
-            east_grn_time=calc_green_time()
-
-            debug_message("Turning east green")
-
-            phasering1=controlring1eb(phasering1)
-
-            east_yel_time=calc_yellow_time(east_speedlimit, 0)
-
-            for x in range(east_grn_time, 0, -1):
-                lcd_message("Speed Limit: " + str(east_speedlimit), "Time Remain: " + str(x) + "s")
-                sleep(1)
-
-            debug_message("Turning east yellow")
-
-            # east_yel_time=calc_yellow_time(east_speedlimit, 0)
-
-            phasering1=controlring1eb(phasering1)
-
-            lcd_message("Yellow Time: ", str(east_yel_time) + " seconds")
-
-            sleep(east_yel_time)
-
-            counter=1
-
-        elif selection == "11":
-            while True:
-                phasering1=2
-
-                north_grn_time=randint(5, 15)
-                north_yel_time=randint(2, 5)
-                east_grn_time=randint(5, 15)
-                east_yel_time=randint(2, 5)
-
-                # normal cycle loop
-                # for x in range(0, 2, +1):
-
-                # nb green
-                phasering1=controlring1uk(phasering1)
-                for ptime in range(north_grn_time, 0, -1):
-                    lcd_message("Time: " + str(ptime), "")
-                    sleep(1)
-
-                # nb yellow
-                phasering1=controlring1uk(phasering1)
-                for ptime in range(north_yel_time, 0, -1):
-                    lcd_message("Time: " + str(ptime), "")
-                    sleep(1)
-
-                # all red
-                phasering1=controlring1uk(phasering1)
-                for ptime in range(ALL_RED_TIME, 0, -1):
-                    lcd_message("Time: " + str(ptime), "")
-                    sleep(1)
-
-                # eb green
-                phasering1=controlring1uk(phasering1)
-                for ptime in range(east_grn_time, 0, -1):
-                    lcd_message("Time: " + str(ptime), "")
-                    sleep(1)
-
-                # eb yellow
-                phasering1=controlring1uk(phasering1)
-                for ptime in range(east_yel_time, 0, -1):
-                    lcd_message("Time: " + str(ptime), "")
-                    sleep(1)
-
-                # all red
-                phasering1=controlring1uk(phasering1)
-                for ptime in range(ALL_RED_TIME, 0, -1):
-                    lcd_message("Time: " + str(ptime), "")
-                    sleep(1)
-
-        elif selection == "12":
-            # ALL_RED_TIME=getallredtime()
-            counter = 0
-
-            while True:
-                phasering1=1
-                phaseflasher=0
-
-                north_grn_time=calc_green_time()
-                north_yel_time=calc_yellow_time(randomspeed(), random.randint(0, 5))
-                east_grn_time=calc_green_time()
-                east_yel_time=calc_yellow_time(randomspeed(), random.randint(0, 5))
-
-                # nb grn, eb red
-                phasering1=controlring1(phasering1)
-                for ttime in range(north_grn_time, 0, -1):
-                    lcd_message("NB GRN, EB RED", "Time Remain: " + str(ttime) + "s")
-                    sleep(1)
-
-                # nb yel, eb red
-                phasering1=controlring1(phasering1)
-                for ttime in range(int(round(north_yel_time, 0)), 0, -1):
-                    lcd_message("NB YEL, EB RED", "Time Remain: " + str(ttime) + "s")
-                    sleep(1)
-
-                # all red phase
-                phasering1=controlring1(phasering1)
-                for ttime in range(ALL_RED_TIME, 0, -1):
-                    lcd_message("NB RED, EB RED", "Time Remain: " + str(ttime) + "s")
-                    sleep(1)
-
-                # nb red, eb grn
-                phasering1=controlring1(phasering1)
-                for ttime in range(east_grn_time, 0, -1):
-                    lcd_message("NB RED, EB GRN", "Time Remain: " + str(ttime) + "s")
-                    sleep(1)
-
-                # nb red, eb yel
-                phasering1=controlring1(phasering1)
-                for ttime in range(int(round(east_yel_time, 0)), 0, -1):
-                    lcd_message("NB RED, EB YEL", "Time Remain: " + str(ttime) + "s")
-                    sleep(1)
-
-                # all red
-                phasering1=controlring1(phasering1)
-                for ttime in range(ALL_RED_TIME, 0, -1):
-                    lcd_message("NB RED, EB RED", "Time Remain: " + str(ttime) + "s")
-                    sleep(1)
-
-        elif selection == "13":
-        ## red light, green light
-            phasenum=1
-            while True:
-                red_time=randint(2, 10)
-                green_time=randint(1, 3)
-
-                phasenum=controlredlightgreenlight(phasenum)
-                debug_message("Red Time: " + str(red_time))
-                # lcd_message("Red Light!", "Dont move!")
-                sleep(red_time)
-
-                phasenum=controlredlightgreenlight(phasenum)
-                debug_message("Green Time: " + str(green_time))
-                # lcd_message("Green Light!", "Run!")
-                sleep(green_time)
 
         elif selection == "20":
         # US signal pattern
@@ -612,3 +446,4 @@ while (selection != "Q" or selection != "q"):
 
     except KeyboardInterrupt:
         terminate()
+
