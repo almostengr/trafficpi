@@ -10,7 +10,7 @@
 # Author: Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
 #
 # Description:Core script which all the functions for controlling the lights
-# are contained. 
+# are contained.
 ################################################################################
 
 from time import sleep
@@ -77,7 +77,7 @@ def light_on(pin):
     GPIO.output(pin, GPIO.LOW)
     debug_message("Pin " + str(pin) + " turned on")
     return 0
-    
+
 
 def light_off(pin):
 # TURN OFF THE LIGHT, HAS TO PROVIDE PIN NUMBER
@@ -91,7 +91,7 @@ def debug_message(message):
     if DEBUG == 1:
         log_message("DEBUG: " + message)
     return 0
-    
+
 
 def log_message(message):
 # print message on computer screen
@@ -113,7 +113,7 @@ def terminate():
     log_message("Exiting")
     GPIO.cleanup()
     display.lcd_clear()
-   
+
 
 def run_red_light_green_light():
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
@@ -124,25 +124,24 @@ def run_red_light_green_light():
 
     while True:
         red_time=randint(2, 10)
-	    green_time=randint(1, 3)
+	green_time=randint(1, 3)
 
-	    phasenum=rtc.controlredlightgreenlight(phasenum)
-	    rtc.debug_message("Red Time: " + str(red_time))
-	    rtc.lcd_message("Red Light!", "Dont move!")
-	    sleep(red_time)
-		
-	    phasenum=rtc.controlredlightgreenlight(phasenum)
-	    rtc.debug_message("Green Time: " + str(green_time))
-	    rtc.lcd_message("Green Light!", "Run!")
-	    sleep(green_time)
+        phasenum=rtc.controlredlightgreenlight(phasenum)
+        rtc.debug_message("Red Time: " + str(red_time))
+        rtc.lcd_message("Red Light!", "Dont move!")
+        sleep(red_time)
 
-        
+        phasenum=rtc.controlredlightgreenlight(phasenum)
+        rtc.debug_message("Green Time: " + str(green_time))
+        rtc.lcd_message("Green Light!", "Run!")
+        sleep(green_time)
+
+
 def run_signal(country):
 # runs the light using normal signal
-    while True:
-        phasering1=1
-        phaseflasher=0
+    phaseflasher=0
 
+    while True:
         east_grn_time=random.randint(7, 60)
         east_yel_time=random.randint(2, 5)
         east_red_time=random.randint(7, 60)
@@ -152,14 +151,14 @@ def run_signal(country):
         for ttime in range(east_red_time, 0, -1):
 	        lcd_message("Red", "Time Remain: " + str(ttime) + "s")
 	        sleep(1)
-	        
-	    if country == "UK":
+
+        if country == "UK":
             eblight(LAMPON, LAMPON, LAMPOFF)
             for ttime in range(east_yel_time, 0, -1):
-	            lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
-	            sleep(1)
-	        
-        # green 
+	        lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
+	        sleep(1)
+
+        # green
         eblight(LAMPOFF, LAMPOFF, LAMPON)
         for ttime in range(east_grn_time, 0, -1):
 	        lcd_message("Green", "Time Remain: " + str(ttime) + "s")
@@ -171,7 +170,7 @@ def run_signal(country):
         for ttime in range(east_yel_time, 0, -1):
 	        lcd_message("Yellow", "Time Remain: " + str(ttime) + "s")
 	        sleep(1)
-	        
+
         # red
         # phasering1=controlring1(phasering1)
         eblight(LAMPON, LAMPOFF, LAMPOFF)
@@ -181,14 +180,14 @@ def run_signal(country):
 
         # change flasher color
         if phaseflasher == 1 or phaseflasher == 2:
-            phaseflasher = 3
+            phaseflasher = 5
         else:
             phaseflasher = 1
 
         # flasher
-        for i in 30:
+        for i in range(1,30):
             phaseflasher = controlflasher(phaseflasher)
-            sleep(1)
+            sleep(FLASHER_DELAY)
 
 
 def controlflasher(phase):
@@ -209,16 +208,6 @@ def controlflasher(phase):
         # lcd_message ("Flasher Mode", "EB RED, NB OFF")
         phase=1
 
-    # # flash red lights
-    # elif phase == 3:
-    # # nblight(LAMPON, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
-    # eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-    # phase=4
-    # elif phase == 4:
-    # # nblight(LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
-    # eblight(LAMPON, LAMPOFF, LAMPOFF)
-    # phase=3
-
     # flash yellow lights
     elif phase == 5:
         # nblight(LAMPOFF, LAMPON, LAMPOFF, LAMPOFF, LAMPOFF)
@@ -238,16 +227,6 @@ def controlflasher(phase):
         # nblight(LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPOFF, LAMPOFF, LAMPON)
         phase = 7
-
-    # # flash with nb red, eb yellow
-    # elif phase == 9:
-    # # nblight(LAMPON, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
-    # eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-    # phase = 10
-    # elif phase == 10:
-    # # nblight(LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
-    # eblight(LAMPOFF, LAMPON, LAMPOFF)
-    # phase = 9
 
     else:
         log_message("Not valid flasher phase")
@@ -274,17 +253,17 @@ def eblight(cirred, ciryel, cirgrn):
 # CONTROLS THE LAMPS ON THE EASTBOUND LIGHT. DOESNT HAVE LEFT TURN
     GPIO.output(EAST_CR, cirred)
     GPIO.output(EAST_CY, ciryel)
-    GPIO.output(EAST_CG, cirgrn)	
+    GPIO.output(EAST_CG, cirgrn)
 
 
 def randomspeed():
 # picks a random speed from the range defined below
     speed=random.randint(25,65)
     return speed
-    
+
 
 def run_eightball():
-# run the magic 8 ball game with the traffic light 
+# run the magic 8 ball game with the traffic light
 
     # display prompts
     lcd_message("Ask as question", "3...")
@@ -311,7 +290,7 @@ def run_eightball():
 
 
 def allon(phase):
-# TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED 
+# TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
     if phase == "all":
         # nblight(LAMPON, LAMPON, LAMPON, LAMPON, LAMPON)
         eblight(LAMPON, LAMPON, LAMPON)
@@ -340,7 +319,7 @@ def alloff():
     lcd_message("ALL LIGHTS OFF", "")
     for i in pinOutList:
         light_off(i)
-    
+
     sleep(3)
     display.lcd_clear()
 
@@ -348,7 +327,7 @@ def alloff():
 def lamptest():
     lcd_message("LAMP TEST", "")
 
-    for i in pinOutList: 
+    for i in pinOutList:
         light_on(i)
         lcd_message("LAMP TEST", "Pin " + str(i) + " on")
         sleep(1)
@@ -383,7 +362,7 @@ def mainmenu():
     log_message("20) US Signal")
     log_message("21) UK Signal")
     log_message("Q) Exit")
-    
+
     selection = raw_input(">> ")
 
     return selection
@@ -438,11 +417,11 @@ while (selection != "Q" or selection != "q"):
             allon("green")
 
         elif selection == "4":
-        # yellow on 
+        # yellow on
             allon("yellow")
 
         elif selection == "5":
-        # red on 
+        # red on
             allon("red")
 
         elif selection == "9":
@@ -500,7 +479,6 @@ while (selection != "Q" or selection != "q"):
             sleep(east_yel_time)
 
             counter=1
-            
 
         elif selection == "11":
             while True:
@@ -532,7 +510,7 @@ while (selection != "Q" or selection != "q"):
                     lcd_message("Time: " + str(ptime), "")
                     sleep(1)
 
-                # eb green 
+                # eb green
                 phasering1=controlring1uk(phasering1)
                 for ptime in range(east_grn_time, 0, -1):
                     lcd_message("Time: " + str(ptime), "")
@@ -615,19 +593,18 @@ while (selection != "Q" or selection != "q"):
                 debug_message("Green Time: " + str(green_time))
                 # lcd_message("Green Light!", "Run!")
                 sleep(green_time)
-                
-        elif selection = "20":
+
+        elif selection == "20":
         # US signal pattern
             run_signal("US")
-        
-        elif selection == "21": 
+
+        elif selection == "21":
         # UK signal pattern
             run_signal("UK")
 
         elif selection == "Q" or selection == "q":
         # exit the script
             sys.exit()
-            # log_message("Exiting...")
 
         else:
         # display error and help message
