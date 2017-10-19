@@ -1,0 +1,3 @@
+[submodule "lcd"]
+	path = lcd
+	url = https://github.com/the-raspberry-pi-guy/lcd.git
