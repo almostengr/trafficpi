@@ -179,8 +179,10 @@ def run_signal(country):
         # change flasher color
         if phaseflasher == 1 or phaseflasher == 2:
             phaseflasher = 5
+            lcd_message("Yellow Flasher", "")
         else:
             phaseflasher = 1
+            lcd_message("Red Flasher", "")
 
         # flasher
         for i in range(1,30):
