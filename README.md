@@ -67,6 +67,12 @@ breadboard with LEDs connected.
 
 ----
 
+## Initial Setup
+In the ```scripts``` directory, run the ```script_raspitraffic.sh``` script 
+as root user. This will install of the required software and python packages.
+
+----
+
 ## Running The Scripts
 To run the script, browse to the script folder, and run `python <scriptname>` 
 where `<scriptname>` is the name of the script.
@@ -103,6 +109,8 @@ issue tracker on this repository. For bugs, please include as much detail
 as possible so that the issue can be replicated. Special requests are 
 welcome to be submitted.
 
+----
+
 ### Known Bugs
 * When exiting the script (using Ctrl+C), all of the relays may not turn off.
 In addition, the LCD display may not clear if it is writing when the kill
@@ -111,7 +119,7 @@ shortcut is performed.
 ----
 
 ## Acknowledgements
-* Author: Kenny Robinson, Bit Second Tech http://www.bitsecondtech.com
+* Author: Kenny Robinson, Almost Engineer @almostengr
 * LCD Display code for controlling the LCD display were provided from 
 https://github.com/the-raspberry-pi-guy/lcd. 
 * Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
