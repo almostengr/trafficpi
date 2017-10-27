@@ -71,6 +71,8 @@ def setup():
 
     lcd_message("Done performing setup", "")
 
+    lcd_message("", "")
+
     return 0
 
 
