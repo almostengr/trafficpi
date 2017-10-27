@@ -376,7 +376,7 @@ def mainmenu():
     return selection
 
 # configure everything
-# setup()
+setup()
 
 # while (selection != "Q"):
 while (selection != "Q" or selection != "q"):
@@ -384,7 +384,6 @@ while (selection != "Q" or selection != "q"):
         selection = 0
         selection = mainmenu()
 
-        setup()
         debug_message("Debug mode enabled")
 
         if selection == "1":
