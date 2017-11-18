@@ -33,7 +33,7 @@ if [ $(id -u) -eq 0 ]; then
 
 	log_message "Installing needed packages" 
 
-	/usr/bin/apt-get python git
+	/usr/bin/apt-get python git python-dev python-rpi.gpio
 	
 	log_message "Done installing needed packages"
 	
