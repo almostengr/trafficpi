@@ -35,7 +35,6 @@ EAST_CG = 19
 # DEFINE CONSTANTS
 LAMPON=GPIO.LOW
 LAMPOFF=GPIO.HIGH
-ALL_RED_TIME=2
 FLASHER_DELAY=.7
 
 display=lcddriver.lcd()
@@ -59,7 +58,7 @@ def setup():
     for i in pinOutList:
         debug_message("Setting up and activiating pin " + str(i))
         GPIO.setup(i, GPIO.OUT)
-        GPIO.output(i, GPIO.LOW)
+        # GPIO.output(i, GPIO.LOW)
 
     debug_message("Waiting")
 
@@ -146,9 +145,9 @@ def run_signal(country):
     phaseflasher=0
 
     while True:
-        east_grn_time=random.randint(7, 60)
+        east_grn_time=random.randint(5, 60)
         east_yel_time=random.randint(2, 5)
-        east_red_time=random.randint(7, 60)
+        east_red_time=random.randint(5, 60)
 
         # red
         eblight(LAMPON, LAMPOFF, LAMPOFF)
@@ -156,6 +155,7 @@ def run_signal(country):
 	        lcd_message("Red", "Time Remain: " + str(ttime) + "s")
 	        sleep(1)
 
+	# red-yellow for UK only
         if country == "UK":
             eblight(LAMPON, LAMPON, LAMPOFF)
             for ttime in range(east_yel_time, 0, -1):
@@ -204,33 +204,27 @@ def controlflasher(phase):
 
     # flash red
     elif phase == 1:
-        # nblight(LAMPOFF, LAMPON, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPOFF, LAMPOFF, LAMPOFF)
         # lcd_message("Flasher Mode", "EB OFF, NB YEL")
         phase=2
     elif phase == 2:
-        # nblight(LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPON, LAMPOFF, LAMPOFF)
         # lcd_message ("Flasher Mode", "EB RED, NB OFF")
         phase=1
 
     # flash yellow lights
     elif phase == 5:
-        # nblight(LAMPOFF, LAMPON, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPOFF, LAMPOFF, LAMPOFF)
         phase = 6
     elif phase == 6:
-        # nblight(LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPOFF, LAMPON, LAMPOFF)
         phase = 5
 
     # flash green lights
     elif phase == 7:
-        # nblight(LAMPOFF, LAMPOFF, LAMPON, LAMPOFF, LAMPON)
         eblight(LAMPOFF, LAMPOFF, LAMPOFF)
         phase = 8
     elif phase == 8:
-        # nblight(LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPOFF, LAMPOFF, LAMPON)
         phase = 7
 
@@ -298,19 +292,15 @@ def run_eightball():
 def allon(phase):
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
     if phase == "all":
-        # nblight(LAMPON, LAMPON, LAMPON, LAMPON, LAMPON)
         eblight(LAMPON, LAMPON, LAMPON)
         lcd_message("ALL LIGHTS ON", "")
     elif phase == "red":
-        # nblight(LAMPON, LAMPOFF, LAMPOFF, LAMPOFF, LAMPOFF)
         eblight(LAMPON, LAMPOFF, LAMPOFF)
         lcd_message("ALL REDS ON", "")
     elif phase == "yellow":
-        # nblight(LAMPOFF, LAMPON, LAMPOFF, LAMPON, LAMPOFF)
         eblight(LAMPOFF, LAMPON, LAMPOFF)
         lcd_message("ALL YELLOWS ON", "")
     elif phase == "green":
-        # nblight(LAMPOFF, LAMPOFF, LAMPON, LAMPOFF, LAMPON)
         eblight(LAMPOFF, LAMPOFF, LAMPON)
         lcd_message("ALL GREENS ON", "")
     else:
@@ -323,8 +313,9 @@ def allon(phase):
 def alloff():
 # TURNS OFF ALL OF THE LIGHTS
     lcd_message("ALL LIGHTS OFF", "")
-    for i in pinOutList:
-        light_off(i)
+    eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+    # for i in pinOutList:
+        # light_off(i)
 
     sleep(3)
     display.lcd_clear()
@@ -333,18 +324,30 @@ def alloff():
 def lamptest():
     lcd_message("LAMP TEST", "")
 
-    for i in pinOutList:
-        light_on(i)
-        lcd_message("LAMP TEST", "Pin " + str(i) + " on")
-        sleep(1)
+    #for i in pinOutList:
+        # light_on(i)
+        # lcd_message("LAMP TEST", "Pin " + str(i) + " on")
+        # sleep(1)
+
+    eblight(LAMPON, LAMPOFF, LAMPOFF)
+    sleep(1)
+    eblight(LAMPON, LAMPON, LAMPOFF)
+    sleep(1)
+    eblight(LAMPON, LAMPON, LAMPON)
 
     lcd_message("LAMP TEST", "ALL ON")
-    sleep(10)
+    sleep(5)
 
-    for i in pinOutList:
-        light_off(i)
-        lcd_message("LAMP TEST", "Pin " + str(i) + " off")
-        sleep(1)
+    # for i in pinOutList:
+        # light_off(i)
+        # lcd_message("LAMP TEST", "Pin " + str(i) + " off")
+        # sleep(1)
+
+    eblight(LAMPOFF, LAMPON, LAMPON)
+    sleep(1)
+    eblight(LAMPOFF, LAMPOFF, LAMPON)
+    sleep(1)
+    eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 
     lcd_message("LAMP TEST", "ALL OFF")
     sleep(3)
@@ -363,10 +366,12 @@ def mainmenu():
     log_message("4) Yellow On")
     log_message("5) Red On")
     log_message("6) Flash Red")
+    log_message("7) Flash Yellow")
     log_message("8) Flash Green")
-    log_message("9) Flash Yellow")
     log_message("20) US Signal")
     log_message("21) UK Signal")
+    log_message("40) Magic Eightball")
+    # log_message("10) Pseudocode Interpreter")
     log_message("Q) Exit")
     log_message("")
     log_message("Use Ctrl+C to exit running command.")
@@ -430,13 +435,6 @@ while (selection != "Q" or selection != "q"):
         # red on
             allon("red")
 
-        elif selection == "9":
-	# flash yellow
-            phasenum=5
-            while True:
-                phasenum=controlflasher(phasenum)
-                sleep(FLASHER_DELAY)
-
         elif selection == "20":
         # US signal pattern
             run_signal("US")
@@ -444,6 +442,10 @@ while (selection != "Q" or selection != "q"):
         elif selection == "21":
         # UK signal pattern
             run_signal("UK")
+
+	elif selection == "40":
+	# 8ball
+	    run_eightball()
 
         elif selection == "Q" or selection == "q":
         # exit the script
