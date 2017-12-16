@@ -46,7 +46,7 @@ def setup():
         GPIO.setwarnings(False)
 
     # loop through each of the pins and define it.
-    # tun on all the lights once setup
+    # turn on all the lights once setup
 
     # log_message("Performing setup")
     lcd_message("Performing setup", "Please wait...")
@@ -187,7 +187,8 @@ def run_signal(country):
             lcd_message("Red Flasher", "")
 
         # flasher
-        for i in range(1,30):
+        flashrangemax=randint(2,60)
+        for i in range(1,flashrangemax):
             phaseflasher = controlflasher(phaseflasher)
             sleep(FLASHER_DELAY)
 
@@ -320,11 +321,6 @@ def alloff():
 def lamptest():
     lcd_message("LAMP TEST", "")
 
-    #for i in pinOutList:
-        # light_on(i)
-        # lcd_message("LAMP TEST", "Pin " + str(i) + " on")
-        # sleep(1)
-
     eblight(LAMPON, LAMPOFF, LAMPOFF)
     sleep(1)
     eblight(LAMPON, LAMPON, LAMPOFF)
@@ -333,11 +329,6 @@ def lamptest():
 
     lcd_message("LAMP TEST", "ALL ON")
     sleep(5)
-
-    # for i in pinOutList:
-        # light_off(i)
-        # lcd_message("LAMP TEST", "Pin " + str(i) + " off")
-        # sleep(1)
 
     eblight(LAMPOFF, LAMPON, LAMPON)
     sleep(1)
