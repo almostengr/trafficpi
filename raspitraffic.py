@@ -378,6 +378,22 @@ def mainmenu():
 # configure everything
 # setup()
 
+while True
+	try:
+		file = open('/tmp/traffic.txt', 'r')
+		selection = file.readline()
+		file.close()
+
+		if selection == "allon":
+		# all lights on
+			allon("all")
+		elif selection == "alloff":
+		# all lights off
+			alloff()
+
+	except KeyboardInterrupt:
+		terminate()
+
 # while (selection != "Q"):
 while (selection != "Q" or selection != "q"):
     try:
