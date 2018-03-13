@@ -54,16 +54,11 @@ breadboard with LEDs connected.
 * 3 --------------------- LCD Display SDA
 * 4 --------------------- Relay Board VCC (+5V)
 * 5 --------------------- LCD Display SLC
-* 19 -------------------- Signal 2 Red
-* 21 -------------------- Signal 2 Yellow
-* 23 -------------------- Signal 2 Green
-* 29 -------------------- Signal 1 Left Turn Yellow
+* 19 -------------------- Red Signal
+* 21 -------------------- Yellow Signal
+* 23 -------------------- Green Signal
 * 30 -------------------- LCD Display GND
-* 31 -------------------- Signal 1 Left Turn Green
-* 33 -------------------- Signal 1 Red
 * 34 -------------------- Relay Board GND
-* 35 -------------------- Signal 1 Yellow
-* 37 -------------------- Signal 1 Green
 
 ----
 
