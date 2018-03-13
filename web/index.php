@@ -4,6 +4,8 @@
 </head>
 <body>
 
+Page body
+
 <?php
 
 // write the file if something is selected
@@ -41,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<form method="post">
+<form method="post" action="index.php">
 <p><input type="submit" name="us" value="US Traffic" /></p>
 <p><input type="submit" name="uk" value="UK Traffic" /></p>
 <p><input type="submit" name="allon" value="All On" /></p>
