@@ -16,7 +16,7 @@
 from time import sleep
 from random import randint
 import RPi.GPIO as GPIO
-import lcddriver
+# import lcddriver
 import random
 import sys
 import os
@@ -38,7 +38,7 @@ LAMPOFF=GPIO.HIGH
 ALL_RED_TIME=2
 FLASHER_DELAY=.7
 
-display=lcddriver.lcd()
+# display.lcddriver.lcd()
 selection=0
 
 
@@ -105,9 +105,9 @@ def log_message(message):
 
 def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
-    display.lcd_clear()
-    display.lcd_display_string(line1, 1)
-    display.lcd_display_string(line2, 2)
+    # display.lcd_clear()
+    # display.lcd_# display.string(line1, 1)
+    # display.lcd_# display.string(line2, 2)
     # log_message(line1 + " | " + line2)
     return 0
 
@@ -116,7 +116,7 @@ def terminate():
 # WHEN COMMAND TO EXIT IS GIVEN, THEN RESET EVERYTHING BACK TO DEFAULT
     log_message("Exiting")
     GPIO.cleanup()
-    display.lcd_clear()
+    # display.lcd_clear()
 
 
 def run_red_light_green_light():
@@ -271,7 +271,7 @@ def randomspeed():
 def run_eightball():
 # run the magic 8 ball game with the traffic light
 
-    # display prompts
+    # display.prompts
     lcd_message("Ask as question", "3...")
     sleep(1)
     lcd_message("Ask as question", "2...")
@@ -317,7 +317,7 @@ def allon(phase):
         log_message("Doing nothing")
 
     sleep(3)
-    display.lcd_clear()
+    # display.lcd_clear()
 
 
 def alloff():
@@ -327,7 +327,7 @@ def alloff():
         light_off(i)
 
     sleep(3)
-    display.lcd_clear()
+    # display.lcd_clear()
 
 
 def lamptest():
@@ -348,7 +348,7 @@ def lamptest():
 
     lcd_message("LAMP TEST", "ALL OFF")
     sleep(3)
-    display.lcd_clear()
+    # display.lcd_clear()
 
 
 def mainmenu():
@@ -376,7 +376,7 @@ def mainmenu():
     return selection
 
 # configure everything
-setup()
+# setup()
 
 # while (selection != "Q"):
 while (selection != "Q" or selection != "q"):
@@ -385,6 +385,10 @@ while (selection != "Q" or selection != "q"):
         selection = mainmenu()
 
         debug_message("Debug mode enabled")
+
+	# perform setup if not exiting
+	if selection != "q" or selection != "Q":
+	    setup()
 
         if selection == "1":
         # all lights on
@@ -450,7 +454,7 @@ while (selection != "Q" or selection != "q"):
             sys.exit()
 
         else:
-        # display error and help message
+        # display.error and help message
             log_message("Invalid selection, try again.")
 
     except KeyboardInterrupt:
