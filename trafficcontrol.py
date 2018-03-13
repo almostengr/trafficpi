@@ -351,32 +351,31 @@ def lamptest():
     # display.lcd_clear()
 
 
-def mainmenu():
-# MAIN MENU FOR THE PROGRAM
-    os.system('clear')
-
-    log_message("Main Menu")
-    log_message("====================")
-    log_message("1) All Lights On")
-    log_message("2) All Lights Off")
-    log_message("3) Green On")
-    log_message("4) Yellow On")
-    log_message("5) Red On")
-    log_message("6) Flash Red")
-    log_message("8) Flash Green")
-    log_message("9) Flash Yellow")
-    log_message("20) US Signal")
-    log_message("21) UK Signal")
-    log_message("Q) Exit")
-    log_message("")
-    log_message("Use Ctrl+C to exit running command.")
-
-    selection = raw_input(">> ")
-
-    return selection
+  return selection
 
 # configure everything
 # setup()
+
+while True
+	try:
+		log_message("Reading traffic file...")
+		file = open('/tmp/traffic.txt', 'r')
+		selection = file.readline()
+		file.close()
+
+		if selection == "allon":
+		# all lights on
+			allon("all")
+		elif selection == "alloff":
+		# all lights off
+			alloff()
+		elif selection == "us":
+			run_signal("US")
+		elif selection == "uk":
+			run_signal("UK")
+
+	except KeyboardInterrupt:
+		terminate()
 
 # while (selection != "Q"):
 while (selection != "Q" or selection != "q"):
