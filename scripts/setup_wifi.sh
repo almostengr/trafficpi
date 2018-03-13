@@ -19,15 +19,17 @@ function log_message() {
 # CHECK TO SEE IF THE SCRIPT IS BEING RAN AS ROOT
 if [ $(id -u) -eq 0 ]; then
 	log_message "Running script"
+
+	log_message "Performing wifi Setup"
 	
 	# update repositories
 	apt-get update
 
 	# installing software
-	apt-get install hostadp dnsmasq -y
+	apt-get install hostapd dnsmasq -y
+	
+	log_message "Done performing Wifi setup"
 else
 	log_message "Must be root to run script."
 fi
 		
-	
-main $*
