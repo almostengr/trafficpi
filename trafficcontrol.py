@@ -63,7 +63,7 @@ def setup():
 
     debug_message("Waiting")
 
-    sleep(5)
+    sleep(1)
 
     # turn off all the lights
     for i in pinOutList:
