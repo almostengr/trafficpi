@@ -63,7 +63,7 @@ def setup():
 
     debug_message("Waiting")
 
-    sleep(1)
+    sleep(5)
 
     # turn off all the lights
     for i in pinOutList:
@@ -349,113 +349,4 @@ def lamptest():
     lcd_message("LAMP TEST", "ALL OFF")
     sleep(3)
     # display.lcd_clear()
-
-
-  return selection
-
-# configure everything
-# setup()
-
-while True
-	try:
-		log_message("Reading traffic file...")
-		file = open('/tmp/traffic.txt', 'r')
-		selection = file.readline()
-		file.close()
-
-		if selection == "allon":
-		# all lights on
-			allon("all")
-		elif selection == "alloff":
-		# all lights off
-			alloff()
-		elif selection == "us":
-			run_signal("US")
-		elif selection == "uk":
-			run_signal("UK")
-
-	except KeyboardInterrupt:
-		terminate()
-
-# while (selection != "Q"):
-while (selection != "Q" or selection != "q"):
-    try:
-        selection = 0
-        selection = mainmenu()
-
-        debug_message("Debug mode enabled")
-
-	# perform setup if not exiting
-	if selection != "q" or selection != "Q":
-	    setup()
-
-        if selection == "1":
-        # all lights on
-            allon("all")
-
-        elif selection == "2":
-        # all lights off
-            alloff()
-
-        elif selection == "6":
-        # flash red
-            phaseflasher=1
-            while True:
-                lcd_message("Flashing Red", "")
-                phaseflasher=controlflasher(phaseflasher)
-                sleep(FLASHER_DELAY)
-
-        elif selection == "7":
-        # flash yellow
-            phaseflasher=9
-            while True:
-                lcd_message("Flashing Yellow", "")
-                phaseflasher=controlflasher(phaseflasher)
-                sleep(FLASHER_DELAY)
-
-        elif selection == "8":
-        # flash green
-            phasenum=7
-            while True:
-                lcd_message("Flashing Green", "")
-                phasenum=controlflasher(phasenum)
-                sleep(FLASHER_DELAY)
-
-        elif selection == "3":
-        # green on
-            allon("green")
-
-        elif selection == "4":
-        # yellow on
-            allon("yellow")
-
-        elif selection == "5":
-        # red on
-            allon("red")
-
-        elif selection == "9":
-	# flash yellow
-            phasenum=5
-            while True:
-                phasenum=controlflasher(phasenum)
-                sleep(FLASHER_DELAY)
-
-        elif selection == "20":
-        # US signal pattern
-            run_signal("US")
-
-        elif selection == "21":
-        # UK signal pattern
-            run_signal("UK")
-
-        elif selection == "Q" or selection == "q":
-        # exit the script
-            sys.exit()
-
-        else:
-        # display.error and help message
-            log_message("Invalid selection, try again.")
-
-    except KeyboardInterrupt:
-        terminate()
 
