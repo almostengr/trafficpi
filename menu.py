@@ -21,21 +21,21 @@ def mainmenu():
 # MAIN MENU FOR THE PROGRAM
     os.system('clear')
 
-    rtc.og_message("Main Menu")
-    rtc.og_message("====================")
-    rtc.og_message("1) All Lights On")
-    rtc.og_message("2) All Lights Off")
-    rtc.og_message("3) Green On")
-    rtc.og_message("4) Yellow On")
-    rtc.og_message("5) Red On")
-    rtc.og_message("6) Flash Red")
-    rtc.og_message("8) Flash Green")
-    rtc.og_message("9) Flash Yellow")
-    rtc.og_message("20) US Signal")
-    rtc.og_message("21) UK Signal")
-    rtc.og_message("Q) Exit")
-    rtc.og_message("")
-    rtc.og_message("Use Ctrl+C to exit running command.")
+    rtc.log_message("Main Menu")
+    rtc.log_message("====================")
+    rtc.log_message("1) All Lights On")
+    rtc.log_message("2) All Lights Off")
+    rtc.log_message("3) Green On")
+    rtc.log_message("4) Yellow On")
+    rtc.log_message("5) Red On")
+    rtc.log_message("6) Flash Red")
+    rtc.log_message("8) Flash Green")
+    rtc.log_message("9) Flash Yellow")
+    rtc.log_message("20) US Signal")
+    rtc.log_message("21) UK Signal")
+    rtc.log_message("Q) Exit")
+    rtc.log_message("")
+    rtc.log_message("Use Ctrl+C to exit running command.")
 
     selection = raw_input(">> ")
 
@@ -47,11 +47,11 @@ while (selection != "Q" or selection != "q"):
         selection = 0
         selection = mainmenu()
 
-        rtc.ebug_message("Debug mode enabled")
+        rtc.debug_message("Debug mode enabled")
 
 	# perform setup if not exiting
 	if selection != "q" or selection != "Q":
-	    rtc.etup()
+	    rtc.setup()
 
         if selection == "1":
         # all lights on
@@ -65,52 +65,52 @@ while (selection != "Q" or selection != "q"):
         # flash red
             phaseflasher=1
             while True:
-                rtc.cd_message("Flashing Red", "")
-                phaseflasher=rtc.ontrolflasher(phaseflasher)
+                rtc.lcd_message("Flashing Red", "")
+                phaseflasher=rtc.controlflasher(phaseflasher)
                 sleep(FLASHER_DELAY)
 
         elif selection == "7":
         # flash yellow
             phaseflasher=9
             while True:
-                rtc.cd_message("Flashing Yellow", "")
-                phaseflasher=rtc.ontrolflasher(phaseflasher)
+                rtc.lcd_message("Flashing Yellow", "")
+                phaseflasher=rtc.controlflasher(phaseflasher)
                 sleep(FLASHER_DELAY)
 
         elif selection == "8":
         # flash green
             phasenum=7
             while True:
-                rtc.cd_message("Flashing Green", "")
-                phasenum=rtc.ontrolflasher(phasenum)
+                rtc.lcd_message("Flashing Green", "")
+                phasenum=rtc.controlflasher(phasenum)
                 sleep(FLASHER_DELAY)
 
         elif selection == "3":
         # green on
-            rtc.llon("green")
+            rtc.allon("green")
 
         elif selection == "4":
         # yellow on
-            rtc.llon("yellow")
+            rtc.allon("yellow")
 
         elif selection == "5":
         # red on
-            rtc.llon("red")
+            rtc.allon("red")
 
         elif selection == "9":
 	# flash yellow
             phasenum=5
             while True:
-                phasenum=rtc.ontrolflasher(phasenum)
+                phasenum=rtc.controlflasher(phasenum)
                 sleep(FLASHER_DELAY)
 
         elif selection == "20":
         # US signal pattern
-            rtc.un_signal("US")
+            rtc.run_signal("US")
 
         elif selection == "21":
         # UK signal pattern
-            rtc.un_signal("UK")
+            rtc.run_signal("UK")
 
         elif selection == "Q" or selection == "q":
         # exit the script
@@ -118,8 +118,8 @@ while (selection != "Q" or selection != "q"):
 
         else:
         # display.error and help message
-            rtc.og_message("Invalid selection, try again.")
+            rtc.log_message("Invalid selection, try again.")
 
     except KeyboardInterrupt:
-        rtc.erminate()
+        rtc.terminate()
 
