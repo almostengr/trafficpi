@@ -2,13 +2,12 @@
 
 ################################################################################
 # Project: 	Raspi Traffic Control
-# Script Usage: run_all_on.py
-# Created: 	2017-04-09
-# Author: 	Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
-# Description:	Turns on all the lights and exits.
+# Script Usage: poweron.py
+# Created: 	2018-03-18
+# Author: 	Kenny Robinson, @almostengr, www.bitsecondtech.com
+# Description:	Turns on all the lights and exits. Configured to run on startup
 ################################################################################
 
-# import raspitraffic as rtc
 import trafficcontrol as rtc
 
 try:

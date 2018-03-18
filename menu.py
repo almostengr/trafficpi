@@ -2,13 +2,9 @@
 
 ################################################################################
 # Project: Raspi Traffic Control
-#
 # Script Usage: menu.py
-#
-# Created: 2018-03-18
-# 
+# Created: 2018-03-18 
 # Author: Kenny Robinson, @almostengr, www.bitsecondtech.com
-#
 # Description: Main menu for use with command line / ssh interface
 ################################################################################
 
