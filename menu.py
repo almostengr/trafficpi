@@ -7,7 +7,7 @@
 #
 # Created: 2018-03-18
 # 
-# Author: Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
+# Author: Kenny Robinson, @almostengr, www.bitsecondtech.com
 #
 # Description: Main menu for use with command line / ssh interface
 ################################################################################
@@ -59,7 +59,7 @@ while (selection != "Q" or selection != "q"):
 
         elif selection == "2":
         # all lights off
-            rtc.lloff()
+            rtc.alloff()
 
         elif selection == "6":
         # flash red
