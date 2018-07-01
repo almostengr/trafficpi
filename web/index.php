@@ -9,12 +9,25 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $action = $_POST['program'];
 
-	echo "<p style='background-color: #0c0; margin: 5px; padding: 5px;'>Running $action</p>";
 	try {
 		// write the action to the file
-        	$file = fopen('/tmp/traffic.txt', 'w') or die("Can't open file");
-	        fwrite($file, $action) or die("Write failed");
+        	$file = fopen('/var/tmp/traffic.txt', 'w');
+
+		if (!$file) {
+			throw new Exception("Unable to open file");
+		}
+	        
+		// fwrite($file, $action) or die("Write failed");
+		$writeFile = fwrite($file, $action);
+
+		if (!$writeFile) {
+			throw new Exception("Unable to write to file");
+			echo "write error";
+		}
+
         	fclose($file);
+	
+		echo "<p style='background-color: #0c0; margin: 5px; padding: 5px;'>Running $action</p>";
 	} catch (Exception $e) {
 		echo "<p style='background-color: #c00; padding: 5px;'>$e->getMessage()</p>";
 	}
@@ -22,8 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 else{
 	$action = "None";
 }
-
-// echo "Running Program: $action";
 ?>
 </p>
 
