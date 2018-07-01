@@ -16,6 +16,7 @@ import lcddriver
 import random
 import sys
 import os
+import subprocess
 
 # DEBUGGING MODE, DISABLED=0, ENABLED=1
 DEBUG=0
@@ -33,7 +34,7 @@ LAMPON=GPIO.LOW
 LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
 
-display=lcddriver.lcd()
+# display=lcddriver.lcd()
 selection=0
 
 
@@ -49,7 +50,7 @@ def setup():
     # turn on all the lights once setup
 
     # log_message("Performing setup")
-    lcd_message("Performing setup", "Please wait...")
+    # lcd_message("Performing setup", "Please wait...")
 
     for i in pinOutList:
         debug_message("Setting up and activiating pin " + str(i))
@@ -100,9 +101,8 @@ def log_message(message):
 
 def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
-    display.lcd_clear()
-    display.lcd_display_string(line1, 1)
-    display.lcd_display_string(line2, 2)
+    # display.lcd_clear()
+    # display.lcd_display_string(line2, 2)
     # log_message(line1 + " | " + line2)
     return 0
 
@@ -111,7 +111,7 @@ def terminate():
 # WHEN COMMAND TO EXIT IS GIVEN, THEN RESET EVERYTHING BACK TO DEFAULT
     log_message("Exiting")
     GPIO.cleanup()
-    display.lcd_clear()
+    # display.lcd_clear()
 
 
 def run_red_light_green_light():
@@ -304,7 +304,7 @@ def allon(phase):
         log_message("Doing nothing")
 
     sleep(3)
-    display.lcd_clear()
+    # display.lcd_clear()
 
 
 def alloff():
@@ -374,15 +374,30 @@ setup()
 while (selection != "Q" or selection != "q"):
     try:
         selection = 0
-        selection = mainmenu()
+        # selection = mainmenu()
+
+	try:
+            file = open("/tmp/traffic.txt", "r")
+            selection = file.readline()
+	    file.close()
+
+        except IOError:
+            file = open("/tmp/traffic.txt", "w")
+            subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
+            file.close()
 
         debug_message("Debug mode enabled")
 
-        if selection == "1":
+
+        if selection == "":
+            allon("all")
+
+        elif selection == "allon":
         # all lights on
             allon("all")
 
-        elif selection == "2":
+        # elif selection == "2":
+	elif selection == "alloff":
         # all lights off
             alloff()
 
@@ -422,7 +437,7 @@ while (selection != "Q" or selection != "q"):
         # red on
             allon("red")
 
-        elif selection == "20":
+        elif selection == "ustraffic":
         # US signal pattern
             run_signal("US")
 
@@ -438,9 +453,13 @@ while (selection != "Q" or selection != "q"):
         # exit the script
             sys.exit()
 
-        else:
+	elif selection == "shutdown":
+	# shutdown the system
+	    subprocess.call(["shutdown", "-h", "now"])
+
+        # else:
         # display error and help message
-            log_message("Invalid selection, try again.")
+            # log_message("Invalid selection, try again.")
 
     except KeyboardInterrupt:
         terminate()
