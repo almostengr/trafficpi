@@ -100,8 +100,8 @@ def lcd_message(line1, line2):
 def run_red_light_green_light():
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
 
-	red_time=randint(2, 10)
-	green_time=randint(0, 3)
+	red_time=randint(1, 10)
+	green_time=randint(1, 3)
 	
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	debug_message("Red Time: " + str(red_time))
