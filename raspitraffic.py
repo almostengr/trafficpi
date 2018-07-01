@@ -4,13 +4,8 @@
 # Project: Raspi Traffic Control
 # Script Usage: raspitraffic.py
 # Created: 2017-04-02
-<<<<<<< HEAD
 # Author: Kenny Robinson, @almostengr, www.bitsecondtech.com
-# Description:Core script which all the functions for controlling the lights
-=======
-# Author: Kenny Robinson, Bit Second Tech (www.bitsecondtech.com)
 # Description: Core script which all the functions for controlling the lights
->>>>>>> 9afa55376a5f0bc11352c19c96c96532cd3821ec
 # are contained.
 ################################################################################
 
