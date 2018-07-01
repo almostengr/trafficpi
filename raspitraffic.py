@@ -51,10 +51,6 @@ def setup():
 
 	# loop through each of the pins and define it.
 	# turn on all the lights once setup
-
-	# log_message("Performing setup")
-	# lcd_message("Performing setup", "Please wait...")
-
 	for i in pinOutList:
 		debug_message("Setting up and activiating pin " + str(i))
 		GPIO.setup(i, GPIO.OUT)
@@ -104,8 +100,6 @@ def log_message(message):
 
 def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
-	# display.lcd_clear()
-	# display.lcd_display_string(line2, 2)
 	log_message(line1 + " | " + line2)
 	return 0
 
@@ -142,8 +136,6 @@ def run_signal(country):
 # runs the light using normal signal
 	phaseflasher=0
 
-	# while True:
-
 	east_grn_time=random.randint(5, 30)
 	east_yel_time=random.randint(2, 5)
 	east_red_time=random.randint(5, 30)
@@ -169,13 +161,11 @@ def run_signal(country):
 
 	# yellow
 	eblight(LAMPOFF, LAMPON, LAMPOFF)
-	# for ttime in range(int(round(north_yel_time, 0)), 0, -1):
 	for ttime in range(east_yel_time, 0, -1):
 		lcd_message("Yellow", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
 
 	# red
-	# phasering1=controlring1(phasering1)
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	for ttime in range(east_red_time, 0, -1):
 		lcd_message("Red", "Time Remain: " + str(ttime) + "s")
@@ -183,19 +173,15 @@ def run_signal(country):
 
 	# change flasher color
 	if phaseflasher == 1 or phaseflasher == 2:
-		# phaseflasher = 5
 		inColor = "yellow"
 		lcd_message("Yellow Flasher", "")
 	else:
-		# phaseflasher = 1
 		inColor = "red"
 		lcd_message("Red Flasher", "")
 
 	# flasher
 	flashrangemax=randint(2,60)
 	for i in range(1,flashrangemax):
-		# phaseflasher = controlflasher(phaseflasher)
-		# sleep(FLASHER_DELAY)
 		phaseflasher = run_flasher(inColor, phaseflasher)
 
 
@@ -264,8 +250,6 @@ def controlflasher(phase):
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		phase = 7
 
-
-
 	else:
 		log_message("Not valid flasher phase")
 		phase = 0
@@ -276,14 +260,12 @@ def controlflasher(phase):
 def calc_yellow_time( speed, grade ):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
-	# log_message("Yellow Time: " + str(yel_time))
 	return yel_time
 
 
 def calc_green_time():
 # SET A RANDOM VALUE FOR THE GREEN TIME
 	grn_time=random.randint(10, 45)
-	# log_message("Green Time: " + str(grn_time))
 	return grn_time
 
 
@@ -318,18 +300,13 @@ def allon(phase):
 		log_message("Doing nothing")
 
 	sleep(3)
-	# display.lcd_clear()
 
 
 def alloff():
 # TURNS OFF ALL OF THE LIGHTS
 	lcd_message("ALL LIGHTS OFF", "")
 	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-	# for i in pinOutList:
-	# light_off(i)
-
 	sleep(3)
-	# display.lcd_clear()
 
 
 def lamptest():
@@ -352,7 +329,6 @@ def lamptest():
 
 	lcd_message("LAMP TEST", "ALL OFF")
 	sleep(3)
-	# display.lcd_clear()
 
 
 def mainmenu():
@@ -388,7 +364,6 @@ setup()
 while (selection != "Q" or selection != "q"):
 	try:
 		selection = 0
-		# selection = mainmenu()
 
 		try:
 			file = open("/tmp/traffic.txt", "r")
@@ -410,34 +385,24 @@ while (selection != "Q" or selection != "q"):
 		# all lights on
 			allon("all")
 
-		# elif selection == "alloff":
 		elif selection == "alloff":
 		# all lights off
 			alloff()
 
 		elif selection == "flashred":
 		# flash red
-#			phaseflasher=1
 			lcd_message("Flashing Red", "")
-			# phaseflasher=controlflasher(phaseflasher)
 			phaseflasher=run_flasher("red", phaseflasher)
-			# sleep(FLASHER_DELAY)
 
 		elif selection == "flashyel":
 		# flash yellow
-#			phaseflasher=9
 			lcd_message("Flashing Yellow", "")
-			# phaseflasher=controlflasher(phaseflasher)
 			phaseflasher = run_flasher("yellow", phaseflasher)
-			# sleep(FLASHER_DELAY)
 
 		elif selection == "flashgrn":
 		# flash green
-#			phasenum=7
 			lcd_message("Flashing Green", "")
-			#phasenum=controlflasher(phasenum)
 			phaseflasher=run_flasher("green", phaseflasher)
-			# sleep(FLASHER_DELAY)
 
 		elif selection == "3":
 		# green on
@@ -465,10 +430,6 @@ while (selection != "Q" or selection != "q"):
 		elif selection == "shutdown":
 		# shutdown the system
 			subprocess.call(["shutdown", "-h", "now"])
-
-		# else:
-		# display error and help message
-		# log_message("Invalid selection, try again.")
 
 	except KeyboardInterrupt:
 		terminate()
