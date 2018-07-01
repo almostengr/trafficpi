@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>TrafficPi Control Panel</title>
@@ -29,22 +30,28 @@ p#success {
 <h1>TrafficPi Control Panel</h1>
 
 <?php
+// only peform these actions if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $action = $_POST['program'];
+
+	// get the program to run from the from
+	$action = $_POST['program'];
 	$filepath = "/tmp/traffic.txt";
 
+	// update the file with program to run
 	$file = file_put_contents($filepath, $action);
 	if ($file === FALSE) {
-		// throw new Exception("Error when attempting to open file");
+		// throw error if not able to write to the file
 		echo "<p id='error'>Error when attempting to open file.</p>";
 	}
-	else{ 
+	else{
+	       	// show success message if able to write to the file	
 		echo "<p id='success'>Submitted $action</p>";
 	}
 }
 ?>
 
 <form method="post" action="index.php">
+<p>
 <select name="program">
 	<option value="ustraffic">US Traffic</option>
 	<option value="uktraffic">UK Traffic</option>
@@ -58,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="restart">Restart</option>
 	<option value="shutdown">Shut Down</option>
 </select>
-<p><input type="submit" name="Submit" value="Submit Request" /></p>
+</p>
+<p><input type="submit" name="Submit" value="Submit" /></p>
 </form>
 
 <p style="text-align: center;">
