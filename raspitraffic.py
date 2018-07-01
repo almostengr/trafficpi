@@ -196,7 +196,7 @@ def run_flasher(color, phase):
 	return phase
 
 
-def calc_yellow_time( grade ):
+def calc_yellow_time(grade):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
         speed = randint(25,80)
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
