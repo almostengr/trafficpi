@@ -309,7 +309,7 @@ while True:
 
 		debug_message("Debug mode enabled")
 
-		if selection == "":
+		if selection == "ustraffic":
 			allon("all")
 
 		elif selection == "allon":
