@@ -317,8 +317,12 @@ while True:
 		elif selection == "redlightgreenlight2":
 			run_red_light_green_light(1)
 
+		elif selection == "restart":
+		# restart the Raspberry Pi
+			subprocess.call(["sudo", "restart"])
+
 		elif selection == "shutdown":
-		# shutdown the system
+		# shutdown the Raspberry Pi
 			subprocess.call(["sudo", "shutdown", "-h", "now"])
 
 	except KeyboardInterrupt:
