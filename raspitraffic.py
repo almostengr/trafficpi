@@ -54,7 +54,6 @@ def setup():
 	for i in pinOutList:
 		debug_message("Setting up and activiating pin " + str(i))
 		GPIO.setup(i, GPIO.OUT)
-		# GPIO.output(i, GPIO.LOW)
 
 	debug_message("Waiting")
 
@@ -63,9 +62,7 @@ def setup():
 	# turn off all the lights
 	for i in pinOutList:
 		GPIO.output(i, GPIO.HIGH)
-
 		lcd_message("Done performing setup", "")
-
 		lcd_message("", "")
 
 	return 0
@@ -214,46 +211,6 @@ def run_flasher(color, phase):
 			lcd_message("Flashing Green", "")
 			phase = 7
 	sleep(FLASHER_DELAY)
-	return phase
-		
-			
-
-def controlflasher(phase):
-# runs flasher sequence
-
-	if phase == 0:
-		log_message("Do nothing")
-
-	# flash red
-	elif phase == 1:
-		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-		lcd_message("Flashing Green", "")
-		phase=2
-	elif phase == 2:
-		eblight(LAMPON, LAMPOFF, LAMPOFF)
-		lcd_message("Flashing Green", "")
-		phase=1
-
-	# flash yellow lights
-	elif phase == 5:
-		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-		phase = 6
-	elif phase == 6:
-		eblight(LAMPOFF, LAMPON, LAMPOFF)
-		phase = 5
-
-	# flash green lights
-	elif phase == 7:
-		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-		phase = 8
-	elif phase == 8:
-		eblight(LAMPOFF, LAMPOFF, LAMPON)
-		phase = 7
-
-	else:
-		log_message("Not valid flasher phase")
-		phase = 0
-
 	return phase
 
 
