@@ -206,7 +206,7 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red", "")
 			phase = 2
-		else
+		else:
 			eblight(LAMPON, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red", "")
 			phase = 1
@@ -215,7 +215,7 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Yellow", "")
 			phase = 4
-		else
+		else:
 			eblight(LAMPOFF, LAMPON, LAMPOFF)
 			lcd_message("Flashing Yellow", "")
 			phase = 3
@@ -224,7 +224,7 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Green", "")
 			phase = 8
-		elif phase == 8:
+		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
 			lcd_message("Flashing Green", "")
 			phase = 7
@@ -448,7 +448,7 @@ while (selection != "Q" or selection != "q"):
 #			phaseflasher=1
 			lcd_message("Flashing Red", "")
 			# phaseflasher=controlflasher(phaseflasher)
-			run_flasher(color, phase)
+			phaseflasher=run_flasher("red", phaseflasher)
 			# sleep(FLASHER_DELAY)
 
 		elif selection == "flashyel":
@@ -456,7 +456,7 @@ while (selection != "Q" or selection != "q"):
 #			phaseflasher=9
 			lcd_message("Flashing Yellow", "")
 			# phaseflasher=controlflasher(phaseflasher)
-			run_flasher(color, phase)
+			phaseflasher = run_flasher("yellow", phaseflasher)
 			# sleep(FLASHER_DELAY)
 
 		elif selection == "flashgrn":
@@ -464,7 +464,7 @@ while (selection != "Q" or selection != "q"):
 #			phasenum=7
 			lcd_message("Flashing Green", "")
 			#phasenum=controlflasher(phasenum)
-			run_flasher(color, phase)
+			phaseflasher=run_flasher("green", phaseflasher)
 			# sleep(FLASHER_DELAY)
 
 		elif selection == "3":
