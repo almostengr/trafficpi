@@ -12,10 +12,8 @@
 from time import sleep
 from random import randint
 import RPi.GPIO as GPIO
-# import lcddriver
+import lcddriver
 import random
-import sys
-import os
 import subprocess
 
 # DEBUGGING MODE, DISABLED=0, ENABLED=1
@@ -220,12 +218,6 @@ def calc_yellow_time( speed, grade ):
 	return yel_time
 
 
-def calc_green_time():
-# SET A RANDOM VALUE FOR THE GREEN TIME
-	grn_time=random.randint(10, 45)
-	return grn_time
-
-
 def eblight(cirred, ciryel, cirgrn):
 # CONTROLS THE LAMPS ON THE EASTBOUND LIGHT. DOESNT HAVE LEFT TURN
 	GPIO.output(EAST_CR, cirred)
@@ -269,11 +261,13 @@ def alloff():
 # configure everything
 setup()
 
+# loop forever
 while True:
 	debug_message("Debug mode enabled")
 
 	try:
 		try:
+		# Read the data file
 			file = open("/tmp/traffic.txt", "r")
 			selection = file.readline()
 			file.close()
@@ -285,7 +279,7 @@ while True:
 			file.close()
 
 		if selection == "":
-			# allon("all")
+		# default value if nothing has been selected
 			run_signal("US")
 
 		elif selection == "allon":
@@ -310,18 +304,6 @@ while True:
 		# flash green
 			lcd_message("Flashing Green", "")
 			phaseflasher=run_flasher("green", phaseflasher)
-
-		elif selection == "3":
-		# green on
-			allon("green")
-
-		elif selection == "4":
-		# yellow on
-			allon("yellow")
-
-		elif selection == "5":
-		# red on
-			allon("red")
 
 		elif selection == "ustraffic":
 		# US signal pattern
