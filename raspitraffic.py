@@ -134,6 +134,11 @@ def run_signal(country):
 		lcd_message("Green", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
 
+        # flash green
+        if country == "normalflashgreen"
+            for i in range(4, randint(5,10))
+                phaseflasher = run_flasher("green", phaseflasher)
+
 	# yellow
 	eblight(LAMPOFF, LAMPON, LAMPOFF)
 	for ttime in range(east_yel_time, 0, -1):
@@ -291,6 +296,10 @@ while True:
 		elif selection == "uktraffic":
 		# UK signal pattern
 			run_signal("UK")
+
+                elif selection == "normalflashgreen"
+                # signal pattern with flashing green
+                        run_signal("normalflashgreen")
 
 		elif selection == "redlightgreenlight":
 			run_red_light_green_light(0)
