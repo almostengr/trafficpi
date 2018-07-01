@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="flashgrn">Flash Green</option>
 	<option value="shutdown">Shut Down</option>
 </select>
-<p><input type="submit" name="Submit" /></p>
+<p><input type="submit" name="Submit" value="Submit Request" /></p>
 </form>
 
 </body>
