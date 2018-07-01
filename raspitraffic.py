@@ -140,22 +140,22 @@ def run_signal(country):
 # runs the light using normal signal
     phaseflasher=0
 
-    while True:
-        east_grn_time=random.randint(5, 60)
-        east_yel_time=random.randint(2, 5)
-        east_red_time=random.randint(5, 60)
+    # while True:
+    east_grn_time=random.randint(5, 60)
+    east_yel_time=random.randint(2, 5)
+    east_red_time=random.randint(5, 60)
 
-        # red
-        eblight(LAMPON, LAMPOFF, LAMPOFF)
-        for ttime in range(east_red_time, 0, -1):
-	        lcd_message("Red", "Time Remain: " + str(ttime) + "s")
-	        sleep(1)
+    # red
+    eblight(LAMPON, LAMPOFF, LAMPOFF)
+    for ttime in range(east_red_time, 0, -1):
+        lcd_message("Red", "Time Remain: " + str(ttime) + "s")
+        sleep(1)
 
-	# red-yellow for UK only
-        if country == "UK":
-            eblight(LAMPON, LAMPON, LAMPOFF)
-            for ttime in range(east_yel_time, 0, -1):
-	        lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
+    # red-yellow for UK only
+    if country == "UK":
+        eblight(LAMPON, LAMPON, LAMPOFF)
+        for ttime in range(east_yel_time, 0, -1):
+       lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
 	        sleep(1)
 
         # green
