@@ -18,7 +18,7 @@ p#error {
 }
 
 p#success {
-	background-color: #0c0;
+	background-color: #82FA58;
 	color: #000;
 	padding: 5px;
 }
