@@ -316,7 +316,7 @@ def alloff():
 	# light_off(i)
 
 	sleep(3)
-	display.lcd_clear()
+	# display.lcd_clear()
 
 
 def lamptest():
@@ -339,7 +339,7 @@ def lamptest():
 
 	lcd_message("LAMP TEST", "ALL OFF")
 	sleep(3)
-	display.lcd_clear()
+	# display.lcd_clear()
 
 
 def mainmenu():
