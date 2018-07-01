@@ -1,4 +1,3 @@
 *.pyc
-i2c_lib.pyc
-lcddriver.pyc
-raspitraffic.pyc
+*.swp
+
