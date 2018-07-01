@@ -59,7 +59,7 @@ breadboard with LEDs connected.
 
 ## Initial Setup
 ### Install Script
-In the ```scripts``` directory, run the ```script_raspitraffic.sh``` script 
+In the ```scripts``` directory, run the ```install.sh``` script 
 as root user. This will install of the required software and python packages.
 
 ### Update Apache Configuration
