@@ -3,36 +3,12 @@
 <title>Traffic Control</title>
 </head>
 <body>
-<ul>
-<?php
 
+<p>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $action = "";
-        if (isset($_POST['us'])) {
-                $action = "us";
-        }
-        else if (isset($_POST['uk'])) {
-                $action = "uk";
-        }
-        else if (isset($_POST['allon'])) {
-                $action = "allon";
-        }
-        else if (isset($_POST['alloff'])) {
-                $action = "alloff";
-        }
-        else if (isset($_POST['flashred'])) {
-                $action = "flashred";
-        }
-        else if (isset($_POST['flashyel'])) {
-                $action = "flashyel";
-        }
-        else if (isset($_POST['flashgrn'])) {
-                $action = "flashgrn";
-        }
-        else if (isset($_POST['shutdown'])) {
-                $action = "shutdown";
-        }
+        $action = $_POST['program'];
+
 	echo "<p style='background-color: #0c0; margin: 5px; padding: 5px;'>Running $action</p>";
 	try {
 		// write the action to the file
@@ -43,12 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "<p style='background-color: #c00; padding: 5px;'>$e->getMessage()</p>";
 	}
 }
+else{
+	$action = "None";
+}
+
+// echo "Running Program: $action";
 ?>
+</p>
 
 <form method="post" action="index.php">
 <select name="program">
-	<option value="us">US Traffic</option>
-	<option value="uk">UK Traffic</option>
+	<option value="ustraffic">US Traffic</option>
+	<option value="uktraffic">UK Traffic</option>
 	<option value="allon">All On</option>
 	<option value="alloff">All Off</option>
 	<option value="flashred">Flash Red</option>
