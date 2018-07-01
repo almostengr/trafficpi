@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "<p id='error'>Error when attempting to open file.</p>";
 	}
 	else{ 
-		echo "<p id='success'>Running $action</p>";
+		echo "<p id='success'>Submitted $action</p>";
 	}
 }
 ?>
