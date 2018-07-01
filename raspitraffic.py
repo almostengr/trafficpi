@@ -110,21 +110,17 @@ def terminate():
 def run_red_light_green_light():
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
 
-	# phase 0 - do nothing
-	# phase 1 - red light
-	# phase 2 - green light
-
 	red_time=randint(2, 10)
-	green_time=randint(1, 3)
-
-	phasenum=rtc.controlredlightgreenlight(phasenum)
-	rtc.debug_message("Red Time: " + str(red_time))
-	rtc.lcd_message("Red Light!", "Dont move!")
+	green_time=randint(0, 3)
+	
+	eblight(LAMPON, LAMPOFF, LAMPOFF)
+	debug_message("Red Time: " + str(red_time))
+	lcd_message("Red Light!", "Dont move!")
 	sleep(red_time)
 
-	phasenum=rtc.controlredlightgreenlight(phasenum)
-	rtc.debug_message("Green Time: " + str(green_time))
-	rtc.lcd_message("Green Light!", "Run!")
+	eblight(LAMPOFF, LAMPOFF, LAMPON)
+	debug_message("Green Time: " + str(green_time))
+	lcd_message("Green Light!", "Run!")
 	sleep(green_time)
 
 
