@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Traffic Control</title>
+<title>TrafficPi Control Panel</title>
 <meta name="copyright" content="Kenny Robinson, @almostengr" />
 <meta name="author" content="Kenny Robinson, @almostengr" />
 <meta name="robots" content="noindex,nofollow" />
@@ -26,7 +26,7 @@ p#success {
 </head>
 <body>
 
-<h1>Traffic Control</h1>
+<h1>TrafficPi Control Panel</h1>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 <p style="text-align: center;">
-Copyright &copy; 2018 @almostengr | 
+Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr | 
 <a href="index.php">Home</a> | 
 <a href="https:////github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
 </p>
