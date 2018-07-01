@@ -64,20 +64,6 @@ def setup():
 	return 0
 
 
-def light_on(pin):
-# TURN ON THE LIGHT, HAS TO PROVIDE PIN NUMBER
-	GPIO.output(pin, GPIO.LOW)
-	debug_message("Pin " + str(pin) + " turned on")
-	return 0
-
-
-def light_off(pin):
-# TURN OFF THE LIGHT, HAS TO PROVIDE PIN NUMBER
-	GPIO.output(pin, GPIO.HIGH)
-	debug_message("Pin " + str(pin) + " turned off")
-	return 0
-
-
 def debug_message(message):
 # LOG ADDITIONAL MESSAGES TO THE SCREEN/LOG FILE WHEN TESTING
 	if DEBUG == 1:
