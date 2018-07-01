@@ -4,7 +4,9 @@
 * Purpose
 * System Requirements
 * Pin Setup
+* Initial Setup
 * Running the Scripts
+* Uninstall Script
 * Bug Reports
 * Acknowledgements
 * License
@@ -44,7 +46,7 @@ listed are the physical pin numbers on the board, not the GPIO pin numbers. If
 you are not using a relay board, the connections can be made directly to a 
 breadboard with LEDs connected.
 
-* Pi Pin (Board)		Device Pin / LED Color
+* Pi Pin (Board) -------- Device Pin / LED Color
 * 2 --------------------- LCD Display VCC (+5V)
 * 3 --------------------- LCD Display SDA
 * 4 --------------------- Relay Board VCC (+5V)
@@ -73,10 +75,20 @@ grep -R "PrivateTmp=true" *
 to search for the file that contains this value. Once grep returns the file name, 
 edit the file and make the stated change.
 
+----
+
 ## Running The Scripts
 To control the traffic light, visit the webpage in your browser. A form will be 
 presented with a list of programs to select from. Select the program you wish to 
-run and click the "Submit Request" button.
+run and click the "Submit" button.
+
+----
+
+## Uninstall Script
+At any point, you can uninstall the software that is used by the program to return 
+your Raspberry Pi to its prior state. In the ```scripts``` directory, run the 
+```uninstall.sh``` script as root user. This will uninstall the packages installed 
+by the install script.
 
 ----
 
