@@ -288,32 +288,6 @@ def lamptest():
 	sleep(3)
 
 
-def mainmenu():
-# MAIN MENU FOR THE PROGRAM
-	os.system('clear')
-
-	log_message("Main Menu")
-	log_message("====================")
-	log_message("1) All Lights On")
-	log_message("2) All Lights Off")
-	log_message("3) Green On")
-	log_message("4) Yellow On")
-	log_message("5) Red On")
-	log_message("6) Flash Red")
-	log_message("7) Flash Yellow")
-	log_message("8) Flash Green")
-	log_message("20) US Signal")
-	log_message("21) UK Signal")
-	log_message("40) Magic Eightball")
-	# log_message("10) Pseudocode Interpreter")
-	log_message("Q) Exit")
-	log_message("")
-	log_message("Use Ctrl+C to exit running command.")
-
-	selection = raw_input(">> ")
-
-	return selection
-
 # configure everything
 setup()
 
