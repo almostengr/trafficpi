@@ -388,7 +388,6 @@ while (selection != "Q" or selection != "q"):
 
         debug_message("Debug mode enabled")
 
-
         if selection == "":
             allon("all")
 
@@ -396,12 +395,12 @@ while (selection != "Q" or selection != "q"):
         # all lights on
             allon("all")
 
-        # elif selection == "2":
+        # elif selection == "alloff":
 	elif selection == "alloff":
         # all lights off
             alloff()
 
-        elif selection == "6":
+        elif selection == "flashred":
         # flash red
             phaseflasher=1
             while True:
@@ -409,7 +408,7 @@ while (selection != "Q" or selection != "q"):
                 phaseflasher=controlflasher(phaseflasher)
                 sleep(FLASHER_DELAY)
 
-        elif selection == "7":
+        elif selection == "flashyel":
         # flash yellow
             phaseflasher=9
             while True:
@@ -417,7 +416,7 @@ while (selection != "Q" or selection != "q"):
                 phaseflasher=controlflasher(phaseflasher)
                 sleep(FLASHER_DELAY)
 
-        elif selection == "8":
+        elif selection == "flashgrn":
         # flash green
             phasenum=7
             while True:
@@ -441,17 +440,9 @@ while (selection != "Q" or selection != "q"):
         # US signal pattern
             run_signal("US")
 
-        elif selection == "21":
+        elif selection == "uktraffic":
         # UK signal pattern
             run_signal("UK")
-
-	elif selection == "40":
-	# 8ball
-	    run_eightball()
-
-        elif selection == "Q" or selection == "q":
-        # exit the script
-            sys.exit()
 
 	elif selection == "shutdown":
 	# shutdown the system
