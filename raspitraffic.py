@@ -103,7 +103,7 @@ def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
 	# display.lcd_clear()
 	# display.lcd_display_string(line2, 2)
-	# log_message(line1 + " | " + line2)
+	log_message(line1 + " | " + line2)
 	return 0
 
 
@@ -142,9 +142,9 @@ def run_signal(country):
 
 	# while True:
 
-	east_grn_time=random.randint(5, 60)
+	east_grn_time=random.randint(5, 30)
 	east_yel_time=random.randint(2, 5)
-	east_red_time=random.randint(5, 60)
+	east_red_time=random.randint(5, 30)
 
 	# red
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
@@ -198,7 +198,7 @@ def controlflasher(phase):
 # runs flasher sequence
 
 	if phase == 0:
-	log_message("Do nothing")
+		log_message("Do nothing")
 
 	# flash red
 	elif phase == 1:
@@ -344,115 +344,116 @@ def lamptest():
 
 def mainmenu():
 # MAIN MENU FOR THE PROGRAM
-    os.system('clear')
+	os.system('clear')
 
-    log_message("Main Menu")
-    log_message("====================")
-    log_message("1) All Lights On")
-    log_message("2) All Lights Off")
-    log_message("3) Green On")
-    log_message("4) Yellow On")
-    log_message("5) Red On")
-    log_message("6) Flash Red")
-    log_message("7) Flash Yellow")
-    log_message("8) Flash Green")
-    log_message("20) US Signal")
-    log_message("21) UK Signal")
-    log_message("40) Magic Eightball")
-    # log_message("10) Pseudocode Interpreter")
-    log_message("Q) Exit")
-    log_message("")
-    log_message("Use Ctrl+C to exit running command.")
+	log_message("Main Menu")
+	log_message("====================")
+	log_message("1) All Lights On")
+	log_message("2) All Lights Off")
+	log_message("3) Green On")
+	log_message("4) Yellow On")
+	log_message("5) Red On")
+	log_message("6) Flash Red")
+	log_message("7) Flash Yellow")
+	log_message("8) Flash Green")
+	log_message("20) US Signal")
+	log_message("21) UK Signal")
+	log_message("40) Magic Eightball")
+	# log_message("10) Pseudocode Interpreter")
+	log_message("Q) Exit")
+	log_message("")
+	log_message("Use Ctrl+C to exit running command.")
 
-    selection = raw_input(">> ")
+	selection = raw_input(">> ")
 
-    return selection
+	return selection
 
 # configure everything
 setup()
 
 # while (selection != "Q"):
 while (selection != "Q" or selection != "q"):
-    try:
-        selection = 0
-        # selection = mainmenu()
-
 	try:
-            file = open("/tmp/traffic.txt", "r")
-            selection = file.readline()
-	    file.close()
+		selection = 0
+		# selection = mainmenu()
 
-        except IOError:
-            file = open("/tmp/traffic.txt", "w")
-            subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
-            file.close()
+		try:
+			file = open("/tmp/traffic.txt", "r")
+			selection = file.readline()
+			file.close()
 
-        debug_message("Debug mode enabled")
+		except IOError:
+			# if the file doesn't exist, then create it and give public permissions
+			file = open("/tmp/traffic.txt", "w")
+			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
+			file.close()
 
-        if selection == "":
-            allon("all")
+		debug_message("Debug mode enabled")
 
-        elif selection == "allon":
-        # all lights on
-            allon("all")
+		if selection == "":
+			allon("all")
 
-        # elif selection == "alloff":
-	elif selection == "alloff":
-        # all lights off
-            alloff()
+		elif selection == "allon":
+		# all lights on
+			allon("all")
 
-        elif selection == "flashred":
-        # flash red
-            phaseflasher=1
-            while True:
-                lcd_message("Flashing Red", "")
-                phaseflasher=controlflasher(phaseflasher)
-                sleep(FLASHER_DELAY)
+		# elif selection == "alloff":
+		elif selection == "alloff":
+		# all lights off
+			alloff()
 
-        elif selection == "flashyel":
-        # flash yellow
-            phaseflasher=9
-            while True:
-                lcd_message("Flashing Yellow", "")
-                phaseflasher=controlflasher(phaseflasher)
-                sleep(FLASHER_DELAY)
+		elif selection == "flashred":
+		# flash red
+			phaseflasher=1
+			while True:
+				lcd_message("Flashing Red", "")
+				phaseflasher=controlflasher(phaseflasher)
+				sleep(FLASHER_DELAY)
 
-        elif selection == "flashgrn":
-        # flash green
-            phasenum=7
-            while True:
-                lcd_message("Flashing Green", "")
-                phasenum=controlflasher(phasenum)
-                sleep(FLASHER_DELAY)
+		elif selection == "flashyel":
+		# flash yellow
+			phaseflasher=9
+			while True:
+				lcd_message("Flashing Yellow", "")
+				phaseflasher=controlflasher(phaseflasher)
+				sleep(FLASHER_DELAY)
 
-        elif selection == "3":
-        # green on
-            allon("green")
+		elif selection == "flashgrn":
+		# flash green
+			phasenum=7
+			while True:
+				lcd_message("Flashing Green", "")
+				phasenum=controlflasher(phasenum)
+				sleep(FLASHER_DELAY)
 
-        elif selection == "4":
-        # yellow on
-            allon("yellow")
+		elif selection == "3":
+		# green on
+			allon("green")
 
-        elif selection == "5":
-        # red on
-            allon("red")
+		elif selection == "4":
+		# yellow on
+			allon("yellow")
 
-        elif selection == "ustraffic":
-        # US signal pattern
-            run_signal("US")
+		elif selection == "5":
+		# red on
+			allon("red")
 
-        elif selection == "uktraffic":
-        # UK signal pattern
-            run_signal("UK")
+		elif selection == "ustraffic":
+		# US signal pattern
+			run_signal("US")
 
-	elif selection == "shutdown":
-	# shutdown the system
-	    subprocess.call(["shutdown", "-h", "now"])
+		elif selection == "uktraffic":
+		# UK signal pattern
+			run_signal("UK")
 
-        # else:
-        # display error and help message
-            # log_message("Invalid selection, try again.")
+		elif selection == "shutdown":
+		# shutdown the system
+			subprocess.call(["shutdown", "-h", "now"])
 
-    except KeyboardInterrupt:
-        terminate()
+		# else:
+		# display error and help message
+		# log_message("Invalid selection, try again.")
+
+	except KeyboardInterrupt:
+		terminate()
 
