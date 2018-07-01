@@ -59,7 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p><input type="submit" name="Submit" value="Submit Request" /></p>
 </form>
 
-<p style="text-align: center;">Copyright &copy; 2018 @almostengr</p>
+<p style="text-align: center;">
+Copyright &copy; 2018 @almostengr | 
+<a href="index.php">Home</a> | 
+<a href="https:////github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
+</p>
+
 </body>
 </html>
 
