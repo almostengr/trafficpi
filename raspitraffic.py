@@ -303,8 +303,9 @@ while True:
 
 		debug_message("Debug mode enabled")
 
-		if selection == "ustraffic":
-			allon("all")
+		if selection == "":
+			# allon("all")
+			run_signal("US")
 
 		elif selection == "allon":
 		# all lights on
