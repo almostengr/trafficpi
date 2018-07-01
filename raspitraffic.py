@@ -37,6 +37,9 @@ FLASHER_DELAY=.7
 # display=lcddriver.lcd()
 selection=0
 
+phaseflasher=0
+phasenum=0
+
 
 def setup():
 	# SET UP GPIO PINS
@@ -181,18 +184,54 @@ def run_signal(country):
 
 	# change flasher color
 	if phaseflasher == 1 or phaseflasher == 2:
-		phaseflasher = 5
+		# phaseflasher = 5
+		inColor = "yellow"
 		lcd_message("Yellow Flasher", "")
 	else:
-		phaseflasher = 1
+		# phaseflasher = 1
+		inColor = "red"
 		lcd_message("Red Flasher", "")
 
 	# flasher
 	flashrangemax=randint(2,60)
 	for i in range(1,flashrangemax):
-		phaseflasher = controlflasher(phaseflasher)
-		sleep(FLASHER_DELAY)
+		# phaseflasher = controlflasher(phaseflasher)
+		# sleep(FLASHER_DELAY)
+		phaseflasher = run_flasher(inColor, phaseflasher)
 
+
+def run_flasher(color, phase):
+	if color == "red":
+		if phase == 1:
+			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			lcd_message("Flashing Red", "")
+			phase = 2
+		else
+			eblight(LAMPON, LAMPOFF, LAMPOFF)
+			lcd_message("Flashing Red", "")
+			phase = 1
+	elif color == "yellow":
+		if phase == 3:
+			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			lcd_message("Flashing Yellow", "")
+			phase = 4
+		else
+			eblight(LAMPOFF, LAMPON, LAMPOFF)
+			lcd_message("Flashing Yellow", "")
+			phase = 3
+	elif color == "green":
+		if phase == 7:
+			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			lcd_message("Flashing Green", "")
+			phase = 8
+		elif phase == 8:
+			eblight(LAMPOFF, LAMPOFF, LAMPON)
+			lcd_message("Flashing Green", "")
+			phase = 7
+	sleep(FLASHER_DELAY)
+	return phase
+		
+			
 
 def controlflasher(phase):
 # runs flasher sequence
@@ -203,11 +242,11 @@ def controlflasher(phase):
 	# flash red
 	elif phase == 1:
 		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-		# lcd_message("Flasher Mode", "EB OFF, NB YEL")
+		lcd_message("Flashing Green", "")
 		phase=2
 	elif phase == 2:
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
-		# lcd_message ("Flasher Mode", "EB RED, NB OFF")
+		lcd_message("Flashing Green", "")
 		phase=1
 
 	# flash yellow lights
@@ -225,6 +264,8 @@ def controlflasher(phase):
 	elif phase == 8:
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		phase = 7
+
+
 
 	else:
 		log_message("Not valid flasher phase")
@@ -404,27 +445,27 @@ while (selection != "Q" or selection != "q"):
 
 		elif selection == "flashred":
 		# flash red
-			phaseflasher=1
-			while True:
-				lcd_message("Flashing Red", "")
-				phaseflasher=controlflasher(phaseflasher)
-				sleep(FLASHER_DELAY)
+#			phaseflasher=1
+			lcd_message("Flashing Red", "")
+			# phaseflasher=controlflasher(phaseflasher)
+			run_flasher(color, phase)
+			# sleep(FLASHER_DELAY)
 
 		elif selection == "flashyel":
 		# flash yellow
-			phaseflasher=9
-			while True:
-				lcd_message("Flashing Yellow", "")
-				phaseflasher=controlflasher(phaseflasher)
-				sleep(FLASHER_DELAY)
+#			phaseflasher=9
+			lcd_message("Flashing Yellow", "")
+			# phaseflasher=controlflasher(phaseflasher)
+			run_flasher(color, phase)
+			# sleep(FLASHER_DELAY)
 
 		elif selection == "flashgrn":
 		# flash green
-			phasenum=7
-			while True:
-				lcd_message("Flashing Green", "")
-				phasenum=controlflasher(phasenum)
-				sleep(FLASHER_DELAY)
+#			phasenum=7
+			lcd_message("Flashing Green", "")
+			#phasenum=controlflasher(phasenum)
+			run_flasher(color, phase)
+			# sleep(FLASHER_DELAY)
 
 		elif selection == "3":
 		# green on
