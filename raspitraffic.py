@@ -124,7 +124,6 @@ def run_red_light_green_light():
 	# phase 1 - red light
 	# phase 2 - green light
 
-	# while True:
 	red_time=randint(2, 10)
 	green_time=randint(1, 3)
 
@@ -459,6 +458,9 @@ while (selection != "Q" or selection != "q"):
 		elif selection == "uktraffic":
 		# UK signal pattern
 			run_signal("UK")
+
+		elif selection == "redlightgreenlight":
+			run_red_light_green_light()
 
 		elif selection == "shutdown":
 		# shutdown the system
