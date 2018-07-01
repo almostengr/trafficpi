@@ -196,8 +196,9 @@ def run_flasher(color, phase):
 	return phase
 
 
-def calc_yellow_time( speed, grade ):
+def calc_yellow_time( grade ):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
+        speed = randint(25,80)
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
 	return yel_time
 
@@ -207,12 +208,6 @@ def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
-
-
-def randomspeed():
-# picks a random speed from the range defined below
-	speed=random.randint(25,65)
-	return speed
 
 
 def allon(phase):
