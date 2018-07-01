@@ -97,11 +97,12 @@ def lcd_message(line1, line2):
 	return 0
 
 
-def run_red_light_green_light():
+def run_red_light_green_light(yellowon):
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
 
 	red_time=randint(1, 10)
 	green_time=randint(1, 3)
+	yellow_time=FLASHER_DELAY
 	
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	debug_message("Red Time: " + str(red_time))
@@ -112,6 +113,12 @@ def run_red_light_green_light():
 	debug_message("Green Time: " + str(green_time))
 	lcd_message("Green Light!", "Run!")
 	sleep(green_time)
+
+	if yellowon == 1:
+		eblight(LAMPOFF, LAMPON, LAMPOFF)
+		debug_message("Yellow Time: " + str(yellow_time))
+		lcd_message("Yellow Light!", "Slow!")
+		sleep(yellow_time)
 
 
 def run_signal(country):
@@ -305,7 +312,10 @@ while True:
 			run_signal("UK")
 
 		elif selection == "redlightgreenlight":
-			run_red_light_green_light()
+			run_red_light_green_light(0)
+
+		elif selection == "redlightgreenlight2":
+			run_red_light_green_light(1)
 
 		elif selection == "shutdown":
 		# shutdown the system

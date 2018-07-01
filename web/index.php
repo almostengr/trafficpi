@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="allon">All On</option>
 	<option value="alloff">All Off</option>
 	<option value="redlightgreenlight">Red Light Green Light</option>
+	<option value="redlightgreenlight2">Red Light Green Light, with Yellow</option>
 	<option value="flashred">Flash Red</option>
 	<option value="flashyel">Flash Yellow</option>
 	<option value="flashgrn">Flash Green</option>
