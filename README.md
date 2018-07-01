@@ -23,11 +23,6 @@ M" of "STEM" by using electronic circuits for controlling the lights, software f
 controlling the electronic circuits, and mathematical calculations for making 
 timing decisions.
 
-This project is intended to be used with two traffic lights. Northbound (NB) light 
-(Signal 1) has a left turn yellow and green arrows in addition to the standard 3-segment 
-light. Eastbound (EB) light (Signal 2) only has a standard 3-segment light. It is possible to
-only connect one traffic light assembly to the board as all code will still function.
-
 ----
 
 ## System Requirements
@@ -63,47 +58,25 @@ breadboard with LEDs connected.
 ----
 
 ## Initial Setup
+### Install Script
 In the ```scripts``` directory, run the ```script_raspitraffic.sh``` script 
 as root user. This will install of the required software and python packages.
 
-Install Apache and PHP. To do this run
-```sh
-sudo apt-get update 
-sudo apt-get install apache2 php
-```
-
-If any prompts to continue appear, accept them.
-
+### Update Apache Configuration
 Search for the file containing "PrivateTmp=true". This file should be in your /etc
 directory. Change this value to ```PrivateTmp=false```. Then restart Apache.
+You may use 
+```sh
+cd /etc/
+grep -R "PrivateTmp=true" *
+```
+to search for the file that contains this value. Once grep returns the file name, 
+edit the file and make the stated change.
 
 ## Running The Scripts
-To run the script, browse to the script folder, and run `python <scriptname>` 
-where `<scriptname>` is the name of the script.
-
-### Script Name and Description
-* run_all_off.py - Turns off all of the lights.
-* run_all_on.py - Turns on all of the lights.
-* run_flasher1.py - Flashes the lights in the normal sequence, but with 
-opposite colors in run_flasher2.py.
-* run_flasher2.py - Flashes the lights in the normal sequence, but with 
-opposite colors in run_flasher1.py.
-* run_green_flash.py - Flashes all of the green lights.
-* run_green_on.py - Turns on all of the green lights.
-* run_guess_yellow_time_double.py - A game that requires the guess of the 
-amount of time that the traffic light will show a yellow signal. This script 
-is for the use of two traffic lights.
-* run_guess_yellow_time_single.py - A game that requires the guess of the 
-amount of time that the traffic light will show a yellow signal.  This script 
-is for the use of a signal traffic light. 
-* run_normal_uk.py - Operates as a normal traffic light using the UK signal phasing.
-* run_normal_us.py - Operates as a normal traffic light using the US signal phasing.
-* run_red_flash.py - Flashes all of the red lights.
-* run_red_light_green_light.py - Operates the traffic light to play Red Light, 
-Green Light game.
-* run_red_on.py - Turns on all of the red lights.
-* run_yellow_flash.py - Flashes all of the yellow lights.
-* run_yellow_on.py - Turns on all of the yellow lights.
+To control the traffic light, visit the webpage in your browser. A form will be 
+presented with a list of programs to select from. Select the program you wish to 
+run and click the "Submit Request" button.
 
 ----
 
@@ -115,7 +88,7 @@ welcome to be submitted.
 
 ----
 
-### Known Bugs
+## Known Bugs
 * When exiting the script (using Ctrl+C), all of the relays may not turn off.
 In addition, the LCD display may not clear if it is writing when the kill
 shortcut is performed.
