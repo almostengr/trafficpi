@@ -22,6 +22,8 @@ p#success {
 </head>
 <body>
 
+<h1>Traffic Control</h1>
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $action = $_POST['program'];
