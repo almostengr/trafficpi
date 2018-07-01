@@ -41,7 +41,7 @@ phasenum=0
 
 
 def setup():
-	# SET UP GPIO PINS
+# SET UP GPIO PINS
 	GPIO.setmode(GPIO.BOARD)
 
 	# disable GPIO warnings when not debugging
@@ -178,6 +178,7 @@ def run_signal(country):
 
 
 def run_flasher(color, phase):
+# flash the lights
 	if color == "red":
 		if phase == 1:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
@@ -187,6 +188,7 @@ def run_flasher(color, phase):
 			eblight(LAMPON, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red Off", "")
 			phase = 1
+
 	elif color == "yellow":
 		if phase == 3:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
@@ -196,6 +198,7 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPON, LAMPOFF)
 			lcd_message("Flashing Yellow Off", "")
 			phase = 3
+
 	elif color == "green":
 		if phase == 7:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
@@ -205,6 +208,7 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
 			lcd_message("Flashing Green Off", "")
 			phase = 7
+
 	sleep(FLASHER_DELAY)
 
 	return phase
@@ -287,8 +291,9 @@ def lamptest():
 # configure everything
 setup()
 
-# while (selection != "Q"):
 while True:
+	debug_message("Debug mode enabled")
+
 	try:
 		try:
 			file = open("/tmp/traffic.txt", "r")
@@ -300,8 +305,6 @@ while True:
 			file = open("/tmp/traffic.txt", "w")
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
-
-		debug_message("Debug mode enabled")
 
 		if selection == "":
 			# allon("all")
