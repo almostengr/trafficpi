@@ -35,10 +35,6 @@ LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
 
 # display=lcddriver.lcd()
-selection=0
-
-phaseflasher=0
-phasenum=0
 
 
 def setup():
@@ -295,6 +291,8 @@ setup()
 while True:
 	try:
 		selection = 0
+		phaseflasher=0
+		phasenum=0
 
 		try:
 			file = open("/tmp/traffic.txt", "r")
