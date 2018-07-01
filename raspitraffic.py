@@ -289,7 +289,7 @@ def lamptest():
 
 
 # configure everything
-# setup()
+setup()
 
 while True:
 	debug_message("Debug mode enabled")
