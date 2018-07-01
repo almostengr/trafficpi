@@ -71,7 +71,16 @@ breadboard with LEDs connected.
 In the ```scripts``` directory, run the ```script_raspitraffic.sh``` script 
 as root user. This will install of the required software and python packages.
 
-----
+Install Apache and PHP. To do this run
+```sh
+sudo apt-get update 
+sudo apt-get install apache2 php
+```
+
+If any prompts to continue appear, accept them.
+
+Search for the file containing "PrivateTmp=true". This file should be in your /etc
+directory. Change this value to ```PrivateTmp=false```. Then restart Apache.
 
 ## Running The Scripts
 To run the script, browse to the script folder, and run `python <scriptname>` 
