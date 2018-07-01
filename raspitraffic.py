@@ -53,7 +53,6 @@ def setup():
 		GPIO.setup(i, GPIO.OUT)
 
 	debug_message("Waiting")
-
 	sleep(1)
 
 	# turn off all the lights
@@ -96,13 +95,6 @@ def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
 	log_message(line1 + " | " + line2)
 	return 0
-
-
-def terminate():
-# WHEN COMMAND TO EXIT IS GIVEN, THEN RESET EVERYTHING BACK TO DEFAULT
-	log_message("Exiting")
-	GPIO.cleanup()
-	# display.lcd_clear()
 
 
 def run_red_light_green_light():
@@ -208,7 +200,6 @@ def run_flasher(color, phase):
 			phase = 7
 
 	sleep(FLASHER_DELAY)
-
 	return phase
 
 
@@ -321,5 +312,6 @@ while True:
 			subprocess.call(["sudo", "shutdown", "-h", "now"])
 
 	except KeyboardInterrupt:
-		terminate()
+		log_message("Exiting")
+	        GPIO.cleanup()
 
