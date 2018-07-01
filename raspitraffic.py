@@ -266,28 +266,6 @@ def alloff():
 	sleep(3)
 
 
-def lamptest():
-	lcd_message("LAMP TEST", "")
-
-	eblight(LAMPON, LAMPOFF, LAMPOFF)
-	sleep(1)
-	eblight(LAMPON, LAMPON, LAMPOFF)
-	sleep(1)
-	eblight(LAMPON, LAMPON, LAMPON)
-
-	lcd_message("LAMP TEST", "ALL ON")
-	sleep(5)
-
-	eblight(LAMPOFF, LAMPON, LAMPON)
-	sleep(1)
-	eblight(LAMPOFF, LAMPOFF, LAMPON)
-	sleep(1)
-	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-
-	lcd_message("LAMP TEST", "ALL OFF")
-	sleep(3)
-
-
 # configure everything
 setup()
 
