@@ -30,6 +30,7 @@ if [ $(id -u) -eq 0 ]; then
 	/usr/bin/apt-get clean
 
 	log_message "Done cleaning up"
+	log_message "Done running script"
 else
 	log_message "Need to be sudo or root to run script"
 fi
