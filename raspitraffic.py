@@ -301,33 +301,6 @@ def randomspeed():
 	return speed
 
 
-def run_eightball():
-# run the magic 8 ball game with the traffic light
-
-	# display prompts
-	lcd_message("Ask as question", "3...")
-	sleep(1)
-	lcd_message("Ask as question", "2...")
-	sleep(1)
-	lcd_message("Ask as question", "1...")
-	sleep(1)
-
-	# pick a random number
-	rand=random.randint(1,3)
-
-	if rand == 1:
-		eblight(LAMPON, LAMPOFF, LAMPOFF)
-		lcd_message("No","")
-	elif rand == 2:
-		eblight(LAMPOFF, LAMPON, LAMPOFF)
-		lcd_message("Maybe", "")
-	elif rand == 3:
-		eblight(LAMPOFF, LAMPOFF, LAMPON)
-		lcd_message("Yes", "")
-	else:
-		log_message("Invalid Phase")
-
-
 def allon(phase):
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
 	if phase == "all":
