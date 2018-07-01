@@ -292,7 +292,7 @@ def lamptest():
 setup()
 
 # while (selection != "Q"):
-while (selection != "Q" or selection != "q"):
+while True:
 	try:
 		selection = 0
 
