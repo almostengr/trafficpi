@@ -35,6 +35,9 @@ LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
 
 # display=lcddriver.lcd()
+selection = 0
+phaseflasher=0
+phasenum=0
 
 
 def setup():
@@ -207,6 +210,7 @@ def run_flasher(color, phase):
 			lcd_message("Flashing Green Off", "")
 			phase = 7
 	sleep(FLASHER_DELAY)
+
 	return phase
 
 
@@ -290,10 +294,6 @@ setup()
 # while (selection != "Q"):
 while True:
 	try:
-		selection = 0
-		phaseflasher=0
-		phasenum=0
-
 		try:
 			file = open("/tmp/traffic.txt", "r")
 			selection = file.readline()
