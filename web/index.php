@@ -1,10 +1,27 @@
 <html>
 <head>
 <title>Traffic Control</title>
+<style type="text/css">
+body{
+	font-family: Arial;
+	font-size: 10pt;
+}
+
+p#error {
+	background-color: #c00;
+	color: #fff;
+	padding: 5px;
+}
+
+p#success {
+	background-color: #0c0;
+	color: #000;
+	padding: 5px;
+}
+</style>
 </head>
 <body>
 
-<p>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $action = $_POST['program'];
@@ -13,14 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$file = file_put_contents($filepath, $action);
 	if ($file === FALSE) {
 		// throw new Exception("Error when attempting to open file");
-		echo "<p style='background-color: #c00; padding: 5px;'>Error when attempting to open file.</p>";
+		echo "<p id='error'>Error when attempting to open file.</p>";
 	}
 	else{ 
-		echo "<p style='background-color: #0c0; margin: 5px; padding: 5px;'>Running $action</p>";
+		echo "<p id='success'>Running $action</p>";
 	}
 }
 ?>
-</p>
 
 <form method="post" action="index.php">
 <select name="program">
