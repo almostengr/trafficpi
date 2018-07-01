@@ -358,7 +358,7 @@ while True:
 
 		elif selection == "shutdown":
 		# shutdown the system
-			subprocess.call(["shutdown", "-h", "now"])
+			subprocess.call(["sudo", "shutdown", "-h", "now"])
 
 	except KeyboardInterrupt:
 		terminate()
