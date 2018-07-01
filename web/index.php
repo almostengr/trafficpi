@@ -1,6 +1,10 @@
 <html>
 <head>
 <title>Traffic Control</title>
+<meta name="copyright" content="Kenny Robinson, @almostengr" />
+<meta name="author" content="Kenny Robinson, @almostengr" />
+<meta name="robots" content="noindex,nofollow" />
+<meta name="language" content="English" />
 <style type="text/css">
 body{
 	font-family: Arial;
@@ -55,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p><input type="submit" name="Submit" value="Submit Request" /></p>
 </form>
 
+<p style="text-align: center;">Copyright &copy; 2018 @almostengr</p>
 </body>
 </html>
 
