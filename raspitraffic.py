@@ -37,7 +37,6 @@ selection=0
 phaseflasher=0
 phasenum=0
 global inColor 
-inColor="red"
 
 
 def setup():
@@ -110,7 +109,7 @@ def run_red_light_green_light(yellowon):
 		sleep(yellow_time)
 
 
-def run_signal(country):
+def run_signal(country, inColor):
 # runs the light using normal signal
 	phaseflasher=0
 
@@ -153,14 +152,6 @@ def run_signal(country):
 	for ttime in range(east_red_time, 0, -1):
 		lcd_message("Red", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
-
-	# change flasher color
-	if inColor == "red":
-		inColor="yellow"
-		# lcd_message("Yellow Flasher", "")
-	else:
-		inColor="red"
-		# lcd_message("Red Flasher", "")
 
 	# flasher
 	flashrangemax=randint(6,30)
@@ -252,6 +243,11 @@ setup()
 while True:
 	debug_message("Debug mode enabled")
 
+	if run_signal_flasher == "red":
+		run_signal_flasher="yellow"
+	else
+		run_signal_flasher="red"
+
 	try:
 		try:
 		# Read the data file
@@ -265,9 +261,10 @@ while True:
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
 
-		if selection == "":
+		if selection == "" or selection == "ustraffic":
 		# default value if nothing has been selected
-			run_signal("US")
+		# or if US has been selected
+			run_signal("US", run_signal_flasher)
 
 		elif selection == "allon":
 		# all lights on
@@ -292,17 +289,13 @@ while True:
 			lcd_message("Flashing Green", "")
 			phaseflasher=run_flasher("green", phaseflasher)
 
-		elif selection == "ustraffic":
-		# US signal pattern
-			run_signal("US")
-
 		elif selection == "uktraffic":
 		# UK signal pattern
-			run_signal("UK")
+			run_signal("UK", run_signal_flasher)
 
                 elif selection == "normalflashgreen":
                 # signal pattern with flashing green
-                        run_signal("normalflashgreen")
+                        run_signal("normalflashgreen", run_signal_flasher)
 
 		elif selection == "redlightgreenlight":
 			run_red_light_green_light(0)
