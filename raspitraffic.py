@@ -20,7 +20,7 @@ import subprocess
 DEBUG=0
 
 # LIST ALL OF THE PINS USED
-pinOutList=[23, 21, 19]
+PINOUTLIST=[23, 21, 19]
 
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
 EAST_CR=23
@@ -48,7 +48,7 @@ def setup():
 
 	# loop through each of the pins and define it.
 	# turn on all the lights once setup
-	for i in pinOutList:
+	for i in PINOUTLIST:
 		debug_message("Setting up and activiating pin " + str(i))
 		GPIO.setup(i, GPIO.OUT)
 
@@ -56,7 +56,7 @@ def setup():
 	sleep(1)
 
 	# turn off all the lights
-	for i in pinOutList:
+	for i in PINOUTLIST:
 		GPIO.output(i, GPIO.HIGH)
 		debug_message("Turning off pin " + str(i))
 
@@ -208,7 +208,7 @@ def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CG, cirgrn)
 
 
-def allon(phase):
+def all_on(phase):
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
 	if phase == "all":
 		eblight(LAMPON, LAMPON, LAMPON)
@@ -228,7 +228,7 @@ def allon(phase):
 	sleep(3)
 
 
-def alloff():
+def all_off():
 # TURNS OFF ALL OF THE LIGHTS
 	lcd_message("ALL LIGHTS OFF", "")
 	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
@@ -265,13 +265,13 @@ while True:
 		# or if US has been selected
 			run_signal("US", run_signal_flasher)
 
-		elif selection == "allon":
+		elif selection == "all_on":
 		# all lights on
-			allon("all")
+			all_on("all")
 
-		elif selection == "alloff":
+		elif selection == "all_off":
 		# all lights off
-			alloff()
+			all_off()
 
 		elif selection == "flashred":
 		# flash red
@@ -312,11 +312,12 @@ while True:
 
 	except KeyboardInterrupt:
 		log_message("Exiting")
-		alloff()
+		all_off()
 		GPIO.clean()
 
 	except Exception:
 		log_message("Exception thrown")
 		while True:
 			phaseflasher=run_flasher("yellow", phaseflasher)
+		all_off()
 
