@@ -91,7 +91,7 @@ def run_red_light_green_light(yellowon):
 	red_time=randint(1, 10)
 	green_time=randint(1, 3)
 	yellow_time=FLASHER_DELAY
-	
+
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	debug_message("Red Time: " + str(red_time))
 	lcd_message("Red Light!", "Dont move!")
@@ -137,8 +137,8 @@ def run_signal(country):
 		sleep(1)
 
         # flash green
-        if country == "normalflashgreen"
-            for i in range(4, randint(5,10))
+        if country == "normalflashgreen":
+            for i in range(4, randint(5,10)):
                 phaseflasher = run_flasher("green", phaseflasher)
 
 	# yellow
@@ -156,10 +156,10 @@ def run_signal(country):
 	# change flasher color
 	if inColor == "red":
 		inColor = "yellow"
-		lcd_message("Yellow Flasher", "")
+		# lcd_message("Yellow Flasher", "")
 	else:
 		inColor = "red"
-		lcd_message("Red Flasher", "")
+		# lcd_message("Red Flasher", "")
 
 	# flasher
 	flashrangemax=randint(6,30)
@@ -299,7 +299,7 @@ while True:
 		# UK signal pattern
 			run_signal("UK")
 
-                elif selection == "normalflashgreen"
+                elif selection == "normalflashgreen":
                 # signal pattern with flashing green
                         run_signal("normalflashgreen")
 
