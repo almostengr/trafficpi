@@ -36,8 +36,7 @@ FLASHER_DELAY=.7
 selection=0
 phaseflasher=0
 phasenum=0
-global inColor 
-
+run_signal_flasher="red"
 
 def setup():
 # SET UP GPIO PINS
@@ -245,7 +244,7 @@ while True:
 
 	if run_signal_flasher == "red":
 		run_signal_flasher="yellow"
-	else
+	else:
 		run_signal_flasher="red"
 
 	try:
@@ -313,11 +312,11 @@ while True:
 
 	except KeyboardInterrupt:
 		log_message("Exiting")
+		alloff()
+		GPIO.clean()
 
 	except Exception:
 		log_message("Exception thrown")
 		while True:
 			phaseflasher=run_flasher("yellow", phaseflasher)
-
-GPIO.clean()
 
