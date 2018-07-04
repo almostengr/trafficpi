@@ -66,20 +66,6 @@ def setup():
 	return 0
 
 
-def light_on(pin):
-# TURN ON THE LIGHT, HAS TO PROVIDE PIN NUMBER
-	GPIO.output(pin, GPIO.LOW)
-	debug_message("Pin " + str(pin) + " turned on")
-	return 0
-
-
-def light_off(pin):
-# TURN OFF THE LIGHT, HAS TO PROVIDE PIN NUMBER
-	GPIO.output(pin, GPIO.HIGH)
-	debug_message("Pin " + str(pin) + " turned off")
-	return 0
-
-
 def debug_message(message):
 # LOG ADDITIONAL MESSAGES TO THE SCREEN/LOG FILE WHEN TESTING
 	if DEBUG == 1:
@@ -150,6 +136,11 @@ def run_signal(country):
 		lcd_message("Green", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
 
+        # flash green
+        if country == "normalflashgreen"
+            for i in range(4, randint(5,10))
+                phaseflasher = run_flasher("green", phaseflasher)
+
 	# yellow
 	eblight(LAMPOFF, LAMPON, LAMPOFF)
 	for ttime in range(east_yel_time, 0, -1):
@@ -212,8 +203,9 @@ def run_flasher(color, phase):
 	return phase
 
 
-def calc_yellow_time( speed, grade ):
+def calc_yellow_time(grade):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
+        speed = randint(25,80)
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
 	return yel_time
 
@@ -223,12 +215,6 @@ def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
-
-
-def randomspeed():
-# picks a random speed from the range defined below
-	speed=random.randint(25,65)
-	return speed
 
 
 def allon(phase):
@@ -312,6 +298,10 @@ while True:
 		elif selection == "uktraffic":
 		# UK signal pattern
 			run_signal("UK")
+
+                elif selection == "normalflashgreen"
+                # signal pattern with flashing green
+                        run_signal("normalflashgreen")
 
 		elif selection == "redlightgreenlight":
 			run_red_light_green_light(0)

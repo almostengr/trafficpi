@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>Traffic Control</title>
+<title>TrafficPi Control Panel</title>
 <meta name="copyright" content="Kenny Robinson, @almostengr" />
 <meta name="author" content="Kenny Robinson, @almostengr" />
 <meta name="robots" content="noindex,nofollow" />
@@ -26,28 +27,35 @@ p#success {
 </head>
 <body>
 
-<h1>Traffic Control</h1>
+<h1>TrafficPi Control Panel</h1>
 
 <?php
+// only peform these actions if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $action = $_POST['program'];
+
+	// get the program to run from the from
+	$action = $_POST['program'];
 	$filepath = "/tmp/traffic.txt";
 
+	// update the file with program to run
 	$file = file_put_contents($filepath, $action);
 	if ($file === FALSE) {
-		// throw new Exception("Error when attempting to open file");
+		// throw error if not able to write to the file
 		echo "<p id='error'>Error when attempting to open file.</p>";
 	}
-	else{ 
+	else{
+	       	// show success message if able to write to the file	
 		echo "<p id='success'>Submitted $action</p>";
 	}
 }
 ?>
 
 <form method="post" action="index.php">
+<p>
 <select name="program">
 	<option value="ustraffic">US Traffic</option>
 	<option value="uktraffic">UK Traffic</option>
+	<option value="normalflashgreen">Normal with Flashing Green</option>
 	<option value="allon">All On</option>
 	<option value="alloff">All Off</option>
 	<option value="redlightgreenlight">Red Light Green Light</option>
@@ -58,11 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="restart">Restart</option>
 	<option value="shutdown">Shut Down</option>
 </select>
-<p><input type="submit" name="Submit" value="Submit Request" /></p>
+</p>
+<p><input type="submit" name="Submit" value="Submit" /></p>
 </form>
 
 <p style="text-align: center;">
-Copyright &copy; 2018 @almostengr | 
+Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr | 
 <a href="index.php">Home</a> | 
 <a href="https:////github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
 </p>
