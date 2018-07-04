@@ -36,6 +36,7 @@ FLASHER_DELAY=.7
 selection = 0
 phaseflasher = 0
 phasenum = 0
+global inColor 
 inColor = "red"
 
 
@@ -320,4 +321,11 @@ while True:
 	except KeyboardInterrupt:
 		log_message("Exiting")
 	        GPIO.cleanup()
+
+	except Exception:
+		log_message("Exception thrown")
+		while True:
+			phaseflasher=run_flasher("yellow", phaseflasher)
+		GPIO.cleanup()
+
 
