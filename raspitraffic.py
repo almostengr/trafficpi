@@ -36,6 +36,7 @@ FLASHER_DELAY=.7
 selection = 0
 phaseflasher=0
 phasenum=0
+inColor="red"
 
 
 def setup():
@@ -161,7 +162,7 @@ def run_signal(country):
 		sleep(1)
 
 	# change flasher color
-	if phaseflasher == 1 or phaseflasher == 2:
+	if inColor == "red":
 		inColor = "yellow"
 		lcd_message("Yellow Flasher", "")
 	else:
@@ -169,7 +170,7 @@ def run_signal(country):
 		lcd_message("Red Flasher", "")
 
 	# flasher
-	flashrangemax=randint(2,60)
+	flashrangemax=randint(6,30)
 	for i in range(1,flashrangemax):
 		phaseflasher = run_flasher(inColor, phaseflasher)
 
