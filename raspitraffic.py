@@ -34,9 +34,9 @@ FLASHER_DELAY=.7
 
 # display=lcddriver.lcd()
 selection = 0
-phaseflasher=0
-phasenum=0
-inColor="red"
+phaseflasher = 0
+phasenum = 0
+inColor = "red"
 
 
 def setup():
@@ -59,8 +59,9 @@ def setup():
 	# turn off all the lights
 	for i in pinOutList:
 		GPIO.output(i, GPIO.HIGH)
-		lcd_message("Done performing setup", "")
-		lcd_message("", "")
+		debug_message("Turning off pin " + str(i))
+
+	lcd_message("Done performing setup", "")
 
 	return 0
 
