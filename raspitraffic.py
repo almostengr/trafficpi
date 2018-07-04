@@ -320,12 +320,11 @@ while True:
 
 	except KeyboardInterrupt:
 		log_message("Exiting")
-	        GPIO.cleanup()
 
 	except Exception:
 		log_message("Exception thrown")
 		while True:
 			phaseflasher=run_flasher("yellow", phaseflasher)
-		GPIO.cleanup()
 
+GPIO.clean()
 
