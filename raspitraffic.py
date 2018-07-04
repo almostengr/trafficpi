@@ -20,12 +20,12 @@ import subprocess
 DEBUG=0
 
 # LIST ALL OF THE PINS USED
-pinOutList = [23, 21, 19]
+pinOutList=[23, 21, 19]
 
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
-EAST_CR = 23
-EAST_CY = 21
-EAST_CG = 19
+EAST_CR=23
+EAST_CY=21
+EAST_CG=19
 
 # DEFINE CONSTANTS
 LAMPON=GPIO.LOW
@@ -33,11 +33,11 @@ LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
 
 # display=lcddriver.lcd()
-selection = 0
-phaseflasher = 0
-phasenum = 0
+selection=0
+phaseflasher=0
+phasenum=0
 global inColor 
-inColor = "red"
+inColor="red"
 
 
 def setup():
@@ -140,7 +140,7 @@ def run_signal(country):
         # flash green
         if country == "normalflashgreen":
             for i in range(4, randint(5,10)):
-                phaseflasher = run_flasher("green", phaseflasher)
+                phaseflasher=run_flasher("green", phaseflasher)
 
 	# yellow
 	eblight(LAMPOFF, LAMPON, LAMPOFF)
@@ -156,16 +156,16 @@ def run_signal(country):
 
 	# change flasher color
 	if inColor == "red":
-		inColor = "yellow"
+		inColor="yellow"
 		# lcd_message("Yellow Flasher", "")
 	else:
-		inColor = "red"
+		inColor="red"
 		# lcd_message("Red Flasher", "")
 
 	# flasher
 	flashrangemax=randint(6,30)
 	for i in range(1,flashrangemax):
-		phaseflasher = run_flasher(inColor, phaseflasher)
+		phaseflasher=run_flasher(inColor, phaseflasher)
 
 
 def run_flasher(color, phase):
@@ -174,31 +174,31 @@ def run_flasher(color, phase):
 		if phase == 1:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red", "")
-			phase = 2
+			phase=2
 		else:
 			eblight(LAMPON, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red Off", "")
-			phase = 1
+			phase=1
 
 	elif color == "yellow":
 		if phase == 3:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Yellow", "")
-			phase = 4
+			phase=4
 		else:
 			eblight(LAMPOFF, LAMPON, LAMPOFF)
 			lcd_message("Flashing Yellow Off", "")
-			phase = 3
+			phase=3
 
 	elif color == "green":
 		if phase == 7:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Green", "")
-			phase = 8
+			phase=8
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
 			lcd_message("Flashing Green Off", "")
-			phase = 7
+			phase=7
 
 	sleep(FLASHER_DELAY)
 	return phase
@@ -206,8 +206,8 @@ def run_flasher(color, phase):
 
 def calc_yellow_time(grade):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
-        speed = randint(25,80)
-	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
+        speed=randint(25,80)
+	yel_time=1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
 	return yel_time
 
 
@@ -255,13 +255,13 @@ while True:
 	try:
 		try:
 		# Read the data file
-			file = open("/tmp/traffic.txt", "r")
-			selection = file.readline()
+			file=open("/tmp/traffic.txt", "r")
+			selection=file.readline()
 			file.close()
 
 		except IOError:
 			# if the file doesn't exist, then create it and give public permissions
-			file = open("/tmp/traffic.txt", "w")
+			file=open("/tmp/traffic.txt", "w")
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
 
@@ -285,7 +285,7 @@ while True:
 		elif selection == "flashyel":
 		# flash yellow
 			lcd_message("Flashing Yellow", "")
-			phaseflasher = run_flasher("yellow", phaseflasher)
+			phaseflasher=run_flasher("yellow", phaseflasher)
 
 		elif selection == "flashgrn":
 		# flash green
