@@ -56,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="ustraffic">US Traffic</option>
 	<option value="uktraffic">UK Traffic</option>
 	<option value="normalflashgreen">Normal with Flashing Green</option>
-	<option value="allon">All On</option>
-	<option value="alloff">All Off</option>
+	<option value="all_on">All On</option>
+	<option value="all_off">All Off</option>
 	<option value="redlightgreenlight">Red Light Green Light</option>
 	<option value="redlightgreenlight2">Red Light Green Light, with Yellow</option>
 	<option value="flashred">Flash Red</option>
