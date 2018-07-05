@@ -177,6 +177,16 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
 			lcd_message("Flashing Green", "")
 			phase=7
+	
+	elif color == "all":
+		if phase == 9:
+			eblight(LAMPON, LAMPON, LAMPON)
+			lcd_message("Flashing All", "")
+			phase=10
+		else:
+			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			lcd_message"Flashing All Off", "")
+			phase=9
 
 	sleep(FLASHER_DELAY)
 	return phase
@@ -243,7 +253,11 @@ while True:
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
 
-		if selection == "" or selection == "ustraffic":
+		if selection == ""
+		# run if nothing has been selected
+			phaseflasher=run_flasher("all", phaseflasher)
+
+		elif selection == "ustraffic":
 		# default value if nothing has been selected
 		# or if US has been selected
 			run_signal("US")
