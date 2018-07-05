@@ -253,11 +253,7 @@ while True:
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
 
-		if selection == "":
-		# run if nothing has been selected
-			phaseflasher=run_flasher("all", phaseflasher)
-
-		elif selection == "ustraffic":
+		if selection == "ustraffic":
 		# default value if nothing has been selected
 		# or if US has been selected
 			run_signal("US")
@@ -306,6 +302,10 @@ while True:
 		elif selection == "shutdown":
 		# shutdown the Raspberry Pi
 			subprocess.call(["sudo", "shutdown", "-h", "now"])
+	
+		else:
+		# If nothing selected or bad value, default to failure state
+			phaseflasher=run_flasher("yellow", phaseflasher)
 
 	except KeyboardInterrupt:
 		log_message("Exiting")
