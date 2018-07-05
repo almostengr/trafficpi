@@ -298,9 +298,3 @@ while True:
 		all_off()
 		GPIO.clean()
 
-	except Exception:
-		log_message("Exception thrown")
-		while True:
-			phaseflasher=run_flasher("yellow", phaseflasher)
-		all_off()
-
