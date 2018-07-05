@@ -163,31 +163,31 @@ def run_flasher(color, phase):
 	if color == "red":
 		if phase == 1:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Red", "")
+			lcd_message("Flashing Red Off", "")
 			phase=2
 		else:
 			eblight(LAMPON, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Red Off", "")
+			lcd_message("Flashing Red", "")
 			phase=1
 
 	elif color == "yellow":
 		if phase == 3:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Yellow", "")
+			lcd_message("Flashing Yellow Off", "")
 			phase=4
 		else:
 			eblight(LAMPOFF, LAMPON, LAMPOFF)
-			lcd_message("Flashing Yellow Off", "")
+			lcd_message("Flashing Yellow", "")
 			phase=3
 
 	elif color == "green":
 		if phase == 7:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Green", "")
+			lcd_message("Flashing Green Off", "")
 			phase=8
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
-			lcd_message("Flashing Green Off", "")
+			lcd_message("Flashing Green", "")
 			phase=7
 
 	sleep(FLASHER_DELAY)
