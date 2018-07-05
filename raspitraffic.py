@@ -108,32 +108,13 @@ def run_red_light_green_light(yellowon):
 		sleep(yellow_time)
 
 
-def run_signal(country, inColor):
+def run_signal(country):
 # runs the light using normal signal
 	phaseflasher=0
 
 	east_grn_time=random.randint(5, 30)
 	east_yel_time=random.randint(2, 5)
 	east_red_time=random.randint(5, 30)
-
-	# flasher
-        flashrangemax=randint(6,30)
-        for i in range(1,flashrangemax):
-                phaseflasher=run_flasher(inColor, phaseflasher)
-
-
-	# red
-	eblight(LAMPON, LAMPOFF, LAMPOFF)
-	for ttime in range(east_red_time, 0, -1):
-		lcd_message("Red", "Time Remain: " + str(ttime) + "s")
-		sleep(1)
-
-	# red-yellow for UK only
-	if country == "UK":
-		eblight(LAMPON, LAMPON, LAMPOFF)
-		for ttime in range(east_yel_time, 0, -1):
-			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
-			sleep(1)
 
 	# green
 	eblight(LAMPOFF, LAMPOFF, LAMPON)
@@ -158,11 +139,12 @@ def run_signal(country, inColor):
 		lcd_message("Red", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
 
-	# flasher
-	flashrangemax=randint(6,30)
-	for i in range(1,flashrangemax):
-		phaseflasher=run_flasher(inColor, phaseflasher)
-
+	# red-yellow for UK only
+	if country == "UK":
+		eblight(LAMPON, LAMPON, LAMPOFF)
+		for ttime in range(east_yel_time, 0, -1):
+			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
+			sleep(1)
 
 def run_flasher(color, phase):
 # flash the lights
@@ -248,11 +230,6 @@ setup()
 while True:
 	debug_message("Debug mode enabled")
 
-	if run_signal_flasher == "red":
-		run_signal_flasher="yellow"
-	else:
-		run_signal_flasher="red"
-
 	try:
 		try:
 		# Read the data file
@@ -269,7 +246,7 @@ while True:
 		if selection == "" or selection == "ustraffic":
 		# default value if nothing has been selected
 		# or if US has been selected
-			run_signal("US", run_signal_flasher)
+			run_signal("US")
 
 		elif selection == "all_on":
 		# all lights on
@@ -296,11 +273,11 @@ while True:
 
 		elif selection == "uktraffic":
 		# UK signal pattern
-			run_signal("UK", run_signal_flasher)
+			run_signal("UK")
 
                 elif selection == "normalflashgreen":
                 # signal pattern with flashing green
-                        run_signal("normalflashgreen", run_signal_flasher)
+                        run_signal("normalflashgreen")
 
 		elif selection == "redlightgreenlight":
 			run_red_light_green_light(0)
