@@ -185,7 +185,7 @@ def run_flasher(color, phase):
 			phase=10
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message"Flashing All Off", "")
+			lcd_message("Flashing All Off", "")
 			phase=9
 
 	sleep(FLASHER_DELAY)
@@ -253,7 +253,7 @@ while True:
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
 
-		if selection == ""
+		if selection == "":
 		# run if nothing has been selected
 			phaseflasher=run_flasher("all", phaseflasher)
 
