@@ -116,6 +116,12 @@ def run_signal(country, inColor):
 	east_yel_time=random.randint(2, 5)
 	east_red_time=random.randint(5, 30)
 
+	# flasher
+        flashrangemax=randint(6,30)
+        for i in range(1,flashrangemax):
+                phaseflasher=run_flasher(inColor, phaseflasher)
+
+
 	# red
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	for ttime in range(east_red_time, 0, -1):
