@@ -53,18 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <form method="post" action="index.php">
 <p>
 <select name="program">
+	<optgroup label="Run Signals">
 	<option value="ustraffic">US Traffic</option>
 	<option value="uktraffic">UK Traffic</option>
 	<option value="normalflashgreen">Normal with Flashing Green</option>
+	</optgroup>
+	<optgroup label="Other">
 	<option value="all_on">All On</option>
 	<option value="all_off">All Off</option>
+	</optgroup>
+	<optgroup label="Games">
 	<option value="redlightgreenlight">Red Light Green Light</option>
 	<option value="redlightgreenlight2">Red Light Green Light, with Yellow</option>
+	</optgroup>
+	<optgroup label="Flashers">
 	<option value="flashred">Flash Red</option>
 	<option value="flashyel">Flash Yellow</option>
 	<option value="flashgrn">Flash Green</option>
+	</optgroup>
+	<optgroup label="Raspberry Pi Options">
 	<option value="restart">Restart</option>
 	<option value="shutdown">Shut Down</option>
+	</optgroup>
 </select>
 </p>
 <p><input type="submit" name="Submit" value="Submit" /></p>
