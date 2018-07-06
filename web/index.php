@@ -34,18 +34,22 @@ p#success {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// get the program to run from the from
-	$action = $_POST['program'];
-	$filepath = "/tmp/traffic.txt";
+	$fileactionpath = "/tmp/traffic.txt";
+	$filedisplaypath = "/tmp/traffic_display.txt";
 
 	// update the file with program to run
-	$file = file_put_contents($filepath, $action);
-	if ($file === FALSE) {
+	$fileaction = file_put_contents($filepath, $_POST['program'];
+	$filedisplay = file_put_contents($filedisplaypath, $_POST['display']);
+
+	$now = date("F j, Y, g:i:s a");
+
+	if ($fileaction === FALSE || $filedisplay === FALSE) {
 		// throw error if not able to write to the file
-		echo "<p id='error'>Error when attempting to open file.</p>";
+		echo "<p id='error'>$now Error when attempting to save the request.</p>";
 	}
 	else{
-	       	// show success message if able to write to the file	
-		echo "<p id='success'>Submitted $action</p>";
+	       	// show success message if able to write to the file
+		echo "<p id='success'>$now Submitted request.</p>";
 	}
 }
 ?>
@@ -84,6 +88,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</optgroup>
 </select>
 </p>
+
+<p>
+<select name="display">
+	<option value="off" <?php if ($display=="off) echo 'selected="selected"'; ?>>Off</option>
+	<option value="on" <?php if ($display=="on") echo 'selected="selected"'; ?>>On</option>
+</select>
+</p>
+
 <p><input type="submit" name="Submit" value="Submit" /></p>
 </form>
 
