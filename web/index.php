@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <form method="post" action="index.php">
 <p>
+<strong>Select Program</strong><br />
 <select name="program">
 	<optgroup label="Run Signals">
 	<option value="ustraffic">US Traffic</option>
@@ -84,6 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</optgroup>
 </select>
 </p>
+
+<p>
+<strong>Pseudocode</strong><br />
+<textarea name="pseudocode" cols="20" rows="20">
+<?php $_SERVER['REQUEST_METHOD'] == 'POST' ? echo $_POST["pseudocode"] : echo ""; ?></textarea>
+</p>
+
 <p><input type="submit" name="Submit" value="Submit" /></p>
 </form>
 
