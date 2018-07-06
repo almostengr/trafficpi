@@ -251,11 +251,11 @@ def all_off():
 # configure everything
 setup()
 
-# loop forever
-while True:
-	debug_message("Debug mode enabled")
+debug_message("Debug mode enabled")
 
-	try:
+try:
+	# loop forever
+	while True:
 		try:
 		# Read the data file
 			file=open("/tmp/traffic.txt", "r")
@@ -332,9 +332,9 @@ while True:
 		# If nothing selected or bad value, default to failure state
 			phaseflasher=run_flasher("all", phaseflasher)
 
-	except KeyboardInterrupt:
-	# perform action if Ctrl+C is pressed
-		log_message("Exiting")
-		all_off()
-		# GPIO.clean()
+except KeyboardInterrupt:
+# perform action if Ctrl+C is pressed
+	log_message("Exiting")
+	all_off()
+	# GPIO.clean()
 
