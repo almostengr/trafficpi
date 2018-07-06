@@ -302,7 +302,7 @@ while True:
 	
 		else:
 		# If nothing selected or bad value, default to failure state
-			phaseflasher=run_flasher("yellow", phaseflasher)
+			phaseflasher=run_flasher("all", phaseflasher)
 
 	except KeyboardInterrupt:
 		log_message("Exiting")
