@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </textarea>
 </p>
 
-<p><input type="submit" name="Submit" value="Submit" /></p>
+<p><input type="submit" name="submit" value="Submit" /></p>
 </form>
 
 <p style="text-align: center;">
