@@ -277,15 +277,19 @@ try:
 	while True:
 		try:
 		# Read the data file
-			file=open("/tmp/traffic.txt", "r")
-			selection=file.readline()
-			file.close()
+			fileTraffic=open("/tmp/traffic.txt", "r")
+			selection=fileTraffic.readline()
+			fileTraffic.close()
 
 		except IOError:
 		# if the file doesn't exist, then create it and give public permissions
-			file=open("/tmp/traffic.txt", "w")
+			fileTraffic=open("/tmp/traffic.txt", "w")
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
-			file.close()
+			fileTraffic.close()
+
+			filePseudo=open("/tmp/traffic_pseudo.txt", "w")
+			subprocess.call(['chmod', '0777', '/tmp/traffic_pseudo.txt'])
+			filePseudo.close()
 
 		if selection == "ustraffic":
 		# run the US traffic program
@@ -353,6 +357,9 @@ try:
 
 		elif selection == "partymode3":
 			phaseflasher=party_mode(phaseflasher, 0.25)
+
+		elif selection == "pseudo":
+			
 	
 		elif selection == "restart":
 		# restart the Raspberry Pi
