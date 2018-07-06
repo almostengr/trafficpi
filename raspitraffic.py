@@ -266,6 +266,36 @@ def all_off():
 	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 	sleep(3)
 
+def process_pseudocode(command):
+# process the pseudocode that ahs been entered
+	returncode=1
+
+	if command == "red":
+	# turn on the red light
+		eblight(LAMPON, LAMPOFF, LAMPOFF)
+		returnCode=0
+
+	elif command == "yellow":
+	# turn on the yellow light
+		eblight(LAMPOFF, LAMPON, LAMPOFF)
+		returnCode=0
+
+	elif command == "green":
+	# turn on the green light
+		eblight(LAMPOFF, LAMPOFF, LAMPON)
+		returnCode=0
+
+	elif command.startswith("wait"):
+	# sleep for the specified duration
+		sleep(command[5:7])
+		returnCode=0
+
+	else:
+		log_message("Exception occurred")
+		returnCode=1
+
+	return returnCode
+	
 
 # configure everything
 setup()
@@ -361,8 +391,11 @@ try:
 		# elif selection == "pseudocode":
 		# Read and attempt to process the sudo code
 			# with open("x.txt") as f:
-			#    for line in f:
-			#        do something with data
+				# for line in f:
+					# do something with data
+					# pseudoReturn=process_pseudocode(line)
+				# if pseudoReturn == 1:
+					# break
 	
 		elif selection == "restart":
 		# restart the Raspberry Pi
