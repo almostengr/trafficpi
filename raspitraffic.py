@@ -358,8 +358,11 @@ try:
 		elif selection == "partymode3":
 			phaseflasher=party_mode(phaseflasher, 0.25)
 
-		elif selection == "pseudo":
-			
+		# elif selection == "pseudocode":
+		# Read and attempt to process the sudo code
+			# with open("x.txt") as f:
+			#    for line in f:
+			#        do something with data
 	
 		elif selection == "restart":
 		# restart the Raspberry Pi
