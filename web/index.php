@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="flashred">Flash Red</option>
 	<option value="flashyel">Flash Yellow</option>
 	<option value="flashgrn">Flash Green</option>
+	<option value="partymode">Party Mode</option>
 	</optgroup>
 	<optgroup label="Raspberry Pi Options">
 	<option value="restart">Restart</option>

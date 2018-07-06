@@ -151,6 +151,24 @@ def run_signal(country):
 			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
+def party_mode(phase):
+# randomly change the color to a different light
+	if phase == 1:
+		eblight(LAMPON, LAMPOFF, LAMPOFF)
+	elif phase == 2:
+		eblight(LAMPON, LAMPON, LAMPOFF)
+	elif phase == 3:
+		eblight(LAMPON, LAMPOFF, LAMPON)
+	elif phase == 4:
+		eblight(LAMPOFF, LAMPON, LAMPOFF)
+	elif phase == 5:
+		eblight(LAMPOFF, LAMPON, LAMPON)
+	elif phase == 6:
+		eblight(LAMPOFF, LAMPOFF, LAMPON)
+
+	sleep(1)
+	return randint(1,6)
+
 def run_flasher(color, phase):
 # flash the lights
 	if color == "red":
@@ -319,6 +337,10 @@ try:
 		elif selection == "redlightgreenlight2":
 		# red light, green light, with yellow
 			run_red_light_green_light(1)
+	
+		elif selection == "partymode":
+		# party mode
+			phaseflasher=party_mode(partyflasher)
 
 		elif selection == "restart":
 		# restart the Raspberry Pi
