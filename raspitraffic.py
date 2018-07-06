@@ -27,7 +27,7 @@ EAST_CR=23
 EAST_CY=21
 EAST_CG=19
 
-# DEFINE CONSTANTS
+# DEFINE ADDITIONAL CONSTANTS
 LAMPON=GPIO.LOW
 LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
@@ -86,21 +86,25 @@ def lcd_message(line1, line2):
 
 def run_red_light_green_light(yellowon):
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
-
+	
+	# generate random values for red and green
 	red_time=randint(1, 10)
 	green_time=randint(1, 3)
 	yellow_time=FLASHER_DELAY
 
+	# Turn on the red light and wait
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	debug_message("Red Time: " + str(red_time))
 	lcd_message("Red Light!", "Dont move!")
 	sleep(red_time)
 
+	# Turn on the green light and wait
 	eblight(LAMPOFF, LAMPOFF, LAMPON)
 	debug_message("Green Time: " + str(green_time))
 	lcd_message("Green Light!", "Run!")
 	sleep(green_time)
-
+	
+	# If playing with yellow light, then turn on the yellow light
 	if yellowon == 1:
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
 		debug_message("Yellow Time: " + str(yellow_time))
@@ -112,6 +116,7 @@ def run_signal(country):
 # runs the light using normal signal
 	phaseflasher=0
 
+	# generate random values for the lights to stay on
 	east_grn_time=random.randint(5, 30)
 	east_yel_time=random.randint(2, 5)
 	east_red_time=random.randint(5, 30)
@@ -122,7 +127,7 @@ def run_signal(country):
 		lcd_message("Green", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
 
-        # flash green
+        # flash green if selected
         if country == "normalflashgreen":
             for i in range(4, randint(5,10)):
                 phaseflasher=run_flasher("green", phaseflasher)
@@ -200,7 +205,7 @@ def calc_yellow_time(grade):
 
 
 def eblight(cirred, ciryel, cirgrn):
-# CONTROLS THE LAMPS ON THE EASTBOUND LIGHT. DOESNT HAVE LEFT TURN
+# CONTROLS THE LAMPS ON THE EASTBOUND LIGHT.
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
@@ -208,18 +213,28 @@ def eblight(cirred, ciryel, cirgrn):
 
 def all_on(phase):
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
+
+	# turn on all the lights
 	if phase == "all":
 		eblight(LAMPON, LAMPON, LAMPON)
 		lcd_message("ALL LIGHTS ON", "")
+	
+	# turn on the red light
 	elif phase == "red":
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 		lcd_message("ALL REDS ON", "")
+
+	# turn on the yellow light
 	elif phase == "yellow":
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
 		lcd_message("ALL YELLOWS ON", "")
+
+	# turn on the green light
 	elif phase == "green":
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		lcd_message("ALL GREENS ON", "")
+
+	# do nothing
 	else:
 		log_message("Doing nothing")
 
@@ -248,14 +263,13 @@ while True:
 			file.close()
 
 		except IOError:
-			# if the file doesn't exist, then create it and give public permissions
+		# if the file doesn't exist, then create it and give public permissions
 			file=open("/tmp/traffic.txt", "w")
 			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
 			file.close()
 
 		if selection == "ustraffic":
-		# default value if nothing has been selected
-		# or if US has been selected
+		# run the US traffic program
 			run_signal("US")
 
 		elif selection == "all_on":
@@ -287,9 +301,11 @@ while True:
                         run_signal("normalflashgreen")
 
 		elif selection == "redlightgreenlight":
+		# red light, green light
 			run_red_light_green_light(0)
 
 		elif selection == "redlightgreenlight2":
+		# red light, green light, with yellow
 			run_red_light_green_light(1)
 
 		elif selection == "restart":
@@ -305,6 +321,7 @@ while True:
 			phaseflasher=run_flasher("all", phaseflasher)
 
 	except KeyboardInterrupt:
+	# perform action if Ctrl+C is pressed
 		log_message("Exiting")
 		all_off()
 		# GPIO.clean()
