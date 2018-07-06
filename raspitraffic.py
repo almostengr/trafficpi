@@ -128,7 +128,7 @@ def run_signal(country):
 		sleep(1)
 
         # flash green if selected
-        if country == "normalflashgreen":
+        if country == "russiatraffic":
             for i in range(4, randint(5,10)):
                 phaseflasher=run_flasher("green", phaseflasher)
 
@@ -308,7 +308,7 @@ while True:
 		# UK signal pattern
 			run_signal("UK")
 
-                elif selection == "normalflashgreen":
+                elif selection == "russiatraffic":
                 # signal pattern with flashing green
                         run_signal("normalflashgreen")
 

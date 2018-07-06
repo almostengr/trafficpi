@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<optgroup label="Run Signals">
 	<option value="ustraffic">US Traffic</option>
 	<option value="uktraffic">UK Traffic</option>
-	<option value="normalflashgreen">Normal with Flashing Green</option>
+	<option value="russiatraffic">Russia Traffic</option>
 	</optgroup>
-	<optgroup label="Steady ON">
+	<optgroup label="Steady On/Off">
 	<option value="all_on">All On</option>
 	<option value="redon">Red On</option>
 	<option value="yellowon">Yellow On</option>
