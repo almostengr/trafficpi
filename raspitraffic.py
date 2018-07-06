@@ -268,17 +268,14 @@ while True:
 
 		elif selection == "flashred":
 		# flash red
-			lcd_message("Flashing Red", "")
 			phaseflasher=run_flasher("red", phaseflasher)
 
 		elif selection == "flashyel":
 		# flash yellow
-			lcd_message("Flashing Yellow", "")
 			phaseflasher=run_flasher("yellow", phaseflasher)
 
 		elif selection == "flashgrn":
 		# flash green
-			lcd_message("Flashing Green", "")
 			phaseflasher=run_flasher("green", phaseflasher)
 
 		elif selection == "uktraffic":
