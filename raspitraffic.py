@@ -347,6 +347,9 @@ try:
 		# party mode, but faster
 			phaseflasher=party_mode(phaseflasher, 0.5)
 
+		elif selection == "partymode3":
+			phaseflasher=party_mode(phaseflasher, 0.25)
+
 		elif selection == "restart":
 		# restart the Raspberry Pi
 			subprocess.call(["sudo", "restart"])
