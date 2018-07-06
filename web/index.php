@@ -63,36 +63,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <strong>Select Program</strong><br />
 <select name="program">
 	<optgroup label="Run Signals">
-		<option value="ustraffic">US Traffic</option>
-		<option value="uktraffic">UK Traffic</option>
-		<option value="russiatraffic">Russia Traffic</option>
+		<option value="ustraffic" <?php if ($action=="ustraffic") echo 'selected="selected"'; ?>>US Traffic</option>
+		<option value="uktraffic" <?php if ($action=="uktraffic") echo 'selected="selected"'; ?>>UK Traffic</option>
+		<option value="russiatraffic" <?php if ($action=="russiatraffic") echo 'selected="selected"'; ?>>Russia Traffic</option>
 	</optgroup>
 	<optgroup label="Steady On/Off">
-		<option value="all_on">All On</option>
-		<option value="redon">Red On</option>
-		<option value="yellowon">Yellow On</option>
-		<option value="greenon">Green On</option>
-		<option value="all_off">All Off</option>
+		<option value="all_on" <?php if ($action=="all_on") echo 'selected="selected"'; ?>>All On</option>
+		<option value="redon" <?php if ($action=="redon") echo 'selected="selected"'; ?>>Red On</option>
+		<option value="yellowon" <?php if ($action=="yellowon") echo 'selected="selected"'; ?>>Yellow On</option>
+		<option value="greenon" <?php if ($action=="greenon") echo 'selected="selected"'; ?>>Green On</option>
+		<option value="all_off" <?php if ($action=="all_off") echo 'selected="selected"'; ?>>All Off</option>
 	</optgroup>
 	<optgroup label="Games">
-		<option value="redlightgreenlight">Red Light Green Light</option>
-		<option value="redlightgreenlight2">Red Light Green Light, with Yellow</option>
+		<option value="redlightgreenlight" <?php if ($action=="redlightgreenlight") echo 'selected="selected"'; ?>>Red Light Green Light</option>
+		<option value="redlightgreenlight2" <?php if ($action=="redlightgreenlight2") echo 'selected="selected"'; ?>>Red Light Green Light, with Yellow</option>
 	</optgroup>
 	<optgroup label="Flashers">
-		<option value="flashred">Flash Red</option>
-		<option value="flashyel">Flash Yellow</option>
-		<option value="flashgrn">Flash Green</option>
-		<option value="partymode4">Party Mode, Slow</option>
-		<option value="partymode">Party Mode</option>
-		<option value="partymode2">Party Mode, Fast</option>
-		<option value="partymode3">Party Mode, Faster</option>
+		<option value="flashred" <?php if ($action=="flashred") echo 'selected="selected"'; ?>>Flash Red</option>
+		<option value="flashyel" <?php if ($action=="flashyel") echo 'selected="selected"'; ?>>Flash Yellow</option>
+		<option value="flashgrn" <?php if ($action=="flashgrn") echo 'selected="selected"'; ?>>Flash Green</option>
+		<option value="partymode4" <?php if ($action=="partymode4") echo 'selected="selected"'; ?>>Party Mode, Slow</option>
+		<option value="partymode" <?php if ($action=="partymode") echo 'selected="selected"'; ?>>Party Mode</option>
+		<option value="partymode2" <?php if ($action=="partymode2") echo 'selected="selected"'; ?>>Party Mode, Fast</option>
+		<option value="partymode3" <?php if ($action=="partymode3") echo 'selected="selected"'; ?>>Party Mode, Faster</option>
 	</optgroup>
 	<optgroup label="Other">
-		<option value="pseudocode">Pseudocode</option>
+		<option value="pseudocode" <?php if ($action=="pseudocode") echo 'selected="selected"'; ?>>Pseudocode</option>
 	</optgroup>
 	<optgroup label="Raspberry Pi Options">
-		<option value="restart">Restart</option>
-		<option value="shutdown">Shut Down</option>
+		<option value="restart" <?php if ($action=="restart") echo 'selected="selected"'; ?>>Restart</option>
+		<option value="shutdown" <?php if ($action=="shutdown") echo 'selected="selected"'; ?>>Shut Down</option>
 	</optgroup>
 </select>
 </p>
