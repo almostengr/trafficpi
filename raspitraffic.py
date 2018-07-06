@@ -338,7 +338,11 @@ try:
 		elif selection == "redlightgreenlight2":
 		# red light, green light, with yellow
 			run_red_light_green_light(1)
-	
+
+		elif selection == "partymode4":
+		# slower party mode
+			phaseflasher=party_mode(phaseflasher, 2)
+
 		elif selection == "partymode":
 		# party mode
 			phaseflasher=party_mode(phaseflasher, 1)
@@ -349,7 +353,7 @@ try:
 
 		elif selection == "partymode3":
 			phaseflasher=party_mode(phaseflasher, 0.25)
-
+	
 		elif selection == "restart":
 		# restart the Raspberry Pi
 			subprocess.call(["sudo", "restart"])

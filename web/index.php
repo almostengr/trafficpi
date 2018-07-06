@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="flashred">Flash Red</option>
 	<option value="flashyel">Flash Yellow</option>
 	<option value="flashgrn">Flash Green</option>
+	<option value="partymode4">Party Mode, Slow</option>
 	<option value="partymode">Party Mode</option>
 	<option value="partymode2">Party Mode, Fast</option>
 	<option value="partymode3">Party Mode, Faster</option>
