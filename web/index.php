@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<option value="partymode2">Party Mode, Fast</option>
 		<option value="partymode3">Party Mode, Faster</option>
 	</optgroup>
-		<optgroup label="Raspberry Pi Options">
+	<optgroup label="Raspberry Pi Options">
 		<option value="restart">Restart</option>
 		<option value="shutdown">Shut Down</option>
 	</optgroup>
