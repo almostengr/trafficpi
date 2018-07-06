@@ -58,8 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<option value="uktraffic">UK Traffic</option>
 	<option value="normalflashgreen">Normal with Flashing Green</option>
 	</optgroup>
-	<optgroup label="Other">
+	<optgroup label="Steady ON">
 	<option value="all_on">All On</option>
+	<option value="redon">Red On</option>
+	<option value="yellowon">Yellow On</option>
+	<option value="greenon">Green On</option>
 	<option value="all_off">All Off</option>
 	</optgroup>
 	<optgroup label="Games">

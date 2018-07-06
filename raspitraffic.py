@@ -276,6 +276,18 @@ while True:
 		# all lights on
 			all_on("all")
 
+		elif selection == "redon":
+		# red on
+			all_on("red")
+	
+		elif selection == "yellowon":
+		# yellow on
+			all_on("yellow")
+
+		elif selection == "greenon":
+		# green on
+			all_on("green")
+
 		elif selection == "all_off":
 		# all lights off
 			all_off()
