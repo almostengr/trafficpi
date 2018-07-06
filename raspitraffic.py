@@ -310,5 +310,5 @@ while True:
 	except KeyboardInterrupt:
 		log_message("Exiting")
 		all_off()
-		GPIO.clean()
+		# GPIO.clean()
 
