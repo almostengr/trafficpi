@@ -55,33 +55,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <strong>Select Program</strong><br />
 <select name="program">
 	<optgroup label="Run Signals">
-	<option value="ustraffic">US Traffic</option>
-	<option value="uktraffic">UK Traffic</option>
-	<option value="russiatraffic">Russia Traffic</option>
+		<option value="ustraffic">US Traffic</option>
+		<option value="uktraffic">UK Traffic</option>
+		<option value="russiatraffic">Russia Traffic</option>
 	</optgroup>
 	<optgroup label="Steady On/Off">
-	<option value="all_on">All On</option>
-	<option value="redon">Red On</option>
-	<option value="yellowon">Yellow On</option>
-	<option value="greenon">Green On</option>
-	<option value="all_off">All Off</option>
+		<option value="all_on">All On</option>
+		<option value="redon">Red On</option>
+		<option value="yellowon">Yellow On</option>
+		<option value="greenon">Green On</option>
+		<option value="all_off">All Off</option>
 	</optgroup>
 	<optgroup label="Games">
-	<option value="redlightgreenlight">Red Light Green Light</option>
-	<option value="redlightgreenlight2">Red Light Green Light, with Yellow</option>
+		<option value="redlightgreenlight">Red Light Green Light</option>
+		<option value="redlightgreenlight2">Red Light Green Light, with Yellow</option>
 	</optgroup>
 	<optgroup label="Flashers">
-	<option value="flashred">Flash Red</option>
-	<option value="flashyel">Flash Yellow</option>
-	<option value="flashgrn">Flash Green</option>
-	<option value="partymode4">Party Mode, Slow</option>
-	<option value="partymode">Party Mode</option>
-	<option value="partymode2">Party Mode, Fast</option>
-	<option value="partymode3">Party Mode, Faster</option>
+		<option value="flashred">Flash Red</option>
+		<option value="flashyel">Flash Yellow</option>
+		<option value="flashgrn">Flash Green</option>
+		<option value="partymode4">Party Mode, Slow</option>
+		<option value="partymode">Party Mode</option>
+		<option value="partymode2">Party Mode, Fast</option>
+		<option value="partymode3">Party Mode, Faster</option>
 	</optgroup>
-	<optgroup label="Raspberry Pi Options">
-	<option value="restart">Restart</option>
-	<option value="shutdown">Shut Down</option>
+		<optgroup label="Raspberry Pi Options">
+		<option value="restart">Restart</option>
+		<option value="shutdown">Shut Down</option>
 	</optgroup>
 </select>
 </p>
