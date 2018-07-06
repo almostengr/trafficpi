@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// get the program to run from the from
 	$action = $_POST['program'];
 	$filepath = "/tmp/traffic.txt";
+	$pseudofilepath = "/tmp/traffic_pseudo.txt";
 
 	// update the file with program to run
 	$file = file_put_contents($filepath, $action);
@@ -46,7 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	else{
 	       	// show success message if able to write to the file	
 		echo "<p id='success'>Submitted $action</p>";
-	}
+	} // end if else
+
+	if ($action == "pseudocode") {
+		$file2 = file_put_contents($pseudofilepath, $_POST['pseudocode']);
+		if ($file2 === FALSE) {
+			echo "<p id='error'>Error when attempting to open file.</p>";
+		}			
+	} // end if else
 }
 ?>
 
@@ -79,6 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<option value="partymode2">Party Mode, Fast</option>
 		<option value="partymode3">Party Mode, Faster</option>
 	</optgroup>
+	<optgroup label="Other">
+		<option value="pseudocode">Pseudocode</option>
+	</optgroup>
 	<optgroup label="Raspberry Pi Options">
 		<option value="restart">Restart</option>
 		<option value="shutdown">Shut Down</option>
@@ -89,7 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p>
 <strong>Pseudocode</strong><br />
 <textarea name="pseudocode" cols="20" rows="20">
-<?php $_SERVER['REQUEST_METHOD'] == 'POST' ? echo $_POST["pseudocode"] : echo ""; ?></textarea>
+<?php $action == "pseudocode" ? echo $_POST["pseudocode"] : echo ""; ?>
+</textarea>
 </p>
 
 <p><input type="submit" name="Submit" value="Submit" /></p>
@@ -98,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p style="text-align: center;">
 Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr | 
 <a href="index.php">Home</a> | 
-<a href="https:////github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
+<a href="https://github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
 </p>
 
 </body>
