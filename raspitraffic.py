@@ -457,8 +457,8 @@ try:
 # except KeyboardInterrupt as e:
 except Exception as e:
 # perform action if exception occurs
+	log_message("Exiting with exception")
 	log_message(e)
-	log_message("Exiting with interrupt")
 	all_off()
 	# GPIO.clean()
 
