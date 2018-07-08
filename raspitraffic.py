@@ -36,6 +36,9 @@ TXTDISPLAY="/tmp/traffic_display.txt"
 TXTPSEUDO="/tmp/traffic_pseudo.txt"
 
 # display=lcddriver.lcd()
+display=""
+displayState="off"
+displayStateOld="off"
 selection=0
 phaseflasher=0
 phasenum=0
@@ -84,6 +87,11 @@ def log_message(message):
 
 def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
+	if displayState == "on";
+		display.lcd_clear()
+		display.lcd_display_string(line1, 1)
+		display.lcd_display_string(line2, 2)
+
 	log_message(line1 + " | " + line2)
 	return 0
 
@@ -331,13 +339,16 @@ setup()
 debug_message("Debug mode enabled")
 
 try:
-	# loop forever
 	while True:
 		try:
 		# Read the data file
 			fileTraffic=open(TXTTRAFFIC, "r")
 			selection=fileTraffic.readline()
 			fileTraffic.close()
+
+			fileDisplay=open("/tmp/traffic_display.txt", "r")
+			displayState=file.readline()
+			fileDisplay.close()
 
 		except IOError:
 		# if the file doesn't exist, then create it and give public permissions
@@ -348,6 +359,16 @@ try:
 			filePseudo=open(TXTPSEUDO, "w")
 			subprocess.call(['chmod', '0777', TXTPSEUDO])
 			filePseudo.close()
+
+			fileDisplay=open("/tmp/traffic_display.txt", "w")
+			subprocess.call(['chmod', '0777', '/tmp/traffic_display.txt'])
+			fileDisplay.close()
+	
+		# controls whether to dispplay output on the LCD
+		if displayState == "on":
+			display=lcddriver.lcd()
+		else
+			display=""
 
 		if selection == "ustraffic":
 		# run the US traffic program

@@ -34,19 +34,23 @@ p#success {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// get the program to run from the from
-	$action = $_POST['program'];
-	$filepath = "/tmp/traffic.txt";
+	$fileactionpath = "/tmp/traffic.txt";
+	$filedisplaypath = "/tmp/traffic_display.txt";
 	$pseudofilepath = "/tmp/traffic_pseudo.txt";
 
 	// update the file with program to run
-	$file = file_put_contents($filepath, $action);
-	if ($file === FALSE) {
+	$fileaction = file_put_contents($fileactionpath, $_POST['program']);
+	$filedisplay = file_put_contents($filedisplaypath, $_POST['display']);
+
+	$now = date("F j, Y, g:i:s a");
+
+	if ($fileaction === FALSE || $filedisplay === FALSE) {
 		// throw error if not able to write to the file
-		echo "<p id='error'>Error when attempting to open file.</p>";
+		echo "<p id='error'>$now Error when attempting to save the request.</p>";
 	}
 	else{
 	       	// show success message if able to write to the file
-		echo "<p id='success'>Submitted $action</p>";
+		echo "<p id='success'>$now Submitted request.</p>";
 	} // end if else
 
 	if ($action == "pseudocode") {
@@ -98,6 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </p>
 
 <p>
+<select name="display">
+	<option value="off" <?php $display=="off" ? print "selected='selected'" : false; ?>>Off</option>
+	<option value="on" <?php $display=="on" ? print "selected='selected'" : false; ?>>On</option>
+</select>
+</p>
+
 <strong>Pseudocode</strong><br />
 <textarea name="pseudocode" cols="50" rows="4">
 <?php $action == "pseudocode" ? print $_POST["pseudocode"] : false; ?>
@@ -105,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </p>
 
 <p><input type="submit" name="submit" value="Submit" /></p>
+
 </form>
 
 <p>Pseudocode Commands</p>
