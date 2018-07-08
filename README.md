@@ -27,16 +27,30 @@ timing decisions.
 
 ----
 
-## System Requirements
+## Parts List
+Below are the list of parts needed for this project. You'll need to choose one of 
+the mentioned options below depending on your budget. Using LEDs is cheaper than 
+getting an actual traffic light.
+
 * Raspiberry Pi 3 (May work on other models, but has been tested on Raspberry Pi 3)
-* Relay board(s) to handle 8 channels (optional)
-* Traffic Light (actual or DIY made from LEDs)
+* Raspiberry Pi power suppy
+* Micro SD card (to run the OS)
+* USB keyboard (mouse optional)
+* HDMI display
 * I2C 16x2 LCD Display 
 * Breadboard Jumper Cables
 * Breadboard (optional)
 * Python 2.7.9 (May work with later versions, but has only be tested with 2.7.9)
 * Raspbian Jessie (May work on other OSs, but has only been tested with Raspbian Jessie)
-* Plastic Control Box (optional)
+
+### LED Option
+* Red LED
+* Yellow LED
+* Green LED
+
+### Real Traffic Light Option
+* Relay board(s) with at least 3 channels
+* Traffic Light (actual or replica)
 
 ----
 

@@ -31,6 +31,9 @@ EAST_CG=19
 LAMPON=GPIO.LOW
 LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
+TXTTRAFFIC="/tmp/traffic.txt"
+TXTDISPLAY="/tmp/traffic_display.txt"
+TXTPSEUDO="/tmp/traffic_pseudo.txt"
 
 # display=lcddriver.lcd()
 display=""
@@ -40,6 +43,7 @@ selection=0
 phaseflasher=0
 phasenum=0
 run_signal_flasher="red"
+
 
 def setup():
 # SET UP GPIO PINS
@@ -159,6 +163,7 @@ def run_signal(country):
 			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
+
 def party_mode(phase, delay):
 # randomly change the color to a different light
 	if phase == 1:
@@ -173,10 +178,13 @@ def party_mode(phase, delay):
 		eblight(LAMPOFF, LAMPON, LAMPON)
 	elif phase == 6:
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
+	elif phase == 7:
+		eblight(LAMPON, LAMPON, LAMPON)
 	
 	# delay between changing lights again
 	sleep(delay)
-	return randint(1,6)
+	return randint(1,7)
+
 
 def run_flasher(color, phase):
 # flash the lights
@@ -236,6 +244,10 @@ def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
+	
+	# print the status of each light
+	# 1 = off, 0 = on
+	debug_message("R: " + str(cirred) + " Y: " + str(ciryel) + " G: " + str(cirgrn))
 
 
 def all_on(phase):
@@ -275,6 +287,52 @@ def all_off():
 	sleep(3)
 
 
+def process_pseudocode(command):
+# process the pseudocode that ahs been entered
+	returncode=1
+
+	if command.startswith("red"):
+	# turn on the red light
+		eblight(LAMPON, LAMPOFF, LAMPOFF)
+		returnCode=0
+
+	elif command.startswith("yellow"):
+	# turn on the yellow light
+		eblight(LAMPOFF, LAMPON, LAMPOFF)
+		returnCode=0
+
+	elif command.startswith("green"):
+	# turn on the green light
+		eblight(LAMPOFF, LAMPOFF, LAMPON)
+		returnCode=0
+
+	elif command.startswith("wait"):
+	# sleep for the specified duration
+		waittime=float(command[5:7])
+		debug_message("Waiting " + str(waittime))
+		sleep(waittime)
+		returnCode=0
+
+	elif command.startswith("repeat"):
+	# repeat reading the file
+		returnCode=0
+
+	else:
+	# mention that exception occurred and exit
+		log_message("Exception occurred")
+		returnCode=1
+
+	return returnCode
+
+
+def pseudowait():
+# Update the status so that the message doesnt repeat
+	log_message("Updating pseudo status")
+	fileTraffic2=open(TXTTRAFFIC, 'w')
+	fileTraffic2.write("pseudowait")
+	fileTraffic2.close()
+
+
 # configure everything
 setup()
 
@@ -284,9 +342,9 @@ try:
 	while True:
 		try:
 		# Read the data file
-			file=open("/tmp/traffic.txt", "r")
-			selection=file.readline()
-			file.close()
+			fileTraffic=open(TXTTRAFFIC, "r")
+			selection=fileTraffic.readline()
+			fileTraffic.close()
 
 			fileDisplay=open("/tmp/traffic_display.txt", "r")
 			displayState=file.readline()
@@ -294,9 +352,13 @@ try:
 
 		except IOError:
 		# if the file doesn't exist, then create it and give public permissions
-			file=open("/tmp/traffic.txt", "w")
-			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
-			file.close()
+			fileTraffic=open(TXTTRAFFIC, "w")
+			subprocess.call(['chmod', '0777', TXTTRAFFIC])
+			fileTraffic.close()
+
+			filePseudo=open(TXTPSEUDO, "w")
+			subprocess.call(['chmod', '0777', TXTPSEUDO])
+			filePseudo.close()
 
 			fileDisplay=open("/tmp/traffic_display.txt", "w")
 			subprocess.call(['chmod', '0777', '/tmp/traffic_display.txt'])
@@ -374,7 +436,40 @@ try:
 
 		elif selection == "partymode3":
 			phaseflasher=party_mode(phaseflasher, 0.25)
-	
+
+		elif selection == "pseudocode":
+		# Read and attempt to process the sudo code
+			lastline=""
+			pseudofile=open(TXTPSEUDO, 'rb')
+			for line in pseudofile:
+				debug_message("Line reads: " + line)
+
+				# do something with data
+				pseudoReturn=process_pseudocode(line)
+				lastline=line
+				debug_message("pseudoReturn: " + str(pseudoReturn))
+
+				if pseudoReturn == 1:
+				# exit if the value returned equals one
+					debug_message("Exiting")
+					all_off()
+					pseudowait()	
+					break
+			else:
+				if lastline == "repeat":
+					False
+				else:
+					pseudowait()
+			
+			# close the file when done
+			pseudofile.close()
+
+		elif selection == "pseudowait":
+		# if there was a failure previously, then dont do anything until updated
+			debug_message("Waiting on pseudocode to be updated")
+			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			sleep(5)
+
 		elif selection == "restart":
 		# restart the Raspberry Pi
 			subprocess.call(["sudo", "restart"])
@@ -382,14 +477,16 @@ try:
 		elif selection == "shutdown":
 		# shutdown the Raspberry Pi
 			subprocess.call(["sudo", "shutdown", "-h", "now"])
-	
+
 		else:
 		# If nothing selected or bad value, default to failure state
 			phaseflasher=run_flasher("all", phaseflasher)
 
-except KeyboardInterrupt:
-# perform action if Ctrl+C is pressed
-	log_message("Exiting")
+# except KeyboardInterrupt as e:
+except Exception as e:
+# perform action if exception occurs
+	log_message("Exiting with exception")
+	log_message(e)
 	all_off()
 	# GPIO.clean()
 
