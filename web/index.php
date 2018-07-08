@@ -107,6 +107,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p><input type="submit" name="submit" value="Submit" /></p>
 </form>
 
+<p>Pseudocode Commands</p>
+<ul>
+<li><strong>red</strong> Turn on the red light</li>
+<li><strong>yellow</strong> Turn on the yellow light</li>
+<li><strong>green</strong> Turn on the green light</li>
+<li><strong>repeat</strong> Repeat the loop</li>
+<li><strong>wait time</strong> Wait before doing the next command. "Time" is the number of seconds to wait</li>
+</ul>
+
+
 <p style="text-align: center;">
 Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr |
 <a href="index.php">Home</a> |
