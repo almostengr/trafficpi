@@ -87,12 +87,13 @@ def log_message(message):
 
 def lcd_message(line1, line2):
 # Displays the message on the LCD screen and computer screen
-	if displayState == "on";
+	if displayState == "on":
 		display.lcd_clear()
 		display.lcd_display_string(line1, 1)
 		display.lcd_display_string(line2, 2)
 
-	log_message(line1 + " | " + line2)
+	log_message(line1)
+	log_message(line2)
 	return 0
 
 
@@ -346,28 +347,38 @@ try:
 			selection=fileTraffic.readline()
 			fileTraffic.close()
 
-			fileDisplay=open("/tmp/traffic_display.txt", "r")
-			displayState=file.readline()
+                except IOError:
+                # if the file doesn't exist, then create it and give public permissions
+                        fileTraffic=open(TXTTRAFFIC, "w")
+                        subprocess.call(['chmod', '0777', TXTTRAFFIC])
+                        fileTraffic.close()
+		
+		try:
+		# Read the file
+			fileDisplay=open(TXTDISPLAY, "r")
+			displayState=fileDisplay.readline()
 			fileDisplay.close()
 
 		except IOError:
 		# if the file doesn't exist, then create it and give public permissions
-			fileTraffic=open(TXTTRAFFIC, "w")
-			subprocess.call(['chmod', '0777', TXTTRAFFIC])
-			fileTraffic.close()
+			fileDisplay=open(TXTDISPLAY, "w")
+			subprocess.call(['chmod', '0777', TXTDISPLAY])
+			fileDisplay.close()
 
-			filePseudo=open(TXTPSEUDO, "w")
-			subprocess.call(['chmod', '0777', TXTPSEUDO])
+		try:
+			filePseudo=open(TXTPSEUDO, "r")
 			filePseudo.close()
 
-			fileDisplay=open("/tmp/traffic_display.txt", "w")
-			subprocess.call(['chmod', '0777', '/tmp/traffic_display.txt'])
-			fileDisplay.close()
+		except IOError:
+                # if the file doesn't exist, then create it and give public permissions
+                        filePseudo=open(TXTPSEUDO, "w")
+                        subprocess.call(['chmod', '0777', TXTPSEUDO])
+                        filePseudo.close()
 	
 		# controls whether to dispplay output on the LCD
 		if displayState == "on":
 			display=lcddriver.lcd()
-		else
+		else:
 			display=""
 
 		if selection == "ustraffic":
