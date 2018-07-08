@@ -39,7 +39,7 @@ TXTPSEUDO="/tmp/traffic_pseudo.txt"
 display=""
 displayState="off"
 displayStateOld="off"
-selection=0
+selection=""
 phaseflasher=0
 phasenum=0
 run_signal_flasher="red"
@@ -141,7 +141,7 @@ def run_signal(country):
 		sleep(1)
 
         # flash green if selected
-        if country == "Russia":
+        if country.startswith("russia"):
             for i in range(randint(5,10), 0, -1):
                 phaseflasher=run_flasher("green", phaseflasher)
 
@@ -158,7 +158,7 @@ def run_signal(country):
 		sleep(1)
 
 	# red-yellow for UK only
-	if country == "UK":
+	if country.startswith("uk"):
 		eblight(LAMPON, LAMPON, LAMPOFF)
 		for ttime in range(east_yel_time, 0, -1):
 			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
@@ -167,8 +167,8 @@ def run_signal(country):
 	# perform flashing if selected
 	if country.endswith("flasher"):
 		# pick a color to flash
-		colorint=randint(1,2)
-		if colorint==1:
+		colorint=randint(0,10)
+		if colorint < 5:
 			color="red"
 		else:
 			color="yellow"
@@ -400,9 +400,9 @@ try:
 		else:
 			display=""
 
-		if selection.startswith("ustraffic"):
+		if "traffic" in selection:
 		# run the US traffic program
-			run_signal("US")
+			run_signal(selection)
 
 		elif selection == "all_on":
 		# all lights on
@@ -436,13 +436,13 @@ try:
 		# flash green
 			phaseflasher=run_flasher("green", phaseflasher)
 
-		elif selection.startswith("uktraffic"):
+	#	elif selection.startswith("uktraffic"):
 		# UK signal pattern
-			run_signal("UK")
+			# run_signal("UK")
 
-                elif selection.startswith("russiatraffic"):
+                # elif selection.startswith("russiatraffic"):
                 # signal pattern with flashing green
-                        run_signal("Russia")
+                        # run_signal("Russia")
 
 		elif selection == "redlightgreenlight":
 		# red light, green light
