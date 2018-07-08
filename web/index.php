@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </select>
 </p>
 
-<strong>Pseudocode</strong><br />
+<strong>Pseudocode Commands</strong><br />
 <textarea name="pseudocode" cols="50" rows="4">
 <?php $action == "pseudocode" ? print $_POST["pseudocode"] : false; ?>
 </textarea>
