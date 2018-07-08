@@ -102,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </p>
 
 <p>
+<strong>LCD Display</strong> <br />
 <select name="display">
 	<option value="off" <?php $display=="off" ? print "selected='selected'" : false; ?>>Off</option>
 	<option value="on" <?php $display=="on" ? print "selected='selected'" : false; ?>>On</option>
