@@ -280,6 +280,7 @@ def process_pseudocode(command):
 	if command.startswith("start"):
 	# start the program
 		log_message("Starting program")
+		all_on("all")
 		returnCode=0
 
 	elif command.startswith("red"):
@@ -318,6 +319,14 @@ def process_pseudocode(command):
 		returnCode=1
 
 	return returnCode
+
+def pseudowait():
+# Update the status so that the message doesnt repeat
+	log_message("Updating pseudo status")
+	fileTraffic2=open(TXTTRAFFIC, 'w')
+	fileTraffic2.write("pseudowait")
+	fileTraffic2.close()
+
 	
 
 # configure everything
@@ -413,30 +422,29 @@ try:
 
 		elif selection == "pseudocode":
 		# Read and attempt to process the sudo code
+			lastline=""
 			pseudofile=open(TXTPSEUDO, 'rb')
 			for line in pseudofile:
 				debug_message("Line reads: " + line)
 
 				# do something with data
 				pseudoReturn=process_pseudocode(line)
-
+				lastline=line
 				debug_message("pseudoReturn: " + str(pseudoReturn))
 
 				if pseudoReturn == 1:
 				# exit if the value returned equals one
-					# debug_message("Exiting")
+					debug_message("Exiting")
 					all_off()
-					# pseudofile.close()
-			
-					debug_message("Writing to file")	
-					# update the status so that the cycle doesn't repeat
-					fileTraffic2=open(TXTTRAFFIC, 'w')
-		                        fileTraffic2.write("pseudowait")
-               				fileTraffic2.close()
+					pseudowait()	
 					break
-
-			# close the file when done
-			pseudofile.close()
+			else:
+				if lastline == "repeat":
+					False
+				else:
+					pseudowait()
+				# close the file when done
+				pseudofile.close()
 
 		elif selection == "pseudowait":
 		# if there was a failure previously, then dont do anything until updated
