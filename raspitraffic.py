@@ -17,7 +17,7 @@ import random
 import subprocess
 
 # DEBUGGING MODE, DISABLED=0, ENABLED=1
-DEBUG=1
+DEBUG=0
 
 # LIST ALL OF THE PINS USED
 PINOUTLIST=[23, 21, 19]
@@ -40,6 +40,7 @@ selection=0
 phaseflasher=0
 phasenum=0
 run_signal_flasher="red"
+
 
 def setup():
 # SET UP GPIO PINS
@@ -154,6 +155,7 @@ def run_signal(country):
 			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
+
 def party_mode(phase, delay):
 # randomly change the color to a different light
 	if phase == 1:
@@ -172,6 +174,7 @@ def party_mode(phase, delay):
 	# delay between changing lights again
 	sleep(delay)
 	return randint(1,6)
+
 
 def run_flasher(color, phase):
 # flash the lights
@@ -273,6 +276,7 @@ def all_off():
 	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 	sleep(3)
 
+
 def process_pseudocode(command):
 # process the pseudocode that ahs been entered
 	returncode=1
@@ -309,6 +313,7 @@ def process_pseudocode(command):
 		returnCode=1
 
 	return returnCode
+
 
 def pseudowait():
 # Update the status so that the message doesnt repeat
