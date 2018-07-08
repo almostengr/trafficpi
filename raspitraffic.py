@@ -170,10 +170,12 @@ def party_mode(phase, delay):
 		eblight(LAMPOFF, LAMPON, LAMPON)
 	elif phase == 6:
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
+	elif phase == 7:
+		eblight(LAMPON, LAMPON, LAMPON)
 	
 	# delay between changing lights again
 	sleep(delay)
-	return randint(1,6)
+	return randint(1,7)
 
 
 def run_flasher(color, phase):
