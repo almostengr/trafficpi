@@ -494,7 +494,7 @@ try:
 
 		elif selection == "restart":
 		# restart the Raspberry Pi
-			subprocess.call(["sudo", "restart"])
+			subprocess.call(["sudo", "reboot"])
 
 		elif selection == "shutdown":
 		# shutdown the Raspberry Pi
