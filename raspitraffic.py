@@ -490,8 +490,8 @@ try:
 			subprocess.call(["sudo", "shutdown", "-h", "now"])
 
 		else:
-		# If nothing selected or bad value, default to failure state
-			phaseflasher=run_flasher("all", phaseflasher)
+		# If nothing selected or bad value, default to all on
+			all_on("all")
 
 # except KeyboardInterrupt as e:
 except Exception as e:
