@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$filedisplaypath = "/tmp/traffic_display.txt";
 
 	// update the file with program to run
-	$fileaction = file_put_contents($filepath, $_POST['program'];
+	$fileaction = file_put_contents($fileactionpath, $_POST['program']);
 	$filedisplay = file_put_contents($filedisplaypath, $_POST['display']);
 
 	$now = date("F j, Y, g:i:s a");
@@ -91,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <p>
 <select name="display">
-	<option value="off" <?php if ($display=="off) echo 'selected="selected"'; ?>>Off</option>
-	<option value="on" <?php if ($display=="on") echo 'selected="selected"'; ?>>On</option>
+	<option value="off" <?php $display=="off" ? print "selected='selected'" : false; ?>>Off</option>
+	<option value="on" <?php $display=="on" ? print "selected='selected'" : false; ?>>On</option>
 </select>
 </p>
 
