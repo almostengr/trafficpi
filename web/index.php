@@ -101,14 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </select>
 </p>
 
-<p>
-<strong>LCD Display</strong> <br />
-<select name="display">
-	<option value="off" <?php $display=="off" ? print "selected='selected'" : false; ?>>Off</option>
-	<option value="on" <?php $display=="on" ? print "selected='selected'" : false; ?>>On</option>
-</select>
-</p>
-
 <strong>Pseudocode Commands</strong><br />
 <textarea name="pseudocode" cols="50" rows="4">
 <?php $action == "pseudocode" ? print $_POST["pseudocode"] : false; ?>
