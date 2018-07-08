@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "<p id='error'>Error when attempting to open file.</p>";
 	}
 	else{
-	       	// show success message if able to write to the file	
+	       	// show success message if able to write to the file
 		echo "<p id='success'>Submitted $action</p>";
 	} // end if else
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$file2 = file_put_contents($pseudofilepath, $_POST['pseudocode']);
 		if ($file2 === FALSE) {
 			echo "<p id='error'>Error when attempting to open file.</p>";
-		}			
+		}
 	} // end if else
 }
 ?>
@@ -63,36 +63,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <strong>Select Program</strong><br />
 <select name="program">
 	<optgroup label="Run Signals">
-		<option value="ustraffic" <?php if ($action=="ustraffic") echo 'selected="selected"'; ?>>US Traffic</option>
-		<option value="uktraffic" <?php if ($action=="uktraffic") echo 'selected="selected"'; ?>>UK Traffic</option>
-		<option value="russiatraffic" <?php if ($action=="russiatraffic") echo 'selected="selected"'; ?>>Russia Traffic</option>
+		<option value="ustraffic" <?php $action=="ustraffic" ? print 'selected="selected"' : false; ?>>US Traffic</option>
+		<option value="uktraffic" <?php $action=="uktraffic" ? print 'selected="selected"' : false; ?>>UK Traffic</option>
+		<option value="russiatraffic" <?php $action=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic</option>
 	</optgroup>
 	<optgroup label="Steady On/Off">
-		<option value="all_on" <?php if ($action=="all_on") echo 'selected="selected"'; ?>>All On</option>
-		<option value="redon" <?php if ($action=="redon") echo 'selected="selected"'; ?>>Red On</option>
-		<option value="yellowon" <?php if ($action=="yellowon") echo 'selected="selected"'; ?>>Yellow On</option>
-		<option value="greenon" <?php if ($action=="greenon") echo 'selected="selected"'; ?>>Green On</option>
-		<option value="all_off" <?php if ($action=="all_off") echo 'selected="selected"'; ?>>All Off</option>
+		<option value="all_on" <?php $action=="all_on" ? print 'selected="selected"' : false; ?>>All On</option>
+		<option value="redon" <?php $action=="redon" ? print 'selected="selected"' : false; ?>>Red On</option>
+		<option value="yellowon" <?php $action=="yellowon" ? print 'selected="selected"' : false; ?>>Yellow On</option>
+		<option value="greenon" <?php $action=="greenon" ? print 'selected="selected"' : false; ?>>Green On</option>
+		<option value="all_off" <?php $action=="all_off" ? print 'selected="selected"' : false; ?>>All Off</option>
 	</optgroup>
 	<optgroup label="Games">
-		<option value="redlightgreenlight" <?php if ($action=="redlightgreenlight") echo 'selected="selected"'; ?>>Red Light Green Light</option>
-		<option value="redlightgreenlight2" <?php if ($action=="redlightgreenlight2") echo 'selected="selected"'; ?>>Red Light Green Light, with Yellow</option>
+		<option value="redlightgreenlight" <?php $action=="redlightgreenlight" ? print 'selected="selected"' : false; ?>>Red Light Green Light</option>
+		<option value="redlightgreenlight2" <?php $action=="redlightgreenlight2" ? print 'selected="selected"' : false; ?>>Red Light Green Light, with Yellow</option>
 	</optgroup>
 	<optgroup label="Flashers">
-		<option value="flashred" <?php if ($action=="flashred") echo 'selected="selected"'; ?>>Flash Red</option>
-		<option value="flashyel" <?php if ($action=="flashyel") echo 'selected="selected"'; ?>>Flash Yellow</option>
-		<option value="flashgrn" <?php if ($action=="flashgrn") echo 'selected="selected"'; ?>>Flash Green</option>
-		<option value="partymode4" <?php if ($action=="partymode4") echo 'selected="selected"'; ?>>Party Mode, Slow</option>
-		<option value="partymode" <?php if ($action=="partymode") echo 'selected="selected"'; ?>>Party Mode</option>
-		<option value="partymode2" <?php if ($action=="partymode2") echo 'selected="selected"'; ?>>Party Mode, Fast</option>
-		<option value="partymode3" <?php if ($action=="partymode3") echo 'selected="selected"'; ?>>Party Mode, Faster</option>
+		<option value="flashred" <?php $action=="flashred" ? print 'selected="selected"' : false; ?>>Flash Red</option>
+		<option value="flashyel" <?php $action=="flashyel" ? print 'selected="selected"' : false; ?>>Flash Yellow</option>
+		<option value="flashgrn" <?php $action=="flashgrn" ? print 'selected="selected"' : false; ?>>Flash Green</option>
+		<option value="partymode4" <?php $action=="partymode4" ? print 'selected="selected"' : false; ?>>Party Mode, Slow</option>
+		<option value="partymode" <?php $action=="partymode" ? print 'selected="selected"' : false; ?>>Party Mode</option>
+		<option value="partymode2" <?php $action=="partymode2" ? print 'selected="selected"' : false; ?>>Party Mode, Fast</option>
+		<option value="partymode3" <?php $action=="partymode3" ? print 'selected="selected"' : false; ?>>Party Mode, Faster</option>
 	</optgroup>
 	<optgroup label="Other">
-		<option value="pseudocode" <?php if ($action=="pseudocode") echo 'selected="selected"'; ?>>Pseudocode</option>
+		<option value="pseudocode" <?php $action=="pseudocode" ? print 'selected="selected"' : false; ?>>Pseudocode</option>
 	</optgroup>
 	<optgroup label="Raspberry Pi Options">
-		<option value="restart" <?php if ($action=="restart") echo 'selected="selected"'; ?>>Restart</option>
-		<option value="shutdown" <?php if ($action=="shutdown") echo 'selected="selected"'; ?>>Shut Down</option>
+		<option value="restart" <?php $action=="restart" ? print 'selected="selected"' : false; ?>>Restart</option>
+		<option value="shutdown" <?php $action=="shutdown" ? print 'selected="selected"' : false; ?>>Shut Down</option>
 	</optgroup>
 </select>
 </p>
@@ -108,8 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </form>
 
 <p style="text-align: center;">
-Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr | 
-<a href="index.php">Home</a> | 
+Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr |
+<a href="index.php">Home</a> |
 <a href="https://github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
 </p>
 
