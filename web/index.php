@@ -68,8 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <select name="program">
 	<optgroup label="Run Signals">
 		<option value="ustraffic" <?php $action=="ustraffic" ? print 'selected="selected"' : false; ?>>US Traffic</option>
+		<option value="ustrafficflasher" <?php $_POST['program']=="ustrafficflasher" ? print 'selected="selected"' : false; ?>>US Traffic with flasher</option>
 		<option value="uktraffic" <?php $action=="uktraffic" ? print 'selected="selected"' : false; ?>>UK Traffic</option>
+		<option value="uktrafficflasher" <?php $_POST['program']=="uktrafficflasher" ? print 'selected="selected"' : false; ?>>UK Traffic with flasher</option>
 		<option value="russiatraffic" <?php $action=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic</option>
+		<option value="russiatrafficflasher" <?php $_POST['program']=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic with flasher</option>
 	</optgroup>
 	<optgroup label="Steady On/Off">
 		<option value="all_on" <?php $action=="all_on" ? print 'selected="selected"' : false; ?>>All On</option>

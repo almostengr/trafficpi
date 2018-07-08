@@ -164,6 +164,20 @@ def run_signal(country):
 			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
 			sleep(1)
 
+	# perform flashing if selected
+	if country.endswith("flasher"):
+		# pick a color to flash
+		colorint=randint(1,2)
+		if colorint==1:
+			color="red"
+		else:
+			color="yellow"
+	
+		# perform the flashing
+		flashrangemax=randint(6,30)
+		for i in range(1,flashrangemax):
+			phaseflasher=run_flasher(color, phaseflasher)
+
 
 def party_mode(phase, delay):
 # randomly change the color to a different light
@@ -274,6 +288,11 @@ def all_on(phase):
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		lcd_message("ALL GREENS ON", "")
 
+	elif phase == "off":
+	# turn off all the lights
+		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+		lcd_message("ALL LIGHTS OFF", "")
+
 	# do nothing
 	else:
 		log_message("Doing nothing")
@@ -381,7 +400,7 @@ try:
 		else:
 			display=""
 
-		if selection == "ustraffic":
+		if selection.startswith("ustraffic"):
 		# run the US traffic program
 			run_signal("US")
 
@@ -417,11 +436,11 @@ try:
 		# flash green
 			phaseflasher=run_flasher("green", phaseflasher)
 
-		elif selection == "uktraffic":
+		elif selection.startswith("uktraffic"):
 		# UK signal pattern
 			run_signal("UK")
 
-                elif selection == "russiatraffic":
+                elif selection.startswith("russiatraffic"):
                 # signal pattern with flashing green
                         run_signal("Russia")
 
