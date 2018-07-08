@@ -130,9 +130,9 @@ def run_signal(country):
 	phaseflasher=0
 
 	# generate random values for the lights to stay on
-	east_grn_time=random.randint(5, 30)
+	east_grn_time=random.randint(5, 45)
 	east_yel_time=random.randint(2, 5)
-	east_red_time=random.randint(5, 30)
+	east_red_time=random.randint(5, 45)
 
 	# green
 	eblight(LAMPOFF, LAMPOFF, LAMPON)
@@ -435,14 +435,6 @@ try:
 		elif selection == "flashgrn":
 		# flash green
 			phaseflasher=run_flasher("green", phaseflasher)
-
-	#	elif selection.startswith("uktraffic"):
-		# UK signal pattern
-			# run_signal("UK")
-
-                # elif selection.startswith("russiatraffic"):
-                # signal pattern with flashing green
-                        # run_signal("Russia")
 
 		elif selection == "redlightgreenlight":
 		# red light, green light
