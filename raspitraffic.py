@@ -17,7 +17,7 @@ import random
 import subprocess
 
 # DEBUGGING MODE, DISABLED=0, ENABLED=1
-DEBUG=0
+DEBUG=1
 
 # LIST ALL OF THE PINS USED
 PINOUTLIST=[23, 21, 19]
@@ -31,6 +31,9 @@ EAST_CG=19
 LAMPON=GPIO.LOW
 LAMPOFF=GPIO.HIGH
 FLASHER_DELAY=.7
+TXTTRAFFIC="/tmp/traffic.txt"
+TXTDISPLAY="/tmp/traffic_display.txt"
+TXTPSEUDO="/tmp/traffic_pseudo.txt"
 
 # display=lcddriver.lcd()
 selection=0
@@ -228,6 +231,10 @@ def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
+	
+	# print the status of each light
+	# 1 = off, 0 = on
+	debug_message("R: " + str(cirred) + " Y: " + str(ciryel) + " G: " + str(cirgrn))
 
 
 def all_on(phase):
@@ -270,25 +277,41 @@ def process_pseudocode(command):
 # process the pseudocode that ahs been entered
 	returncode=1
 
-	if command == "red":
+	if command.startswith("start"):
+	# start the program
+		log_message("Starting program")
+		returnCode=0
+
+	elif command.startswith("red"):
 	# turn on the red light
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 		returnCode=0
 
-	elif command == "yellow":
+	elif command.startswith("yellow"):
 	# turn on the yellow light
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
 		returnCode=0
 
-	elif command == "green":
+	elif command.startswith("green"):
 	# turn on the green light
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		returnCode=0
 
 	elif command.startswith("wait"):
 	# sleep for the specified duration
-		sleep(command[5:7])
+		waittime=float(command[5:7])
+		debug_message("Waiting " + str(waittime))
+		sleep(waittime)
 		returnCode=0
+
+	elif command.startswith("repeat"):
+	# repeat reading the file
+		returnCode=0
+
+	elif command.startswith("end"):
+	# end of the program, need to exit
+		log_message("End of program")
+		returnCode=1
 
 	else:
 		log_message("Exception occurred")
@@ -307,18 +330,18 @@ try:
 	while True:
 		try:
 		# Read the data file
-			fileTraffic=open("/tmp/traffic.txt", "r")
+			fileTraffic=open(TXTTRAFFIC, "r")
 			selection=fileTraffic.readline()
 			fileTraffic.close()
 
 		except IOError:
 		# if the file doesn't exist, then create it and give public permissions
-			fileTraffic=open("/tmp/traffic.txt", "w")
-			subprocess.call(['chmod', '0777', '/tmp/traffic.txt'])
+			fileTraffic=open(TXTTRAFFIC, "w")
+			subprocess.call(['chmod', '0777', TXTTRAFFIC])
 			fileTraffic.close()
 
-			filePseudo=open("/tmp/traffic_pseudo.txt", "w")
-			subprocess.call(['chmod', '0777', '/tmp/traffic_pseudo.txt'])
+			filePseudo=open(TXTPSEUDO, "w")
+			subprocess.call(['chmod', '0777', TXTPSEUDO])
 			filePseudo.close()
 
 		if selection == "ustraffic":
@@ -388,15 +411,23 @@ try:
 		elif selection == "partymode3":
 			phaseflasher=party_mode(phaseflasher, 0.25)
 
-		# elif selection == "pseudocode":
+		elif selection == "pseudocode":
 		# Read and attempt to process the sudo code
-			# with open("x.txt") as f:
-				# for line in f:
+			with open(TXTPSEUDO, 'rb') as f:
+				for line in f:
+					debug_message("Line reads: " + line)
+
 					# do something with data
-					# pseudoReturn=process_pseudocode(line)
-				# if pseudoReturn == 1:
-					# break
-	
+					pseudoReturn=process_pseudocode(line)
+
+					debug_message("pseudoReturn: " + str(pseudoReturn))
+
+					if pseudoReturn == 1:
+					# exit if the value returned equals one
+						all_off()
+						f.close()
+						sys.exit()
+
 		elif selection == "restart":
 		# restart the Raspberry Pi
 			subprocess.call(["sudo", "restart"])
@@ -409,7 +440,8 @@ try:
 		# If nothing selected or bad value, default to failure state
 			phaseflasher=run_flasher("all", phaseflasher)
 
-except KeyboardInterrupt:
+# except KeyboardInterrupt:
+except Exception:
 # perform action if Ctrl+C is pressed
 	log_message("Exiting")
 	all_off()
