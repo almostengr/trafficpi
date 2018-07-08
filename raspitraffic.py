@@ -413,20 +413,36 @@ try:
 
 		elif selection == "pseudocode":
 		# Read and attempt to process the sudo code
-			with open(TXTPSEUDO, 'rb') as f:
-				for line in f:
-					debug_message("Line reads: " + line)
+			pseudofile=open(TXTPSEUDO, 'rb')
+			for line in pseudofile:
+				debug_message("Line reads: " + line)
 
-					# do something with data
-					pseudoReturn=process_pseudocode(line)
+				# do something with data
+				pseudoReturn=process_pseudocode(line)
 
-					debug_message("pseudoReturn: " + str(pseudoReturn))
+				debug_message("pseudoReturn: " + str(pseudoReturn))
 
-					if pseudoReturn == 1:
-					# exit if the value returned equals one
-						all_off()
-						f.close()
-						sys.exit()
+				if pseudoReturn == 1:
+				# exit if the value returned equals one
+					# debug_message("Exiting")
+					all_off()
+					# pseudofile.close()
+			
+					debug_message("Writing to file")	
+					# update the status so that the cycle doesn't repeat
+					fileTraffic2=open(TXTTRAFFIC, 'w')
+		                        fileTraffic2.write("pseudowait")
+               				fileTraffic2.close()
+					break
+
+			# close the file when done
+			pseudofile.close()
+
+		elif selection == "pseudowait":
+		# if there was a failure previously, then dont do anything until updated
+			debug_message("Waiting on pseudocode to be updated")
+			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			sleep(5)
 
 		elif selection == "restart":
 		# restart the Raspberry Pi
@@ -435,15 +451,16 @@ try:
 		elif selection == "shutdown":
 		# shutdown the Raspberry Pi
 			subprocess.call(["sudo", "shutdown", "-h", "now"])
-	
+
 		else:
 		# If nothing selected or bad value, default to failure state
 			phaseflasher=run_flasher("all", phaseflasher)
 
-# except KeyboardInterrupt:
-except Exception:
-# perform action if Ctrl+C is pressed
-	log_message("Exiting")
+# except KeyboardInterrupt as e:
+except Exception as e:
+# perform action if exception occurs
+	log_message(e)
+	log_message("Exiting with interrupt")
 	all_off()
 	# GPIO.clean()
 
