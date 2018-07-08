@@ -16,33 +16,33 @@ import lcddriver
 import random
 import subprocess
 
-# DEBUGGING MODE, DISABLED=0, ENABLED=1
-DEBUG=0
+# DEBUGGING MODE, DISABLED = 0, ENABLED = 1
+DEBUG = 0
 
 # LIST ALL OF THE PINS USED
-PINOUTLIST=[23, 21, 19]
+PINOUTLIST = [23, 21, 19]
 
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
-EAST_CR=23
-EAST_CY=21
-EAST_CG=19
+EAST_CR = 23
+EAST_CY = 21
+EAST_CG = 19
 
 # DEFINE ADDITIONAL CONSTANTS
-LAMPON=GPIO.LOW
-LAMPOFF=GPIO.HIGH
-FLASHER_DELAY=.7
-TXTTRAFFIC="/tmp/traffic.txt"
-TXTDISPLAY="/tmp/traffic_display.txt"
-TXTPSEUDO="/tmp/traffic_pseudo.txt"
+LAMPON = GPIO.LOW
+LAMPOFF = GPIO.HIGH
+FLASHER_DELAY = .7
+TXTTRAFFIC = "/tmp/traffic.txt"
+TXTDISPLAY = "/tmp/traffic_display.txt"
+TXTPSEUDO = "/tmp/traffic_pseudo.txt"
 
-# display=lcddriver.lcd()
-display=""
-displayState="off"
-displayStateOld="off"
-selection=""
-phaseflasher=0
-phasenum=0
-run_signal_flasher="red"
+# display = lcddriver.lcd()
+display = ""
+displayState = "off"
+displayStateOld = "off"
+selection = ""
+phaseflasher = 0
+phasenum = 0
+run_signal_flasher = "red"
 
 
 def setup():
@@ -101,9 +101,9 @@ def run_red_light_green_light(yellowon):
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
 	
 	# generate random values for red and green
-	red_time=randint(1, 10)
-	green_time=randint(1, 3)
-	yellow_time=FLASHER_DELAY
+	red_time = randint(1, 10)
+	green_time = randint(1, 3)
+	yellow_time = FLASHER_DELAY
 
 	# Turn on the red light and wait
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
@@ -127,12 +127,12 @@ def run_red_light_green_light(yellowon):
 
 def run_signal(country):
 # runs the light using normal signal
-	phaseflasher=0
+	phaseflasher = 0
 
 	# generate random values for the lights to stay on
-	east_grn_time=random.randint(5, 45)
-	east_yel_time=random.randint(2, 5)
-	east_red_time=random.randint(5, 45)
+	east_grn_time = random.randint(5, 45)
+	east_yel_time = random.randint(2, 5)
+	east_red_time = random.randint(5, 45)
 
 	# green
 	eblight(LAMPOFF, LAMPOFF, LAMPON)
@@ -143,7 +143,7 @@ def run_signal(country):
         # flash green if selected
         if country.startswith("russia"):
             for i in range(randint(5,10), 0, -1):
-                phaseflasher=run_flasher("green", phaseflasher)
+                phaseflasher = run_flasher("green", phaseflasher)
 
 	# yellow
 	eblight(LAMPOFF, LAMPON, LAMPOFF)
@@ -167,16 +167,16 @@ def run_signal(country):
 	# perform flashing if selected
 	if country.endswith("flasher"):
 		# pick a color to flash
-		colorint=randint(0,10)
+		colorint = randint(0,10)
 		if colorint < 5:
-			color="red"
+			color = "red"
 		else:
-			color="yellow"
+			color = "yellow"
 	
 		# perform the flashing
-		flashrangemax=randint(6,30)
+		flashrangemax = randint(6,30)
 		for i in range(1,flashrangemax):
-			phaseflasher=run_flasher(color, phaseflasher)
+			phaseflasher = run_flasher(color, phaseflasher)
 
 
 def party_mode(phase, delay):
@@ -207,41 +207,41 @@ def run_flasher(color, phase):
 		if phase == 1:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red Off", "")
-			phase=2
+			phase = 2
 		else:
 			eblight(LAMPON, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Red", "")
-			phase=1
+			phase = 1
 
 	elif color == "yellow":
 		if phase == 3:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Yellow Off", "")
-			phase=4
+			phase = 4
 		else:
 			eblight(LAMPOFF, LAMPON, LAMPOFF)
 			lcd_message("Flashing Yellow", "")
-			phase=3
+			phase = 3
 
 	elif color == "green":
 		if phase == 7:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing Green Off", "")
-			phase=8
+			phase = 8
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
 			lcd_message("Flashing Green", "")
-			phase=7
+			phase = 7
 	
 	elif color == "all":
 		if phase == 9:
 			eblight(LAMPON, LAMPON, LAMPON)
 			lcd_message("Flashing All", "")
-			phase=10
+			phase = 10
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 			lcd_message("Flashing All Off", "")
-			phase=9
+			phase = 9
 
 	sleep(FLASHER_DELAY)
 	return phase
@@ -249,8 +249,8 @@ def run_flasher(color, phase):
 
 def calc_yellow_time(grade):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
-        speed=randint(25,80)
-	yel_time=1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
+        speed = randint(25,80)
+	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
 	return yel_time
 
 
@@ -309,38 +309,38 @@ def all_off():
 
 def process_pseudocode(command):
 # process the pseudocode that ahs been entered
-	returncode=1
+	returncode = 1
 
 	if command.startswith("red"):
 	# turn on the red light
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
-		returnCode=0
+		returnCode = 0
 
 	elif command.startswith("yellow"):
 	# turn on the yellow light
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
-		returnCode=0
+		returnCode = 0
 
 	elif command.startswith("green"):
 	# turn on the green light
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
-		returnCode=0
+		returnCode = 0
 
 	elif command.startswith("wait"):
 	# sleep for the specified duration
-		waittime=float(command[5:7])
+		waittime = float(command[5:7])
 		debug_message("Waiting " + str(waittime))
 		sleep(waittime)
-		returnCode=0
+		returnCode = 0
 
 	elif command.startswith("repeat"):
 	# repeat reading the file
-		returnCode=0
+		returnCode = 0
 
 	else:
 	# mention that exception occurred and exit
 		log_message("Exception occurred")
-		returnCode=1
+		returnCode = 1
 
 	return returnCode
 
@@ -348,7 +348,7 @@ def process_pseudocode(command):
 def pseudowait():
 # Update the status so that the message doesnt repeat
 	log_message("Updating pseudo status")
-	fileTraffic2=open(TXTTRAFFIC, 'w')
+	fileTraffic2 = open(TXTTRAFFIC, 'w')
 	fileTraffic2.write("pseudowait")
 	fileTraffic2.close()
 
@@ -362,44 +362,44 @@ try:
 	while True:
 		try:
 		# Read the program file
-			fileTraffic=open(TXTTRAFFIC, "r")
-			selection=fileTraffic.readline()
+			fileTraffic = open(TXTTRAFFIC, "r")
+			selection = fileTraffic.readline()
 			fileTraffic.close()
 
                 except IOError:
                 # if the file doesn't exist, then create it and give public permissions
-                        fileTraffic=open(TXTTRAFFIC, "w")
+                        fileTraffic = open(TXTTRAFFIC, "w")
                         subprocess.call(['chmod', '0777', TXTTRAFFIC])
                         fileTraffic.close()
 		
 		try:
 		# read the text display file
-			fileDisplay=open(TXTDISPLAY, "r")
-			displayState=fileDisplay.readline()
+			fileDisplay = open(TXTDISPLAY, "r")
+			displayState = fileDisplay.readline()
 			fileDisplay.close()
 
 		except IOError:
 		# if the file doesn't exist, then create it and give public permissions
-			fileDisplay=open(TXTDISPLAY, "w")
+			fileDisplay = open(TXTDISPLAY, "w")
 			subprocess.call(['chmod', '0777', TXTDISPLAY])
 			fileDisplay.close()
 
 		try:
 		# read the psuedo code file
-			filePseudo=open(TXTPSEUDO, "r")
+			filePseudo = open(TXTPSEUDO, "r")
 			filePseudo.close()
 
 		except IOError:
                 # if the file doesn't exist, then create it and give public permissions
-                        filePseudo=open(TXTPSEUDO, "w")
+                        filePseudo = open(TXTPSEUDO, "w")
                         subprocess.call(['chmod', '0777', TXTPSEUDO])
                         filePseudo.close()
 	
 		# controls whether to display output on the LCD
 		if displayState == "on":
-			display=lcddriver.lcd()
+			display = lcddriver.lcd()
 		else:
-			display=""
+			display = ""
 
 		if "traffic" in selection:
 		# run the US traffic program
@@ -427,15 +427,15 @@ try:
 
 		elif selection == "flashred":
 		# flash red
-			phaseflasher=run_flasher("red", phaseflasher)
+			phaseflasher = run_flasher("red", phaseflasher)
 
 		elif selection == "flashyel":
 		# flash yellow
-			phaseflasher=run_flasher("yellow", phaseflasher)
+			phaseflasher = run_flasher("yellow", phaseflasher)
 
 		elif selection == "flashgrn":
 		# flash green
-			phaseflasher=run_flasher("green", phaseflasher)
+			phaseflasher = run_flasher("green", phaseflasher)
 
 		elif selection == "redlightgreenlight":
 		# red light, green light
@@ -447,30 +447,30 @@ try:
 
 		elif selection == "partymode4":
 		# slower party mode
-			phaseflasher=party_mode(phaseflasher, 2)
+			phaseflasher = party_mode(phaseflasher, 2)
 
 		elif selection == "partymode":
 		# party mode
-			phaseflasher=party_mode(phaseflasher, 1)
+			phaseflasher = party_mode(phaseflasher, 1)
 	
 		elif selection == "partymode2":
 		# party mode, but faster
-			phaseflasher=party_mode(phaseflasher, 0.5)
+			phaseflasher = party_mode(phaseflasher, 0.5)
 
 		elif selection == "partymode3":
 		# party mode, but fastest
-			phaseflasher=party_mode(phaseflasher, 0.25)
+			phaseflasher = party_mode(phaseflasher, 0.25)
 
 		elif selection == "pseudocode":
 		# Read and attempt to process the sudo code
-			lastline=""
-			pseudofile=open(TXTPSEUDO, 'rb')
+			lastline = ""
+			pseudofile = open(TXTPSEUDO, 'rb')
 			for line in pseudofile:
 				debug_message("Line reads: " + line)
 
 				# do something with data
-				pseudoReturn=process_pseudocode(line)
-				lastline=line
+				pseudoReturn = process_pseudocode(line)
+				lastline = line
 				debug_message("pseudoReturn: " + str(pseudoReturn))
 
 				if pseudoReturn == 1:
