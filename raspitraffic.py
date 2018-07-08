@@ -277,13 +277,7 @@ def process_pseudocode(command):
 # process the pseudocode that ahs been entered
 	returncode=1
 
-	if command.startswith("start"):
-	# start the program
-		log_message("Starting program")
-		all_on("all")
-		returnCode=0
-
-	elif command.startswith("red"):
+	if command.startswith("red"):
 	# turn on the red light
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 		returnCode=0
@@ -308,11 +302,6 @@ def process_pseudocode(command):
 	elif command.startswith("repeat"):
 	# repeat reading the file
 		returnCode=0
-
-	elif command.startswith("end"):
-	# end of the program, need to exit
-		log_message("End of program")
-		returnCode=1
 
 	else:
 		log_message("Exception occurred")
