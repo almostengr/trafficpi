@@ -509,7 +509,7 @@ try:
 			all_on("all")
 
 # except KeyboardInterrupt as e:
-except Exception as e:
+except BaseException as e:
 # perform action if exception occurs
 	log_message("Exiting with exception")
 	log_message(e)
