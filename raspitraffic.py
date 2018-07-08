@@ -180,7 +180,7 @@ def run_signal(country):
 
 
 def party_mode(phase, delay):
-# randomly change the color to a different light
+# randomly change the color to a different light(s)
 	if phase == 1:
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 	elif phase == 2:
@@ -361,7 +361,7 @@ debug_message("Debug mode enabled")
 try:
 	while True:
 		try:
-		# Read the data file
+		# Read the program file
 			fileTraffic=open(TXTTRAFFIC, "r")
 			selection=fileTraffic.readline()
 			fileTraffic.close()
@@ -373,7 +373,7 @@ try:
                         fileTraffic.close()
 		
 		try:
-		# Read the file
+		# read the text display file
 			fileDisplay=open(TXTDISPLAY, "r")
 			displayState=fileDisplay.readline()
 			fileDisplay.close()
@@ -385,6 +385,7 @@ try:
 			fileDisplay.close()
 
 		try:
+		# read the psuedo code file
 			filePseudo=open(TXTPSEUDO, "r")
 			filePseudo.close()
 
@@ -394,7 +395,7 @@ try:
                         subprocess.call(['chmod', '0777', TXTPSEUDO])
                         filePseudo.close()
 	
-		# controls whether to dispplay output on the LCD
+		# controls whether to display output on the LCD
 		if displayState == "on":
 			display=lcddriver.lcd()
 		else:
@@ -457,6 +458,7 @@ try:
 			phaseflasher=party_mode(phaseflasher, 0.5)
 
 		elif selection == "partymode3":
+		# party mode, but fastest
 			phaseflasher=party_mode(phaseflasher, 0.25)
 
 		elif selection == "pseudocode":
@@ -479,8 +481,10 @@ try:
 					break
 			else:
 				if lastline == "repeat":
+				# repeat the phase if the last line states repeat
 					False
 				else:
+				# go into waiting state if last line isnt repeat 
 					pseudowait()
 			
 			# close the file when done
