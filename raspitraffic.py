@@ -304,6 +304,7 @@ def process_pseudocode(command):
 		returnCode=0
 
 	else:
+	# mention that exception occurred and exit
 		log_message("Exception occurred")
 		returnCode=1
 
@@ -316,7 +317,6 @@ def pseudowait():
 	fileTraffic2.write("pseudowait")
 	fileTraffic2.close()
 
-	
 
 # configure everything
 setup()
@@ -432,8 +432,9 @@ try:
 					False
 				else:
 					pseudowait()
-				# close the file when done
-				pseudofile.close()
+			
+			# close the file when done
+			pseudofile.close()
 
 		elif selection == "pseudowait":
 		# if there was a failure previously, then dont do anything until updated
