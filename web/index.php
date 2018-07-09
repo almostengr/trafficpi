@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$pseudofilepath = "/tmp/traffic_pseudo.txt";
 
 	// update the file with program to run
-	$fileaction = file_put_contents($fileactionpath, $_POST['program']);
+	$fileaction = file_put_contents($fileactionpath, $_POST['action']);
 	$filedisplay = file_put_contents($filedisplaypath, $_POST['display']);
 
 	$now = date("F j, Y, g:i:s a");
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "<p id='success'>$now Submitted request.</p>";
 	} // end if else
 
-	if ($action == "pseudocode") {
+	if ($_POST['action'] == "pseudocode") {
 		$file2 = file_put_contents($pseudofilepath, $_POST['pseudocode']);
 		if ($file2 === FALSE) {
 			echo "<p id='error'>Error when attempting to open file.</p>";
@@ -64,49 +64,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <form method="post" action="index.php">
 <p>
-<strong>Select Program</strong><br />
-<select name="program">
+<strong>Select Action</strong><br />
+<select name="action">
 	<optgroup label="Run Signals">
-		<option value="ustraffic" <?php $action=="ustraffic" ? print 'selected="selected"' : false; ?>>US Traffic</option>
-		<option value="ustrafficflasher" <?php $_POST['program']=="ustrafficflasher" ? print 'selected="selected"' : false; ?>>US Traffic with flasher</option>
-		<option value="uktraffic" <?php $action=="uktraffic" ? print 'selected="selected"' : false; ?>>UK Traffic</option>
-		<option value="uktrafficflasher" <?php $_POST['program']=="uktrafficflasher" ? print 'selected="selected"' : false; ?>>UK Traffic with flasher</option>
-		<option value="russiatraffic" <?php $action=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic</option>
-		<option value="russiatrafficflasher" <?php $_POST['program']=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic with flasher</option>
+		<option value="ustraffic" <?php $_POST['action']=="ustraffic" ? print 'selected="selected"' : false; ?>>US Traffic</option>
+		<option value="ustrafficflasher" <?php $_POST['action']=="ustrafficflasher" ? print 'selected="selected"' : false; ?>>US Traffic with flasher</option>
+		<option value="uktraffic" <?php $_POST['action']=="uktraffic" ? print 'selected="selected"' : false; ?>>UK Traffic</option>
+		<option value="uktrafficflasher" <?php $_POST['action']=="uktrafficflasher" ? print 'selected="selected"' : false; ?>>UK Traffic with flasher</option>
+		<option value="russiatraffic" <?php $_POST['action']=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic</option>
+		<option value="russiatrafficflasher" <?php $_POST['action']=="russiatraffic" ? print 'selected="selected"' : false; ?>>Russia Traffic with flasher</option>
 	</optgroup>
 	<optgroup label="Steady On/Off">
-		<option value="all_on" <?php $action=="all_on" ? print 'selected="selected"' : false; ?>>All On</option>
-		<option value="redon" <?php $action=="redon" ? print 'selected="selected"' : false; ?>>Red On</option>
-		<option value="yellowon" <?php $action=="yellowon" ? print 'selected="selected"' : false; ?>>Yellow On</option>
-		<option value="greenon" <?php $action=="greenon" ? print 'selected="selected"' : false; ?>>Green On</option>
-		<option value="all_off" <?php $action=="all_off" ? print 'selected="selected"' : false; ?>>All Off</option>
+		<option value="all_on" <?php $_POST['action']=="all_on" ? print 'selected="selected"' : false; ?>>All On</option>
+		<option value="redon" <?php $_POST['action']=="redon" ? print 'selected="selected"' : false; ?>>Red On</option>
+		<option value="yellowon" <?php $_POST['action']=="yellowon" ? print 'selected="selected"' : false; ?>>Yellow On</option>
+		<option value="greenon" <?php $_POST['action']=="greenon" ? print 'selected="selected"' : false; ?>>Green On</option>
+		<option value="all_off" <?php $_POST['action']=="all_off" ? print 'selected="selected"' : false; ?>>All Off</option>
 	</optgroup>
 	<optgroup label="Games">
-		<option value="redlightgreenlight" <?php $action=="redlightgreenlight" ? print 'selected="selected"' : false; ?>>Red Light Green Light</option>
-		<option value="redlightgreenlight2" <?php $action=="redlightgreenlight2" ? print 'selected="selected"' : false; ?>>Red Light Green Light, with Yellow</option>
+		<option value="redlightgreenlight" <?php $_POST['action']=="redlightgreenlight" ? print 'selected="selected"' : false; ?>>Red Light Green Light</option>
+		<option value="redlightgreenlight2" <?php $_POST['action']=="redlightgreenlight2" ? print 'selected="selected"' : false; ?>>Red Light Green Light, with Yellow</option>
 	</optgroup>
 	<optgroup label="Flashers">
-		<option value="flashred" <?php $action=="flashred" ? print 'selected="selected"' : false; ?>>Flash Red</option>
-		<option value="flashyel" <?php $action=="flashyel" ? print 'selected="selected"' : false; ?>>Flash Yellow</option>
-		<option value="flashgrn" <?php $action=="flashgrn" ? print 'selected="selected"' : false; ?>>Flash Green</option>
-		<option value="partymode4" <?php $action=="partymode4" ? print 'selected="selected"' : false; ?>>Party Mode, Slow</option>
-		<option value="partymode" <?php $action=="partymode" ? print 'selected="selected"' : false; ?>>Party Mode</option>
-		<option value="partymode2" <?php $action=="partymode2" ? print 'selected="selected"' : false; ?>>Party Mode, Fast</option>
-		<option value="partymode3" <?php $action=="partymode3" ? print 'selected="selected"' : false; ?>>Party Mode, Faster</option>
+		<option value="flashred" <?php $_POST['action']=="flashred" ? print 'selected="selected"' : false; ?>>Flash Red</option>
+		<option value="flashyel" <?php $_POST['action']=="flashyel" ? print 'selected="selected"' : false; ?>>Flash Yellow</option>
+		<option value="flashgrn" <?php $_POST['action']=="flashgrn" ? print 'selected="selected"' : false; ?>>Flash Green</option>
+		<option value="partymode4" <?php $_POST['action']=="partymode4" ? print 'selected="selected"' : false; ?>>Party Mode, Slow</option>
+		<option value="partymode" <?php $_POST['action']=="partymode" ? print 'selected="selected"' : false; ?>>Party Mode</option>
+		<option value="partymode2" <?php $_POST['action']=="partymode2" ? print 'selected="selected"' : false; ?>>Party Mode, Fast</option>
+		<option value="partymode3" <?php $_POST['action']=="partymode3" ? print 'selected="selected"' : false; ?>>Party Mode, Faster</option>
 	</optgroup>
 	<optgroup label="Other">
-		<option value="pseudocode" <?php $action=="pseudocode" ? print 'selected="selected"' : false; ?>>Pseudocode</option>
+		<option value="pseudocode" <?php $_POST['action']=="pseudocode" ? print 'selected="selected"' : false; ?>>Pseudocode</option>
 	</optgroup>
 	<optgroup label="Raspberry Pi Options">
-		<option value="restart" <?php $action=="restart" ? print 'selected="selected"' : false; ?>>Restart</option>
-		<option value="shutdown" <?php $action=="shutdown" ? print 'selected="selected"' : false; ?>>Shut Down</option>
+		<option value="restart" <?php $_POST['action']=="restart" ? print 'selected="selected"' : false; ?>>Restart</option>
+		<option value="shutdown" <?php $_POST['action']=="shutdown" ? print 'selected="selected"' : false; ?>>Shut Down</option>
 	</optgroup>
 </select>
 </p>
 
 <strong>Pseudocode Commands</strong><br />
 <textarea name="pseudocode" cols="50" rows="4">
-<?php $action == "pseudocode" ? print $_POST["pseudocode"] : false; ?>
+<?php $_POST['action']=="pseudocode" ? print $_POST["pseudocode"] : false; ?>
 </textarea>
 </p>
 
