@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>TrafficPi Control Panel</title>
+<title>RaspiTraffic Control Panel</title>
 <meta name="copyright" content="Kenny Robinson, @almostengr" />
 <meta name="author" content="Kenny Robinson, @almostengr" />
 <meta name="robots" content="noindex,nofollow" />
@@ -27,7 +27,7 @@ p#success {
 </head>
 <body>
 
-<h1>TrafficPi Control Panel</h1>
+<h1>RaspiTraffic Control Panel</h1>
 
 <?php
 // only peform these actions if the form has been submitted
