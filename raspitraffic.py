@@ -345,6 +345,11 @@ def process_pseudocode(command):
 	# repeat reading the file
 		returnCode = 0
 
+	elif command.startswith("off"):
+	# turn off all of the lights
+		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+		returnCode = 0
+
 	else:
 	# mention that exception occurred and exit
 		log_message("Exception occurred")

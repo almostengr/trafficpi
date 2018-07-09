@@ -118,8 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <li><strong>red</strong> Turn on the red light</li>
 <li><strong>yellow</strong> Turn on the yellow light</li>
 <li><strong>green</strong> Turn on the green light</li>
-<li><strong>repeat</strong> Repeat the loop</li>
+<li><strong>repeat</strong> Repeat the loop. Has to be last line in the in order to repeat</li>
 <li><strong>wait time</strong> Wait before doing the next command. "Time" is the number of seconds to wait</li>
+<li><strong>off</strong> Turn off all the lights</li>
 </ul>
 
 <p style="text-align: center;">
