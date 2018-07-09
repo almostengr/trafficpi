@@ -200,7 +200,7 @@ def party_mode(phase, delay):
 	
 	# delay between changing lights again
 	sleep(delay)
-	return randint(1,7)
+	return randint(1,8)
 
 
 def run_flasher(color, phase):
