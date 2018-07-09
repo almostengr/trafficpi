@@ -195,6 +195,8 @@ def party_mode(phase, delay):
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 	elif phase == 7:
 		eblight(LAMPON, LAMPON, LAMPON)
+	elif phase == 8:
+		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 	
 	# delay between changing lights again
 	sleep(delay)
