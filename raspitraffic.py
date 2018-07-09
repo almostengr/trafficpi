@@ -172,7 +172,7 @@ def run_signal(country):
 			color = "red"
 		else:
 			color = "yellow"
-	
+
 		# perform the flashing
 		flashrangemax = randint(6,30)
 		for i in range(1,flashrangemax):
@@ -195,9 +195,9 @@ def party_mode(phase, delay):
 		eblight(LAMPON, LAMPOFF, LAMPON)
 	elif phase == 7:
 		eblight(LAMPON, LAMPON, LAMPON)
-	elif phase == 8: 
+	elif phase == 8:
 		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-	
+
 	# delay between changing lights again
 	sleep(delay)
 
@@ -240,7 +240,7 @@ def run_flasher(color, phase):
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
 			lcd_message("Flashing Green", "")
 			phase = 7
-	
+
 	elif color == "all":
 		if phase == 9:
 			eblight(LAMPON, LAMPON, LAMPON)
@@ -267,7 +267,7 @@ def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
-	
+
 	# print the status of each light
 	# 1 = off, 0 = on
 	debug_message("R: " + str(cirred) + " Y: " + str(ciryel) + " G: " + str(cirgrn))
@@ -280,7 +280,7 @@ def all_on(phase):
 	if phase == "all":
 		eblight(LAMPON, LAMPON, LAMPON)
 		lcd_message("ALL LIGHTS ON", "")
-	
+
 	# turn on the red light
 	elif phase == "red":
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
@@ -384,7 +384,7 @@ try:
                         fileTraffic = open(TXTTRAFFIC, "w")
                         subprocess.call(['chmod', '0777', TXTTRAFFIC])
                         fileTraffic.close()
-		
+
 		try:
 		# read the text display file
 			fileDisplay = open(TXTDISPLAY, "r")
@@ -407,7 +407,7 @@ try:
                         filePseudo = open(TXTPSEUDO, "w")
                         subprocess.call(['chmod', '0777', TXTPSEUDO])
                         filePseudo.close()
-	
+
 		# controls whether to display output on the LCD
 		if displayState == "on":
 			display = lcddriver.lcd()
@@ -425,7 +425,7 @@ try:
 		elif selection == "redon":
 		# red on
 			all_on("red")
-	
+
 		elif selection == "yellowon":
 		# yellow on
 			all_on("yellow")
@@ -465,7 +465,7 @@ try:
 		elif selection == "partymode":
 		# party mode
 			phaseflasher = party_mode(phaseflasher, 1)
-	
+
 		elif selection == "partymode2":
 		# party mode, but faster
 			phaseflasher = party_mode(phaseflasher, 0.5)
@@ -490,16 +490,16 @@ try:
 				# exit if the value returned equals one
 					debug_message("Exiting")
 					all_off()
-					pseudowait()	
+					pseudowait()
 					break
 			else:
 				if lastline == "repeat":
 				# repeat the phase if the last line states repeat
 					False
 				else:
-				# go into waiting state if last line isnt repeat 
+				# go into waiting state if last line isnt repeat
 					pseudowait()
-			
+
 			# close the file when done
 			pseudofile.close()
 
