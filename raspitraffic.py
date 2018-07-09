@@ -99,7 +99,7 @@ def lcd_message(line1, line2):
 
 def run_red_light_green_light(yellowon):
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
-	
+
 	# generate random values for red and green
 	red_time = randint(1, 10)
 	green_time = randint(1, 3)
@@ -116,9 +116,9 @@ def run_red_light_green_light(yellowon):
 	debug_message("Green Time: " + str(green_time))
 	lcd_message("Green Light!", "Run!")
 	sleep(green_time)
-	
-	# If playing with yellow light, then turn on the yellow light
+
 	if yellowon == 1:
+	# if playing with yellow light, then turn on the yellow light
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
 		debug_message("Yellow Time: " + str(yellow_time))
 		lcd_message("Yellow Light!", "Slow!")
@@ -134,7 +134,7 @@ def run_signal(country):
 	east_yel_time = random.randint(2, 5)
 	east_red_time = random.randint(5, 45)
 
-	# green
+	# green light
 	eblight(LAMPOFF, LAMPOFF, LAMPON)
 	for ttime in range(east_grn_time, 0, -1):
 		lcd_message("Green", "Time Remain: " + str(ttime) + "s")
@@ -145,13 +145,13 @@ def run_signal(country):
             for i in range(randint(5,10), 0, -1):
                 phaseflasher = run_flasher("green", phaseflasher)
 
-	# yellow
+	# yellow light
 	eblight(LAMPOFF, LAMPON, LAMPOFF)
 	for ttime in range(east_yel_time, 0, -1):
 		lcd_message("Yellow", "Time Remain: " + str(ttime) + "s")
 		sleep(1)
 
-	# red
+	# red light
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
 	for ttime in range(east_red_time, 0, -1):
 		lcd_message("Red", "Time Remain: " + str(ttime) + "s")
@@ -210,7 +210,8 @@ def party_mode(phase, delay):
 
 
 def run_flasher(color, phase):
-# flash the lights
+# flash the lights with the color provided
+
 	if color == "red":
 		if phase == 1:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
@@ -316,7 +317,7 @@ def all_off():
 
 
 def process_pseudocode(command):
-# process the pseudocode that ahs been entered
+# process the pseudocode that has been entered
 	returncode = 1
 
 	if command.startswith("red"):
