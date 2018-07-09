@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo "<p id='error'>$now Error when attempting to save the request.</p>";
 	}
 	else{
-	       	// show success message if able to write to the file
+		// show success message if able to write to the file
 		echo "<p id='success'>$now Submitted request.</p>";
 	} // end if else
 
@@ -111,7 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </p>
 
 <p><input type="submit" name="submit" value="Submit" /></p>
-
 </form>
 
 <p>Pseudocode Commands</p>
@@ -122,7 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <li><strong>repeat</strong> Repeat the loop</li>
 <li><strong>wait time</strong> Wait before doing the next command. "Time" is the number of seconds to wait</li>
 </ul>
-
 
 <p style="text-align: center;">
 Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr |
