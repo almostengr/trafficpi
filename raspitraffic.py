@@ -184,23 +184,29 @@ def party_mode(phase, delay):
 	if phase == 1:
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 	elif phase == 2:
-		eblight(LAMPON, LAMPON, LAMPOFF)
-	elif phase == 3:
-		eblight(LAMPON, LAMPOFF, LAMPON)
-	elif phase == 4:
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
+	elif phase == 3:
+		eblight(LAMPOFF, LAMPOFF, LAMPON)
+	elif phase == 4:
+		eblight(LAMPON, LAMPON, LAMPOFF)
 	elif phase == 5:
 		eblight(LAMPOFF, LAMPON, LAMPON)
 	elif phase == 6:
-		eblight(LAMPOFF, LAMPOFF, LAMPON)
+		eblight(LAMPON, LAMPOFF, LAMPON)
 	elif phase == 7:
 		eblight(LAMPON, LAMPON, LAMPON)
-	elif phase == 8:
+	elif phase == 8: 
 		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 	
 	# delay between changing lights again
 	sleep(delay)
-	return randint(1,8)
+
+	# reduce change of same phase being displayed twice in a row
+	nextphase = randint(1,8)
+	if nextphase == phase:
+		nextphase = randint(1,3)
+
+	return nextphase
 
 
 def run_flasher(color, phase):
