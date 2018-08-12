@@ -71,6 +71,9 @@ breadboard with LEDs connected.
 * 30 -------------------- LCD Display GND
 * 34 -------------------- Relay Board GND
 
+Visual of Pin Connections
+![Image of connections on Raspberry Pi board](https://raw.githubusercontent.com/bitsecondal/raspitraffic-stem/master/docs/circuitry.jpg)
+
 ----
 
 ## Initial Setup
