@@ -102,6 +102,21 @@ if [ $(id -u) -eq 0 ]; then
 
 	# step 20
 	sh -c "iptables-save > /etc/iptables.ipv4.nat"
+	
+	# step 21 and 22
+	cp -p /etc/rc.local /etc/rc.local.${DATETIME}
+	/bin/sed 's|exit 0|iptables-restore < /etc/iptables.ipv4.nat|g' /etc/rc.local.${DATETIME} /etc/rc.local
+	echo "" >> /etc/rc.local
+	echo "exit 0" >> /etc/rc.local
+
+	# step 23
+	service hostapd start
+	service dnsmasq start
+
+	# step 24
+	log_message "Raspberry Pi will reboot in 10 seconds"
+	wait 10
+	reboot
 
 	log_message "Done performing Wifi setup"
 else
