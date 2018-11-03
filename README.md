@@ -2,12 +2,13 @@
 
 ## Table of Contents
 * Purpose
-* System Requirements
+* Parts List
 * Pin Setup
 * Initial Setup
 * Running the Scripts
 * Uninstall Script
-* Bug Reports
+* Bug Reports and Road Map
+* Known Bugs
 * Acknowledgements
 * License
 
