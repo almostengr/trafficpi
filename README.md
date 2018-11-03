@@ -24,6 +24,7 @@ to educate children about the impact that computers and computer programming has
 society. This project targets the "T, E, and M" of "STEM" by using electronic circuits 
 for controlling the lights, software for controlling the electronic circuits, and 
 mathematical calculations for making timing decisions.
+
 ----
 
 ## Parts List
