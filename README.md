@@ -32,15 +32,15 @@ Below are the list of parts needed for this project. You'll need to choose one o
 the mentioned options below depending on your budget. Using LEDs is cheaper than 
 getting an actual traffic light.
 
-* Raspiberry Pi 3 (May work on other models, but has been tested on Raspberry Pi 3)
+* Raspiberry Pi 3 (May work on other models, but has only been tested on Raspberry Pi 3)
 * Raspiberry Pi power suppy
-* Micro SD card (to run the OS)
+* Micro SD card (to run the OS and store project files)
 * USB keyboard (mouse optional)
 * HDMI display
 * I2C 16x2 LCD Display 
 * Breadboard Jumper Cables
 * Breadboard (optional)
-* Python 2.7.9 (May work with later versions, but has only be tested with 2.7.9)
+* Python 2.7.9 (May work with later versions, but has only been tested with 2.7.9)
 * Raspbian Jessie (May work on other OSs, but has only been tested with Raspbian Jessie)
 
 ### LED Option
@@ -60,7 +60,7 @@ listed are the physical pin numbers on the board, not the GPIO pin numbers. If
 you are not using a relay board, the connections can be made directly to a 
 breadboard with LEDs connected.
 
-* Pi Pin (Board) -------- Device Pin / LED Color
+* Pi Pin (Board) -------- Device Connection
 * 2 --------------------- LCD Display VCC (+5V)
 * 3 --------------------- LCD Display SDA
 * 4 --------------------- Relay Board VCC (+5V)
@@ -112,8 +112,7 @@ by the install script.
 ## Bug Reports and Road Map
 Future enhancements, defects, and updates to the scripts are tracked using the 
 issue tracker on this repository. For bugs, please include as much detail 
-as possible so that the issue can be replicated. Special requests are 
-welcome to be submitted.
+as possible so that the issue can be replicated.
 
 ----
 
