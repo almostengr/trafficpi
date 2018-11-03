@@ -17,19 +17,17 @@
 ## Purpose 
 The purpose of this project is to educate children about the STEM (Science, Technology, 
 Engineering, and Mathematics) fields. Through the use of low cost devices and effective 
-teaching, by grouping these subjects together, children are able to associate what they 
-are learning with interactions with everyday items. For example, most children are 
-aware of the purpose of a traffic light, but most are not aware of a traffic lights' 
-internal workings. This project is designed to educate children by explaining the 
-workings of the "black box" of a traffic light. This project targets the "T, E, and 
-M" of "STEM" by using electronic circuits for controlling the lights, software for 
-controlling the electronic circuits, and mathematical calculations for making 
-timing decisions.
-
+teaching, children are able to associate what they are learning with interactions with 
+everyday items. For example, most children are aware of the purpose of a traffic light, 
+but most are not aware of a traffic lights' internal workings. This project is designed 
+to educate children about the impact that computers and computer programming has with
+society. This project targets the "T, E, and M" of "STEM" by using electronic circuits 
+for controlling the lights, software for controlling the electronic circuits, and 
+mathematical calculations for making timing decisions.
 ----
 
 ## Parts List
-Below are the list of parts needed for this project. You'll need to choose one of 
+Below are the list of parts used for this project. You'll need to choose one of 
 the mentioned options below depending on your budget. Using LEDs is cheaper than 
 getting an actual traffic light.
 
@@ -100,6 +98,12 @@ To control the traffic light, visit the webpage in your browser. A form will be
 presented with a list of programs to select from. Select the program you wish to 
 run and click the "Submit" button.
 
+### Pseudocode Program
+The Pseudocode Program allows you to write your own program for controlling the traffic 
+light. On the Control Panel webpage, enter each command that you want the light
+to perform on a line by itself in the "Pseudocode Commands" textbox. The list of 
+commands are listed on the Control Panel webpage below the textbox.
+
 ----
 
 ## Uninstall Script
@@ -120,7 +124,7 @@ as possible so that the issue can be replicated.
 ## Known Bugs
 * When exiting the script (using Ctrl+C), all of the relays may not turn off.
 In addition, the LCD display may not clear if it is writing when the kill
-shortcut is performed.
+command is executed.
 
 ----
 
