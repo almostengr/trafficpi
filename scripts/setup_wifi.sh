@@ -13,12 +13,17 @@ DATETTIME=$(date +%Y%m%d%H%M)
 function log_message() {
 # print message to screen and to log file
 	echo $*
-	echo "$(date) | "$* >> /var/tmp/raspitraffic_setup.log
+	echo "$(date) | "$* >> /var/tmp/trafficpi${DATETIME}/raspitraffic_setup.log
 }
 
 # CHECK TO SEE IF THE SCRIPT IS BEING RAN AS ROOT
 if [ $(id -u) -eq 0 ]; then
+	# make backup directory
+	mkdir /var/tmp/trafficpi${DATETIME}
+
 	log_message "Performing wifi Setup"
+
+	log_message "Backups of files will be saved in /var/tmp/trafficpi${DATETIME}"
 
 	# step 1
 	apt-get update
@@ -38,7 +43,7 @@ if [ $(id -u) -eq 0 ]; then
 	touch /etc/dhcpcd.conf
 
 	# make backup of original file
-	cp -p /etc/dhcpcd.conf /etc/dhcpcd.conf.${DATETIME}
+	cp -p /etc/dhcpcd.conf /var/tmp/trafficpi${DATETIME}
 
 	echo "interface wlan0" >> /etc/dhcpcd.conf
 	echo "static ip_address=192.168.220.1/24" >> /etc/dhcpcd.conf
@@ -53,7 +58,7 @@ if [ $(id -u) -eq 0 ]; then
 	touch /etc/hostapd/hostapd.conf
 
 	# make backup of original file
-	cp -p /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.${DATETIME}
+	cp -p /etc/hostapd/hostapd.conf /var/tmp/trafficpi${DATETIME}
 
 	echo "interface=wlan0" >> /etc/hostapd/hostapd.conf
 	echo "driver=nl80211" >> /etc/hostapd/hostapd.conf
@@ -74,12 +79,13 @@ if [ $(id -u) -eq 0 ]; then
 	echo "wpa_passphrase=almostengr" >> /etc/hostapd/hostapd.conf
 
 	# step 9 and 10
-	cp -p /etc/default/hostapd /etc/default/hostapd.${DATETIME}
-	/bin/sed 's|#DAEMON_CONF=""|DAEMON_CONF="/etc/hostapd/hostapd.conf"|g' /etc/default/hostapd.${DATETIME} > /etc/default/hostapd
+	log_message "Updating hostapd"
+	cp -rp /etc/default /var/tmp/trafficpi${DATETIME}/
+	/bin/sed 's|#DAEMON_CONF=""|DAEMON_CONF="/etc/hostapd/hostapd.conf"|g' /var/tmp/trafficpi${DATETIME}/default/hostapd > /etc/default/hostapd
 
 	# step 11 and 12
-	cp -p /etc/init.d/hostapd /etc/init.d/hostapd.${DATETIME}
-	/bin/sed 's|#DAEMON_CONF=|DAEMON_CONF=/etc/hostapd/hostapd.conf|g' /etc/init.d/hostapd.${DATETIME} > /etc/init.d/hostapd
+	cp -rp /etc/init.d /var/tmp/trafficpi${DATETIME}/init.d.hostapd
+	/bin/sed 's|#DAEMON_CONF=|DAEMON_CONF=/etc/hostapd/hostapd.conf|g' /var/tmp/trafficpi${DATETIME}/init.d/hostapd > /etc/init.d/hostapd
 
 	# step 13
 	mv /etc/dnsmasq.conf /etc/dnsmasq.conf.${DATETIME}
