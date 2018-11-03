@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p style="text-align: center;">
 Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr |
 <a href="index.php">Home</a> |
-<a href="https://github.com/bitsecondal/raspitraffic-stem" target="_blank">GitHub Repo</a>
+<a href="https://github.com/almostengr/raspitraffic-stem" target="_blank">GitHub Repo</a>
 </p>
 
 </body>
