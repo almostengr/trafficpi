@@ -127,6 +127,8 @@ shortcut is performed.
 https://github.com/the-raspberry-pi-guy/lcd. 
 * Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
 seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
+* Wifi AP configuration steps provided by 
+https://pimylifeup.com/raspberry-pi-wireless-access-point/
 
 ----
 
