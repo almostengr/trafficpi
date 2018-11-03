@@ -40,8 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// update the file with program to run
 	$fileaction = file_put_contents($fileactionpath, $_POST['action']);
-	$filedisplay = file_put_contents($filedisplaypath, $_POST['display']);
-
 	$now = date("F j, Y, g:i:s a");
 
 	if ($fileaction === FALSE || $filedisplay === FALSE) {
@@ -54,8 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} // end if else
 
 	if ($_POST['action'] == "pseudocode") {
+	// only perform the below if pseudocode option has been selected
 		$file2 = file_put_contents($pseudofilepath, $_POST['pseudocode']);
 		if ($file2 === FALSE) {
+		// display error if not able to open file
 			echo "<p id='error'>Error when attempting to open file.</p>";
 		}
 	} // end if else
@@ -113,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <p><input type="submit" name="submit" value="Submit" /></p>
 </form>
 
+<!-- pseudocode command input box -->
 <p>Pseudocode Commands</p>
 <ul>
 <li><strong>red</strong> Turn on the red light</li>
@@ -123,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <li><strong>off</strong> Turn off all the lights</li>
 </ul>
 
+<!-- FOOTER -- FOOTER -- FOOTER -->
 <p style="text-align: center;">
 Copyright &copy; 2017-<?php echo date("Y"); ?> @almostengr |
 <a href="index.php">Home</a> |
