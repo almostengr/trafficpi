@@ -2,17 +2,13 @@
 
 ####################################################################
 # Description: Script to configure wifi settings.
-# Author: Kenny Robinson, Bit Second Tech
+# Author: Kenny Robinson, @almostengr
 # Created: 2017-05-15
 ####################################################################  
 
-RTNCD=255
-
 function log_message() {
-	# print message to screen
+# print message to screen and to log file
 	echo $*
-
-	# write message to log
 	echo "$(date) | "$* >> /var/tmp/raspitraffic_setup.log
 }
 
