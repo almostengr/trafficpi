@@ -94,9 +94,17 @@ edit the file and make the stated change.
 ----
 
 ## Running The Scripts
-To control the traffic light, visit the webpage in your browser. A form will be 
+To control the traffic light, run the raspitraffic.py script via command line.
+```sh
+python raspitraffic.py
+```
+Then visit the webpage to your TrafficPi in a web browser. A form will be 
 presented with a list of programs to select from. Select the program you wish to 
-run and click the "Submit" button.
+run and click the "Submit" button. 
+
+If a program is already running, the newly selected program will start once the end of 
+the current program has been reached. If no program has been selected, the newly 
+selected program will start immediately.
 
 ### Pseudocode Program
 The Pseudocode Program allows you to write your own program for controlling the traffic 
