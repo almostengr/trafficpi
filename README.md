@@ -18,9 +18,9 @@
 The purpose of this project is to educate children about the STEM (Science, Technology, 
 Engineering, and Mathematics) fields. Through the use of low cost devices and effective 
 teaching, children are able to associate what they are learning with interactions with 
-everyday items. For example, most children are aware of the purpose of a traffic light, 
+everyday items. For example, most future engineers are aware of the purpose of a traffic light, 
 but most are not aware of a traffic lights' internal workings. This project is designed 
-to educate children about the impact that computers and computer programming has with
+to educate future engineers about the impact that computers and computer programming has with
 society. This project targets the "T, E, and M" of "STEM" by using electronic circuits 
 for controlling the lights, software for controlling the electronic circuits, and 
 mathematical calculations for making timing decisions.
@@ -124,12 +124,30 @@ by the install script.
 
 ----
 
+## Teach Software Versioning
+
+One of the goals of this project is to be able to teach the next generation of 
+engineers about the programming, software versioning, and how valuable engineers and 
+technologists are to society and the impact that they have. 
+A game was devleoped to be combined with this project to teach about software versioning,
+how sometime times Software Developers don't get it right the first time, and the 
+negative impact that can occur if they don't get it right the first time. 
+
+Below is the image of a group of future engineers working their way to developing the 
+psuedocode for a normal traffic cycle. As shown in the first version, all of the lights turned
+on but never turned off.  In the final version, they figured out that they had to turn on 
+and turn off each light as well as include a delay in between each light change. 
+
+![Image of Versioning](https://raw.githubusercontent.com/almostengr/raspitraffic-stem/master/docs/versioning.jpg)
+
+----
+
 ## Video Demonstration
-Video demostration of version 1.0 of the project is available to be watched at 
+Video demonstration of version 1.0 of the project is available to be watched at 
 <a href="https://www.youtube.com/watch?v=lr_ZJNX0viM" target="_blank">https://www.youtube.com/watch?v=lr_ZJNX0viM</a>. This version of the demonstration of the traffic light working 
 with an LCD screen connected.
 
-----
+---- 
 
 ## Bug Reports and Road Map
 Future enhancements, defects, and updates to the scripts are tracked using the 
