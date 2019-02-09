@@ -142,9 +142,9 @@ command is executed.
 * LCD Display code for controlling the LCD display were provided from 
 https://github.com/the-raspberry-pi-guy/lcd. 
 * Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
-seen at https://www.youtube.com/watch?v=xqZRDtX64UA influenced this project.
+seen at <a href="https://www.youtube.com/watch?v=xqZRDtX64UA" target="_blank">https://www.youtube.com/watch?v=xqZRDtX64UA</a> influenced this project.
 * Wifi AP configuration steps provided by 
-https://pimylifeup.com/raspberry-pi-wireless-access-point/
+<a href="https://pimylifeup.com/raspberry-pi-wireless-access-point/" target="_blank">https://pimylifeup.com/raspberry-pi-wireless-access-point/</a>
 
 ----
 
