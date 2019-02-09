@@ -60,16 +60,17 @@ listed are the physical pin numbers on the board, not the GPIO pin numbers. If
 you are not using a relay board, the connections can be made directly to a 
 breadboard with LEDs connected.
 
-* Pi Pin (Board) -------- Device Connection
-* 2 --------------------- LCD Display VCC (+5V)
-* 3 --------------------- LCD Display SDA
-* 4 --------------------- Relay Board VCC (+5V)
-* 5 --------------------- LCD Display SLC
-* 19 -------------------- Red Signal
-* 21 -------------------- Yellow Signal
-* 23 -------------------- Green Signal
-* 30 -------------------- LCD Display GND
-* 34 -------------------- Relay Board GND
+Pi Pin (Board) | Device Connection
+-------------- | -----------------
+2 | LCD Display VCC (+5V)
+3 | LCD Display SDA
+4 | Relay Board VCC (+5V)
+5 | LCD Display SLC
+19 | Red Signal
+21 | Yellow Signal
+23 | Green Signal
+30 | LCD Display GND
+34 | Relay Board GND
 
 Visual of Pin Connections to Relay Board
 ![Image of connections on Raspberry Pi board](https://raw.githubusercontent.com/bitsecondal/raspitraffic-stem/master/docs/circuitry.jpg)
