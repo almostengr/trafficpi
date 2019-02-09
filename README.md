@@ -44,12 +44,12 @@ getting an actual traffic light.
 * Raspbian Jessie (May work on other OSs, but has only been tested with Raspbian Jessie)
 
 ### LED Option
-* Red LED
-* Yellow LED
-* Green LED
+* <a href="https://www.amazon.com/gp/product/B0765NKCZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0765NKCZ4&linkId=0beb817f2435922b5666155b94430ecc" target="_blank">Red LED</a>
+* <a href="https://www.amazon.com/gp/product/B0765NKCZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0765NKCZ4&linkId=0beb817f2435922b5666155b94430ecc" target="_blank">Yellow LED</a>
+* <a href="https://www.amazon.com/gp/product/B0765NKCZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0765NKCZ4&linkId=0beb817f2435922b5666155b94430ecc" target="_blank">Green LED</a>
 
 ### Real Traffic Light Option
-* Relay board(s) with at least 3 channels
+* <a href="https://www.amazon.com/gp/product/B00KTEN3TM/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00KTEN3TM&linkId=1178d5b941f8f41f5bc23fc6da317cf0" target="_blank">Relay board(s) with at least 3 channels</a>
 * Traffic Light (actual or replica)
 
 ----
