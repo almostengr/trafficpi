@@ -32,14 +32,14 @@ Below are the list of parts used for this project. You'll need to choose one of
 the mentioned options below depending on your budget. Using LEDs is cheaper than 
 getting an actual traffic light.
 
-* Raspiberry Pi 3 (May work on other models, but has only been tested on Raspberry Pi 3)
-* Raspiberry Pi power suppy
-* Micro SD card (to run the OS and store project files)
-* USB keyboard (mouse optional)
+* <a href="https://www.amazon.com/gp/product/B01CD5VC92/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B01CD5VC92&linkCode=as2&tag=almostengr-20&linkId=b25e1b38c2c187404a50b967837af72b" target="_blank">Raspiberry Pi 3</a> (May work on other models, but has only been tested on Raspberry Pi 3)
+* <a href="https://www.amazon.com/gp/product/B00MARDJZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00MARDJZ4&linkId=d8a07d1f200ba168b5fd5a49d4bb8afa" target="_blank">Raspiberry Pi power supply</a>
+* <a href="https://amzn.to/2IcYREu" target="_blank">Micro SD card</a> (to run the OS and store project files)
+* <a href="https://amzn.to/2tfNnpE" target="_blank">USB keyboard</a> (mouse optional)
 * HDMI display
-* I2C 16x2 LCD Display 
-* Breadboard Jumper Cables
-* Breadboard (optional)
+* <a href="https://www.amazon.com/gp/product/B07D83DY17/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07D83DY17&linkId=e283038ab1f79e840b5d893586a38e19" target="_blank">I2C 16x2 LCD Display</a>
+* <a href="https://www.amazon.com/gp/product/B07GD2BWPY/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07GD2BWPY&linkId=c3042114933e20a073b88c0947756efd" target="_blank">Breadboard Jumper Cables</a>
+* <a href="https://www.amazon.com/gp/product/B01EV6LJ7G/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01EV6LJ7G&linkId=d6d36ad3de7629f3e963d620893c4ee3" target="_blank">Breadboard</a> (optional)
 * Python 2.7.9 (May work with later versions, but has only been tested with 2.7.9)
 * Raspbian Jessie (May work on other OSs, but has only been tested with Raspbian Jessie)
 
