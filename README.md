@@ -50,7 +50,7 @@ getting an actual traffic light.
 
 ### Real Traffic Light Option
 * <a href="https://www.amazon.com/gp/product/B00KTEN3TM/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00KTEN3TM&linkId=1178d5b941f8f41f5bc23fc6da317cf0" target="_blank">Relay board(s) with at least 3 channels</a>
-* Traffic Light (actual or replica)
+* Traffic Light
 
 ----
 
