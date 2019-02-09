@@ -123,6 +123,13 @@ by the install script.
 
 ----
 
+## Video Demonstration
+Video demostration of version 1.0 of the project is available to be watched at 
+<a href="https://www.youtube.com/watch?v=lr_ZJNX0viM" target="_blank">https://www.youtube.com/watch?v=lr_ZJNX0viM</a>. This version of the demonstration of the traffic light working 
+with an LCD screen connected.
+
+----
+
 ## Bug Reports and Road Map
 Future enhancements, defects, and updates to the scripts are tracked using the 
 issue tracker on this repository. For bugs, please include as much detail 
