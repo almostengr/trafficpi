@@ -1,4 +1,4 @@
-# Raspi Traffic Control
+# Raspberry Pi Traffic Light Controller
 
 ## Table of Contents
 * Purpose
@@ -30,8 +30,8 @@ mathematical calculations for making timing decisions.
 One of the goals of this project is to be able to teach the next generation of 
 engineers about the programming, software versioning, and how valuable engineers and 
 technologists are to society and the impact that they have. 
-A game was devleoped to be combined with this project to teach about software versioning,
-how sometime times Software Developers don't get it right the first time, and the 
+A game was developed to be combined with this project to teach about software versioning,
+how sometimes Software Developers don't get it right the first time, and the 
 negative impact that can occur if they don't get it right the first time. 
 
 Below is the image of a group of future engineers working their way to developing the 
@@ -44,7 +44,8 @@ and turn off each light as well as include a delay in between each light change.
 ### Video Demonstration
 
 Video demonstration of version 1.0 of the project is available to be watched at 
-<a href="https://www.youtube.com/watch?v=lr_ZJNX0viM" target="_blank">https://www.youtube.com/watch?v=lr_ZJNX0viM</a>. This version of the demonstration of the traffic light working 
+<a href="https://www.youtube.com/watch?v=lr_ZJNX0viM" target="_blank">https://www.youtube.com/watch?v=lr_ZJNX0viM</a>. 
+This version of the demonstration of the traffic light working 
 with an LCD screen connected.
 
 ----
