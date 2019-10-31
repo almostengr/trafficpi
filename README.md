@@ -25,6 +25,28 @@ society. This project targets the "T, E, and M" of "STEM" by using electronic ci
 for controlling the lights, software for controlling the electronic circuits, and 
 mathematical calculations for making timing decisions.
 
+### Teach Software Versioning
+
+One of the goals of this project is to be able to teach the next generation of 
+engineers about the programming, software versioning, and how valuable engineers and 
+technologists are to society and the impact that they have. 
+A game was devleoped to be combined with this project to teach about software versioning,
+how sometime times Software Developers don't get it right the first time, and the 
+negative impact that can occur if they don't get it right the first time. 
+
+Below is the image of a group of future engineers working their way to developing the 
+psuedocode for a normal traffic cycle. As shown in the first version, all of the lights turned
+on but never turned off.  In the final version, they figured out that they had to turn on 
+and turn off each light as well as include a delay in between each light change. 
+
+![Image of Versioning](https://raw.githubusercontent.com/almostengr/raspitraffic-stem/master/docs/versioning.jpg)
+
+### Video Demonstration
+
+Video demonstration of version 1.0 of the project is available to be watched at 
+<a href="https://www.youtube.com/watch?v=lr_ZJNX0viM" target="_blank">https://www.youtube.com/watch?v=lr_ZJNX0viM</a>. This version of the demonstration of the traffic light working 
+with an LCD screen connected.
+
 ----
 
 ## Parts List
@@ -122,31 +144,6 @@ your Raspberry Pi to its prior state. In the ```scripts``` directory, run the
 ```uninstall.sh``` script as root user. This will uninstall the packages installed 
 by the install script.
 
-----
-
-## Teach Software Versioning
-
-One of the goals of this project is to be able to teach the next generation of 
-engineers about the programming, software versioning, and how valuable engineers and 
-technologists are to society and the impact that they have. 
-A game was devleoped to be combined with this project to teach about software versioning,
-how sometime times Software Developers don't get it right the first time, and the 
-negative impact that can occur if they don't get it right the first time. 
-
-Below is the image of a group of future engineers working their way to developing the 
-psuedocode for a normal traffic cycle. As shown in the first version, all of the lights turned
-on but never turned off.  In the final version, they figured out that they had to turn on 
-and turn off each light as well as include a delay in between each light change. 
-
-![Image of Versioning](https://raw.githubusercontent.com/almostengr/raspitraffic-stem/master/docs/versioning.jpg)
-
-----
-
-## Video Demonstration
-Video demonstration of version 1.0 of the project is available to be watched at 
-<a href="https://www.youtube.com/watch?v=lr_ZJNX0viM" target="_blank">https://www.youtube.com/watch?v=lr_ZJNX0viM</a>. This version of the demonstration of the traffic light working 
-with an LCD screen connected.
-
 ---- 
 
 ## Bug Reports and Road Map
@@ -164,7 +161,7 @@ command is executed.
 ----
 
 ## Acknowledgements
-* Author: Kenny Robinson, Almost Engineer @almostengr
+* Author: Kenny Robinson, @almostengr <a href="http://thealmostengineer.com" target="_blank">thealmostengineer.com</a>
 * LCD Display code for controlling the LCD display were provided from 
 https://github.com/the-raspberry-pi-guy/lcd. 
 * Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
@@ -176,4 +173,3 @@ seen at <a href="https://www.youtube.com/watch?v=xqZRDtX64UA" target="_blank">ht
 
 ## License
 This project is licensed under the MIT License. See LICENSE for more details.
-
