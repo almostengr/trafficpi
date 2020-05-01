@@ -1,20 +1,22 @@
 # Raspberry Pi Traffic Light Controller
 
 ## Table of Contents
-* Purpose
-* Parts List
-* Pin Setup
-* Initial Setup
-* Running the Scripts
-* Uninstall Script
-* Bug Reports and Road Map
-* Known Bugs
-* Acknowledgements
-* License
+
+* [Purpose](#purpose)
+* [Parts List](#parts-list)
+* [Pin Setup](#pin-setup)
+* [Initial Setup](#initial-setup)
+* [Running the Scripts](#running-the-scripts)
+* [Uninstall Script](#uninstall-script)
+* [Bug Reports and Road Map](#bug-reports-and-road-map)
+* [Known Bugs](#known-bugs)
+* [Acknowledgements](#acknowledgements)
+* [License](#license)
 
 ----
 
 ## Purpose 
+
 The purpose of this project is to educate children about the STEM (Science, Technology, 
 Engineering, and Mathematics) fields. Through the use of low cost devices and effective 
 teaching, children are able to associate what they are learning with interactions with 
@@ -51,6 +53,7 @@ with an LCD screen connected.
 ----
 
 ## Parts List
+
 Below are the list of parts used for this project. You'll need to choose one of 
 the mentioned options below depending on your budget. Using LEDs is cheaper than 
 getting an actual traffic light.
@@ -67,17 +70,20 @@ getting an actual traffic light.
 * Raspbian Jessie (May work on other OSs, but has only been tested with Raspbian Jessie)
 
 ### LED Option
+
 * <a href="https://www.amazon.com/gp/product/B0765NKCZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0765NKCZ4&linkId=0beb817f2435922b5666155b94430ecc" target="_blank">Red LED</a>
 * <a href="https://www.amazon.com/gp/product/B0765NKCZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0765NKCZ4&linkId=0beb817f2435922b5666155b94430ecc" target="_blank">Yellow LED</a>
 * <a href="https://www.amazon.com/gp/product/B0765NKCZ4/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B0765NKCZ4&linkId=0beb817f2435922b5666155b94430ecc" target="_blank">Green LED</a>
 
 ### Real Traffic Light Option
+
 * <a href="https://www.amazon.com/gp/product/B00KTEN3TM/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00KTEN3TM&linkId=1178d5b941f8f41f5bc23fc6da317cf0" target="_blank">Relay board(s) with at least 3 channels</a>
 * Traffic Light
 
 ----
 
 ## Pin Setup
+
 Below is the mapping for the connections to the Raspberry Pi. The Pin numbers
 listed are the physical pin numbers on the board, not the GPIO pin numbers. If 
 you are not using a relay board, the connections can be made directly to a 
@@ -96,33 +102,42 @@ Pi Pin (Board) | Device Connection
 34 | Relay Board GND
 
 Visual of Pin Connections to Relay Board
+
 ![Image of connections on Raspberry Pi board](https://raw.githubusercontent.com/almostengr/raspitraffic-stem/master/docs/circuitry.jpg)
 
 ----
 
 ## Initial Setup
+
 ### Install Script
+
 In the ```scripts``` directory, run the ```install.sh``` script 
 as root user. This will install of the required software and python packages.
 
 ### Update Apache Configuration
+
 Search for the file containing "PrivateTmp=true". This file should be in your /etc
 directory. Change this value to ```PrivateTmp=false```. Then restart Apache.
 You may use 
+
 ```sh
 cd /etc/
 grep -R "PrivateTmp=true" *
 ```
+
 to search for the file that contains this value. Once grep returns the file name, 
 edit the file and make the stated change.
 
 ----
 
 ## Running The Scripts
+
 To control the traffic light, run the raspitraffic.py script via command line.
+
 ```sh
 python raspitraffic.py
 ```
+
 Then visit the webpage to your TrafficPi in a web browser. A form will be 
 presented with a list of programs to select from. Select the program you wish to 
 run and click the "Submit" button. 
@@ -132,6 +147,7 @@ the current program has been reached. If no program has been selected, the newly
 selected program will start immediately.
 
 ### Pseudocode Program
+
 The Pseudocode Program allows you to write your own program for controlling the traffic 
 light. On the Control Panel webpage, enter each command that you want the light
 to perform on a line by itself in the "Pseudocode Commands" textbox. The list of 
@@ -140,6 +156,7 @@ commands are listed on the Control Panel webpage below the textbox.
 ----
 
 ## Uninstall Script
+
 At any point, you can uninstall the software that is used by the program to return 
 your Raspberry Pi to its prior state. In the ```scripts``` directory, run the 
 ```uninstall.sh``` script as root user. This will uninstall the packages installed 
@@ -148,6 +165,7 @@ by the install script.
 ---- 
 
 ## Bug Reports and Road Map
+
 Future enhancements, defects, and updates to the scripts are tracked using the 
 issue tracker on this repository. For bugs, please include as much detail 
 as possible so that the issue can be replicated.
@@ -155,6 +173,7 @@ as possible so that the issue can be replicated.
 ----
 
 ## Known Bugs
+
 * When exiting the script (using Ctrl+C), all of the relays may not turn off.
 In addition, the LCD display may not clear if it is writing when the kill
 command is executed.
@@ -162,6 +181,7 @@ command is executed.
 ----
 
 ## Acknowledgements
+
 * Author: Kenny Robinson, @almostengr <a href="http://thealmostengineer.com" target="_blank">thealmostengineer.com</a>
 * LCD Display code for controlling the LCD display were provided from 
 https://github.com/the-raspberry-pi-guy/lcd. 
@@ -173,4 +193,5 @@ seen at <a href="https://www.youtube.com/watch?v=xqZRDtX64UA" target="_blank">ht
 ----
 
 ## License
+
 This project is licensed under the MIT License. See LICENSE for more details.
