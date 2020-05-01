@@ -287,15 +287,30 @@ def all_on(phase):
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 		lcd_message("ALL REDS ON", "")
 
+	# turn on the red and yellow lights
+	elif phase == "redyellow":
+		eblight(LAMPON, LAMPON, LAMPOFF)
+		lcd_message("ALL REDS AND", "YELLOW ON")
+
 	# turn on the yellow light
 	elif phase == "yellow":
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
 		lcd_message("ALL YELLOWS ON", "")
 
+	# turn of the yellow and green light
+	elif phase == "yellowgreen":
+		eblight(LAMPOFF, LAMPON, LAMPON)
+		lcd_message("ALL YELLOW AND", "GREEN ON")
+
 	# turn on the green light
 	elif phase == "green":
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		lcd_message("ALL GREENS ON", "")
+
+	# turn on the green and red light
+	elif phase == "greenred":
+		eblight(LAMPON, LAMPOFF, LAMPON)
+		lcd_message("ALL GREEN AND", "YELLOWS ON")
 
 	elif phase == "off":
 	# turn off all the lights
@@ -427,13 +442,25 @@ try:
 		# red on
 			all_on("red")
 
+		elif selection == "redyellowon":
+		# red and yellow on
+			all_on("redyellow")
+
 		elif selection == "yellowon":
 		# yellow on
 			all_on("yellow")
 
+		elif selection == "yellowgreenon":
+		# yellow and green on
+			all_on("yellowgreen")
+
 		elif selection == "greenon":
 		# green on
 			all_on("green")
+
+		elif selection == "greenredon":
+		# green and red on
+			all_on("greenred")
 
 		elif selection == "all_off":
 		# all lights off
