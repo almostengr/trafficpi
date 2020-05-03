@@ -31,13 +31,10 @@ LAMPON = GPIO.LOW
 LAMPOFF = GPIO.HIGH
 FLASHER_DELAY = .7
 TXTTRAFFIC = "/tmp/traffic.txt"
-TXTDISPLAY = "/tmp/traffic_display.txt"
 TXTPSEUDO = "/tmp/traffic_pseudo.txt"
 
-# display = lcddriver.lcd()
-display = ""
-displayState = "off"
-displayStateOld = "off"
+display = lcddriver.lcd()
+displayState = "on"
 selection = ""
 phaseflasher = 0
 phasenum = 0
@@ -59,7 +56,7 @@ def setup():
 	# turn off all the lights
 	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 
-	lcd_message("Done performing setup", "")
+	lcd_message("Setup Complete")
 
 
 # LOG ADDITIONAL MESSAGES TO THE SCREEN/LOG FILE WHEN TESTING
@@ -80,8 +77,8 @@ def lcd_message(line1, line2=''):
 		display.lcd_display_string(line1, 1)
 		display.lcd_display_string(line2, 2)
 
-	log_message(line1)
-	log_message(line2)
+	log_message(line1 + "|" + line2)
+	# log_message(line2)
 
 
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
@@ -202,7 +199,7 @@ def run_flasher(color, phase):
 	if color == "red":
 		if phase == 1:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Red Off", "")
+			lcd_message("Flashing Red", "")
 			phase = 2
 		else:
 			eblight(LAMPON, LAMPOFF, LAMPOFF)
@@ -212,7 +209,7 @@ def run_flasher(color, phase):
 	elif color == "yellow":
 		if phase == 3:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Yellow Off", "")
+			lcd_message("Flashing Yellow", "")
 			phase = 4
 		else:
 			eblight(LAMPOFF, LAMPON, LAMPOFF)
@@ -222,7 +219,7 @@ def run_flasher(color, phase):
 	elif color == "green":
 		if phase == 7:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Green Off", "")
+			lcd_message("Flashing Green", "")
 			phase = 8
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPON)
@@ -236,7 +233,7 @@ def run_flasher(color, phase):
 			phase = 10
 		else:
 			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing All Off", "")
+			lcd_message("Flashing All", "")
 			phase = 9
 
 	sleep(FLASHER_DELAY)
@@ -376,6 +373,10 @@ debug_message("Debug mode enabled")
 
 try:
 	while True:
+		lcd_message("Reading files")
+		# print display
+		# sleep(4)
+
 		try:
 		# Read the program file
 			fileTraffic = open(TXTTRAFFIC, "r")
@@ -391,18 +392,6 @@ try:
 			fileTraffic.close()
 
 		try:
-		# read the text display file
-			fileDisplay = open(TXTDISPLAY, "r")
-			displayState = fileDisplay.readline()
-			fileDisplay.close()
-
-		except IOError:
-		# if the file doesn't exist, then create it and give public permissions
-			fileDisplay = open(TXTDISPLAY, "w")
-			subprocess.call(['chmod', '0777', TXTDISPLAY])
-			fileDisplay.close()
-
-		try:
 		# read the psuedo code file
 			filePseudo = open(TXTPSEUDO, "r")
 			filePseudo.close()
@@ -413,11 +402,9 @@ try:
 			subprocess.call(['chmod', '0777', TXTPSEUDO])
 			filePseudo.close()
 
-		# controls whether to display output on the LCD
-		if displayState == "on":
-			display = lcddriver.lcd()
-		else:
-			display = ""
+		# print display
+		lcd_message("Done reading")
+		# sleep(4)
 
 		if "traffic" in selection:
 		# run the US traffic program
@@ -544,3 +531,5 @@ except BaseException as e:
 	log_message(e)
 	all_off()
 	# GPIO.clean()
+	display.lcd_clear()
+
