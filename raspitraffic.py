@@ -19,13 +19,12 @@ import subprocess
 # DEBUGGING MODE, DISABLED = 0, ENABLED = 1
 DEBUG = 0
 
-# LIST ALL OF THE PINS USED
-PINOUTLIST = [23, 21, 19]
-
 # DEFINE THE GPIO NUMBERS AND VARIABLES FOR THE EASTBOUND TRAFFIC
 EAST_CR = 23
 EAST_CY = 21
 EAST_CG = 19
+
+PINOUTLIST = [EAST_CR, EAST_CY, EAST_CG]
 
 # DEFINE ADDITIONAL CONSTANTS
 LAMPON = GPIO.LOW
@@ -44,9 +43,8 @@ phaseflasher = 0
 phasenum = 0
 run_signal_flasher = "red"
 
-
-def setup():
 # SET UP GPIO PINS
+def setup():
 	GPIO.setmode(GPIO.BOARD)
 
 	# disable GPIO warnings when not debugging
@@ -69,24 +67,20 @@ def setup():
 
 	lcd_message("Done performing setup", "")
 
-	return 0
 
-
-def debug_message(message):
 # LOG ADDITIONAL MESSAGES TO THE SCREEN/LOG FILE WHEN TESTING
+def debug_message(message):
 	if DEBUG == 1:
 		log_message("DEBUG: " + message)
-	return 0
 
 
-def log_message(message):
 # print message on computer screen
+def log_message(message):
 	print message
-	return 0
 
 
-def lcd_message(line1, line2=''):
 # Displays the message on the LCD screen and computer screen
+def lcd_message(line1, line2=''):
 	if displayState == "on":
 		display.lcd_clear()
 		display.lcd_display_string(line1, 1)
@@ -94,12 +88,10 @@ def lcd_message(line1, line2=''):
 
 	log_message(line1)
 	log_message(line2)
-	return 0
 
 
-def run_red_light_green_light(yellowon):
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
-
+def run_red_light_green_light(yellowon):
 	# generate random values for red and green
 	red_time = randint(1, 10)
 	green_time = randint(1, 3)
@@ -125,8 +117,8 @@ def run_red_light_green_light(yellowon):
 		sleep(yellow_time)
 
 
-def run_signal(country):
 # runs the light using normal signal
+def run_signal(country):
 	phaseflasher = 0
 
 	# generate random values for the lights to stay on
@@ -179,8 +171,8 @@ def run_signal(country):
 			phaseflasher = run_flasher(color, phaseflasher)
 
 
-def party_mode(phase, delay):
 # randomly change the color to a different light(s)
+def party_mode(phase, delay):
 	if phase == 1:
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 	elif phase == 2:
@@ -209,8 +201,8 @@ def party_mode(phase, delay):
 	return nextphase
 
 
-def run_flasher(color, phase):
 # flash the lights with the color provided
+def run_flasher(color, phase):
 
 	if color == "red":
 		if phase == 1:
@@ -256,15 +248,15 @@ def run_flasher(color, phase):
 	return phase
 
 
-def calc_yellow_time(grade):
 # CALCULATE THE AMOUNT OF YELLOW LIGHT TIME
-        speed = randint(25,80)
+def calc_yellow_time(grade):
+	speed = randint(25,80)
 	yel_time = 1 + ((1.47 * speed) / (2 * (10 + (0 / 100) * 32.2)))
 	return yel_time
 
 
-def eblight(cirred, ciryel, cirgrn):
 # CONTROLS THE LAMPS ON THE EASTBOUND LIGHT.
+def eblight(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
@@ -274,8 +266,8 @@ def eblight(cirred, ciryel, cirgrn):
 	debug_message("R: " + str(cirred) + " Y: " + str(ciryel) + " G: " + str(cirgrn))
 
 
-def all_on(phase):
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
+def all_on(phase):
 
 	# turn on all the lights
 	if phase == "all":
@@ -312,8 +304,8 @@ def all_on(phase):
 		eblight(LAMPON, LAMPOFF, LAMPON)
 		lcd_message("ALL GREEN AND", "YELLOWS ON")
 
-	elif phase == "off":
 	# turn off all the lights
+	elif phase == "off":
 		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 		lcd_message("ALL LIGHTS OFF", "")
 
@@ -324,41 +316,41 @@ def all_on(phase):
 	sleep(3)
 
 
-def all_off():
 # TURNS OFF ALL OF THE LIGHTS
+def all_off():
 	lcd_message("ALL LIGHTS OFF", "")
 	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 	sleep(3)
 
 
-def process_pseudocode(command):
 # process the pseudocode that has been entered
+def process_pseudocode(command):
 	returncode = 1
 
-	if command.startswith("red"):
 	# turn on the red light
+	if command.startswith("red"):
 		eblight(LAMPON, LAMPOFF, LAMPOFF)
 		returnCode = 0
 
-	elif command.startswith("yellow"):
 	# turn on the yellow light
+	elif command.startswith("yellow"):
 		eblight(LAMPOFF, LAMPON, LAMPOFF)
 		returnCode = 0
 
-	elif command.startswith("green"):
 	# turn on the green light
+	elif command.startswith("green"):
 		eblight(LAMPOFF, LAMPOFF, LAMPON)
 		returnCode = 0
 
-	elif command.startswith("wait"):
 	# sleep for the specified duration
+	elif command.startswith("wait"):
 		waittime = float(command[5:7])
 		debug_message("Waiting " + str(waittime))
 		sleep(waittime)
 		returnCode = 0
 
-	elif command.startswith("repeat"):
 	# repeat reading the file
+	elif command.startswith("repeat"):
 		returnCode = 0
 
 	elif command.startswith("off"):
@@ -366,16 +358,16 @@ def process_pseudocode(command):
 		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 		returnCode = 0
 
-	else:
 	# mention that exception occurred and exit
+	else:
 		log_message("Exception occurred")
 		returnCode = 1
 
 	return returnCode
 
 
-def pseudowait():
 # Update the status so that the message doesnt repeat
+def pseudowait():
 	log_message("Updating pseudo status")
 	fileTraffic2 = open(TXTTRAFFIC, 'w')
 	fileTraffic2.write("pseudowait")
@@ -395,11 +387,13 @@ try:
 			selection = fileTraffic.readline()
 			fileTraffic.close()
 
-                except IOError:
-                # if the file doesn't exist, then create it and give public permissions
-                        fileTraffic = open(TXTTRAFFIC, "w")
-                        subprocess.call(['chmod', '0777', TXTTRAFFIC])
-                        fileTraffic.close()
+		except IOError:
+		# if the file doesn't exist, then create it and give public permissions
+			fileTraffic = open(TXTTRAFFIC, "w")
+
+			# chmod 0777 /tmp/traffic.txt
+			subprocess.call(['chmod', '0777', TXTTRAFFIC])
+			fileTraffic.close()
 
 		try:
 		# read the text display file
@@ -419,10 +413,10 @@ try:
 			filePseudo.close()
 
 		except IOError:
-                # if the file doesn't exist, then create it and give public permissions
-                        filePseudo = open(TXTPSEUDO, "w")
-                        subprocess.call(['chmod', '0777', TXTPSEUDO])
-                        filePseudo.close()
+		# if the file doesn't exist, then create it and give public permissions
+			filePseudo = open(TXTPSEUDO, "w")
+			subprocess.call(['chmod', '0777', TXTPSEUDO])
+			filePseudo.close()
 
 		# controls whether to display output on the LCD
 		if displayState == "on":
@@ -547,14 +541,11 @@ try:
 
 		else:
 		# If nothing selected or bad value, default to all on
-			# all_on("all")
 			run_signal("ustrafficflasher")
 
-# except KeyboardInterrupt as e:
 except BaseException as e:
 # perform action if exception occurs
 	log_message("Exiting with exception")
 	log_message(e)
 	all_off()
 	# GPIO.clean()
-
