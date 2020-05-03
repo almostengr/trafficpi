@@ -34,11 +34,8 @@ TXTTRAFFIC = "/tmp/traffic.txt"
 TXTPSEUDO = "/tmp/traffic_pseudo.txt"
 
 display = lcddriver.lcd()
-displayState = "on"
 selection = ""
 phaseflasher = 0
-phasenum = 0
-run_signal_flasher = "red"
 
 # SET UP GPIO PINS
 def setup():
@@ -54,7 +51,7 @@ def setup():
 	 	GPIO.setup(i, GPIO.OUT)
 
 	# turn off all the lights
-	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+	thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 
 	lcd_message("Setup Complete")
 
@@ -72,13 +69,13 @@ def log_message(message):
 
 # Displays the message on the LCD screen and computer screen
 def lcd_message(line1, line2=''):
-	if displayState == "on":
+	if display != "":
 		display.lcd_clear()
-		display.lcd_display_string(line1, 1)
-		display.lcd_display_string(line2, 2)
+		# display.lcd_display_string(line1, 1)
+		display.lcd_display_string("PGM: " + selection, 1)
+		display.lcd_display_string(line1 + " " + line2, 2)
 
-	log_message(line1 + "|" + line2)
-	# log_message(line2)
+	log_message(line1 + " | " + line2)
 
 
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
@@ -86,26 +83,26 @@ def run_red_light_green_light(yellowon):
 
 	# generate random values for red and green
 	red_time = randint(1, 10)
-	green_time = randint(1, 3)
 	yellow_time = randint(0,2)
+	green_time = randint(1, 3)
 
 	# Turn on the red light and wait
-	eblight(LAMPON, LAMPOFF, LAMPOFF)
+	thesignal(LAMPON, LAMPOFF, LAMPOFF)
 	debug_message("Red Time: " + str(red_time))
-	lcd_message("Red Light!", "Dont move!")
+	lcd_message("Red!", "Dont move!")
 	sleep(red_time)
 
 	# Turn on the green light and wait
-	eblight(LAMPOFF, LAMPOFF, LAMPON)
+	thesignal(LAMPOFF, LAMPOFF, LAMPON)
 	debug_message("Green Time: " + str(green_time))
-	lcd_message("Green Light!", "Run!")
+	lcd_message("Green!", "Run!")
 	sleep(green_time)
 
 	if yellowon == 1:
 	# if playing with yellow light, then turn on the yellow light
-		eblight(LAMPOFF, LAMPON, LAMPOFF)
+		thesignal(LAMPOFF, LAMPON, LAMPOFF)
 		debug_message("Yellow Time: " + str(yellow_time))
-		lcd_message("Yellow Light!", "Slow!")
+		lcd_message("Yellow!", "Slow!")
 		sleep(yellow_time)
 
 
@@ -119,9 +116,9 @@ def run_signal(country):
 	east_red_time = random.randint(5, 45)
 
 	# green light
-	eblight(LAMPOFF, LAMPOFF, LAMPON)
+	thesignal(LAMPOFF, LAMPOFF, LAMPON)
 	for ttime in range(east_grn_time, 0, -1):
-		lcd_message("Green", "Time Remain: " + str(ttime) + "s")
+		lcd_message("Green", "Time: " + str(ttime) + "s")
 		sleep(1)
 
         # flash green if selected
@@ -130,26 +127,27 @@ def run_signal(country):
                 phaseflasher = run_flasher("green", phaseflasher)
 
 	# yellow light
-	eblight(LAMPOFF, LAMPON, LAMPOFF)
+	thesignal(LAMPOFF, LAMPON, LAMPOFF)
 	for ttime in range(east_yel_time, 0, -1):
-		lcd_message("Yellow", "Time Remain: " + str(ttime) + "s")
+		lcd_message("Yellow", "Time: " + str(ttime) + "s")
 		sleep(1)
 
 	# red light
-	eblight(LAMPON, LAMPOFF, LAMPOFF)
+	thesignal(LAMPON, LAMPOFF, LAMPOFF)
 	for ttime in range(east_red_time, 0, -1):
-		lcd_message("Red", "Time Remain: " + str(ttime) + "s")
+		lcd_message("Red", "Time: " + str(ttime) + "s")
 		sleep(1)
 
 	# red-yellow for UK only
 	if country.startswith("uk"):
-		eblight(LAMPON, LAMPON, LAMPOFF)
+		thesignal(LAMPON, LAMPON, LAMPOFF)
 		for ttime in range(east_yel_time, 0, -1):
-			lcd_message("Red-Yellow", "Time Remain: " + str(ttime) + "s")
+			lcd_message("Red-Yellow", "Time: " + str(ttime) + "s")
 			sleep(1)
 
 	# perform flashing if selected
 	if country.endswith("flasher"):
+
 		# pick a color to flash
 		colorint = randint(0,10)
 		if colorint < 5:
@@ -158,7 +156,7 @@ def run_signal(country):
 			color = "yellow"
 
 		# perform the flashing
-		flashrangemax = randint(6,30)
+		flashrangemax = randint(6,50)
 		for i in range(1,flashrangemax):
 			phaseflasher = run_flasher(color, phaseflasher)
 
@@ -166,21 +164,21 @@ def run_signal(country):
 # randomly change the color to a different light(s)
 def party_mode(phase, delay):
 	if phase == 1:
-		eblight(LAMPON, LAMPOFF, LAMPOFF)
+		thesignal(LAMPON, LAMPOFF, LAMPOFF)
 	elif phase == 2:
-		eblight(LAMPOFF, LAMPON, LAMPOFF)
+		thesignal(LAMPOFF, LAMPON, LAMPOFF)
 	elif phase == 3:
-		eblight(LAMPOFF, LAMPOFF, LAMPON)
+		thesignal(LAMPOFF, LAMPOFF, LAMPON)
 	elif phase == 4:
-		eblight(LAMPON, LAMPON, LAMPOFF)
+		thesignal(LAMPON, LAMPON, LAMPOFF)
 	elif phase == 5:
-		eblight(LAMPOFF, LAMPON, LAMPON)
+		thesignal(LAMPOFF, LAMPON, LAMPON)
 	elif phase == 6:
-		eblight(LAMPON, LAMPOFF, LAMPON)
+		thesignal(LAMPON, LAMPOFF, LAMPON)
 	elif phase == 7:
-		eblight(LAMPON, LAMPON, LAMPON)
+		thesignal(LAMPON, LAMPON, LAMPON)
 	elif phase == 8:
-		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+		thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 
 	# delay between changing lights again
 	sleep(delay)
@@ -197,43 +195,39 @@ def party_mode(phase, delay):
 def run_flasher(color, phase):
 
 	if color == "red":
+		lcd_message("Flashing Red", "")
 		if phase == 1:
-			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Red", "")
+			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 2
 		else:
-			eblight(LAMPON, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Red", "")
+			thesignal(LAMPON, LAMPOFF, LAMPOFF)
 			phase = 1
 
 	elif color == "yellow":
+		lcd_message("Flashing Yellow", "")
 		if phase == 3:
-			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Yellow", "")
+			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 4
 		else:
-			eblight(LAMPOFF, LAMPON, LAMPOFF)
-			lcd_message("Flashing Yellow", "")
+			thesignal(LAMPOFF, LAMPON, LAMPOFF)
 			phase = 3
 
 	elif color == "green":
+		lcd_message("Flashing Green", "")
 		if phase == 7:
-			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing Green", "")
+			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 8
 		else:
-			eblight(LAMPOFF, LAMPOFF, LAMPON)
-			lcd_message("Flashing Green", "")
+			thesignal(LAMPOFF, LAMPOFF, LAMPON)
 			phase = 7
 
 	elif color == "all":
+		lcd_message("Flashing All", "")
 		if phase == 9:
-			eblight(LAMPON, LAMPON, LAMPON)
-			lcd_message("Flashing All", "")
+			thesignal(LAMPON, LAMPON, LAMPON)
 			phase = 10
 		else:
-			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-			lcd_message("Flashing All", "")
+			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 9
 
 	sleep(FLASHER_DELAY)
@@ -248,7 +242,7 @@ def calc_yellow_time(grade):
 
 
 # CONTROLS THE LAMPS ON THE EASTBOUND LIGHT.
-def eblight(cirred, ciryel, cirgrn):
+def thesignal(cirred, ciryel, cirgrn):
 	GPIO.output(EAST_CR, cirred)
 	GPIO.output(EAST_CY, ciryel)
 	GPIO.output(EAST_CG, cirgrn)
@@ -259,60 +253,52 @@ def eblight(cirred, ciryel, cirgrn):
 
 
 # TURNS ON THE LIGHTS BASED ON THE ARGUMENT PROVIDED
-def all_on(phase):
+def light_and_hold(phase):
 
 	# turn on all the lights
 	if phase == "all":
-		eblight(LAMPON, LAMPON, LAMPON)
+		thesignal(LAMPON, LAMPON, LAMPON)
 		lcd_message("ALL LIGHTS ON", "")
 
 	# turn on the red light
 	elif phase == "red":
-		eblight(LAMPON, LAMPOFF, LAMPOFF)
-		lcd_message("ALL REDS ON", "")
+		thesignal(LAMPON, LAMPOFF, LAMPOFF)
+		lcd_message("REDS ON", "")
 
 	# turn on the red and yellow lights
 	elif phase == "redyellow":
-		eblight(LAMPON, LAMPON, LAMPOFF)
-		lcd_message("ALL REDS AND", "YELLOW ON")
+		thesignal(LAMPON, LAMPON, LAMPOFF)
+		lcd_message("RED AND", "YELLOW ON")
 
 	# turn on the yellow light
 	elif phase == "yellow":
-		eblight(LAMPOFF, LAMPON, LAMPOFF)
-		lcd_message("ALL YELLOWS ON", "")
+		thesignal(LAMPOFF, LAMPON, LAMPOFF)
+		lcd_message("YELLOW ON", "")
 
 	# turn of the yellow and green light
 	elif phase == "yellowgreen":
-		eblight(LAMPOFF, LAMPON, LAMPON)
-		lcd_message("ALL YELLOW AND", "GREEN ON")
+		thesignal(LAMPOFF, LAMPON, LAMPON)
+		lcd_message("YELLOW AND", "GREEN ON")
 
 	# turn on the green light
 	elif phase == "green":
-		eblight(LAMPOFF, LAMPOFF, LAMPON)
-		lcd_message("ALL GREENS ON", "")
+		thesignal(LAMPOFF, LAMPOFF, LAMPON)
+		lcd_message("GREEN ON", "")
 
 	# turn on the green and red light
 	elif phase == "greenred":
-		eblight(LAMPON, LAMPOFF, LAMPON)
-		lcd_message("ALL GREEN AND", "YELLOWS ON")
+		thesignal(LAMPON, LAMPOFF, LAMPON)
+		lcd_message("GREEN AND", "YELLOW ON")
 
 	# turn off all the lights
 	elif phase == "off":
-		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+		thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 		lcd_message("ALL LIGHTS OFF", "")
+		sleep(3)
 
 	# do nothing
 	else:
 		log_message("Doing nothing")
-
-	sleep(3)
-
-
-# TURNS OFF ALL OF THE LIGHTS
-def all_off():
-	lcd_message("ALL LIGHTS OFF", "")
-	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
-	sleep(3)
 
 
 # process the pseudocode that has been entered
@@ -321,17 +307,17 @@ def process_pseudocode(command):
 
 	# turn on the red light
 	if command.startswith("red"):
-		eblight(LAMPON, LAMPOFF, LAMPOFF)
+		thesignal(LAMPON, LAMPOFF, LAMPOFF)
 		returnCode = 0
 
 	# turn on the yellow light
 	elif command.startswith("yellow"):
-		eblight(LAMPOFF, LAMPON, LAMPOFF)
+		thesignal(LAMPOFF, LAMPON, LAMPOFF)
 		returnCode = 0
 
 	# turn on the green light
 	elif command.startswith("green"):
-		eblight(LAMPOFF, LAMPOFF, LAMPON)
+		thesignal(LAMPOFF, LAMPOFF, LAMPON)
 		returnCode = 0
 
 	# sleep for the specified duration
@@ -347,7 +333,7 @@ def process_pseudocode(command):
 
 	elif command.startswith("off"):
 	# turn off all of the lights
-		eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+		thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 		returnCode = 0
 
 	# mention that exception occurred and exit
@@ -374,8 +360,7 @@ debug_message("Debug mode enabled")
 try:
 	while True:
 		lcd_message("Reading files")
-		# print display
-		# sleep(4)
+		debug_message(display)
 
 		try:
 		# Read the program file
@@ -402,45 +387,44 @@ try:
 			subprocess.call(['chmod', '0777', TXTPSEUDO])
 			filePseudo.close()
 
-		# print display
+		debug_message(display)
 		lcd_message("Done reading")
-		# sleep(4)
 
 		if "traffic" in selection:
 		# run the US traffic program
 			run_signal(selection)
 
-		elif selection == "all_on":
+		elif selection == "light_and_hold":
 		# all lights on
-			all_on("all")
+			light_and_hold("all")
 
 		elif selection == "redon":
 		# red on
-			all_on("red")
+			light_and_hold("red")
 
 		elif selection == "redyellowon":
 		# red and yellow on
-			all_on("redyellow")
+			light_and_hold("redyellow")
 
 		elif selection == "yellowon":
 		# yellow on
-			all_on("yellow")
+			light_and_hold("yellow")
 
 		elif selection == "yellowgreenon":
 		# yellow and green on
-			all_on("yellowgreen")
+			light_and_hold("yellowgreen")
 
 		elif selection == "greenon":
 		# green on
-			all_on("green")
+			light_and_hold("green")
 
 		elif selection == "greenredon":
 		# green and red on
-			all_on("greenred")
+			light_and_hold("greenred")
 
 		elif selection == "all_off":
 		# all lights off
-			all_off()
+			light_and_hold("off")
 
 		elif selection == "flashred":
 		# flash red
@@ -493,7 +477,7 @@ try:
 				if pseudoReturn == 1:
 				# exit if the value returned equals one
 					debug_message("Exiting")
-					all_off()
+					light_and_hold("off")
 					pseudowait()
 					break
 			else:
@@ -510,7 +494,7 @@ try:
 		elif selection == "pseudowait":
 		# if there was a failure previously, then dont do anything until updated
 			debug_message("Waiting on pseudocode to be updated")
-			eblight(LAMPOFF, LAMPOFF, LAMPOFF)
+			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			sleep(5)
 
 		elif selection == "restart":
@@ -529,7 +513,7 @@ except BaseException as e:
 # perform action if exception occurs
 	log_message("Exiting with exception")
 	log_message(e)
-	all_off()
+	light_and_hold("off")
+	sleep(3)
 	# GPIO.clean()
 	display.lcd_clear()
-
