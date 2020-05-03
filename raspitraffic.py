@@ -85,7 +85,7 @@ def log_message(message):
 	return 0
 
 
-def lcd_message(line1, line2):
+def lcd_message(line1, line2=''):
 # Displays the message on the LCD screen and computer screen
 	if displayState == "on":
 		display.lcd_clear()
@@ -547,7 +547,8 @@ try:
 
 		else:
 		# If nothing selected or bad value, default to all on
-			all_on("all")
+			# all_on("all")
+			run_signal("ustrafficflasher")
 
 # except KeyboardInterrupt as e:
 except BaseException as e:
