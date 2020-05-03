@@ -4,7 +4,7 @@
 # Project: Raspi Traffic Control
 # Script Usage: raspitraffic.py
 # Created: 2017-04-02
-# Author: Kenny Robinson, @almostengr, www.bitsecondtech.com
+# Author: Kenny Robinson, @almostengr, thealmostengineer.com
 # Description: Core script which all the functions for controlling the lights
 # are contained.
 ################################################################################
@@ -52,18 +52,12 @@ def setup():
 		GPIO.setwarnings(False)
 
 	# loop through each of the pins and define it.
-	# turn on all the lights once setup
 	for i in PINOUTLIST:
-		debug_message("Setting up and activiating pin " + str(i))
-		GPIO.setup(i, GPIO.OUT)
-
-	debug_message("Waiting")
-	sleep(1)
+	 	debug_message("Setting up and activiating pin " + str(i))
+	 	GPIO.setup(i, GPIO.OUT)
 
 	# turn off all the lights
-	for i in PINOUTLIST:
-		GPIO.output(i, GPIO.HIGH)
-		debug_message("Turning off pin " + str(i))
+	eblight(LAMPOFF, LAMPOFF, LAMPOFF)
 
 	lcd_message("Done performing setup", "")
 
