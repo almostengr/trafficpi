@@ -86,10 +86,11 @@ def lcd_message(line1, line2=''):
 
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
 def run_red_light_green_light(yellowon):
+
 	# generate random values for red and green
 	red_time = randint(1, 10)
 	green_time = randint(1, 3)
-	yellow_time = FLASHER_DELAY
+	yellow_time = randint(0,2)
 
 	# Turn on the red light and wait
 	eblight(LAMPON, LAMPOFF, LAMPOFF)
