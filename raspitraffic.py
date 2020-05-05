@@ -75,7 +75,7 @@ def lcd_message(line1, line2=''):
 		display.lcd_display_string("PGM: " + selection, 1)
 		display.lcd_display_string(line1 + " " + line2, 2)
 
-	log_message(line1 + " | " + line2)
+	log_message(line1 + " " + line2)
 
 
 # SEQUENCE FOR RED LIGHT GREEN LIGHT GAME.
@@ -142,7 +142,7 @@ def run_signal(country):
 	if country.startswith("uk"):
 		thesignal(LAMPON, LAMPON, LAMPOFF)
 		for ttime in range(east_yel_time, 0, -1):
-			lcd_message("Red-Yellow", "Time: " + str(ttime) + "s")
+			lcd_message("Red-Yel", "Time: " + str(ttime) + "s")
 			sleep(1)
 
 	# perform flashing if selected
@@ -163,6 +163,8 @@ def run_signal(country):
 
 # randomly change the color to a different light(s)
 def party_mode(phase, delay):
+	display.lcd_clear()
+
 	if phase == 1:
 		thesignal(LAMPON, LAMPOFF, LAMPOFF)
 	elif phase == 2:
@@ -184,9 +186,9 @@ def party_mode(phase, delay):
 	sleep(delay)
 
 	# reduce change of same phase being displayed twice in a row
-	nextphase = randint(1,8)
+	nextphase = randint(1,7)
 	if nextphase == phase:
-		nextphase = randint(1,3)
+		nextphase = 8
 
 	return nextphase
 
@@ -258,47 +260,48 @@ def light_and_hold(phase):
 	# turn on all the lights
 	if phase == "all":
 		thesignal(LAMPON, LAMPON, LAMPON)
-		lcd_message("ALL LIGHTS ON", "")
+		# lcd_message("ALL LIGHTS ON", "")
 
 	# turn on the red light
 	elif phase == "red":
 		thesignal(LAMPON, LAMPOFF, LAMPOFF)
-		lcd_message("REDS ON", "")
+		# lcd_message("RED ON", "")
 
 	# turn on the red and yellow lights
 	elif phase == "redyellow":
 		thesignal(LAMPON, LAMPON, LAMPOFF)
-		lcd_message("RED AND", "YELLOW ON")
+		# lcd_message("RED AND", "YELLOW ON")
 
 	# turn on the yellow light
 	elif phase == "yellow":
 		thesignal(LAMPOFF, LAMPON, LAMPOFF)
-		lcd_message("YELLOW ON", "")
+		# lcd_message("YELLOW ON", "")
 
 	# turn of the yellow and green light
 	elif phase == "yellowgreen":
 		thesignal(LAMPOFF, LAMPON, LAMPON)
-		lcd_message("YELLOW AND", "GREEN ON")
+		# lcd_message("YELLOW AND", "GREEN ON")
 
 	# turn on the green light
 	elif phase == "green":
 		thesignal(LAMPOFF, LAMPOFF, LAMPON)
-		lcd_message("GREEN ON", "")
+		# lcd_message("GREEN ON", "")
 
 	# turn on the green and red light
 	elif phase == "greenred":
 		thesignal(LAMPON, LAMPOFF, LAMPON)
-		lcd_message("GREEN AND", "YELLOW ON")
+		# lcd_message("GREEN AND", "YELLOW ON")
 
 	# turn off all the lights
 	elif phase == "off":
 		thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
-		lcd_message("ALL LIGHTS OFF", "")
-		sleep(3)
+		# lcd_message("ALL LIGHTS OFF", "")
 
 	# do nothing
 	else:
 		log_message("Doing nothing")
+
+	sleep(5)
 
 
 # process the pseudocode that has been entered
@@ -359,7 +362,7 @@ debug_message("Debug mode enabled")
 
 try:
 	while True:
-		lcd_message("Reading files")
+		log_message("Reading files")
 		debug_message(display)
 
 		try:
@@ -374,6 +377,7 @@ try:
 
 			# chmod 0777 /tmp/traffic.txt
 			subprocess.call(['chmod', '0777', TXTTRAFFIC])
+			fileTraffic.write("ustrafficflasher")
 			fileTraffic.close()
 
 		try:
@@ -388,13 +392,13 @@ try:
 			filePseudo.close()
 
 		debug_message(display)
-		lcd_message("Done reading")
+		log_message("Done reading")
 
 		if "traffic" in selection:
 		# run the US traffic program
 			run_signal(selection)
 
-		elif selection == "light_and_hold":
+		elif selection == "all_on":
 		# all lights on
 			light_and_hold("all")
 
@@ -507,7 +511,8 @@ try:
 
 		else:
 		# If nothing selected or bad value, default to all on
-			run_signal("ustrafficflasher")
+			# run_signal("ustrafficflasher")
+			log_message("File empty")
 
 except BaseException as e:
 # perform action if exception occurs
