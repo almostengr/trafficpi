@@ -125,6 +125,8 @@ if [ $(id -u) -eq 0 ]; then
 	reboot
 
 	log_message "Done performing Wifi setup"
+	exit 0
 else
 	log_message "Must be root to run script."
+	exit 1
 fi
