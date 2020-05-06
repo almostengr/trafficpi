@@ -196,7 +196,7 @@ def party_mode(phase, delay):
 def run_flasher(color, phase):
 
 	if color == "red":
-		lcd_message("Flashing Red", "")
+		lcd_message("Flash Red", "")
 		if phase == 1:
 			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 2
@@ -205,8 +205,8 @@ def run_flasher(color, phase):
 			phase = 1
 
 	elif color == "yellow":
-		lcd_message("Flashing Yellow", "")
 		if phase == 3:
+			lcd_message("Flash Yellow", "")
 			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 4
 		else:
@@ -214,7 +214,7 @@ def run_flasher(color, phase):
 			phase = 3
 
 	elif color == "green":
-		lcd_message("Flashing Green", "")
+		lcd_message("Flash Green", "")
 		if phase == 7:
 			thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 			phase = 8
@@ -223,7 +223,7 @@ def run_flasher(color, phase):
 			phase = 7
 
 	elif color == "all":
-		lcd_message("Flashing All", "")
+		lcd_message("Flash All", "")
 		if phase == 9:
 			thesignal(LAMPON, LAMPON, LAMPON)
 			phase = 10
