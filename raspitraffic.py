@@ -71,8 +71,7 @@ def log_message(message):
 def lcd_message(line1, line2=''):
 	if display != "":
 		display.lcd_clear()
-		# display.lcd_display_string(line1, 1)
-		display.lcd_display_string("PGM: " + selection, 1)
+		display.lcd_display_string("PG:" + selection, 1)
 		display.lcd_display_string(line1 + " " + line2, 2)
 
 	log_message(line1 + " " + line2)
