@@ -18,8 +18,12 @@ function log_message() {
 
 # CHECK TO SEE IF THE SCRIPT IS BEING RAN AS ROOT
 if [ $(id -u) -eq 0 ]; then
-	# make backup directory
+	# step 0 
+	log_message "Making backup directory"
 	mkdir /var/tmp/trafficpi${DATETIME}
+
+	log_message "Uninstalling existing packages and configuration"
+	apt-get autoremove --purge hostapd dnsmasq -y
 
 	log_message "Performing wifi Setup"
 
