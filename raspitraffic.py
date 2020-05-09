@@ -68,11 +68,17 @@ def log_message(message):
 
 
 # Displays the message on the LCD screen and computer screen
+# Pad the display to make sure that it does have 16 characters
 def lcd_message(line1, line2=''):
 	if display != "":
-		display.lcd_clear()
-		display.lcd_display_string("PG:" + selection, 1)
-		display.lcd_display_string(line1 + " " + line2, 2)
+		line2=line1 + " " + line2
+		line2=line2.ljust(16)
+
+		programstr="PG:" + selection
+		programstr=programstr.ljust(16)
+
+		display.lcd_display_string(programstr, 1)
+		display.lcd_display_string(line2, 2)
 
 	log_message(line1 + " " + line2)
 
@@ -97,8 +103,8 @@ def run_red_light_green_light(yellowon):
 	lcd_message("Green!", "Run!")
 	sleep(green_time)
 
-	if yellowon == 1:
 	# if playing with yellow light, then turn on the yellow light
+	if yellowon == 1:
 		thesignal(LAMPOFF, LAMPON, LAMPOFF)
 		debug_message("Yellow Time: " + str(yellow_time))
 		lcd_message("Yellow!", "Slow!")
@@ -259,42 +265,34 @@ def light_and_hold(phase):
 	# turn on all the lights
 	if phase == "all":
 		thesignal(LAMPON, LAMPON, LAMPON)
-		# lcd_message("ALL LIGHTS ON", "")
 
 	# turn on the red light
 	elif phase == "red":
 		thesignal(LAMPON, LAMPOFF, LAMPOFF)
-		# lcd_message("RED ON", "")
 
 	# turn on the red and yellow lights
 	elif phase == "redyellow":
 		thesignal(LAMPON, LAMPON, LAMPOFF)
-		# lcd_message("RED AND", "YELLOW ON")
 
 	# turn on the yellow light
 	elif phase == "yellow":
 		thesignal(LAMPOFF, LAMPON, LAMPOFF)
-		# lcd_message("YELLOW ON", "")
 
 	# turn of the yellow and green light
 	elif phase == "yellowgreen":
 		thesignal(LAMPOFF, LAMPON, LAMPON)
-		# lcd_message("YELLOW AND", "GREEN ON")
 
 	# turn on the green light
 	elif phase == "green":
 		thesignal(LAMPOFF, LAMPOFF, LAMPON)
-		# lcd_message("GREEN ON", "")
 
 	# turn on the green and red light
 	elif phase == "greenred":
 		thesignal(LAMPON, LAMPOFF, LAMPON)
-		# lcd_message("GREEN AND", "YELLOW ON")
 
 	# turn off all the lights
 	elif phase == "off":
 		thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
-		# lcd_message("ALL LIGHTS OFF", "")
 
 	# do nothing
 	else:
@@ -333,8 +331,8 @@ def process_pseudocode(command):
 	elif command.startswith("repeat"):
 		returnCode = 0
 
-	elif command.startswith("off"):
 	# turn off all of the lights
+	elif command.startswith("off"):
 		thesignal(LAMPOFF, LAMPOFF, LAMPOFF)
 		returnCode = 0
 
@@ -510,7 +508,6 @@ try:
 
 		else:
 		# If nothing selected or bad value, default to all on
-			# run_signal("ustrafficflasher")
 			log_message("File empty")
 
 except BaseException as e:
@@ -518,6 +515,4 @@ except BaseException as e:
 	log_message("Exiting with exception")
 	log_message(e)
 	light_and_hold("off")
-	sleep(3)
-	# GPIO.clean()
 	display.lcd_clear()
