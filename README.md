@@ -67,7 +67,7 @@ getting an actual traffic light.
 * <a href="https://www.amazon.com/gp/product/B07GD2BWPY/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07GD2BWPY&linkId=c3042114933e20a073b88c0947756efd" target="_blank">Breadboard Jumper Cables</a>
 * <a href="https://www.amazon.com/gp/product/B01EV6LJ7G/ref=as_li_tl?ie=UTF8&tag=almostengr-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01EV6LJ7G&linkId=d6d36ad3de7629f3e963d620893c4ee3" target="_blank">Breadboard</a> (optional)
 * Python 2.7.9 (May work with later versions, but has only been tested with 2.7.9)
-* Raspbian Jessie (May work on other OSs, but has only been tested with Raspbian Jessie)
+* Raspbian Jessie, Stretch, or Buster (May work on other OSs, but has only been tested with Raspbian Jessie)
 
 ### LED Option
 
@@ -107,7 +107,25 @@ Visual of Pin Connections to Relay Board
 
 ----
 
+## Demostrations and Video Discusssions 
+
+These demostration videos show the traffic in one of several operating modes. 
+
+[Raspberry PI Traffic Light Controller Demonstration](https://www.youtube.com/watch?v=lr_ZJNX0viM)
+
+[Discussing the Traffic Light Code](https://www.youtube.com/watch?v=ZyBnWOX3wGE)
+
+----
+
 ## Initial Setup
+
+### Install Raspbian 
+
+You will need to install Raspbian on your SD. Once you have completed this install, 
+Then you can insert the SD card into the Raspberry Pi and power it on. 
+
+To install Raspbian using Ubuntu, I made a video tutorial which you can watch 
+at [https://www.youtube.com/watch?v=Wy1_MWWlkNI](https://www.youtube.com/watch?v=Wy1_MWWlkNI).
 
 ### Install Script
 
@@ -162,27 +180,18 @@ your Raspberry Pi to its prior state. In the ```scripts``` directory, run the
 ```uninstall.sh``` script as root user. This will uninstall the packages installed 
 by the install script.
 
----- 
-
-## Bug Reports and Road Map
-
-Future enhancements, defects, and updates to the scripts are tracked using the 
-issue tracker on this repository. For bugs, please include as much detail 
-as possible so that the issue can be replicated.
-
 ----
 
 ## Known Bugs
 
 * When exiting the script (using Ctrl+C), all of the relays may not turn off.
-In addition, the LCD display may not clear if it is writing when the kill
-command is executed.
+* The LCD display may not clear if it is writing when the kill command is executed.
 
 ----
 
 ## Acknowledgements
 
-* Author: Kenny Robinson, @almostengr <a href="http://thealmostengineer.com" target="_blank">thealmostengineer.com</a>
+* Author: Kenny Robinson, @almostengr <a href="https://thealmostengineer.com" target="_blank">thealmostengineer.com</a>
 * LCD Display code for controlling the LCD display were provided from 
 https://github.com/the-raspberry-pi-guy/lcd. 
 * Attempts to replicate the Traffic Light Simulation created by Samuel Vidal 
@@ -194,4 +203,4 @@ seen at <a href="https://www.youtube.com/watch?v=xqZRDtX64UA" target="_blank">ht
 
 ## License
 
-This project is licensed under the MIT License. See LICENSE for more details.
+See LICENSE for more details.
