@@ -89,17 +89,17 @@ listed are the physical pin numbers on the board, not the GPIO pin numbers. If
 you are not using a relay board, the connections can be made directly to a 
 breadboard with LEDs connected.
 
-Pi Pin (Board) | Device Connection
--------------- | -----------------
-2 | LCD Display VCC (+5V)
-3 | LCD Display SDA
-4 | Relay Board VCC (+5V)
-5 | LCD Display SLC
-19 | Red Signal
-21 | Yellow Signal
-23 | Green Signal
-30 | LCD Display GND
-34 | Relay Board GND
+Pi Pin (Board) | GPIO | Device Connection
+-------------- | ---- | -----------------
+2 | -- | LCD Display VCC (+5V)
+3 | -- | LCD Display SDA
+4 | -- | Relay Board VCC (+5V)
+5 | -- | LCD Display SLC
+19 | 11 | Red Signal
+21 | 9 | Yellow Signal
+23 | 10 | Green Signal
+30 | -- | LCD Display GND
+34 | -- | Relay Board GND
 
 Visual of Pin Connections to Relay Board
 
@@ -173,21 +173,44 @@ commands are listed on the Control Panel webpage below the textbox.
 
 ----
 
-## Uninstall Script
+## Move and Run Code on the Pi
 
-At any point, you can uninstall the software that is used by the program to return 
-your Raspberry Pi to its prior state. In the ```scripts``` directory, run the 
-```uninstall.sh``` script as root user. This will uninstall the packages installed 
-by the install script.
+### Software to Install on Pi
 
-----
+Run these commands to install the necessary software on the Pi. You only need to do them once.
 
-## Known Bugs
+```sh
+sudo apt-get update
+sudo apt-get install curl libunwind8 gettext apt-transport-https
+```
 
-* When exiting the script (using Ctrl+C), all of the relays may not turn off.
-* The LCD display may not clear if it is writing when the kill command is executed.
+### Publish Your App
 
-----
+Then run the publish command on your app
+
+```sh
+dotnet publish -r linux-arm
+```
+
+### Copy the Files
+
+Then copy the files from your computer to the Pi. I used SSH for this.
+
+```sh
+scp -pr bin/Debug/netcoreapp3.1/linux-arm/publish/* pi@trafficpi://home/pi/rpidotnet
+```
+
+### Run App On Pi
+
+Run the program by calling the executable. This filename will be the name of your project.
+
+```sh
+./rpidotnet
+```
+
+## Troubleshooting 
+
+* If your app does not run, make sure that execute permissions have been set for all roles (755).
 
 ## Acknowledgements
 
