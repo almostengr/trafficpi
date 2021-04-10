@@ -7,11 +7,10 @@ namespace Almostengr.TrafficPi
     public class TrafficControl
     {
         private const int red = 11, yellow = 9, green = 10;
-        // private PinValue LampOn = PinValue.Low;
-        // private PinValue LampOff = PinValue.High;
-        private PinValue LampOff = PinValue.Low;
-        private PinValue LampOn = PinValue.High;
-
+        private PinValue LampOn = PinValue.Low;
+        private PinValue LampOff = PinValue.High;
+        // private PinValue LampOff = PinValue.Low;
+        // private PinValue LampOn = PinValue.High;
 
         public int GetDelay(int color)
         {
