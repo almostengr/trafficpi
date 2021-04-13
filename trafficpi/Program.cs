@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            ITrafficControl control = new MockControl();
+            ITrafficControl control = new ManualControl();
             // control.RunControl(args);
             control.RunControl();
         }
