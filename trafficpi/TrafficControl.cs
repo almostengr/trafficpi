@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Almostengr.TrafficPi
 {
-    public class TrafficControl
+    public class TrafficControl : ITrafficControl
     {
         private const int red = 11, yellow = 9, green = 10;
         private PinValue LampOn = PinValue.Low;
@@ -44,7 +44,7 @@ namespace Almostengr.TrafficPi
             controller.Write(red, LampOff);
         }
 
-        public void RunControl(string[] args)
+        public void RunControl()
         {
             Console.WriteLine("Traffic light starting...");
 
