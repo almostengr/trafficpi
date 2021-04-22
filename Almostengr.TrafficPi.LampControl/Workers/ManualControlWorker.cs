@@ -1,52 +1,53 @@
 using System;
+using System.Device.Gpio;
 using System.Threading;
 using System.Threading.Tasks;
-using Almostengr.TrafficPi.Signal.Enumerables;
 using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class ManualControlWorker : BaseWorker
+    public class ManualControlWorker : BaseControlWorker, IControlWorker
     {
         private readonly ILogger<ManualControlWorker> _logger;
 
-        public ManualControlWorker(ILogger<ManualControlWorker> logger)
+        public ManualControlWorker(
+            ILogger<ManualControlWorker> logger,
+            GpioController gpioController,
+            AppSettings appSettings) :
+            base(logger, gpioController, appSettings)
         {
             _logger = logger;
         }
-        
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             string input = string.Empty;
 
-            while (input.ToLower() != "q")
+            while (input.ToLower() != "q" || !stoppingToken.IsCancellationRequested)
             {
                 Console.WriteLine("==== Main Menu ====");
                 Console.WriteLine();
-                Console.WriteLine("0 - All Off");
-                Console.WriteLine("1 - Red");
-                Console.WriteLine("2 - Yellow");
-                Console.WriteLine("3 - Green");
+                Console.WriteLine("0 - All Off, 1 - Red, 2 - Yellow, 3 - Green, Q - Quit");
                 Console.WriteLine();
 
-                input = Console.ReadLine();
+                input = Console.ReadLine().ToLower();
 
-                switch(input)
+                switch (input)
                 {
                     case "0":
-                        ChangeSignal(LampState.Off, LampState.Off, LampState.Off);
+                        ChangeSignal(LampOff, LampOff, LampOff);
                         break;
 
                     case "1":
-                        ChangeSignal(LampState.On, LampState.Off, LampState.Off);
+                        ChangeSignal(LampOn, LampOff, LampOff);
                         break;
 
                     case "2":
-                        ChangeSignal(LampState.Off, LampState.On, LampState.Off);
+                        ChangeSignal(LampOff, LampOn, LampOff);
                         break;
 
                     case "3":
-                        ChangeSignal(LampState.Off, LampState.Off, LampState.On);
+                        ChangeSignal(LampOff, LampOff, LampOn);
                         break;
 
                     case "q":
@@ -54,8 +55,10 @@ namespace Almostengr.TrafficPi.LampControl.Workers
                         break;
 
                     default:
+                        Console.WriteLine("Invalid selection");
                         break;
                 }
+                
             } // end while
         }
     }

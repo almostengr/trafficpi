@@ -83,12 +83,15 @@ namespace Almostengr.TrafficPi
 
                 // controller.Write(red, LampOff);
 
-                Console.WriteLine("===== Main Menu =====");
+                Console.WriteLine("===== Manual Control Menu =====");
                 Console.WriteLine();
                 Console.WriteLine("0 = Off");
                 Console.WriteLine("1 = Red");
                 Console.WriteLine("2 = Yellow");
                 Console.WriteLine("3 = Green");
+                
+                Console.WriteLine();
+                Console.Write("Enter selection: ");
 
                 string input = Console.ReadLine();
 
@@ -105,18 +108,20 @@ namespace Almostengr.TrafficPi
 
                     case "2":
                         TurnOff(controller);
-                        controller.Write(red, LampOn);
+                        controller.Write(yellow, LampOn);
                         break;
 
                     case "3":
                         TurnOff(controller);
-                        controller.Write(red, LampOn);
+                        controller.Write(green, LampOn);
                         break;
 
                     default:
                         Console.WriteLine("Invalid selection");
                         break;
                 }
+
+                Console.WriteLine();
             }
         }
     }

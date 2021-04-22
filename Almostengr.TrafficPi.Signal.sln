@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.TrafficPi.Web", "Almostengr.TrafficPi.Web\Almostengr.TrafficPi.Web.csproj", "{5A5D747C-AE67-4D84-A842-6AB7975D056A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.Traffic.LampControl", "Almostengr.TrafficPi.LampControl\Almostengr.Traffic.LampControl.csproj", "{951636F0-F6E4-4694-BB4D-EBD6C18ABED9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.TrafficPi.LampControl", "Almostengr.TrafficPi.LampControl\Almostengr.TrafficPi.LampControl.csproj", "{951636F0-F6E4-4694-BB4D-EBD6C18ABED9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

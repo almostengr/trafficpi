@@ -10,7 +10,7 @@ namespace Almostengr.TrafficPi
         {
             while (true)
             {
-                Console.WriteLine("===== Main Menu =====");
+                Console.WriteLine("===== Mock Control Menu =====");
                 Console.WriteLine();
                 Console.WriteLine("0 = Off");
                 Console.WriteLine("1 = Red");
@@ -44,7 +44,8 @@ namespace Almostengr.TrafficPi
                         Console.WriteLine("Invalid selection");
                         break;
                 }
-                
+
+                Console.WriteLine();
                 Console.WriteLine();
             }
         }
