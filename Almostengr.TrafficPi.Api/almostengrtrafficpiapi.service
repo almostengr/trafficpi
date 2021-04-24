@@ -1,0 +1,13 @@
+[Unit]
+Description=Traffic Pi Api
+After=network.target
+Documentation=https://thealmostengineer.com/trafficpi
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/home/pi/trafficpi/Almostengr.TrafficPi.Api
+User=pi
+
+[Install]
+WantedBy=multi-user.target

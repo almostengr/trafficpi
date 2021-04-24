@@ -13,13 +13,11 @@ namespace Almostengr.TrafficPi.Api.Controllers
     {
         public readonly ILogger<TrafficController> _logger;
         public readonly AppSettings _appSettings;
-        public readonly TrafficSignalDbContext _context;
 
         // public TrafficController(ILogger<TrafficController> logger, AppSettings appSettings)
-        public TrafficController(ILogger<TrafficController> logger, TrafficSignalDbContext context)
+        public TrafficController(ILogger<TrafficController> logger)
         {
             _logger = logger;
-            _context = context;
             // _appSettings = appSettings;
         }
 
@@ -31,15 +29,18 @@ namespace Almostengr.TrafficPi.Api.Controllers
             if (id == null)
                 throw new ArgumentNullException();
 
+            Process process;
+
             try
             {
+                _logger.LogInformation("Shutting down previous process");
 
-                Process process = new Process()
+                process = new Process()
                 {
                     StartInfo = new ProcessStartInfo()
                     {
-                        FileName = "",
-                        Arguments = "",
+                        FileName = "/bin/kill",
+                        Arguments = "$(ps -ef | grep Almostengr.TrafficPi.LampControl | awk '{print $2}')",
                         RedirectStandardError = true,
                         RedirectStandardOutput = true,
                         UseShellExecute = false,
@@ -48,6 +49,43 @@ namespace Almostengr.TrafficPi.Api.Controllers
                 };
 
                 process.Start();
+
+                process.WaitForExit();
+
+                _logger.LogInformation("Done shutting down previous process");
+
+                // string output = process.StandardOutput.ReadToEnd();
+
+                // if (string.IsNullOrEmpty(output) == false)
+                // {
+
+                // }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            try
+            {
+                _logger.LogInformation("Starting new process");
+
+                process = new Process()
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = _appSettings.LampControlPath,
+                        Arguments = $"--{id} > /dev/null 2>&1 &",
+                        RedirectStandardError = true,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                    }
+                };
+
+                process.Start();
+
+                _logger.LogInformation("Done starting new process");
 
                 return Ok();
             }
@@ -104,6 +142,6 @@ namespace Almostengr.TrafficPi.Api.Controllers
                 return BadRequest();
             }
         }
-        
+
     }
 }

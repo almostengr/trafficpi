@@ -28,6 +28,8 @@ namespace Almostengr.TrafficPi.Web
             services.AddSingleton(appSettings);
             
             services.AddControllersWithViews();
+
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Traffic Control";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Traffic Control</h1>
+    <form method="POST">
+        <div>
+
+        <label for="program">Select Program</label>
+        <select name="program" id="program">
+            <option value="us">US Traffic</option>
+            <option value="uk">UK Traffic</option>
+            <option value="redlightgreenlight">Red Light, Green Light</option>
+            <option value="flashred">Flash Red</option>
+            <option value="flashyellow">Flash Yellow</option>
+            <option value="flashgreen">Flash Green</option>
+            <option value="partymode">Party Mode</option>
+        </select>
+        </div>
+
+        <div>
+            <button type="submit">Run Program</button>
+        </div>
+
+    </form>
+</div>

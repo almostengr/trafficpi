@@ -10,7 +10,5 @@ namespace Almostengr.TrafficPi.Api.Models
         }
 
         public int ProcessId { get; set; }
-
-        
     }
 }

@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Almostengr.TrafficPi.Web.Models;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 
 namespace Almostengr.TrafficPi.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly HttpClient _httpClient;
+        private readonly AppSettings _appSettings;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            HttpClient httpClient, 
+            AppSettings appSettings)
         {
             _logger = logger;
+            _httpClient = httpClient;
+            _appSettings = appSettings;
         }
 
         public IActionResult Index()
@@ -34,11 +42,20 @@ namespace Almostengr.TrafficPi.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Post()
+        [HttpPost]
+        public IActionResult Traffic()
         {
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> TrafficAsync()
+        {
+            _httpClient.BaseAddress = new Uri(_appSettings.ApiUrl);
 
+            HttpResponseMessage response = await _httpClient.PostAsync("traffic");
+
+            return View();
+        }
     }
 }

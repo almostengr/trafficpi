@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Almostengr.TrafficPi.Api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,8 +29,6 @@ namespace Almostengr.TrafficPi.Api
             IConfiguration configuration = Configuration;
             // AppSettings appSettings = configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
             // services.AddSingleton(appSettings);
-
-            services.AddDbContext<TrafficSignalDbContext>(opt => opt.UseInMemoryDatabase("TrafficSignal"));
 
             services.AddControllers();
         }
