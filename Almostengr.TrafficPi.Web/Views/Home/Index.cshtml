@@ -3,6 +3,26 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Traffic Light Control</h1>
+    <form method="POST" action="/home/index">
+        <div class="form-group">
+            <label for="program" class="form-control">Select Program</label>
+            <select name="program" id="program" class="form-control">
+                <option value="us">US Traffic</option>
+                <option value="uk">UK Traffic</option>
+                <option value="redlightgreenlight">Red Light, Green Light</option>
+                <option value="flashred">Flash Red</option>
+                <option value="flashyellow">Flash Yellow</option>
+                <option value="flashgreen">Flash Green</option>
+                <option value="partymode">Party Mode</option>
+                <option value="mock">Mock (Development Use)</option>
+                <option value="mock2">Mock 2 (Development Use)</option>
+                <option value="restart">Restart</option>
+                <option value="shutdown">Shut Down</option>
+            </select>
+        </div>
+        <div>
+            <button class="form-control btn-secondary" type="submit">Run Program</button>
+        </div>
+    </form>
 </div>
