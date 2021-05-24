@@ -13,15 +13,15 @@ jobs:
       with:
         dotnet-version: 3.1.101
 
-          - name: Build
+    - name: Build
       shell: bash
       run: |
         # Define some variables for things we need
         tag=$(git describe --tags --abbrev=0)
-        release_name="App-$tag-${{ matrix.target }}"
+        release_name="Almostengr.TrafficPi-$tag-${{ matrix.target }}"
 
         # Build everything
-        dotnet publish src/App/App.csproj --framework netcoreapp3.1 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+        dotnet publish trafficpi/Almostengr.TrafficPi.Signal.sln --framework netcoreapp3.1 -c Release -o "$release_name"
 
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
@@ -36,6 +36,6 @@ jobs:
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-        files: "App*"
+        files: "Almostengr.TrafficPi*"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
