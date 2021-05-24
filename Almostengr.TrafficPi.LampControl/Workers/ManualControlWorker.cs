@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class ManualControlWorker : BaseControlWorker, IControlWorker
+    public class ManualControlWorker : BaseControlWorker
     {
         private readonly ILogger<ManualControlWorker> _logger;
 

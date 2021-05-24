@@ -44,6 +44,9 @@ namespace Almostengr.TrafficPi.LampControl.Workers
             _gpioController.Write(_appSettings.RedLightPin, LampOff);
             _gpioController.Write(_appSettings.YellowLightPin, LampOff);
             _gpioController.Write(_appSettings.GreenLightPin, LampOff);
+            _gpioController.ClosePin(_appSettings.RedLightPin);
+            _gpioController.ClosePin(_appSettings.YellowLightPin);
+            _gpioController.ClosePin(_appSettings.GreenLightPin);
             return base.StartAsync(cancellationToken);
         }
 

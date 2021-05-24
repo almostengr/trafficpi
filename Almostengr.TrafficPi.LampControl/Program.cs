@@ -26,6 +26,14 @@ namespace Almostengr.TrafficPi.LampControl
 
                     switch (args[0])
                     {
+                        case "--mock":
+                            services.AddHostedService<MockControlWorker>();
+                            break;
+
+                        case "--mock2":
+                            services.AddHostedService<MockControlWorker2>();
+                            break;
+                            
                         case "--manual":
                             services.AddHostedService<ManualControlWorker>();
                             break;
