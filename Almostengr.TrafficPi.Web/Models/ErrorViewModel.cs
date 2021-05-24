@@ -1,5 +1,3 @@
-using System;
-
 namespace Almostengr.TrafficPi.Web.Models
 {
     public class ErrorViewModel
