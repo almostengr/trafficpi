@@ -21,40 +21,40 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Deploy TraffiPi",
-            "command": "/bin/bash",
+            "label": "Clean Release Project",
+            "command": "dotnet",
             "type": "shell",
             "args": [
-                "-c",
-                "\"",
-                "dotnet",
                 "clean",
                 "-c",
                 "Release",
-                // "--project",
-                // "trafficpi",
-                "&&",
-                "dotnet",
+            ],
+            "group": "none"
+        },
+        {
+            "label": "Publish Release",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
                 "publish",
                 "-r",
                 "linux-arm",
                 "-c",
                 "Release",
-                // "--project",
-                // "trafficpi",
-                "&&",
-                // "scp",
-                // "-p",
-                // "${workspaceRoot}/Almostengr.ThermometerPi.Worker/appsettings.Development.json",
-                // "osmc@osmc://usr/lib/thermometerpi/appsettings.json",
-                // "&&",
-                "scp",
+            ],
+            "group": "none",
+        },
+        {
+            "label": "Deploy TraffiPi",
+            "command": "scp",
+            "type": "shell",
+            "args": [
                 "-pr",
                 "${workspaceRoot}/trafficpi/bin/Release/netcoreapp3.1/linux-arm/*",
                 "pi@trafficpi://home/pi/trafficpi",
-                "\""
             ],
-            "group": "build"
+            "group": "none",
+            "dependsOn": ["Clean Release Project", "Publish Release"]
         }
     ]
 }
