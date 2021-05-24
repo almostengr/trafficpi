@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class UsTrafficControlWorker : BaseControlWorker
+    public class UsTrafficWorker : BaseWorker
     {
-        private readonly ILogger<UsTrafficControlWorker> _logger;
+        private readonly ILogger<UsTrafficWorker> _logger;
 
-        public UsTrafficControlWorker(ILogger<UsTrafficControlWorker> logger, GpioController gpioController, AppSettings appSettings) :
+        public UsTrafficWorker(ILogger<UsTrafficWorker> logger, GpioController gpioController, AppSettings appSettings) :
             base(logger, gpioController, appSettings)
         {
             _logger = logger;
@@ -23,15 +23,15 @@ namespace Almostengr.TrafficPi.LampControl.Workers
             {
                 ChangeSignal(LampOff, LampOff, LampOn);
                 wait = random.Next(5, 60);
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 ChangeSignal(LampOff, LampOn, LampOff);
                 wait = random.Next(1,5);
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 ChangeSignal(LampOn, LampOff, LampOff);
                 wait = random.Next(5,60);
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
             }
         }
     }

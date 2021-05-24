@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class FlashYellowControlWorker : BaseControlWorker
+    public class FlashRedWorker : BaseWorker
     {
         private readonly AppSettings _appSettings;
-
-        public FlashYellowControlWorker(ILogger<FlashYellowControlWorker> logger, GpioController gpioController, AppSettings appSettings) :
+        
+        public FlashRedWorker(ILogger<FlashRedWorker>logger, GpioController gpioController, AppSettings appSettings) : 
             base(logger, gpioController, appSettings)
         {
             _appSettings = appSettings;
@@ -22,10 +22,10 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                signalIlluminated = FlashSignal(_appSettings.YellowLightPin, signalIlluminated);
-                await Task.Delay(TimeSpan.FromMilliseconds(FlasherDelay));
+                signalIlluminated = FlashSignal(_appSettings.RedLightPin, signalIlluminated);
+                await Task.Delay(TimeSpan.FromMilliseconds(FlasherDelay), stoppingToken);
             }
         }
-
+        
     }
 }

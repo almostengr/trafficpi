@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class UkTrafficControlWorker : BaseControlWorker
+    public class UkTrafficWorker : BaseWorker
     {
-        private readonly ILogger<UkTrafficControlWorker> _logger;
+        private readonly ILogger<UkTrafficWorker> _logger;
 
-        public UkTrafficControlWorker(ILogger<UkTrafficControlWorker> logger, GpioController gpioController, AppSettings appSettings) : 
+        public UkTrafficWorker(ILogger<UkTrafficWorker> logger, GpioController gpioController, AppSettings appSettings) : 
             base(logger, gpioController, appSettings)
         {
             _logger = logger;
@@ -24,19 +24,19 @@ namespace Almostengr.TrafficPi.LampControl.Workers
             {
                 ChangeSignal(LampOff, LampOff, LampOn);
                 wait = RedGreenDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 ChangeSignal(LampOff, LampOn, LampOff);
                 wait = YellowDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 ChangeSignal(LampOn, LampOff, LampOff);
                 wait = RedGreenDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 ChangeSignal(LampOn, LampOn, LampOff);
                 wait = YellowDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait));
+                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
             }
         }
     }

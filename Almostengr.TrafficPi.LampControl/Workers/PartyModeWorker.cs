@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class PartyModeControlWorker : BaseControlWorker
+    public class PartyModeWorker : BaseWorker
     {
-        private readonly ILogger<PartyModeControlWorker> _logger;
+        private readonly ILogger<PartyModeWorker> _logger;
 
-        public PartyModeControlWorker(ILogger<PartyModeControlWorker> logger, GpioController gpioController, AppSettings appSettings) :
+        public PartyModeWorker(ILogger<PartyModeWorker> logger, GpioController gpioController, AppSettings appSettings) :
             base(logger, gpioController, appSettings)
         {
             _logger = logger;
@@ -57,7 +57,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
                         break;
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
             }
         }
     }

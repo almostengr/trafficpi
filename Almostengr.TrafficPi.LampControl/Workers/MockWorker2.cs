@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class MockControlWorker : BackgroundService
+    public class MockWorker2 : BackgroundService
     {
-        private readonly ILogger<MockControlWorker> _logger;
+        private readonly ILogger<MockWorker2> _logger;
 
-        public MockControlWorker(ILogger<MockControlWorker> logger, AppSettings appSettings)
+        public MockWorker2(ILogger<MockWorker2> logger, AppSettings appSettings)
         {
             _logger = logger;
         }
@@ -29,8 +29,8 @@ namespace Almostengr.TrafficPi.LampControl.Workers
         {
             while(!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Mock worker is working");
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                _logger.LogInformation("Mock worker 2 is working");
+                await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
             }
         }
     }

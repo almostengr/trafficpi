@@ -6,12 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class ManualControlWorker : BaseControlWorker
+    public class ManualWorker : BaseWorker
     {
-        private readonly ILogger<ManualControlWorker> _logger;
+        private readonly ILogger<ManualWorker> _logger;
 
-        public ManualControlWorker(
-            ILogger<ManualControlWorker> logger,
+        public ManualWorker(
+            ILogger<ManualWorker> logger,
             GpioController gpioController,
             AppSettings appSettings) :
             base(logger, gpioController, appSettings)
@@ -59,6 +59,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
                         break;
                 }
                 
+                await Task.Delay(TimeSpan.FromMilliseconds(1), stoppingToken);
             } // end while
         }
     }

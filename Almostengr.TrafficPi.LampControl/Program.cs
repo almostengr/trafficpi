@@ -27,43 +27,47 @@ namespace Almostengr.TrafficPi.LampControl
                     switch (args[0])
                     {
                         case "--mock":
-                            services.AddHostedService<MockControlWorker>();
+                            services.AddHostedService<MockWorker>();
                             break;
 
                         case "--mock2":
-                            services.AddHostedService<MockControlWorker2>();
+                            services.AddHostedService<MockWorker2>();
                             break;
                             
                         case "--manual":
-                            services.AddHostedService<ManualControlWorker>();
+                            services.AddHostedService<ManualWorker>();
                             break;
 
                         case "--us":
-                            services.AddHostedService<UsTrafficControlWorker>();
+                            services.AddHostedService<UsTrafficWorker>();
                             break;
 
                         case "--uk":
-                            services.AddHostedService<UkTrafficControlWorker>();
+                            services.AddHostedService<UkTrafficWorker>();
                             break;
 
-                        case "--redlightgreenlight":
-                            services.AddHostedService<RedLightGreenLightControlWorker>();
+                        case "--rglight":
+                            services.AddHostedService<RedLightGreenLightWorker>();
+                            break;
+
+                        case "--rglightyellow":
+                            services.AddHostedService<RedLightGreenLightWithYellowWorker>();
                             break;
 
                         case "--flashred":
-                            services.AddHostedService<FlashRedControlWorker>();
+                            services.AddHostedService<FlashRedWorker>();
                             break;
 
                         case "--flashyellow":
-                            services.AddHostedService<FlashYellowControlWorker>();
+                            services.AddHostedService<FlashYellowWorker>();
                             break;
 
                         case "--flashgreen":
-                            services.AddHostedService<FlashGreenControlWorker>();
+                            services.AddHostedService<FlashGreenWorker>();
                             break;
 
                         case "--partymode":
-                            services.AddHostedService<PartyModeControlWorker>();
+                            services.AddHostedService<PartyModeWorker>();
                             break;
 
                         default:
@@ -77,7 +81,8 @@ namespace Almostengr.TrafficPi.LampControl
             Console.WriteLine("--manual - Manually control each signal via command line");
             Console.WriteLine("--us - Run the signal using the US signal pattern");
             Console.WriteLine("--uk - Run the signal using the UK signal panttern");
-            Console.WriteLine("--redlightgreenlight - Run red light, green light");
+            Console.WriteLine("--rglight - Run red light, green light");
+            Console.WriteLine("--rglightyeloow - Run red light, green light with yellow");
             Console.WriteLine("--flashred - Flash red signal");
             Console.WriteLine("--flashyellow - Flash yellow signal");
             Console.WriteLine("--flashgreen - Flash green signal");

@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class BaseControlWorker : BackgroundService
+    public class BaseWorker : BackgroundService
     {
-        private readonly ILogger<BaseControlWorker> _logger;
+        private readonly ILogger<BaseWorker> _logger;
         private readonly GpioController _gpioController;
         private readonly AppSettings _appSettings;
         internal Random random = new Random();
         internal PinValue LampOff = PinValue.High;
         internal PinValue LampOn = PinValue.Low;
-        internal int FlasherDelay { get; } = 700;
+        internal const int FlasherDelay = 700;
 
-        public BaseControlWorker(ILogger<BaseControlWorker> logger, GpioController gpioController, AppSettings appSettings)
+        public BaseWorker(ILogger<BaseWorker> logger, GpioController gpioController, AppSettings appSettings)
         {
             _logger = logger;
             _gpioController = gpioController;
@@ -27,9 +27,11 @@ namespace Almostengr.TrafficPi.LampControl.Workers
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Starting traffic controller");
+
             _gpioController.OpenPin(_appSettings.RedLightPin, PinMode.Output);
             _gpioController.OpenPin(_appSettings.YellowLightPin, PinMode.Output);
             _gpioController.OpenPin(_appSettings.GreenLightPin, PinMode.Output);
+            
             return base.StartAsync(cancellationToken);
         }
 
@@ -41,12 +43,15 @@ namespace Almostengr.TrafficPi.LampControl.Workers
         public override Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Shutting down traffic controller");
+
             _gpioController.Write(_appSettings.RedLightPin, LampOff);
             _gpioController.Write(_appSettings.YellowLightPin, LampOff);
             _gpioController.Write(_appSettings.GreenLightPin, LampOff);
+
             _gpioController.ClosePin(_appSettings.RedLightPin);
             _gpioController.ClosePin(_appSettings.YellowLightPin);
             _gpioController.ClosePin(_appSettings.GreenLightPin);
+
             return base.StartAsync(cancellationToken);
         }
 
