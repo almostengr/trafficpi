@@ -20,3 +20,7 @@ For more information about the project, visit the
 ## License
 
 See LICENSE for more details.
+
+## References
+
+* [https://patriksvensson.se/2020/03/creating-release-artifacts-with-github-actions/](https://patriksvensson.se/2020/03/creating-release-artifacts-with-github-actions/)
