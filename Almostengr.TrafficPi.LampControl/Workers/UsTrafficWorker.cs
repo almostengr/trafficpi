@@ -9,28 +9,43 @@ namespace Almostengr.TrafficPi.LampControl.Workers
     public class UsTrafficWorker : BaseWorker
     {
         private readonly ILogger<UsTrafficWorker> _logger;
+        private readonly GpioController _gpio;
 
         public UsTrafficWorker(ILogger<UsTrafficWorker> logger, GpioController gpioController, AppSettings appSettings) :
-            base(logger, gpioController, appSettings)
+            base(logger, appSettings)
         {
             _logger = logger;
+            _gpio = gpioController;
+        }
+
+        public override Task StartAsync(CancellationToken cancellationToken)
+        {
+            InitializeGpio(_gpio);
+            return base.StartAsync(cancellationToken);
+        }
+
+        public override Task StopAsync(CancellationToken cancellationToken)
+        {
+            ShutdownGpio(_gpio);
+            return base.StopAsync(cancellationToken);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            int wait; 
+            int wait;
+
             while (!stoppingToken.IsCancellationRequested)
             {
-                ChangeSignal(LampOff, LampOff, LampOn);
-                wait = random.Next(5, 60);
+                ChangeSignal(LampOff, LampOff, LampOn, _gpio);
+                wait = RedGreenDelay();
                 await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
-                ChangeSignal(LampOff, LampOn, LampOff);
-                wait = random.Next(1,5);
+                ChangeSignal(LampOff, LampOn, LampOff, _gpio);
+                wait = YellowDelay();
                 await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
-                ChangeSignal(LampOn, LampOff, LampOff);
-                wait = random.Next(5,60);
+                ChangeSignal(LampOn, LampOff, LampOff, _gpio);
+                wait = RedGreenDelay();
                 await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
             }
         }
