@@ -8,14 +8,12 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class UkTrafficWorker : BaseWorker
     {
-        private readonly ILogger<UkTrafficWorker> _logger;
         private readonly GpioController _gpio;
 
-        public UkTrafficWorker(ILogger<UkTrafficWorker> logger, GpioController gpioController, AppSettings appSettings) : 
-            base(logger, appSettings)
+        public UkTrafficWorker(ILogger<FlashGreenWorker> logger, GpioController gpio) : 
+            base(logger)
         {
-            _logger = logger;
-            _gpio = gpioController;
+            _gpio = gpio;
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)

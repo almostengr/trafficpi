@@ -20,14 +20,15 @@ namespace Almostengr.TrafficPi.LampControl.CmdLine
             {
                 Console.WriteLine("Shutting down");
                 ChangeSignal(LampOff, LampOff, LampOff, gpioController);
+                ClosePins(gpioController);
             };
 
             while (input.ToLower() != "q")
             {
                 Console.WriteLine("==== Main Menu ====");
-                Console.WriteLine();
                 Console.WriteLine("0 - All Off, 1 - Red, 2 - Yellow, 3 - Green, Q - Quit");
                 Console.WriteLine();
+                Console.WriteLine("Enter selection: ");
 
                 input = Console.ReadLine();
 
@@ -59,13 +60,18 @@ namespace Almostengr.TrafficPi.LampControl.CmdLine
                         break;
                 }
             } // end while
+            
+            ClosePins(gpioController);
+        }
 
+        private static void ClosePins(GpioController gpioController)
+        {
             gpioController.ClosePin(11);
             gpioController.ClosePin(9);
             gpioController.ClosePin(10);
         }
 
-        public static void ChangeSignal(PinValue redLight, PinValue yellowLight, PinValue greenLight, GpioController gpioController)
+        private static void ChangeSignal(PinValue redLight, PinValue yellowLight, PinValue greenLight, GpioController gpioController)
         {
             gpioController.Write(11, redLight);
             gpioController.Write(9, yellowLight);

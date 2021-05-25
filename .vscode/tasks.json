@@ -41,16 +41,20 @@
                 "linux-arm",
                 "-c",
                 "Release",
+                "-o",
+                "release",
+                "*sln"
             ],
             "group": "none",
         },
         {
-            "label": "Deploy TraffiPi",
+            "label": "Deploy TrafficPi",
             "command": "scp",
             "type": "shell",
             "args": [
                 "-pr",
-                "${workspaceRoot}/trafficpi/bin/Release/netcoreapp3.1/linux-arm/*",
+                "${workspaceRoot}/release/*",
+                "${workspaceRoot}/almostengrtrafficpiweb.service",
                 "pi@trafficpi://home/pi/trafficpi",
             ],
             "group": "none",

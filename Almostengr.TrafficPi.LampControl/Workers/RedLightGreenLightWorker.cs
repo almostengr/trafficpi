@@ -8,14 +8,12 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class RedLightGreenLightWorker : BaseWorker
     {
-        private readonly ILogger<RedLightGreenLightWorker> _logger;
         private readonly GpioController _gpio;
 
-        public RedLightGreenLightWorker(ILogger<RedLightGreenLightWorker> logger, GpioController gpioController, AppSettings appSettings) : 
-            base(logger, appSettings)
+        public RedLightGreenLightWorker(ILogger<FlashGreenWorker> logger, GpioController gpio) : 
+            base(logger)
         {
-            _logger = logger;
-            _gpio = gpioController;
+            _gpio = gpio;
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -37,7 +35,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
             while (!stoppingToken.IsCancellationRequested)
             {
                 ChangeSignal(LampOn, LampOff, LampOff, _gpio);
-                wait = random.Next(1, 5);
+                wait = random.Next(2, 10);
                 await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 ChangeSignal(LampOff, LampOff, LampOn, _gpio);

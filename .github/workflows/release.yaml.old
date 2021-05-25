@@ -21,7 +21,7 @@ jobs:
         release_name="Almostengr.TrafficPi-$tag-${{ matrix.target }}"
 
         # Build everything
-        dotnet publish trafficpi/Almostengr.TrafficPi.Signal.sln --framework netcoreapp3.1 -c Release -o "$release_name"
+        dotnet publish trafficpi/Almostengr.TrafficPi.sln --framework netcoreapp3.1 -c Release -o "$release_name"
 
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then

@@ -2,7 +2,6 @@ using System;
 using System.Device.Gpio;
 using Almostengr.TrafficPi.LampControl.CmdLine;
 using Almostengr.TrafficPi.LampControl.Workers;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -30,10 +29,6 @@ namespace Almostengr.TrafficPi.LampControl
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    IConfiguration configuration = hostContext.Configuration;
-                    AppSettings appSettings = configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
-                    services.AddSingleton(appSettings);
-
                     services.AddScoped<GpioController>();
 
                     switch (args[0])
@@ -92,7 +87,7 @@ namespace Almostengr.TrafficPi.LampControl
             Console.WriteLine("--uk - Run the signal using the UK signal panttern");
             Console.WriteLine("--manual - Manually control each light");
             Console.WriteLine("--rglight - Run red light, green light");
-            Console.WriteLine("--rglightyeloow - Run red light, green light with yellow");
+            Console.WriteLine("--rglightyellow - Run red light, green light with yellow");
             Console.WriteLine("--flashred - Flash red signal");
             Console.WriteLine("--flashyellow - Flash yellow signal");
             Console.WriteLine("--flashgreen - Flash green signal");

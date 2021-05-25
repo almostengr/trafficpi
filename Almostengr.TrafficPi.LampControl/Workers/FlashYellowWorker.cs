@@ -8,13 +8,11 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class FlashYellowWorker : BaseWorker
     {
-        private readonly AppSettings _appSettings;
         private readonly GpioController _gpio;
 
-        public FlashYellowWorker(ILogger<FlashYellowWorker> logger, GpioController gpio, AppSettings appSettings) :
-            base(logger, appSettings)
+        public FlashYellowWorker(ILogger<FlashGreenWorker> logger, GpioController gpio) : 
+            base(logger)
         {
-            _appSettings = appSettings;
             _gpio = gpio;
         }
 
@@ -34,10 +32,10 @@ namespace Almostengr.TrafficPi.LampControl.Workers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                ChangeSignal(LampOff, LampOff, LampOff, _gpio);
+                ChangeSignal(LampOff, LampOn, LampOff, _gpio);
                 await Task.Delay(TimeSpan.FromMilliseconds(FlasherDelay), stoppingToken);
 
-                ChangeSignal(LampOff, LampOn, LampOff, _gpio);
+                ChangeSignal(LampOff, LampOff, LampOff, _gpio);
                 await Task.Delay(TimeSpan.FromMilliseconds(FlasherDelay), stoppingToken);
             }
         }
