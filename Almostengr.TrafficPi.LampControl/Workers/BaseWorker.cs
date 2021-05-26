@@ -10,29 +10,17 @@ namespace Almostengr.TrafficPi.LampControl.Workers
     public class BaseWorker : BackgroundService
     {
         private readonly ILogger<BaseWorker> _logger;
-        private readonly GpioController _gpioController;
-        private readonly AppSettings _appSettings;
         internal Random random = new Random();
         internal PinValue LampOff = PinValue.High;
         internal PinValue LampOn = PinValue.Low;
         internal const int FlasherDelay = 700;
+        private const int RedLightPin = 11;
+        private const int YellowLightPin = 9;
+        private const int GreenLightPin = 10;
 
-        public BaseWorker(ILogger<BaseWorker> logger, GpioController gpioController, AppSettings appSettings)
+        public BaseWorker(ILogger<BaseWorker> logger)
         {
             _logger = logger;
-            _gpioController = gpioController;
-            _appSettings = appSettings;
-        }
-
-        public override Task StartAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Starting traffic controller");
-
-            _gpioController.OpenPin(_appSettings.RedLightPin, PinMode.Output);
-            _gpioController.OpenPin(_appSettings.YellowLightPin, PinMode.Output);
-            _gpioController.OpenPin(_appSettings.GreenLightPin, PinMode.Output);
-            
-            return base.StartAsync(cancellationToken);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -40,48 +28,43 @@ namespace Almostengr.TrafficPi.LampControl.Workers
             throw new NotImplementedException();
         }
 
-        public override Task StopAsync(CancellationToken cancellationToken)
+        internal void ChangeSignal(PinValue redLight, PinValue yellowLight, PinValue greenLight, GpioController gpio)
+        {
+            gpio.Write(RedLightPin, redLight);
+            gpio.Write(YellowLightPin, yellowLight);
+            gpio.Write(GreenLightPin, greenLight);
+        }
+
+        internal GpioController ShutdownGpio(GpioController gpio)
         {
             _logger.LogInformation("Shutting down traffic controller");
 
-            _gpioController.Write(_appSettings.RedLightPin, LampOff);
-            _gpioController.Write(_appSettings.YellowLightPin, LampOff);
-            _gpioController.Write(_appSettings.GreenLightPin, LampOff);
+            gpio.Write(RedLightPin, LampOff);
+            gpio.Write(YellowLightPin, LampOff);
+            gpio.Write(GreenLightPin, LampOff);
 
-            _gpioController.ClosePin(_appSettings.RedLightPin);
-            _gpioController.ClosePin(_appSettings.YellowLightPin);
-            _gpioController.ClosePin(_appSettings.GreenLightPin);
-
-            return base.StartAsync(cancellationToken);
+            gpio.ClosePin(RedLightPin);
+            gpio.ClosePin(YellowLightPin);
+            gpio.ClosePin(GreenLightPin);
+            
+            return gpio;
         }
 
-        internal void ChangeSignal(PinValue redLight, PinValue yellowLight, PinValue greenLight)
+        internal void InitializeGpio(GpioController gpio)
         {
-            _gpioController.Write(_appSettings.RedLightPin, redLight);
-            _gpioController.Write(_appSettings.YellowLightPin, yellowLight);
-            _gpioController.Write(_appSettings.GreenLightPin, greenLight);
+            _logger.LogInformation("Initializing traffic controller");
+
+            gpio.OpenPin(RedLightPin, PinMode.Output);
+            gpio.OpenPin(YellowLightPin, PinMode.Output);
+            gpio.OpenPin(GreenLightPin, PinMode.Output);
         }
 
-        internal bool FlashSignal(int light, bool illuminated)
-        {
-            ChangeSignal(LampOff, LampOff, LampOff);
-
-            if (illuminated)
-            {
-                _gpioController.Write(light, LampOff);
-                return illuminated;
-            }
-
-            _gpioController.Write(light, LampOn);
-            return illuminated;
-        }
-
-        internal virtual int YellowDelay()
+        internal int YellowDelay()
         {
             return random.Next(1, 5);
         }
 
-        internal virtual int RedGreenDelay()
+        internal int RedGreenDelay()
         {
             return random.Next(5, 60);
         }

@@ -10,7 +10,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
     {
         private readonly ILogger<MockWorker> _logger;
 
-        public MockWorker(ILogger<MockWorker> logger, AppSettings appSettings)
+        public MockWorker(ILogger<MockWorker> logger)
         {
             _logger = logger;
         }

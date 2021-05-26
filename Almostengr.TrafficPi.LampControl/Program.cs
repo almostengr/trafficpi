@@ -1,7 +1,7 @@
 using System;
 using System.Device.Gpio;
+using Almostengr.TrafficPi.LampControl.CmdLine;
 using Almostengr.TrafficPi.LampControl.Workers;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,18 +11,25 @@ namespace Almostengr.TrafficPi.LampControl
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            if (args.Length == 0 || args.Length >= 2)
+            {
+                ShowHelp();
+            }
+            else if (args[0] == "--manual")
+            {
+                ManualConsole.RunProgram();
+            }
+            else
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    IConfiguration configuration = hostContext.Configuration;
-                    AppSettings appSettings = configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
-                    services.AddSingleton(appSettings);
-
-                    services.AddSingleton<GpioController>();
+                    services.AddScoped<GpioController>();
 
                     switch (args[0])
                     {
@@ -32,10 +39,6 @@ namespace Almostengr.TrafficPi.LampControl
 
                         case "--mock2":
                             services.AddHostedService<MockWorker2>();
-                            break;
-                            
-                        case "--manual":
-                            services.AddHostedService<ManualWorker>();
                             break;
 
                         case "--us":
@@ -78,11 +81,13 @@ namespace Almostengr.TrafficPi.LampControl
 
         public static void ShowHelp()
         {
-            Console.WriteLine("--manual - Manually control each signal via command line");
+            Console.WriteLine("===== PROGRAM HELP =====");
+            Console.WriteLine();
             Console.WriteLine("--us - Run the signal using the US signal pattern");
             Console.WriteLine("--uk - Run the signal using the UK signal panttern");
+            Console.WriteLine("--manual - Manually control each light");
             Console.WriteLine("--rglight - Run red light, green light");
-            Console.WriteLine("--rglightyeloow - Run red light, green light with yellow");
+            Console.WriteLine("--rglightyellow - Run red light, green light with yellow");
             Console.WriteLine("--flashred - Flash red signal");
             Console.WriteLine("--flashyellow - Flash yellow signal");
             Console.WriteLine("--flashgreen - Flash green signal");

@@ -9,15 +9,13 @@ namespace Almostengr.TrafficPi.Web.Controllers
     public abstract class ControllerBase : Controller
     {
         private readonly ILogger<ControllerBase> _logger;
-        private readonly AppSettings _appSettings;
 
-        public ControllerBase(ILogger<ControllerBase> logger, AppSettings appSettings)
+        public ControllerBase(ILogger<ControllerBase> logger)
         {
             _logger = logger;
-            _appSettings = appSettings;
         }
-        
-        public bool StopWorkerProcess()
+
+        internal bool StopWorkerProcess()
         {
             Process process;
             bool shutdownSuccess = false;
@@ -84,21 +82,31 @@ namespace Almostengr.TrafficPi.Web.Controllers
             return shutdownSuccess;
         }
 
-        public void StartWorkerProcess(string programName)
+        internal void StartWorkerProcess(string programName)
         {
             try
             {
                 _logger.LogInformation("Starting new process");
 
+                string LampControlPath = string.Empty;
+
+#if RELEASE
+                LampControlPath = "/home/pi/trafficpi/Almostengr.TrafficPi.LampControl";
+#else
+                LampControlPath = "/home/almostengineer/trafficpi/Almostengr.TrafficPi.LampControl/bin/Debug/netcoreapp3.1/Almostengr.TrafficPi.LampControl";
+#endif
+
+                _logger.LogInformation(string.Concat("Process: ", LampControlPath, " --", programName));
+
                 Process process = new Process()
                 {
                     StartInfo = new ProcessStartInfo()
                     {
-                        FileName = _appSettings.LampControlPath,
-                        Arguments = $"--{programName} > /dev/null 2>&1 &",
-                        RedirectStandardError = true,
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false,
+                        FileName = LampControlPath,
+                        ArgumentList = {
+                            string.Concat("--", programName),
+                        },
+                        UseShellExecute = true,
                         CreateNoWindow = true,
                     }
                 };
@@ -113,7 +121,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
             }
         }
 
-        public void ShutDownSystem()
+        internal void ShutDownSystem()
         {
             Process process = new Process()
             {
@@ -124,9 +132,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
                         "-h",
                         "now"
                     },
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
+                    UseShellExecute = true,
                     CreateNoWindow = true,
                 }
             };
@@ -134,16 +140,14 @@ namespace Almostengr.TrafficPi.Web.Controllers
             process.Start();
         }
 
-        public void RebootSystem()
+        internal void RebootSystem()
         {
             Process process = new Process()
             {
                 StartInfo = new ProcessStartInfo()
                 {
                     FileName = "reboot",
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
+                    UseShellExecute = true,
                     CreateNoWindow = true,
                 }
             };

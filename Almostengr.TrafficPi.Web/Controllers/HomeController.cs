@@ -10,12 +10,10 @@ namespace Almostengr.TrafficPi.Web.Controllers
     public class HomeController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly AppSettings _appSettings;
 
-        public HomeController(ILogger<HomeController> logger, AppSettings appSettings) : base(logger, appSettings)
+        public HomeController(ILogger<HomeController> logger) : base(logger)
         {
             _logger = logger;
-            _appSettings = appSettings;
         }
 
         [HttpGet]
@@ -29,8 +27,6 @@ namespace Almostengr.TrafficPi.Web.Controllers
         {
             if (trafficProgram == null)
                 throw new ArgumentNullException();
-
-            _logger.LogInformation("Shutting down previous process");
 
             bool shutdownSuccess = StopWorkerProcess();
 
@@ -51,7 +47,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
                 StartWorkerProcess(trafficProgram.Program);
             }
 
-            return View();
+            return View(trafficProgram);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
