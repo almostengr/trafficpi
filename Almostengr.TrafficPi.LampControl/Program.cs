@@ -69,6 +69,22 @@ namespace Almostengr.TrafficPi.LampControl
                             services.AddHostedService<FlashGreenWorker>();
                             break;
 
+                        case "--solidred":
+                            services.AddHostedService<RedLightWorker>();
+                            break;
+
+                        case "--solidyellow":
+                            services.AddHostedService<YellowLightWorker>();
+                            break;
+
+                        case "--solidgreen":
+                            services.AddHostedService<GreenLightWorker>();
+                            break;
+                        
+                        case "--alllights":
+                            services.AddHostedService<AllLightsWorker>();
+                            break;
+
                         case "--partymode":
                             services.AddHostedService<PartyModeWorker>();
                             break;
@@ -92,6 +108,10 @@ namespace Almostengr.TrafficPi.LampControl
             Console.WriteLine("--flashyellow - Flash yellow signal");
             Console.WriteLine("--flashgreen - Flash green signal");
             Console.WriteLine("--partymode - Randomly flash a signal color(s)");
+            Console.WriteLine("--solidred - Solid red signal");
+            Console.WriteLine("--solidyellow - Solid yellow signal");
+            Console.WriteLine("--solidgreen - Solid green signal");
+            Console.WriteLine("--alllights - All lights on solid");
         }
 
     }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class BaseWorker : BackgroundService
+    public abstract class BaseWorker : BackgroundService
     {
         private readonly ILogger<BaseWorker> _logger;
         internal Random random = new Random();
