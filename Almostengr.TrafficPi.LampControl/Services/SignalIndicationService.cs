@@ -9,13 +9,13 @@ namespace Almostengr.TrafficPi.LampControl.Services
         public SignalIndicationService()
         {
             _gpioService = new GpioService();
-            _gpioService.OpenOutputPins(new[] {LightPin.Red, LightPin.Yellow, LightPin.Green});
+            InitializeLights();
         }
 
         public SignalIndicationService(IGpioService gpioService)
         {
             _gpioService = gpioService;
-            _gpioService.OpenOutputPins(new[] {LightPin.Red, LightPin.Yellow, LightPin.Green});
+            InitializeLights();
         }
         
         public void AllLights()
