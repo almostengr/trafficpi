@@ -5,6 +5,11 @@ namespace Almostengr.TrafficPi.LampControl.Services
     public class GpioService : IGpioService
     {
         private readonly GpioController _gpioController;
+        
+        public GpioService()
+        {
+            _gpioController = new GpioController();
+        }
 
         public GpioService(GpioController gpioController)
         {
