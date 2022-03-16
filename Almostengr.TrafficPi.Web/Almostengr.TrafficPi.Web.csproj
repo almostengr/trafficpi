@@ -3,7 +3,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="appsettings.Development.json"/>
-    <Content Include="../almostengrtrafficpiweb.service"/>
+    <Content Remove="appsettings.Development.json" />
+    <Content Include="../almostengrtrafficpiweb.service" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Almostengr.TrafficPi.Common\Almostengr.TrafficPi.Common.csproj" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.TrafficPi.Web", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.TrafficPi.LampControl", "Almostengr.TrafficPi.LampControl\Almostengr.TrafficPi.LampControl.csproj", "{951636F0-F6E4-4694-BB4D-EBD6C18ABED9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.TrafficPi.Common", "Almostengr.TrafficPi.Common\Almostengr.TrafficPi.Common.csproj", "{58A848EB-D33D-473C-B954-0AFD93C7A84C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,5 +58,17 @@ Global
 		{B4F42AE8-B115-4423-B727-9E203C118C3C}.Release|x64.Build.0 = Release|Any CPU
 		{B4F42AE8-B115-4423-B727-9E203C118C3C}.Release|x86.ActiveCfg = Release|Any CPU
 		{B4F42AE8-B115-4423-B727-9E203C118C3C}.Release|x86.Build.0 = Release|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Debug|x64.Build.0 = Debug|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Debug|x86.Build.0 = Debug|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Release|x64.ActiveCfg = Release|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Release|x64.Build.0 = Release|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Release|x86.ActiveCfg = Release|Any CPU
+		{58A848EB-D33D-473C-B954-0AFD93C7A84C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
