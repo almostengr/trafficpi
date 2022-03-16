@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-Almostengr.TrafficPi.LampControl-382D3301-2279-4873-BB4A-DD7C72E2DF27</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
