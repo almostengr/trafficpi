@@ -6,6 +6,10 @@ namespace Almostengr.TrafficPi.LampControl.Services
     {
         private readonly IGpioService _gpioService;
 
+        public SignalIndicationService()
+        {
+        }
+
         public SignalIndicationService(IGpioService gpioService)
         {
             _gpioService = gpioService;
