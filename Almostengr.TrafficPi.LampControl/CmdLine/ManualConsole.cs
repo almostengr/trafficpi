@@ -11,7 +11,7 @@ namespace Almostengr.TrafficPi.LampControl.CmdLine
             // PinValue LampOff = PinValue.High;
             // PinValue LampOn = PinValue.Low;
             // using GpioController gpioController = new GpioController();
-            string input = string.Empty;
+            
 
             // gpioController.OpenPin(11, PinMode.Output);
             // gpioController.OpenPin(9, PinMode.Output);
@@ -26,11 +26,12 @@ namespace Almostengr.TrafficPi.LampControl.CmdLine
                 // ClosePins(gpioController);
                 signalIndication.ShutdownLights();
             };
-
+            
+            string input = string.Empty;
             while (input != "q")
             {
                 Console.WriteLine("==== Main Menu ====");
-                Console.WriteLine("0 - All Off, 1 - Red, 2 - Yellow, 3 - Green, Q - Quit");
+                Console.WriteLine("0 - All Off, 1 - Red, 2 - Yellow, 3 - Green, 4 - All On, Q - Quit");
                 Console.WriteLine();
                 Console.WriteLine("Enter selection: ");
 
@@ -57,9 +58,14 @@ namespace Almostengr.TrafficPi.LampControl.CmdLine
                         // ChangeSignal(LampOff, LampOff, LampOn, gpioController);
                         signalIndication.GreenLight();
                         break;
+                        
+                    case "4":
+                        signalIndication.AllLights();
+                        break;
 
                     case "q":
                         Console.WriteLine("Exiting");
+                        signalIndication.ShutdownLights();
                         break;
 
                     default:
@@ -69,7 +75,6 @@ namespace Almostengr.TrafficPi.LampControl.CmdLine
             } // end while
             
             // ClosePins(gpioController);
-            signalIndication.ShutdownLights();
         }
 
         // private static void ClosePins(GpioController gpioController)
