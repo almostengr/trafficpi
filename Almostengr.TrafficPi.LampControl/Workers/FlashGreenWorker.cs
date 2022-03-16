@@ -32,10 +32,10 @@ namespace Almostengr.TrafficPi.LampControl.Workers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                ChangeSignal(LampOff, LampOff, LampOn, _gpio);
+                ChangeSignal(LampOff, LampOff, LampOn);
                 await Task.Delay(TimeSpan.FromMilliseconds(FlasherDelay), stoppingToken);
 
-                ChangeSignal(LampOff, LampOff, LampOff, _gpio);
+                ChangeSignal(LampOff, LampOff, LampOff);
                 await Task.Delay(TimeSpan.FromMilliseconds(FlasherDelay), stoppingToken);
             }
         }

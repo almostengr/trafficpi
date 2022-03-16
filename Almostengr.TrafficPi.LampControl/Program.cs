@@ -1,6 +1,7 @@
 using System;
 using System.Device.Gpio;
 using Almostengr.TrafficPi.LampControl.CmdLine;
+using Almostengr.TrafficPi.LampControl.Services;
 using Almostengr.TrafficPi.LampControl.Workers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +30,10 @@ namespace Almostengr.TrafficPi.LampControl
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddScoped<GpioController>();
+                    services.AddSingleton<GpioController>();
+
+                    services.AddSingleton<IGpioService, GpioService>();
+                    services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
 
                     switch (args[0])
                     {
