@@ -32,19 +32,14 @@ namespace Almostengr.TrafficPi.LampControl
                 {
                     services.AddSingleton<GpioController>();
 
-                    services.AddSingleton<IGpioService, GpioService>();
-                    services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
+                    // services.AddSingleton<IGpioService, GpioService>();
+                    // services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
+
+                    services.AddSingleton<IGpioService, MockGpioService>();
+                    services.AddSingleton<ISignalIndicationService, MockSignalIndicationService>();
 
                     switch (args[0])
                     {
-                        case "--mock":
-                            services.AddHostedService<MockWorker>();
-                            break;
-
-                        case "--mock2":
-                            services.AddHostedService<MockWorker2>();
-                            break;
-
                         case "--us":
                             services.AddHostedService<UsTrafficWorker>();
                             break;
