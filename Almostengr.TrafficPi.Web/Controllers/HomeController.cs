@@ -46,6 +46,10 @@ namespace Almostengr.TrafficPi.Web.Controllers
             {
                 _homeService.RebootSystem();
             }
+            else if (trafficProgram.Program == ProgramName.None)
+            {
+                _logger.LogInformation("No program selected");
+            }
             else
             {
                 _homeService.StartWorkerProcess(trafficProgram.Program);
