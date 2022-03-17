@@ -20,7 +20,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
             _signalIndication = signalIndication;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             throw new NotImplementedException();
         }
