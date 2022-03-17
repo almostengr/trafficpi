@@ -1,21 +1,20 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Almostengr.TrafficPi.Web.Controllers
+namespace Almostengr.TrafficPi.Web.Services
 {
-    public abstract class ControllerBase : Controller
+    public class HomeService : IHomeService 
     {
-        private readonly ILogger<ControllerBase> _logger;
+        private readonly ILogger<HomeService> _logger;
 
-        public ControllerBase(ILogger<ControllerBase> logger)
+        public HomeService(ILogger<HomeService> logger)
         {
             _logger = logger;
         }
 
-        internal bool StopWorkerProcess()
+        public bool StopWorkerProcess()
         {
             Process process;
             bool shutdownSuccess = false;
@@ -82,7 +81,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
             return shutdownSuccess;
         }
 
-        internal void StartWorkerProcess(string programName)
+        public void StartWorkerProcess(string programName)
         {
             try
             {
@@ -121,7 +120,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
             }
         }
 
-        internal void ShutDownSystem()
+        public void ShutDownSystem()
         {
             Process process = new Process()
             {
@@ -140,7 +139,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
             process.Start();
         }
 
-        internal void RebootSystem()
+        public void RebootSystem()
         {
             Process process = new Process()
             {
