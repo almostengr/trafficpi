@@ -7,6 +7,5 @@
     <Content Include="../almostengrtrafficpiweb.service" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Almostengr.TrafficPi.Common\Almostengr.TrafficPi.Common.csproj" />
   </ItemGroup>
 </Project>

@@ -8,6 +8,6 @@
     <PackageReference Include="System.Device.Gpio" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Almostengr.TrafficPi.Common\Almostengr.TrafficPi.Common.csproj" />
+    <ProjectReference Include="..\Almostengr.TrafficPi.Web\Almostengr.TrafficPi.Web.csproj" />
   </ItemGroup>
 </Project>
