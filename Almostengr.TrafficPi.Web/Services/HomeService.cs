@@ -75,7 +75,7 @@ namespace Almostengr.TrafficPi.Web.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, ex.Message);
             }
 
             return shutdownSuccess;
@@ -116,7 +116,7 @@ namespace Almostengr.TrafficPi.Web.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, ex.Message);
             }
         }
 
