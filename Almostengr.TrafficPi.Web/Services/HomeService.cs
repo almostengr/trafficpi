@@ -92,7 +92,7 @@ namespace Almostengr.TrafficPi.Web.Services
 #if RELEASE
                 LampControlPath = "/home/pi/trafficpi/Almostengr.TrafficPi.LampControl";
 #else
-                LampControlPath = "/home/almostengineer/trafficpi/Almostengr.TrafficPi.LampControl/bin/Debug/netcoreapp3.1/Almostengr.TrafficPi.LampControl";
+                LampControlPath = "/home/almostengineer/trafficpi/Almostengr.TrafficPi.LampControl/bin/Debug/net5.0/Almostengr.TrafficPi.LampControl";
 #endif
 
                 _logger.LogInformation(string.Concat("Process: ", LampControlPath, " --", programName));

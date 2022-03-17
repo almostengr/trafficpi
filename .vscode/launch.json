@@ -10,8 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            // "program": "${workspaceFolder}/Almostengr.TrafficPi.LampControl/bin/Debug/netcoreapp3.1/Almostengr.TrafficPi.LampControl.dll",
-            "program": "${workspaceFolder}/Almostengr.TrafficPi.Web/bin/Debug/netcoreapp3.1/Almostengr.TrafficPi.Web.dll",
+            "program": "${workspaceFolder}/Almostengr.TrafficPi.Web/bin/Debug/net5.0/Almostengr.TrafficPi.Web.dll",
             "args": [],
             // "cwd": "${workspaceFolder}/Almostengr.TrafficPi.LampControl",
             "cwd": "${workspaceFolder}/Almostengr.TrafficPi.Web",
