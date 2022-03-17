@@ -1,55 +1,64 @@
+using Microsoft.Extensions.Logging;
+
 namespace Almostengr.TrafficPi.LampControl.Services
 {
     public class MockSignalIndicationService : ISignalIndicationService
     {
+        private readonly ILogger<MockSignalIndicationService> _logger;
+
+        public MockSignalIndicationService(ILogger<MockSignalIndicationService> logger)
+        {
+            _logger = logger;
+        }
+
         public void AllLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("All lights");
         }
 
         public void GreenLight()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Green light");
         }
 
         public void InitializeLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Initializing lights");
         }
 
         public void NoLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("No lights");
         }
 
         public void RedGreenLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Red and green lights");
         }
 
         public void RedLight()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Red light");
         }
 
         public void RedYellowLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Red and yellow lights");
         }
 
         public void ShutdownLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Shutting down lights");
         }
 
         public void YellowGreenLights()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Yellow and green lights");
         }
 
         public void YellowLight()
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Yellow light");
         }
     }
 }
