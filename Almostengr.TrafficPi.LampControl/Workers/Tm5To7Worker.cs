@@ -6,31 +6,33 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class UsTrafficWorker : BaseWorker
+    public class Tm5To7Worker : BaseWorker
     {
-        public UsTrafficWorker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
+        public Tm5To7Worker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
             base(logger, signalIndication)
         {
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            int wait;
-
             while (!stoppingToken.IsCancellationRequested)
             {
+                _signalIndication.AllLights();
+                await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
+
+                _signalIndication.NoLights();
+                await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+
                 _signalIndication.GreenLight();
-                wait = RedGreenDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(60), stoppingToken);
 
                 _signalIndication.YellowLight();
-                wait = YellowDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(60), stoppingToken);
 
                 _signalIndication.RedLight();
-                wait = RedGreenDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
+                await Task.Delay(TimeSpan.FromHours(1), stoppingToken);
             }
         }
+
     }
 }

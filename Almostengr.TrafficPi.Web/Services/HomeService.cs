@@ -1,21 +1,20 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Almostengr.TrafficPi.Web.Controllers
+namespace Almostengr.TrafficPi.Web.Services
 {
-    public abstract class ControllerBase : Controller
+    public class HomeService : IHomeService 
     {
-        private readonly ILogger<ControllerBase> _logger;
+        private readonly ILogger<HomeService> _logger;
 
-        public ControllerBase(ILogger<ControllerBase> logger)
+        public HomeService(ILogger<HomeService> logger)
         {
             _logger = logger;
         }
 
-        internal bool StopWorkerProcess()
+        public bool StopWorkerProcess()
         {
             Process process;
             bool shutdownSuccess = false;
@@ -76,13 +75,13 @@ namespace Almostengr.TrafficPi.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, ex.Message);
             }
 
             return shutdownSuccess;
         }
 
-        internal void StartWorkerProcess(string programName)
+        public void StartWorkerProcess(string programName)
         {
             try
             {
@@ -93,7 +92,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
 #if RELEASE
                 LampControlPath = "/home/pi/trafficpi/Almostengr.TrafficPi.LampControl";
 #else
-                LampControlPath = "/home/almostengineer/trafficpi/Almostengr.TrafficPi.LampControl/bin/Debug/netcoreapp3.1/Almostengr.TrafficPi.LampControl";
+                LampControlPath = "/home/almostengineer/trafficpi/Almostengr.TrafficPi.LampControl/bin/Debug/net5.0/Almostengr.TrafficPi.LampControl";
 #endif
 
                 _logger.LogInformation(string.Concat("Process: ", LampControlPath, " --", programName));
@@ -117,11 +116,11 @@ namespace Almostengr.TrafficPi.Web.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, ex.Message);
             }
         }
 
-        internal void ShutDownSystem()
+        public void ShutDownSystem()
         {
             Process process = new Process()
             {
@@ -140,7 +139,7 @@ namespace Almostengr.TrafficPi.Web.Controllers
             process.Start();
         }
 
-        internal void RebootSystem()
+        public void RebootSystem()
         {
             Process process = new Process()
             {

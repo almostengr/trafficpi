@@ -4,16 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Almostengr.TrafficPi.Web.Models;
 using Microsoft.AspNetCore.Http;
+using Almostengr.TrafficPi.Web.Services;
+using Almostengr.TrafficPi.Web.Constants;
 
 namespace Almostengr.TrafficPi.Web.Controllers
 {
-    public class HomeController : ControllerBase
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger) : base(logger)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
             _logger = logger;
+            _homeService = homeService;
         }
 
         [HttpGet]
@@ -28,23 +32,27 @@ namespace Almostengr.TrafficPi.Web.Controllers
             if (trafficProgram == null)
                 throw new ArgumentNullException();
 
-            bool shutdownSuccess = StopWorkerProcess();
+            bool shutdownSuccess = _homeService.StopWorkerProcess();
 
-            if (trafficProgram.Program == "shutdown")
-            {
-                ShutDownSystem();
-            }
-            else if (trafficProgram.Program == "restart")
-            {
-                RebootSystem();
-            }
-            else if (shutdownSuccess == false)
+            if (shutdownSuccess == false)
             {
                 _logger.LogError("Previous program did not shutdown"); // don't start program
             }
+            else if (trafficProgram.Program == ProgramName.ShutDown)
+            {
+                _homeService.ShutDownSystem();
+            }
+            else if (trafficProgram.Program == ProgramName.Reboot)
+            {
+                _homeService.RebootSystem();
+            }
+            else if (trafficProgram.Program == ProgramName.None)
+            {
+                _logger.LogInformation("No program selected");
+            }
             else
             {
-                StartWorkerProcess(trafficProgram.Program);
+                _homeService.StartWorkerProcess(trafficProgram.Program);
             }
 
             return View(trafficProgram);
