@@ -5,7 +5,7 @@ namespace Almostengr.TrafficPi.LampControl.Services
     public class GpioService : IGpioService
     {
         private readonly GpioController _gpioController;
-        
+
         public GpioService()
         {
             _gpioController = new GpioController();
@@ -18,7 +18,7 @@ namespace Almostengr.TrafficPi.LampControl.Services
 
         public void OpenOutputPin(int pinNumber)
         {
-            _gpioController.OpenPin(pinNumber, PinMode.Output);
+            _gpioController.OpenPin(pinNumber, PinMode.Output, PinValue.Low);
         }
 
         public void OpenOutputPins(int[] pinNumbers)
@@ -54,7 +54,7 @@ namespace Almostengr.TrafficPi.LampControl.Services
 
         public void TurnOnGpio(int[] pinNumbers)
         {
-            foreach(var pinNumber in pinNumbers)
+            foreach (var pinNumber in pinNumbers)
             {
                 TurnOnGpio(pinNumber);
             }
@@ -62,10 +62,30 @@ namespace Almostengr.TrafficPi.LampControl.Services
 
         public void TurnOffGpio(int[] pinNumbers)
         {
-            foreach(var pinNumber in pinNumbers)
+            foreach (var pinNumber in pinNumbers)
             {
                 TurnOffGpio(pinNumber);
             }
+        }
+
+        public void OpenInputPin(int pinNumber)
+        {
+            _gpioController.OpenPin(pinNumber, PinMode.Input);
+        }
+
+        public void CloseInputPun(int pinNumber)
+        {
+            _gpioController.ClosePin(pinNumber);
+        }
+
+        public bool IsButtonPressed(int pinNumber)
+        {
+            if (_gpioController.Read(pinNumber) == PinValue.High)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

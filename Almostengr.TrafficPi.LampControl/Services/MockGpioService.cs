@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Services
@@ -11,6 +12,11 @@ namespace Almostengr.TrafficPi.LampControl.Services
             _logger = logger;
         }
 
+        public void CloseInputPun(int pinNumber)
+        {
+            _logger.LogInformation($"Closing input pin {pinNumber}");
+        }
+
         public void CloseOutputPin(int pinNumber)
         {
             _logger.LogInformation($"Closing output pin {pinNumber}");
@@ -22,6 +28,18 @@ namespace Almostengr.TrafficPi.LampControl.Services
             {
                 CloseOutputPin(pinNumber);
             }
+        }
+
+        public bool IsButtonPressed(int pinNumber)
+        {
+            _logger.LogInformation($"Watching sensor on pin {pinNumber}");
+            Random random = new Random();
+            return random.Next(0, 100) >= 90 ? true : false;
+        }
+
+        public void OpenInputPin(int pinNumber)
+        {
+            _logger.LogInformation($"Opening input pin {pinNumber}");
         }
 
         public void OpenOutputPin(int pinNumber)

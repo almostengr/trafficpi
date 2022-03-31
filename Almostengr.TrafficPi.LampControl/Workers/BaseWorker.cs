@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Almostengr.TrafficPi.LampControl.Common;
 using Almostengr.TrafficPi.LampControl.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -27,12 +28,12 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 
         internal int YellowDelay()
         {
-            return random.Next(1, 5);
+            return random.Next(1, DelaySeconds.Short);
         }
 
         internal virtual int RedGreenDelay()
         {
-            return random.Next(5, 60);
+            return random.Next(DelaySeconds.Short, DelaySeconds.Long);
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -52,9 +53,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
         public override void Dispose()
         {
             _logger.LogInformation("Shutting down traffic controller");
-            
             _signalIndication.ShutdownLights();
-
             base.Dispose();
         }
     }

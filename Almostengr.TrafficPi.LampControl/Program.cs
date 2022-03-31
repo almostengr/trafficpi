@@ -33,15 +33,21 @@ namespace Almostengr.TrafficPi.LampControl
                     services.AddSingleton<GpioController>();
 
                     // services.AddSingleton<IGpioService, GpioService>();
-                    // services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
+                    services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
+                    services.AddSingleton<ISensorService, CarWaitingSensorService>();
 
                     services.AddSingleton<IGpioService, MockGpioService>();
-                    services.AddSingleton<ISignalIndicationService, MockSignalIndicationService>();
+
+                    Console.WriteLine(args[0]);
 
                     switch (args[0])
                     {
                         case "--us":
                             services.AddHostedService<UsTrafficWorker>();
+                            break;
+
+                        case "--ussensor":
+                            services.AddHostedService<UsTrafficWithSensorWorker>();
                             break;
 
                         case "--uk":

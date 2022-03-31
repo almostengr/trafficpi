@@ -1,5 +1,4 @@
 using System;
-using System.Device.Gpio;
 using Almostengr.TrafficPi.LampControl.Services;
 
 namespace Almostengr.TrafficPi.LampControl.CmdLine

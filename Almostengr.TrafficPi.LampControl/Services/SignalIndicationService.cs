@@ -62,6 +62,7 @@ namespace Almostengr.TrafficPi.LampControl.Services
         {
             _gpioService.TurnOffGpio(new[] { LightPin.Red, LightPin.Yellow, LightPin.Green });
             _gpioService.CloseOutputPins(new[] { LightPin.Red, LightPin.Yellow, LightPin.Green });
+            _gpioService.CloseInputPun(InputPin.CarSensor);
         }
 
         public void YellowGreenLights()
@@ -75,5 +76,6 @@ namespace Almostengr.TrafficPi.LampControl.Services
             _gpioService.TurnOffGpio(new[] { LightPin.Red, LightPin.Green });
             _gpioService.TurnOnGpio(LightPin.Yellow);
         }
+        
     }
 }
