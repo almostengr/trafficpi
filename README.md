@@ -15,7 +15,7 @@ mathematical calculations for making timing decisions.
 ## Project Information
 
 For more information about the project, visit the 
-[project page](https://thealmostengineer.com/trafficpi).
+[project page](https://thealmostengineer.com/projects/traffic-pi/).
 
 ## License
 
