@@ -33,7 +33,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
                 await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
 
                 _signalIndication.RedLight();
-                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken); // all red and cross green phase
 
                 for(int i = 0; i < 180; i++)
                 {
@@ -43,10 +43,13 @@ namespace Almostengr.TrafficPi.LampControl.Workers
                     if (buttonPressed)
                     {
                         _logger.LogInformation($"Car is waiting");
-                        await Task.Delay(TimeSpan.FromSeconds(YellowDelay() + 1), stoppingToken);
                         break;
                     }
                 } // end for
+                
+                await Task.Delay(TimeSpan.FromSeconds(YellowDelay()), stoppingToken); // cross light yellow
+                
+                await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken); // all red phase
             } // end while
         }
 
