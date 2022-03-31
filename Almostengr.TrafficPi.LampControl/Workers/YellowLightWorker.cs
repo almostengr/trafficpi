@@ -9,7 +9,8 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class YellowLightWorker : BaseWorker
     {
-        public YellowLightWorker(ILogger<YellowLightWorker> logger, ISignalIndicationService signalIndication) : base(logger, signalIndication)
+        public YellowLightWorker(ILogger<YellowLightWorker> logger, ISignalIndicationService signalIndication) : 
+            base(logger, signalIndication)
         {
         }
 

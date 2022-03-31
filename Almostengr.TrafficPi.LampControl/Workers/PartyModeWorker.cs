@@ -8,7 +8,8 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class PartyModeWorker : BaseWorker
     {
-        public PartyModeWorker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : base(logger, signalIndication)
+        public PartyModeWorker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
+            base(logger, signalIndication)
         {
         }
 

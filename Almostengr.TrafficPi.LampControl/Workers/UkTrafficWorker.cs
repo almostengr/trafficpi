@@ -9,9 +9,8 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class UkTrafficWorker : BaseWorker
     {
-        private readonly GpioController _gpio;
-
-        public UkTrafficWorker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : base(logger, signalIndication)
+        public UkTrafficWorker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
+            base(logger, signalIndication)
         {
         }
 

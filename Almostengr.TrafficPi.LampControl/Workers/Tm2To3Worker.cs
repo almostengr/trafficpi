@@ -8,7 +8,8 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 {
     public class Tm2To3Worker : BaseWorker
     {
-        public Tm2To3Worker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : base(logger, signalIndication)
+        public Tm2To3Worker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
+            base(logger, signalIndication)
         {
         }
 

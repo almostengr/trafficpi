@@ -6,9 +6,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Almostengr.TrafficPi.LampControl.Workers
 {
-    public class Tm5To7Worker : BaseWorker
+    public class Tm4To6Worker : BaseWorker
     {
-        public Tm5To7Worker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
+        public Tm4To6Worker(ILogger<BaseWorker> logger, ISignalIndicationService signalIndication) : 
             base(logger, signalIndication)
         {
         }
@@ -21,7 +21,7 @@ namespace Almostengr.TrafficPi.LampControl.Workers
                 await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
 
                 _signalIndication.NoLights();
-                await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(4), stoppingToken);
 
                 _signalIndication.GreenLight();
                 await Task.Delay(TimeSpan.FromSeconds(60), stoppingToken);
