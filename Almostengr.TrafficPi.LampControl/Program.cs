@@ -32,10 +32,10 @@ namespace Almostengr.TrafficPi.LampControl
                 {
                     services.AddSingleton<GpioController>();
 
-                    // services.AddSingleton<IGpioService, GpioService>();
                     services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
                     services.AddSingleton<ISensorService, CarWaitingSensorService>();
 
+                    // services.AddSingleton<IGpioService, GpioService>();
                     services.AddSingleton<IGpioService, MockGpioService>();
 
                     Console.WriteLine(args[0]);
@@ -94,6 +94,22 @@ namespace Almostengr.TrafficPi.LampControl
                             services.AddHostedService<PartyModeWorker>();
                             break;
 
+                        case "--tm1to2":
+                            services.AddHostedService<Tm1To2Worker>();
+                            break;
+
+                        case "--tm2to3":
+                            services.AddHostedService<Tm2To3Worker>();
+                            break;
+
+                        case "--tm4to6":
+                            services.AddHostedService<Tm4To6Worker>();
+                            break;
+
+                        case "--tm5to7":
+                            services.AddHostedService<Tm5To7Worker>();
+                            break;
+
                         default:
                             ShowHelp();
                             break;
@@ -105,6 +121,7 @@ namespace Almostengr.TrafficPi.LampControl
             Console.WriteLine("===== PROGRAM HELP =====");
             Console.WriteLine();
             Console.WriteLine("--us - Run the signal using the US signal pattern");
+            Console.WriteLine("--ussensor - Run the signal using the US signal pattern with a sensor");
             Console.WriteLine("--uk - Run the signal using the UK signal panttern");
             Console.WriteLine("--manual - Manually control each light");
             Console.WriteLine("--rglight - Run red light, green light");
@@ -113,6 +130,10 @@ namespace Almostengr.TrafficPi.LampControl
             Console.WriteLine("--flashyellow - Flash yellow signal");
             Console.WriteLine("--flashgreen - Flash green signal");
             Console.WriteLine("--partymode - Randomly flash a signal color(s)");
+            Console.WriteLine("--tm1to2 - Toastmasters 1 to 2 minute speech");
+            Console.WriteLine("--tm2to3 - Toastmasters 2 to 3 minute speech");
+            Console.WriteLine("--tm4to6 - Toastmasters 4 to 6 minute speech");
+            Console.WriteLine("--tm5to7 - Toastmasters 5 to 7 minute speech");
             Console.WriteLine("--solidred - Solid red signal");
             Console.WriteLine("--solidyellow - Solid yellow signal");
             Console.WriteLine("--solidgreen - Solid green signal");
