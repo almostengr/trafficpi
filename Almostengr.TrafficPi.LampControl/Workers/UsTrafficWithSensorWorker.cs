@@ -20,17 +20,13 @@ namespace Almostengr.TrafficPi.LampControl.Workers
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            int wait;
-
             while (!stoppingToken.IsCancellationRequested)
             {
                 _signalIndication.GreenLight();
-                wait = RedGreenDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(RedGreenDelay()), stoppingToken);
 
                 _signalIndication.YellowLight();
-                wait = YellowDelay();
-                await Task.Delay(TimeSpan.FromSeconds(wait), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(YellowDelay()), stoppingToken);
 
                 _signalIndication.RedLight();
                 await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);

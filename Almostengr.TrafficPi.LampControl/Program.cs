@@ -50,8 +50,8 @@ namespace Almostengr.TrafficPi.LampControl
                             services.AddHostedService<UsTrafficWithSensorWorker>();
                             break;
 
-                        case "--uk":
-                            services.AddHostedService<UkTrafficWorker>();
+                        case "--usflasher":
+                            services.AddHostedService<UsTrafficWithFlasherWorker>();
                             break;
 
                         case "--rglight":
