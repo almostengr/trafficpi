@@ -35,8 +35,11 @@ namespace Almostengr.TrafficPi.LampControl
                     services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
                     services.AddSingleton<ISensorService, CarWaitingSensorService>();
 
-                    // services.AddSingleton<IGpioService, GpioService>();
-                    services.AddSingleton<IGpioService, MockGpioService>();
+                    # if RELEASE
+                        services.AddSingleton<IGpioService, GpioService>();
+                    # else
+                        services.AddSingleton<IGpioService, MockGpioService>();
+                    # endif
 
                     Console.WriteLine(args[0]);
 
