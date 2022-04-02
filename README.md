@@ -16,11 +16,3 @@ mathematical calculations for making timing decisions.
 
 For more information about the project, visit the 
 [project page](https://thealmostengineer.com/trafficpi).
-
-## License
-
-See LICENSE for more details.
-
-## References
-
-* [https://patriksvensson.se/2020/03/creating-release-artifacts-with-github-actions/](https://patriksvensson.se/2020/03/creating-release-artifacts-with-github-actions/)
