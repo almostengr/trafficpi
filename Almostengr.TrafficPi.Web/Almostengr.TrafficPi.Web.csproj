@@ -6,6 +6,4 @@
     <Content Remove="appsettings.Development.json" />
     <Content Include="../almostengrtrafficpiweb.service" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
 </Project>
