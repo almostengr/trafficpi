@@ -35,10 +35,11 @@ namespace Almostengr.TrafficPi.LampControl
                     services.AddSingleton<ISignalIndicationService, SignalIndicationService>();
                     services.AddSingleton<ISensorService, CarWaitingSensorService>();
 
-                    // services.AddSingleton<IGpioService, GpioService>();
+#if RELEASE
+                    services.AddSingleton<IGpioService, GpioService>();
+#else
                     services.AddSingleton<IGpioService, MockGpioService>();
-
-                    Console.WriteLine(args[0]);
+#endif
 
                     switch (args[0])
                     {
@@ -50,8 +51,8 @@ namespace Almostengr.TrafficPi.LampControl
                             services.AddHostedService<UsTrafficWithSensorWorker>();
                             break;
 
-                        case "--uk":
-                            services.AddHostedService<UkTrafficWorker>();
+                        case "--usflasher":
+                            services.AddHostedService<UsTrafficWithFlasherWorker>();
                             break;
 
                         case "--rglight":
@@ -85,7 +86,7 @@ namespace Almostengr.TrafficPi.LampControl
                         case "--solidgreen":
                             services.AddHostedService<GreenLightWorker>();
                             break;
-                        
+
                         case "--alllights":
                             services.AddHostedService<AllLightsWorker>();
                             break;
@@ -111,6 +112,7 @@ namespace Almostengr.TrafficPi.LampControl
                             break;
 
                         default:
+                            Console.WriteLine(args[0]);
                             ShowHelp();
                             break;
                     }
@@ -122,14 +124,14 @@ namespace Almostengr.TrafficPi.LampControl
             Console.WriteLine();
             Console.WriteLine("--us - Run the signal using the US signal pattern");
             Console.WriteLine("--ussensor - Run the signal using the US signal pattern with a sensor");
-            Console.WriteLine("--uk - Run the signal using the UK signal panttern");
+            Console.WriteLine("--usflasher - Run the signal using the US signal pattern with a flasher");
             Console.WriteLine("--manual - Manually control each light");
             Console.WriteLine("--rglight - Run red light, green light");
             Console.WriteLine("--rglightyellow - Run red light, green light with yellow");
+            Console.WriteLine("--partymode - Randomly flash a signal color(s)");
             Console.WriteLine("--flashred - Flash red signal");
             Console.WriteLine("--flashyellow - Flash yellow signal");
             Console.WriteLine("--flashgreen - Flash green signal");
-            Console.WriteLine("--partymode - Randomly flash a signal color(s)");
             Console.WriteLine("--tm1to2 - Toastmasters 1 to 2 minute speech");
             Console.WriteLine("--tm2to3 - Toastmasters 2 to 3 minute speech");
             Console.WriteLine("--tm4to6 - Toastmasters 4 to 6 minute speech");
